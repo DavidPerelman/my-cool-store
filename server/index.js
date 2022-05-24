@@ -17,10 +17,9 @@ async function main() {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.post('/register', async (req, res) => {
-    const data = { firstName, lastName, email, password } = req.body;
-    console.log(data);
-})
+// Routers
+const userRouter = require('./routers/userRouter');
+app.use('/user', userRouter);
 
 app.listen(3000, () => {
     console.log(`Server running`)
