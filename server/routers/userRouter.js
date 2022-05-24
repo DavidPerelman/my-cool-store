@@ -13,6 +13,10 @@ router.post('/register', async (req, res) => {
                 errMessage: 'An account with this email already exist.',
             });
         }
+
+        // hash the password
+        const salt = await bcrypt.genSalt();
+        const passwordHash = await bcrypt.hash(password, salt);
     } catch (err) {
         console.error(err);
         res.status(500).send();
