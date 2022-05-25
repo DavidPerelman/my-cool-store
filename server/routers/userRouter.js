@@ -1,3 +1,4 @@
+const sendEmail = require("../utils/email");
 const router = require('express').Router();
 const User = require('../models/userModel');
 const Token = require('../models/tokenModel');
@@ -37,10 +38,15 @@ router.post('/register', async (req, res) => {
         process.env.JWT_SECRET
         );
 
-        console.log(token);
+        // console.log(token);
         savedUser.token = token;
-        console.log(savedUser);
+        // console.log(savedUser);
         await savedUser.save();
+
+        const message = `${process.env.BASE_URL}/verify/${savedUser._id}/${savedUser.token}`;
+        await sendEmail(savedUser.email, "Verify Email", message);
+        console.log(savedUser.email);
+
     } catch (err) {
         console.error(err);
         res.status(500).send();
