@@ -2,11 +2,11 @@ const router = require('express').Router();
 const User = require('../models/userModel');
 const Token = require('../models/tokenModel');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.post('/register', async (req, res) => {
     try {
          const data = { firstName, lastName, email, password } = req.body;
-        console.log(data);
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -28,7 +28,19 @@ router.post('/register', async (req, res) => {
         });
 
         const savedUser = await newUser.save();
+
+        // sign the token
+        const token = jwt.sign(
+        {
+            user: savedUser._id,
+        },
+        process.env.JWT_SECRET
+        );
+
+        console.log(token);
+        savedUser.token = token;
         console.log(savedUser);
+        await savedUser.save();
     } catch (err) {
         console.error(err);
         res.status(500).send();
