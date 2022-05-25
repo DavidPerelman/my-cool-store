@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: () => moment().format('DD/MM/YYYY hh:mm'),
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);
