@@ -39,7 +39,8 @@ const RegisterModal = ({ show, onClose }) => {
           withCredentials: true,
         });
       } catch (err) {
-        console.log(err.response);
+        console.log(err.response.data.errMessage);
+        setError(err.response.data.errMessage);
       }
     }
 

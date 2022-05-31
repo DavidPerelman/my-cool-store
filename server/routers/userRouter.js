@@ -4,10 +4,13 @@ const User = require('../models/userModel');
 const Token = require('../models/tokenModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
+router.use(cors());
 
 router.post('/register', async (req, res) => {
   try {
     const data = ({ firstName, lastName, email, password } = req.body);
+    console.log(req.body);
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {

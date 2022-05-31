@@ -24,13 +24,23 @@ async function main() {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 // Routers
 const userRouter = require('./routers/userRouter');
 app.use('/user', userRouter);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello World!');
+// });
 
 app.listen(3000, () => {
   console.log(`Server running`);

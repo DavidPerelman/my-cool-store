@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import RegisterModal from './components/RegisterModal';
+import axios from 'axios';
 import './App.css';
+
+axios.defaults.withCredentials = true;
 
 function App() {
   const [show, setShow] = useState(false);
