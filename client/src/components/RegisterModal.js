@@ -8,6 +8,20 @@ const RegisterModal = ({ show, onClose }) => {
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
 
+  const register = async (e) => {
+    e.preventDefault();
+
+    const registerData = {
+      firstName,
+      lastName,
+      email,
+      password,
+      verifyPassword,
+    };
+
+    console.log(registerData);
+  };
+
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
@@ -78,16 +92,13 @@ const RegisterModal = ({ show, onClose }) => {
               value={verifyPassword}
             />
           </div>
-          {/* <button type='submit' className='btn btn-primary'>
-            Submit
-          </button> */}
         </form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant='secondary' onClick={onClose}>
           Cancel
         </Button>
-        <Button variant='primary' onClick={onClose}>
+        <Button variant='primary' onClick={register}>
           RegisterModal
         </Button>
       </Modal.Footer>
