@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 const RegisterModal = ({ show, onClose }) => {
+  const [error, setError] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,6 +20,12 @@ const RegisterModal = ({ show, onClose }) => {
       verifyPassword,
     };
 
+    if (!firstName || !lastName || !email || !password || !verifyPassword) {
+      setError('all fields required!');
+    } else {
+      setError('');
+    }
+
     console.log(registerData);
   };
 
@@ -28,6 +35,12 @@ const RegisterModal = ({ show, onClose }) => {
         <Modal.Title>Register</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {(error && (
+          <div className='alert alert-danger' role='alert'>
+            {error}
+          </div>
+        )) ||
+          ''}
         <form>
           <div className='mb-3'>
             <label htmlFor='exampleInputFirstName1' className='form-label'>
