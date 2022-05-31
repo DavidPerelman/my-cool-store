@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import RegisterModal from './components/RegisterModal';
 import './App.css';
 
 function App() {
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   return (
     <div className='App'>
@@ -12,6 +14,7 @@ function App() {
       <button type='button' className='btn btn-primary' onClick={handleShow}>
         Primary
       </button>
+      <RegisterModal show={show} onClose={handleClose} />
     </div>
   );
 }
