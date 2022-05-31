@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import axios from 'axios';
 
 const RegisterModal = ({ show, onClose }) => {
   const [error, setError] = useState('');
@@ -22,14 +23,6 @@ const RegisterModal = ({ show, onClose }) => {
 
     const regexp =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log(regexp.test(email));
-
-    // function validateEmail(email) {
-    //   console.log(email);
-    //   const regexp =
-    //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //   return regexp.test(email);
-    // }
 
     if (!firstName || !lastName || !email || !password || !verifyPassword) {
       setError('all fields required!');
@@ -41,6 +34,13 @@ const RegisterModal = ({ show, onClose }) => {
       setError('invalid email!');
     } else {
       setError('');
+      try {
+        await axios.post('http://localhost:3000/user/register', registerData, {
+          withCredentials: true,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     const clearError = setTimeout(clearErrorMessage, 3000);
