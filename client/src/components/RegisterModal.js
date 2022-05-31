@@ -20,13 +20,34 @@ const RegisterModal = ({ show, onClose }) => {
       verifyPassword,
     };
 
+    const regexp =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log(regexp.test(email));
+
+    // function validateEmail(email) {
+    //   console.log(email);
+    //   const regexp =
+    //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //   return regexp.test(email);
+    // }
+
     if (!firstName || !lastName || !email || !password || !verifyPassword) {
       setError('all fields required!');
+    } else if (password !== verifyPassword) {
+      setError('the passwords not match!');
+    } else if (password.length < 6 || verifyPassword.length < 6) {
+      setError('Password must be at least 6 characters long!');
+    } else if (!regexp.test(email)) {
+      setError('invalid email!');
     } else {
       setError('');
     }
 
-    console.log(registerData);
+    const clearError = setTimeout(clearErrorMessage, 3000);
+
+    function clearErrorMessage() {
+      setError('');
+    }
   };
 
   return (
