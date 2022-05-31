@@ -10,7 +10,6 @@ router.use(cors());
 router.post('/register', async (req, res) => {
   try {
     const data = ({ firstName, lastName, email, password } = req.body);
-    console.log(req.body);
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -44,7 +43,7 @@ router.post('/register', async (req, res) => {
     const message = `${process.env.BASE_URL}/verify/${newUser._id}/${token.token}`;
     await sendEmail(newUser.email, 'Verify Email', message);
     console.log(newUser.email);
-    res.json('ok');
+    res.json({ user: newUser });
   } catch (err) {
     console.error(err);
     res.status(500).send();

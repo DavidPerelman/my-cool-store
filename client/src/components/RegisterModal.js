@@ -35,9 +35,9 @@ const RegisterModal = ({ show, onClose }) => {
     } else {
       setError('');
       try {
-        await axios.post('http://localhost:3000/user/register', registerData, {
-          withCredentials: true,
-        });
+        let res = await axios.post('/user/register', registerData);
+
+        console.log(res);
       } catch (err) {
         console.log(err.response.data.errMessage);
         setError(err.response.data.errMessage);
