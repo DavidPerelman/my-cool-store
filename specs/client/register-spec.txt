@@ -1,0 +1,11 @@
+Register
+
+1. on click "Register" button open modal "RegisterModal" component.
+
+2. when the user fill the form fields, set the state of the field.
+
+3. after the click on "Register" button send the data to the server. 
+
+4. if no errors or validation errors show page with message that email sent to the user mail with "ok" button.
+
+5. when the user click on "ok" button, close the modal.

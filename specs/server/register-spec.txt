@@ -1,0 +1,7 @@
+Register
+
+1. create user: get the user data (firstName, lastName, email, password) from client, 
+check if user exist, hash the password, create new user model with ID, send mail to user for verify the register.
+
+2. verify: find user in database (with the params that accepted in email from user) and find token in database 
+(with the params that accepted in email from user), update the user.verified to "true" and delete the token.
