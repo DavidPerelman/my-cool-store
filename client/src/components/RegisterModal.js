@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 const RegisterModal = ({ show, onClose }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
@@ -18,6 +24,8 @@ const RegisterModal = ({ show, onClose }) => {
               className='form-control'
               id='exampleInputFirstName1'
               aria-describedby='firstNameHelp'
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
             />
           </div>
           <div className='mb-3'>
@@ -29,6 +37,8 @@ const RegisterModal = ({ show, onClose }) => {
               className='form-control'
               id='exampleInputLastName1'
               aria-describedby='lastNameHelp'
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
             />
           </div>
           <div className='mb-3'>
@@ -40,6 +50,8 @@ const RegisterModal = ({ show, onClose }) => {
               className='form-control'
               id='exampleInputEmail1'
               aria-describedby='emailHelp'
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
           <div className='mb-3'>
@@ -50,6 +62,8 @@ const RegisterModal = ({ show, onClose }) => {
               type='password'
               className='form-control'
               id='exampleInputPassword1'
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
           </div>
           <div className='mb-3'>
@@ -60,6 +74,8 @@ const RegisterModal = ({ show, onClose }) => {
               type='password'
               className='form-control'
               id='exampleInputVerifyPassword1'
+              onChange={(e) => setVerifyPassword(e.target.value)}
+              value={verifyPassword}
             />
           </div>
           {/* <button type='submit' className='btn btn-primary'>
