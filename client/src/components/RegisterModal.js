@@ -83,7 +83,7 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant='secondary' onClick={onClose}>
+            <Button variant='secondary' onClick={closeModal}>
               Close
             </Button>
           </Modal.Footer>

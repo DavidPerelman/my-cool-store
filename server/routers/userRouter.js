@@ -11,6 +11,27 @@ router.post('/register', async (req, res) => {
   try {
     const data = ({ firstName, lastName, email, password } = req.body);
 
+    if (!firstName || !lastName || !email || !password) {
+      return res.status(400).json({
+        errMessage: 'all fields required!',
+      });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({
+        errMessage: 'Password must be at least 6 characters long!',
+      });
+    }
+
+    const regexp =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!regexp.test(email)) {
+      return res.status(400).json({
+        errMessage: 'invalid email!',
+      });
+    }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
