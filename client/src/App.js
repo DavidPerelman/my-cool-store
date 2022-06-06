@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import RegisterButton from './components/RegisterButton';
+import Router from './Router';
 import axios from 'axios';
 import './App.css';
 
@@ -11,8 +12,7 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>MyCoolStore</h1>
-      <RegisterButton />
+      <Router />
     </div>
   );
 }
