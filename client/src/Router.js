@@ -7,6 +7,7 @@ const Router = () => {
     <div>
       <Routes>
         <Route exact path='/' element={<Home />} />
+        <Route path='/:status' element={<Home />} />
       </Routes>
     </div>
   );
