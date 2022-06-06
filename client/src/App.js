@@ -7,9 +7,13 @@ axios.defaults.withCredentials = true;
 
 function App() {
   const [show, setShow] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setRegistered(false);
+  };
 
   return (
     <div className='App'>
@@ -17,7 +21,12 @@ function App() {
       <button type='button' className='btn btn-primary' onClick={handleShow}>
         Primary
       </button>
-      <RegisterModal show={show} onClose={handleClose} />
+      <RegisterModal
+        registered={registered}
+        setRegistered={setRegistered}
+        show={show}
+        onClose={handleClose}
+      />
     </div>
   );
 }
