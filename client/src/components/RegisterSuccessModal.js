@@ -1,9 +1,14 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-const RegisterSuccessModal = ({ show, onClose }) => {
+const RegisterSuccessModal = ({ show, onClose, userName }) => {
   const closeModal = () => {
     onClose();
+  };
+
+  const login = () => {
+    onClose();
+    console.log('login');
   };
 
   return (
@@ -12,12 +17,12 @@ const RegisterSuccessModal = ({ show, onClose }) => {
         <Modal.Title>Register Confirmation</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>
-          To confirm the register, We sent you email with link, please enter the
-          link to confirm the registration
-        </p>
+        <p>Thank you {userName} for subscribing to our site!</p>
       </Modal.Body>
       <Modal.Footer>
+        <Button variant='primary' onClick={login}>
+          Login
+        </Button>
         <Button variant='secondary' onClick={closeModal}>
           Close
         </Button>
