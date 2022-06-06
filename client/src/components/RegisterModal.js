@@ -37,6 +37,7 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
       try {
         let res = await axios.post('/user/register', registerData);
         setRegistered(true);
+        clearFormFields();
         console.log(res);
       } catch (err) {
         console.log(err.response.data.errMessage);
@@ -53,6 +54,19 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
 
   const registerForm = () => {
     setRegistered(true);
+  };
+
+  const closeModal = () => {
+    onClose();
+    clearFormFields();
+  };
+
+  const clearFormFields = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+    setVerifyPassword('');
   };
 
   return (
@@ -156,7 +170,7 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant='secondary' onClick={onClose}>
+            <Button variant='secondary' onClick={closeModal}>
               Cancel
             </Button>
             <Button variant='primary' onClick={register}>
