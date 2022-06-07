@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import RegisterButton from './components/RegisterButton';
+import LoginButton from './components/LoginButton';
 import RegisterSuccessModal from './components/RegisterSuccessModal';
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
     <div>
       <h1>MyCoolStore</h1>
       <RegisterButton />
+      <LoginButton />
       <RegisterSuccessModal
         show={show}
         onClose={handleClose}

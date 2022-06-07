@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LoginModal from './LoginModal';
 
 const LoginButton = () => {
   const [show, setShow] = useState(false);
@@ -13,7 +14,7 @@ const LoginButton = () => {
   return (
     <div>
       <button type='button' className='btn btn-primary' onClick={handleShow}>
-        Register
+        Login
       </button>
       <LoginModal
         loggedIn={loggedIn}
