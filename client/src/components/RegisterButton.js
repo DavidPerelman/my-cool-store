@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import RegisterModal from './RegisterModal';
+import Button from './Button';
 
 const RegisterButton = () => {
   const [show, setShow] = useState(false);
@@ -13,9 +14,9 @@ const RegisterButton = () => {
 
   return (
     <div>
-      <button type='button' className='btn btn-primary' onClick={handleShow}>
+      <Button type='button' className='btn btn-primary' onClick={handleShow}>
         Register
-      </button>
+      </Button>
       <RegisterModal
         registered={registered}
         setRegistered={setRegistered}

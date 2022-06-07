@@ -1,9 +1,16 @@
 const Button = (props) => {
-  console.log(props);
   const color = props.className || 'primary';
+  const dataBsToggle = props['data-bs-toggle'] || '';
+  const dataBsTtarget = props['data-bs-target'] || '';
 
   return (
-    <button type='button' className={`${color}`} onClick={props.onClick}>
+    <button
+      type='button'
+      className={`${color}`}
+      data-bs-toggle={dataBsToggle}
+      data-bs-target={dataBsTtarget}
+      onClick={props.onClick}
+    >
       {props.children}
     </button>
   );

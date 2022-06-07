@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { isValidPassword, isValidEmail } from '../utils/formValidation';
+import {
+  isFormFieldsValid,
+  isValidPassword,
+  isValidEmail,
+} from '../utils/formValidation';
 import axios from 'axios';
 
 const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
@@ -19,6 +23,8 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
     verifyPassword: '',
   }); // new way etgar
 
+  console.log(registerData.firstName);
+
   const register = async (e) => {
     e.preventDefault();
 
@@ -30,10 +36,9 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
       verifyPassword,
     };
 
-    // const regexp =
-    //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (!firstName || !lastName || !email || !password || !verifyPassword) {
+    if (
+      isFormFieldsValid(firstName, lastName, email, password, verifyPassword)
+    ) {
       setError('all fields required!');
     } else if (isValidPassword(password, verifyPassword)) {
       setError(
@@ -71,11 +76,21 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
   };
 
   const clearFormFields = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    setVerifyPassword('');
+    for (const property in registerData) {
+      registerData[property] = '';
+    }
+    // setFirstName('');
+    // setLastName('');
+    // setEmail('');
+    // setPassword('');
+    // setVerifyPassword('');
+  };
+
+  const handleFormChange = (e) => {
+    const { value } = e.target;
+    setRegisterData((prevState) => {
+      return { ...prevState, firstName: value };
+    });
   };
 
   return (
@@ -119,8 +134,9 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
                   className='form-control'
                   id='exampleInputFirstName1'
                   aria-describedby='firstNameHelp'
-                  onChange={(e) => setFirstName(e.target.value)}
-                  value={firstName}
+                  onChange={handleFormChange}
+                  // onChange={(e) => setFirstName(e.target.value)}
+                  value={registerData.firstName}
                 />
               </div>
               <div className='mb-3'>
@@ -187,6 +203,9 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
             </Button>
             <Button variant='primary' onClick={registerForm}>
               RegisterForm
+            </Button>
+            <Button variant='primary' onClick={clearFormFields}>
+              Clear Form
             </Button>
           </Modal.Footer>
         </>

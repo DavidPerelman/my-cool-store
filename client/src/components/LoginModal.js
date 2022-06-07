@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+// import Modal from './Modal';
 import axios from 'axios';
 
 const LoginModal = ({ show, onClose, loggedIn, setLoggedIn }) => {

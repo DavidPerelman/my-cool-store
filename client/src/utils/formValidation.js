@@ -1,3 +1,13 @@
+const isFormFieldsValid = (
+  firstName,
+  lastName,
+  email,
+  password,
+  verifyPassword
+) => {
+  return !firstName || !lastName || !email || !password || !verifyPassword;
+};
+
 const isValidPassword = (password, verifyPassword) => {
   return (
     password.length < 6 ||
@@ -12,4 +22,4 @@ const isValidEmail = (email) => {
   return regexp.test(email);
 };
 
-export { isValidPassword, isValidEmail };
+export { isFormFieldsValid, isValidPassword, isValidEmail };
