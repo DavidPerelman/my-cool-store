@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import LoginModal from './LoginModal';
 
-const LoginButton = () => {
+const LoginButton = ({ setLoggedIn }) => {
   const [show, setShow] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleClose = () => {
@@ -16,12 +15,7 @@ const LoginButton = () => {
       <button type='button' className='btn btn-primary' onClick={handleShow}>
         Login
       </button>
-      <LoginModal
-        loggedIn={loggedIn}
-        setLoggedIn={setLoggedIn}
-        show={show}
-        onClose={handleClose}
-      />
+      <LoginModal setLoggedIn={setLoggedIn} show={show} onClose={handleClose} />
     </div>
   );
 };

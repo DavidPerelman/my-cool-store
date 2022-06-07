@@ -29,9 +29,9 @@ const LoginModal = ({ show, onClose, loggedIn, setLoggedIn }) => {
       try {
         console.log(loginData);
         let res = await axios.post('/user/login', loginData);
-        return;
-        setLoggedIn(true);
         clearFormFields();
+        closeModal();
+        setLoggedIn(true);
         console.log(res);
       } catch (err) {
         console.log(err.response.data.errMessage);

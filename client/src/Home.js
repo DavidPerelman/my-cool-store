@@ -35,7 +35,7 @@ const Home = () => {
         <>
           <RegisterButton />
           <br />
-          <LoginButton />
+          <LoginButton setLoggedIn={setLoggedIn} />
         </>
       )}
 
