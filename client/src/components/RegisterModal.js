@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { isValidPassword, isValidEmail } from '../utils/formValidation';
 import axios from 'axios';
 
 const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
@@ -9,6 +10,14 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
+
+  const [registerData, setRegisterData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    verifyPassword: '',
+  }); // new way etgar
 
   const register = async (e) => {
     e.preventDefault();
@@ -21,16 +30,16 @@ const RegisterModal = ({ show, onClose, registered, setRegistered }) => {
       verifyPassword,
     };
 
-    const regexp =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // const regexp =
+    //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (!firstName || !lastName || !email || !password || !verifyPassword) {
       setError('all fields required!');
-    } else if (password !== verifyPassword) {
-      setError('the passwords not match!');
-    } else if (password.length < 6 || verifyPassword.length < 6) {
-      setError('Password must be at least 6 characters long!');
-    } else if (!regexp.test(email)) {
+    } else if (isValidPassword(password, verifyPassword)) {
+      setError(
+        'Password must be at least 6 characters long and the passwords must be identical'
+      );
+    } else if (!isValidEmail(email)) {
       setError('invalid email!');
     } else {
       setError('');
