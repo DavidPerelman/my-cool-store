@@ -96,4 +96,76 @@ router.get('/verify/:id/:token', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        errMessage: 'all fields required!',
+      });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({
+        errMessage: 'Password must be at least 6 characters long!',
+      });
+    }
+
+    const regexp =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!regexp.test(email)) {
+      return res.status(400).json({
+        errMessage: 'invalid email!',
+      });
+    }
+
+    const existingUser = await User.findOne({ email });
+
+    if (!existingUser) {
+      return res.status(400).json({
+        errMessage: 'login error!',
+      });
+    } else {
+      const passwordCorrect = await bcrypt.compare(
+        password,
+        existingUser.passwordHash
+      );
+      if (!passwordCorrect) {
+        return res.status(400).json({
+          errMessage: 'login error!',
+        });
+      } else {
+        if (existingUser.verified === false) {
+          return res.status(400).json({
+            errMessage: 'user not verify!',
+          });
+        } else {
+          // sign the token
+          const token = jwt.sign(
+            {
+              user: existingUser._id,
+            },
+            process.env.JWT_SECRET
+          );
+          existingUser.token = token;
+
+          existingUser.save();
+
+          // send the token in a HTTP only cookie
+          res
+            .cookie('token', token, {
+              httpOnly: true,
+            })
+            .send();
+        }
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 module.exports = router;

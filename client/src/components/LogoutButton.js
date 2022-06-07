@@ -1,8 +1,7 @@
 import React from 'react';
 
 const LogoutButton = () => {
-  const logout = (e) => {
-    e.preventDefalut();
+  const logout = () => {
     console.log('logout');
   };
 

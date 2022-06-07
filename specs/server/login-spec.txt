@@ -1,0 +1,9 @@
+Register
+
+1. login user: get the user data (email, password) from client, check if user exist
+
+2. verify: find user in database and compare the passwords with bcrypt.compare.
+
+3. if password correct, check if user verified, if false send error to the client.
+
+3. if user verified, create token with jwt.sign and send it to the client as cookie.
