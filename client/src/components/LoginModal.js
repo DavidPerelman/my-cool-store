@@ -105,9 +105,6 @@ const LoginModal = ({ show, onClose, loggedIn, setLoggedIn }) => {
         <Button variant='primary' onClick={login}>
           Login
         </Button>
-        <Button variant='primary' onClick={loginForm}>
-          LoginForm
-        </Button>
       </Modal.Footer>
     </Modal>
   );
