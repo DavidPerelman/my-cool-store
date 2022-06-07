@@ -11,3 +11,5 @@ Register
 5. if no errors or validation errors show page with message that email sent to the user mail with "ok" button.
 
 6. when the user click on "ok" button or "cancel" button, close the modal.
+
+7. when user click on link in his mail, pass him to home page and show modal with success message an login option.
