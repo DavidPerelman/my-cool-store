@@ -28,8 +28,7 @@ const Home = () => {
       <RegisterSuccessModal
         show={show}
         onClose={handleClose}
-        userName='David'
-        // userName={userName}
+        userName={userName}
       />
     </div>
   );

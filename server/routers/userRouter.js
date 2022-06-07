@@ -87,7 +87,7 @@ router.get('/verify/:id/:token', async (req, res) => {
     await User.updateOne({ _id: user._id, verified: true });
     await Token.findByIdAndRemove(token._id);
 
-    const userName = user._id;
+    const userName = user.userName;
     res.redirect(`http://localhost:3000/registerSuccess/${userName}`);
 
     // res.send('email verified sucessfully');

@@ -1,13 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 
 const RegisterSuccessModal = ({ show, onClose, userName }) => {
+  const navigate = useNavigate();
+
   const closeModal = () => {
     onClose();
+    navigate('/');
   };
 
   const login = () => {
     onClose();
+    navigate('/');
     console.log('login');
   };
 
