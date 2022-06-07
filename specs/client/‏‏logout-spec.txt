@@ -1,0 +1,3 @@
+Logout
+
+1. logout user: when user click "logout" button send '/logout' request to server.

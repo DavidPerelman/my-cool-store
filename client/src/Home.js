@@ -29,7 +29,7 @@ const Home = () => {
       <h1>MyCoolStore</h1>
       {(loggedIn && (
         <>
-          <p>Hello!</p> <LogoutButton />
+          <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} />
         </>
       )) || (
         <>

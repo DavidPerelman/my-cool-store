@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-const LogoutButton = () => {
-  const logout = () => {
-    console.log('logout');
+const LogoutButton = ({ setLoggedIn }) => {
+  const [error, setError] = useState('');
+
+  const logout = async () => {
+    try {
+      let res = await axios.get('/user/logout');
+      setLoggedIn(false);
+      console.log(res);
+    } catch (err) {
+      console.log(err.response.data.errMessage);
+      setError(err.response.data.errMessage);
+    }
   };
 
   return (
