@@ -1,4 +1,4 @@
-Register
+Login
 
 1. login user: get the user data (email, password) from client, check if user exist
 

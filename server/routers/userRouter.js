@@ -168,4 +168,18 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.get('/logout', async (req, res) => {
+  try {
+    res
+      .cookie('token', '', {
+        httpOnly: true,
+        expires: new Date(0),
+      })
+      .send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 module.exports = router;

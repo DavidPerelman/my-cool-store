@@ -1,0 +1,3 @@
+Logout
+
+1. logout user: send empty token cookie to client.
