@@ -161,7 +161,7 @@ router.post('/login', async (req, res) => {
             .cookie('token', token, {
               httpOnly: true,
             })
-            .json({ isLogin: true })
+            .json({ isLogin: true, user: existingUser })
             .send();
         }
       }
@@ -179,6 +179,7 @@ router.get('/logout', async (req, res) => {
         httpOnly: true,
         expires: new Date(0),
       })
+      .json({ isLogout: true })
       .send();
   } catch (err) {
     console.error(err);

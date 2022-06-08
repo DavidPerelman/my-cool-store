@@ -13,14 +13,21 @@ const AuthService = {
   login: async (data) => {
     try {
       let res = await axios.post('/user/login', data);
-      console.log(res);
       return res;
     } catch (err) {
       console.log(err.response.data.errMessage);
       return err.response.data.errMessage;
     }
   },
-  logout: (data) => {
+  logout: async () => {
+    try {
+      let res = await axios.get('/user/logout');
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err.response.data.errMessage);
+      return err.response.data.errMessage;
+    }
     console.log('logout');
   },
 };
