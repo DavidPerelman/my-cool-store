@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RegisterModal from './RegisterModal';
-import { register } from '../services/AuthServices';
+import AuthService from '../services/AuthServices';
 import Form from './Form';
 import Modal from './Modal';
 import Button from './Button';
@@ -32,10 +32,9 @@ const RegisterButton = () => {
     setRegistered(false);
   };
 
-  // const register = () => {
-  //   console.log('register');
-  //   console.log(registerData);
-  // };
+  const register = () => {
+    AuthService.register(registerData);
+  };
 
   const clearFormFields = () => {
     for (let field in registerData) {
