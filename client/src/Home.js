@@ -16,6 +16,7 @@ const Home = () => {
   useEffect(() => {
     console.log(status);
     console.log(userName);
+    console.log(loggedIn);
 
     if (status === 'registerSuccess') {
       setShow(true);
@@ -35,7 +36,7 @@ const Home = () => {
         <>
           <RegisterButton />
           <br />
-          <LoginButton setLoggedIn={setLoggedIn} />
+          <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         </>
       )}
 

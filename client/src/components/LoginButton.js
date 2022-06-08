@@ -3,11 +3,7 @@ import LoginModal from './LoginModal';
 import Modal from './Modal';
 import Button from './Button';
 import Form from './Form';
-import {
-  isFormFieldsValid,
-  isValidPassword,
-  isValidEmail,
-} from '../utils/formValidation';
+import { isLoginFormFieldsValid, isValidEmail } from '../utils/formValidation';
 import AuthService from '../services/AuthServices';
 
 const LoginButton = ({ setLoggedIn }) => {
@@ -31,7 +27,6 @@ const LoginButton = ({ setLoggedIn }) => {
   const handleClose = () => {
     clearFormFields();
     setShow(false);
-    setLoggedIn(false);
   };
 
   const clearFormFields = () => {
@@ -40,32 +35,25 @@ const LoginButton = ({ setLoggedIn }) => {
     }
   };
 
-  const login = () => {
-    if (
-      isFormFieldsValid(
-        loginData.firstName,
-        loginData.lastName,
-        loginData.email,
-        loginData.password,
-        loginData.verifyPassword
-      )
-    ) {
+  const login = async () => {
+    if (isLoginFormFieldsValid(loginData.email, loginData.password)) {
       setError('all fields required!');
-    } else if (isValidPassword(loginData.password, loginData.verifyPassword)) {
-      setError(
-        'Password must be at least 6 characters long and the passwords must be identical'
-      );
+      console.log(error);
     } else if (!isValidEmail(loginData.email)) {
       setError('invalid email!');
+      console.log(error);
     } else {
       setError('');
     }
     try {
-      AuthService.login(loginData);
-      clearFormFields();
+      const res = await AuthService.login(loginData);
+      if (!res.data) {
+        setError(res);
+      } else if (res.data.isLogin) {
+        setLoggedIn(res.data.isLogin);
+      }
     } catch (err) {
-      console.log(err.response.data.errMessage);
-      setError(err.response.data.errMessage);
+      console.log(err);
     }
 
     const clearError = setTimeout(clearErrorMessage, 3000);

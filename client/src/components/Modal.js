@@ -1,7 +1,7 @@
 import './ModalStyle.css';
 
 const Modal = (props) => {
-  console.log(props);
+  // console.log(props.error);
 
   return (
     <>

@@ -106,12 +106,6 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    if (password.length < 6) {
-      return res.status(400).json({
-        errMessage: 'Password must be at least 6 characters long!',
-      });
-    }
-
     const regexp =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -158,6 +152,7 @@ router.post('/login', async (req, res) => {
             .cookie('token', token, {
               httpOnly: true,
             })
+            .json({ isLogin: true })
             .send();
         }
       }

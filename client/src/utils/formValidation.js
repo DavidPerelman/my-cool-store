@@ -8,11 +8,19 @@ const isFormFieldsValid = (
   return !firstName || !lastName || !email || !password || !verifyPassword;
 };
 
+const isLoginFormFieldsValid = (email, password) => {
+  return !email || !password;
+};
+
 const isValidPassword = (password, verifyPassword) => {
   return (
     password.length < 6 ||
     (verifyPassword.length < 6 && password === verifyPassword)
   );
+};
+
+const isValidLoginPassword = (password) => {
+  return password.length < 6;
 };
 
 const isValidEmail = (email) => {
@@ -22,4 +30,10 @@ const isValidEmail = (email) => {
   return regexp.test(email);
 };
 
-export { isFormFieldsValid, isValidPassword, isValidEmail };
+export {
+  isFormFieldsValid,
+  isLoginFormFieldsValid,
+  isValidLoginPassword,
+  isValidPassword,
+  isValidEmail,
+};
