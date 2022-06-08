@@ -84,22 +84,22 @@ router.get('/verify/:id/:token', async (req, res) => {
   try {
     console.log(req.params.id);
     const user = await User.findOne({ _id: req.params.id });
-    if (!user) return res.status(400).send('Invalid link');
+    if (!user) return res.status(400).send('User not found!');
 
+    console.log(user);
     const token = await Token.findOne({
       userId: user._id,
       token: req.params.token,
     });
-    if (!token) return res.status(400).send('Invalid link');
+    if (!token) return res.status(400).send('Token not found!');
 
     console.log(token);
     await User.updateOne({ _id: user._id, verified: true });
     await Token.findByIdAndRemove(token._id);
 
-    const userName = user.userName;
-    res.redirect(`http://localhost:3000/registerSuccess/${userName}`);
-
-    // res.send('email verified sucessfully');
+    const link = `http://localhost:3000/registerSuccess/${user.firstName}`;
+    console.log(link);
+    res.redirect(link);
   } catch (err) {
     res.status(400).send('An error occured');
   }

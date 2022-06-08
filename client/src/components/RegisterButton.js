@@ -24,7 +24,6 @@ const RegisterButton = ({ setRegisterSuccess }) => {
   });
 
   const handleFormChange = (e, valKey) => {
-    console.log(registerData);
     const { value } = e.target;
     setRegisterData((prevState) => {
       return { ...prevState, [valKey]: value };

@@ -24,10 +24,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log(status);
-    console.log(userName);
-    console.log(loggedIn);
-
     if (status === 'registerSuccess') {
       setShow(true);
       setRegisterConfirmation(true);
@@ -54,8 +50,17 @@ const Home = () => {
 
       {registerSuccess && (
         <>
-          <Modal show={show} onClose={handleClose} hideButton={true}>
-            Register Success!
+          <Modal
+            show={show}
+            onClose={handleClose}
+            hideButton={true}
+            title={'Register Success!'}
+          >
+            <p>Register Success!</p>
+            <p>
+              For registration confirmation please click on the link that we
+              sent to email you signed up with him.
+            </p>
           </Modal>
         </>
       )}
