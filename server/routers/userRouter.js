@@ -9,9 +9,11 @@ router.use(cors());
 
 router.post('/register', async (req, res) => {
   try {
-    const data = ({ firstName, lastName, email, password } = req.body);
+    const data = ({ firstName, lastName, email, password, verifyPassword } =
+      req.body);
 
-    if (!firstName || !lastName || !email || !password) {
+    console.log(data);
+    if (!firstName || !lastName || !email || !password || !verifyPassword) {
       return res.status(400).json({
         errMessage: 'all fields required!',
       });
@@ -20,6 +22,13 @@ router.post('/register', async (req, res) => {
     if (password.length < 6) {
       return res.status(400).json({
         errMessage: 'Password must be at least 6 characters long!',
+      });
+    }
+
+    if (password !== verifyPassword) {
+      return res.status(400).json({
+        errMessage:
+          'Password must be at least 6 characters long and the passwords must be identical!',
       });
     }
 
@@ -64,7 +73,7 @@ router.post('/register', async (req, res) => {
     const message = `${process.env.BASE_URL}/verify/${newUser._id}/${token.token}`;
     await sendEmail(newUser.email, 'Verify Email', message);
     console.log(newUser.email);
-    res.json({ user: newUser });
+    res.json({ user: newUser, success: true });
   } catch (err) {
     console.error(err);
     res.status(500).send();

@@ -10,7 +10,7 @@ import Form from './Form';
 import Modal from './Modal';
 import Button from './Button';
 
-const RegisterButton = () => {
+const RegisterButton = ({ setRegisterSuccess }) => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
   const [registered, setRegistered] = useState(false);
@@ -35,7 +35,7 @@ const RegisterButton = () => {
   const handleClose = () => {
     clearFormFields();
     setShow(false);
-    setRegistered(false);
+    // setRegistered(false);
   };
 
   const clearFormFields = () => {
@@ -44,7 +44,7 @@ const RegisterButton = () => {
     }
   };
 
-  const register = () => {
+  const register = async () => {
     if (
       isFormFieldsValid(
         registerData.firstName,
@@ -67,8 +67,15 @@ const RegisterButton = () => {
       setError('');
     }
     try {
-      AuthService.register(registerData);
-      clearFormFields();
+      const res = await AuthService.register(registerData);
+      // clearFormFields();
+      console.log(res);
+      if (!res.data) {
+        setError(res);
+      } else if (res.data.success) {
+        setRegisterSuccess(true);
+      }
+      // setError(res);
     } catch (err) {
       console.log(err.response.data.errMessage);
       setError(err.response.data.errMessage);

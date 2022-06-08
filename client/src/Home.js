@@ -7,6 +7,7 @@ import RegisterSuccessModal from './components/RegisterSuccessModal';
 
 const Home = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [registerSuccess, setRegisterSuccess] = useState(false);
   const { status, userName } = useParams();
   const [show, setShow] = useState(false);
 
@@ -39,6 +40,8 @@ const Home = () => {
           <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         </>
       )}
+
+      {registerSuccess && <></>}
 
       <RegisterSuccessModal
         show={show}
