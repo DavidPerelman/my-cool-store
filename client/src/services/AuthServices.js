@@ -1,16 +1,3 @@
-// const register = (data) => {
-//   console.log('register');
-//   console.log(data);
-// };
-
-// const login = (data) => {
-//   console.log('login');
-// };
-
-// const logout = (data) => {
-//   console.log('logout');
-// };
-
 const AuthService = {
   register: (data) => {
     console.log('register');
@@ -18,6 +5,7 @@ const AuthService = {
   },
   login: (data) => {
     console.log('login');
+    console.log(data);
   },
   logout: (data) => {
     console.log('logout');
@@ -25,5 +13,3 @@ const AuthService = {
 };
 
 export default AuthService;
-
-// export { register, login, logout };

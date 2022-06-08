@@ -2,18 +2,40 @@ import React, { useState } from 'react';
 import LoginModal from './LoginModal';
 import Modal from './Modal';
 import Button from './Button';
+import Form from './Form';
+import AuthService from '../services/AuthServices';
 
 const LoginButton = ({ setLoggedIn }) => {
   const [show, setShow] = useState(false);
 
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleFormChange = (e, valKey) => {
+    console.log(loginData);
+    const { value } = e.target;
+    setLoginData((prevState) => {
+      return { ...prevState, [valKey]: value };
+    });
+  };
+
   const handleShow = () => setShow(true);
   const handleClose = () => {
+    clearFormFields();
     setShow(false);
     setLoggedIn(false);
   };
 
+  const clearFormFields = () => {
+    for (let field in loginData) {
+      loginData[field] = '';
+    }
+  };
+
   const login = () => {
-    console.log('login');
+    AuthService.login(loginData);
   };
 
   return (
@@ -28,18 +50,8 @@ const LoginButton = ({ setLoggedIn }) => {
         Login
       </Button>
       {show && (
-        <Modal show={show} onClose={handleClose} title='Login' onSave={login}>
-          {/* <form>
-            <div>
-              <label className='form-label'>label</label>
-              <input
-                type='text'
-                className='form-control'
-                // onChange={(e) => handleFormChange(e, field)}
-                // value={registerData[field]}
-              />
-            </div>
-          </form> */}
+        <Modal show={show} onClose={handleClose} title='Login' onSubmit={login}>
+          <Form data={loginData} handleFormChange={handleFormChange}></Form>
         </Modal>
       )}
       {/* <LoginModal setLoggedIn={setLoggedIn} show={show} onClose={handleClose} /> */}

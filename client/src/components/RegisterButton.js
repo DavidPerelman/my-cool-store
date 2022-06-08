@@ -15,7 +15,7 @@ const RegisterButton = () => {
     email: '',
     password: '',
     verifyPassword: '',
-  }); // new way etgar
+  });
 
   const handleFormChange = (e, valKey) => {
     console.log(registerData);
@@ -32,14 +32,14 @@ const RegisterButton = () => {
     setRegistered(false);
   };
 
-  const register = () => {
-    AuthService.register(registerData);
-  };
-
   const clearFormFields = () => {
     for (let field in registerData) {
       registerData[field] = '';
     }
+  };
+
+  const register = () => {
+    AuthService.register(registerData);
   };
 
   return (
