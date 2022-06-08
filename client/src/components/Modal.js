@@ -2,6 +2,7 @@ import './ModalStyle.css';
 
 const Modal = (props) => {
   console.log(props);
+
   return (
     <>
       <div className='modal' tabIndex='-1'>
