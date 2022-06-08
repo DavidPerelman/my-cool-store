@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import RegisterModal from './RegisterModal';
 import AuthService from '../services/AuthServices';
+import {
+  isFormFieldsValid,
+  isValidPassword,
+  isValidEmail,
+} from '../utils/formValidation';
 import Form from './Form';
 import Modal from './Modal';
 import Button from './Button';
 
 const RegisterButton = () => {
   const [show, setShow] = useState(false);
+  const [error, setError] = useState('');
   const [registered, setRegistered] = useState(false);
 
   const [registerData, setRegisterData] = useState({
@@ -39,7 +45,39 @@ const RegisterButton = () => {
   };
 
   const register = () => {
-    AuthService.register(registerData);
+    if (
+      isFormFieldsValid(
+        registerData.firstName,
+        registerData.lastName,
+        registerData.email,
+        registerData.password,
+        registerData.verifyPassword
+      )
+    ) {
+      setError('all fields required!');
+    } else if (
+      isValidPassword(registerData.password, registerData.verifyPassword)
+    ) {
+      setError(
+        'Password must be at least 6 characters long and the passwords must be identical'
+      );
+    } else if (!isValidEmail(registerData.email)) {
+      setError('invalid email!');
+    } else {
+      setError('');
+    }
+    try {
+      AuthService.register(registerData);
+      clearFormFields();
+    } catch (err) {
+      console.log(err.response.data.errMessage);
+      setError(err.response.data.errMessage);
+    }
+
+    const clearError = setTimeout(clearErrorMessage, 3000);
+    function clearErrorMessage() {
+      setError('');
+    }
   };
 
   return (
@@ -59,6 +97,7 @@ const RegisterButton = () => {
           onClose={handleClose}
           title='Register'
           onSubmit={register}
+          error={error}
         >
           <Form data={registerData} handleFormChange={handleFormChange}></Form>
         </Modal>

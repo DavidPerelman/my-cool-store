@@ -1,9 +1,9 @@
 const AuthService = {
-  register: (data) => {
+  register: (error, data) => {
     console.log('register');
     console.log(data);
   },
-  login: (data) => {
+  login: (error, data) => {
     console.log('login');
     console.log(data);
   },

@@ -1,7 +1,7 @@
 import './ModalStyle.css';
 
 const Modal = (props) => {
-  // console.log(props);
+  console.log(props);
 
   return (
     <>
@@ -18,7 +18,15 @@ const Modal = (props) => {
                 onClick={props.onClose}
               ></button>
             </div>
-            <div className='modal-body'>{props.children}</div>
+            <div className='modal-body'>
+              {(props.error && (
+                <div className='alert alert-danger' role='alert'>
+                  {props.error}
+                </div>
+              )) ||
+                ''}
+              {props.children}
+            </div>
             <div className='modal-footer'>
               <button
                 type='button'
