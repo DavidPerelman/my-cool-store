@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LoginModal from './LoginModal';
-// import Modal from './Modal';
+import Modal from './Modal';
 import Button from './Button';
 
 const LoginButton = ({ setLoggedIn }) => {
@@ -10,6 +10,10 @@ const LoginButton = ({ setLoggedIn }) => {
   const handleClose = () => {
     setShow(false);
     setLoggedIn(false);
+  };
+
+  const login = () => {
+    console.log('login');
   };
 
   return (
@@ -23,8 +27,22 @@ const LoginButton = ({ setLoggedIn }) => {
       >
         Login
       </Button>
-      {/* <Modal id='exampleModal'>fdf</Modal> */}
-      <LoginModal setLoggedIn={setLoggedIn} show={show} onClose={handleClose} />
+      {show && (
+        <Modal show={show} onClose={handleClose} title='Login' onSave={login}>
+          {/* <form>
+            <div>
+              <label className='form-label'>label</label>
+              <input
+                type='text'
+                className='form-control'
+                // onChange={(e) => handleFormChange(e, field)}
+                // value={registerData[field]}
+              />
+            </div>
+          </form> */}
+        </Modal>
+      )}
+      {/* <LoginModal setLoggedIn={setLoggedIn} show={show} onClose={handleClose} /> */}
     </div>
   );
 };
