@@ -1,8 +1,6 @@
 import './ModalStyle.css';
 
 const Modal = (props) => {
-  // console.log(props.error);
-
   return (
     <>
       <div className='modal' tabIndex='-1'>
@@ -42,7 +40,7 @@ const Modal = (props) => {
                   className='btn btn-primary'
                   onClick={props.onSubmit}
                 >
-                  Save changes
+                  {props.textButton}
                 </button>
               )}
             </div>

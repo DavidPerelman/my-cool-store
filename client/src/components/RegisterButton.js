@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import RegisterModal from './RegisterModal';
 import AuthService from '../services/AuthServices';
 import {
   isFormFieldsValid,
@@ -13,7 +12,6 @@ import Button from './Button';
 const RegisterButton = ({ setRegisterSuccess }) => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
-  const [registered, setRegistered] = useState(false);
 
   const [registerData, setRegisterData] = useState({
     firstName: '',
@@ -66,7 +64,6 @@ const RegisterButton = ({ setRegisterSuccess }) => {
     }
     try {
       const res = await AuthService.register(registerData);
-      console.log(res);
       if (!res.data) {
         setError(res);
       } else if (res.data.success) {
@@ -100,6 +97,7 @@ const RegisterButton = ({ setRegisterSuccess }) => {
           show={show}
           onClose={handleClose}
           title='Register'
+          textButton='Register'
           onSubmit={register}
           error={error}
         >

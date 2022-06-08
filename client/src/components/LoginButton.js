@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import LoginModal from './LoginModal';
 import Modal from './Modal';
 import Button from './Button';
 import Form from './Form';
@@ -16,7 +15,6 @@ const LoginButton = ({ setLoggedIn }) => {
   });
 
   const handleFormChange = (e, valKey) => {
-    console.log(loginData);
     const { value } = e.target;
     setLoginData((prevState) => {
       return { ...prevState, [valKey]: value };
@@ -38,7 +36,6 @@ const LoginButton = ({ setLoggedIn }) => {
   const login = async () => {
     if (isLoginFormFieldsValid(loginData.email, loginData.password)) {
       setError('all fields required!');
-      console.log(error);
     } else if (!isValidEmail(loginData.email)) {
       setError('invalid email!');
       console.log(error);
@@ -78,13 +75,13 @@ const LoginButton = ({ setLoggedIn }) => {
           show={show}
           onClose={handleClose}
           title='Login'
+          textButton='Login'
           onSubmit={login}
           error={error}
         >
           <Form data={loginData} handleFormChange={handleFormChange}></Form>
         </Modal>
       )}
-      {/* <LoginModal setLoggedIn={setLoggedIn} show={show} onClose={handleClose} /> */}
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import RegisterButton from './components/RegisterButton';
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton';
+import RegisterButton from '../components/RegisterButton';
+import LoginButton from '../components/LoginButton';
+import LogoutButton from '../components/LogoutButton';
 import { useNavigate } from 'react-router-dom';
-import RegisterSuccessModal from './components/RegisterSuccessModal';
-import Modal from './components/Modal';
+import Modal from '../components/Modal';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -78,12 +77,6 @@ const Home = () => {
           </Modal>
         </>
       )}
-
-      {/* <RegisterSuccessModal
-        show={show}
-        onClose={handleClose}
-        userName={userName}
-      /> */}
     </div>
   );
 };

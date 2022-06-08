@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from './Button';
 import axios from 'axios';
 
 const LogoutButton = ({ setLoggedIn }) => {
@@ -16,9 +17,9 @@ const LogoutButton = ({ setLoggedIn }) => {
   };
 
   return (
-    <button type='button' className='btn btn-primary' onClick={logout}>
+    <Button type='button' className='btn btn-primary' onClick={logout}>
       Logout
-    </button>
+    </Button>
   );
 };
 
