@@ -1,19 +1,32 @@
 const Form = (props) => {
-  console.log(props);
+  //   console.log(props);
 
   return (
     <>
-      <form>
-        <div>
-          <label className='form-label'>label</label>
-          <input
-            type='text'
-            className='form-control'
-            // onChange={(e) => handleFormChange(e, field)}
-            // value={registerData[field]}
-          />
-        </div>
-      </form>
+      {Object.keys(props.data).map((field, i) => {
+        return (
+          <div key={i}>
+            <label className='form-label'>
+              {field.charAt(0).toUpperCase() +
+                field
+                  .slice(1)
+                  .split(/(?=[A-Z])/)
+                  .join(' ')}
+            </label>
+            <input
+              type={
+                field === 'verifyPassword' || field === 'password'
+                  ? 'password'
+                  : 'text' || field
+              }
+              className='form-control'
+              id={field}
+              onChange={(e) => props.handleFormChange(e, field)}
+              value={props.data[field]}
+            />
+          </div>
+        );
+      })}
     </>
   );
 };

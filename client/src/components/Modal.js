@@ -1,7 +1,7 @@
 import './ModalStyle.css';
 
 const Modal = (props) => {
-  console.log(props);
+  // console.log(props);
 
   return (
     <>
@@ -18,9 +18,7 @@ const Modal = (props) => {
                 onClick={props.onClose}
               ></button>
             </div>
-            <div className='modal-body'>
-              <p>Modal body text goes here.</p>
-            </div>
+            <div className='modal-body'>{props.children}</div>
             <div className='modal-footer'>
               <button
                 type='button'
@@ -30,7 +28,11 @@ const Modal = (props) => {
               >
                 Close
               </button>
-              <button type='button' className='btn btn-primary'>
+              <button
+                type='button'
+                className='btn btn-primary'
+                onClick={props.onSubmit}
+              >
                 Save changes
               </button>
             </div>
