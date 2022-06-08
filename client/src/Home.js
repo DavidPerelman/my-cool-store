@@ -35,13 +35,17 @@ const Home = () => {
         </>
       )) || (
         <>
-          <RegisterButton />
+          <RegisterButton setRegisterSuccess={setRegisterSuccess} />
           <br />
           <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         </>
       )}
 
-      {registerSuccess && <></>}
+      {registerSuccess && (
+        <>
+          <h1>Register Success!</h1>
+        </>
+      )}
 
       <RegisterSuccessModal
         show={show}

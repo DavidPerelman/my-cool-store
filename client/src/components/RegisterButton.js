@@ -35,7 +35,6 @@ const RegisterButton = ({ setRegisterSuccess }) => {
   const handleClose = () => {
     clearFormFields();
     setShow(false);
-    // setRegistered(false);
   };
 
   const clearFormFields = () => {
@@ -68,14 +67,13 @@ const RegisterButton = ({ setRegisterSuccess }) => {
     }
     try {
       const res = await AuthService.register(registerData);
-      // clearFormFields();
       console.log(res);
       if (!res.data) {
         setError(res);
       } else if (res.data.success) {
         setRegisterSuccess(true);
+        handleClose();
       }
-      // setError(res);
     } catch (err) {
       console.log(err.response.data.errMessage);
       setError(err.response.data.errMessage);
