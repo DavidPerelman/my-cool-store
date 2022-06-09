@@ -25,6 +25,7 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
         {(loggedIn && (
           <>
+            <input />
             <ul>
               <li>
                 <a>
@@ -40,6 +41,7 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
           </>
         )) || (
           <>
+            <input />
             <ul>
               <li>
                 <a>
