@@ -5,13 +5,14 @@
 }
 
 .myPopover{
+    display: flex;
     box-sizing: border-box;
     position: absolute;
     top: 30px;
     width: 150px;
     font-weight: normal;
     visibility: visible;
-    display: grid;
+    /* display: grid; */
     place-items: center;
     background: #f5f5f5;
     right: 10px;
@@ -61,11 +62,11 @@ h1 {
     margin: 0;
 }
 
-.span button:hover {
-    /* background-color: #555; */
-}
-
 .wrapper:hover .content {visibility: visible;}
+
+.wrapper {
+    margin: 0px 10px 0px 10px;
+}
 
 .content {
     display: flex;
@@ -73,7 +74,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    /* visibility: hidden; */
+    visibility: hidden;
     background-color: white;
     border: 1px solid #ccc !important;
     color: #000;
@@ -87,7 +88,6 @@ h1 {
 .popover-body{
     border-top-width: 90%;
     border-top: 0.1px solid #ccc !important;
-    /* border-top: 0.1px solid; */
 }
 
 .logo {
@@ -95,5 +95,6 @@ h1 {
 }
 
 .popover-li:hover {
-        background-color: #A9A9A9 !important;
+    background-color: #A9A9A9 !important;
+    cursor: pointer;
 }

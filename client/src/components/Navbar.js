@@ -2,7 +2,8 @@ import { useState } from 'react';
 import LoginButton from './LoginButton';
 import RegisterButton from './RegisterButton';
 import LogoutButton from './LogoutButton';
-import CartButton from './CartButton';
+import CartPopover from './CartPopover';
+import UserPopover from './UserPopover';
 import MyPopover from './Popover';
 import './NavbarStyle.css';
 
@@ -26,11 +27,11 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
         {(loggedIn && (
           <>
-            <input />
+            <input className='navbar-input' />
             <ul>
               <li>
                 <a>
-                  <MyPopover />
+                  <CartPopover />
                 </a>
               </li>
               <li>
@@ -42,13 +43,22 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
           </>
         )) || (
           <>
-            <input />
+            <input className='navbar-input' />
             <ul>
               <li>
                 <a>
-                  <MyPopover />
+                  <CartPopover />
                 </a>
               </li>
+              {/* <li>
+                <a>
+                  <UserPopover
+                    setRegisterSuccess={setRegisterSuccess}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
+                  />
+                </a>
+              </li> */}
               <li>
                 <a>
                   <RegisterButton setRegisterSuccess={setRegisterSuccess} />

@@ -1,18 +1,18 @@
+import React from 'react';
 import './PopoverStyle.css';
-import cart from '../asset/cart.png';
 
-const MyPopover = () => {
+const MyPopover = (props) => {
   return (
     <>
       <div className='wrapper'>
-        <img className='logo' src={cart} alt='Logo' />
+        <img className='logo' src={props.icon} alt='Logo' />
         <div className='content'>
           <div className='title'>
-            <h5>Popover</h5>
+            <h5>{props.title}</h5>
           </div>
           <div className='popover-body'>
             <ul className='popover-ul'>
-              <li className='popover-li'>Point 1</li>
+              <li className='popover-li'>{props.children}</li>
             </ul>
           </div>
         </div>

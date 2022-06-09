@@ -74,7 +74,7 @@
     border-radius: 10px;
 }
 
-input {
+.navbar-input {
     /* width: 250px; */
     width: 40%;
     margin-right: 70px;
@@ -114,7 +114,7 @@ input {
 }
 
 @media(max-width: 600px) {
-    .navbar-links.active input {
+    .navbar-links.active .navbar-input {
         display: none;
     }
 }
