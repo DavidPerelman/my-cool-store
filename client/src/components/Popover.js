@@ -1,10 +1,11 @@
 import './PopoverStyle.css';
+import cart from '../asset/cart.png';
 
 const MyPopover = () => {
   return (
     <>
       <div className='wrapper'>
-        <div>Popover</div>
+        <img className='logo' src={cart} alt='Logo' />
         <div className='content'>
           <div className='title'>
             <h5>Popover</h5>
