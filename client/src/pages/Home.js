@@ -35,8 +35,12 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar></Navbar>
-      {(loggedIn && (
+      <Navbar
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+        setRegisterSuccess={setRegisterSuccess}
+      ></Navbar>
+      {/* {(loggedIn && (
         <>
           <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} />
         </>
@@ -46,7 +50,7 @@ const Home = () => {
           <br />
           <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         </>
-      )}
+      )} */}
 
       {registerSuccess && (
         <>

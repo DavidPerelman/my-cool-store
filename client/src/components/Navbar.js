@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import Popover from './Popover';
+import LoginButton from './LoginButton';
+import RegisterButton from './RegisterButton';
+import LogoutButton from './LogoutButton';
 import './NavbarStyle.css';
 
-const Navbar = () => {
+const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
 
   return (
@@ -19,7 +23,28 @@ const Navbar = () => {
         <span className='bar'></span>
       </a>
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
-        <ul>
+        {(loggedIn && (
+          <>
+            <ul>
+              <li>
+                <LogoutButton setLoggedIn={setLoggedIn} />
+              </li>
+            </ul>
+            {/* <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} /> */}
+          </>
+        )) || (
+          <>
+            <ul>
+              <li>
+                <RegisterButton setRegisterSuccess={setRegisterSuccess} />
+              </li>
+              <li>
+                <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+              </li>
+            </ul>
+          </>
+        )}
+        {/* <ul>
           <li>
             <a href='#'>Home</a>
           </li>
@@ -29,7 +54,12 @@ const Navbar = () => {
           <li>
             <a href='#'>Contact</a>
           </li>
-        </ul>
+          <li>
+            <a href='#'>
+              <Popover></Popover>
+            </a>
+          </li>
+        </ul> */}
       </div>
     </nav>
   );

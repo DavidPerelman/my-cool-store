@@ -12,6 +12,7 @@
     display: block;
     animation-name: modalopen;
     animation-duration: 1s;
+    color: black !important;
 }
 
 @keyframes modalopen{
