@@ -27,6 +27,8 @@
 
 .modal-header {
     padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 .modal-footer {
@@ -49,4 +51,5 @@
 .form-label {
     width: 70%;
     font-size: 13px;
+    margin-bottom: 3px;
 }

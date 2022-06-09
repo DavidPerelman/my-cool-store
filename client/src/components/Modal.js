@@ -28,6 +28,7 @@ const Modal = (props) => {
             <div className='modal-footer'>
               <button
                 type='button'
+                style={{ fontSize: '13px' }}
                 className='btn btn-secondary'
                 data-bs-dismiss='modal'
                 onClick={props.onClose}
@@ -37,6 +38,7 @@ const Modal = (props) => {
               {!props.hideButton && (
                 <button
                   type='button'
+                  style={{ fontSize: '13px' }}
                   className='btn btn-primary'
                   onClick={props.onSubmit}
                 >
