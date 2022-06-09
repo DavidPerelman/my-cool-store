@@ -3,6 +3,7 @@ import LoginButton from './LoginButton';
 import RegisterButton from './RegisterButton';
 import LogoutButton from './LogoutButton';
 import CartButton from './CartButton';
+import MyPopover from './Popover';
 import './NavbarStyle.css';
 
 const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
@@ -29,12 +30,18 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
             <ul>
               <li>
                 <a>
-                  <CartButton />
+                  {/* <CartButton /> */}
+                  <MyPopover />
                 </a>
               </li>
               <li>
                 <a>
                   <LogoutButton setLoggedIn={setLoggedIn} />
+                </a>
+              </li>
+              <li>
+                <a>
+                  <MyPopover />
                 </a>
               </li>
             </ul>
@@ -45,7 +52,8 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
             <ul>
               <li>
                 <a>
-                  <CartButton />
+                  {/* <CartButton /> */}
+                  <MyPopover />
                 </a>
               </li>
               <li>
@@ -58,6 +66,11 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
                   <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
                 </a>
               </li>
+              {/* <li>
+                <a>
+                  <MyPopover />
+                </a>
+              </li> */}
             </ul>
           </>
         )}

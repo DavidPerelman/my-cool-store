@@ -1,33 +1,25 @@
-import { useState, useRef } from 'react';
-import { Tooltip, Overlay, OverlayTrigger, Button } from 'react-bootstrap';
 import './PopoverStyle.css';
 
 const MyPopover = () => {
-  const [tooltip, displayTooltip] = useState(false);
-  const elementTarget = useRef(null);
-
   return (
-    <div className='App mt-5'>
-      <Button
-        ref={elementTarget}
-        onClick={() => displayTooltip(!tooltip)}
-        variant='primary'
-      >
-        Show Tooltip
-      </Button>
-
-      <Overlay
-        elementTarget={elementTarget.current}
-        show={tooltip}
-        placement='top'
-      >
-        {(props) => (
-          <Tooltip {...props}>
-            Lorem Ipsum is simply dummy text of the printing industry.
-          </Tooltip>
-        )}
-      </Overlay>
-    </div>
+    <>
+      <div className='wrapper'>
+        <div>Popover</div>
+        <div className='content'>
+          <div className='title'>
+            <h5>Popover</h5>
+          </div>
+          <div className='popover-body'>
+            <ul className='popover-ul'>
+              <li>Point 1</li>
+              <li>Point 2</li>
+              <li>Point 3</li>
+              <li>Point 4</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

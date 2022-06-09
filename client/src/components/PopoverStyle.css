@@ -64,3 +64,20 @@ h1 {
 .span button:hover {
     /* background-color: #555; */
 }
+
+.wrapper:hover .content {visibility: visible;}
+
+.content {
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    visibility: hidden;
+    background-color: cornflowerblue;
+    right:19%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: -1px;
+    width: 25%;
+}
