@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Popover from './Popover';
 import LoginButton from './LoginButton';
 import RegisterButton from './RegisterButton';
 import LogoutButton from './LogoutButton';
+import CartButton from './CartButton';
 import './NavbarStyle.css';
 
 const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
@@ -28,15 +28,24 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
             <ul>
               <li>
                 <a>
+                  <CartButton />
+                </a>
+              </li>
+              <li>
+                <a>
                   <LogoutButton setLoggedIn={setLoggedIn} />
                 </a>
               </li>
             </ul>
-            {/* <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} /> */}
           </>
         )) || (
           <>
             <ul>
+              <li>
+                <a>
+                  <CartButton />
+                </a>
+              </li>
               <li>
                 <a>
                   <RegisterButton setRegisterSuccess={setRegisterSuccess} />
@@ -50,22 +59,6 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
             </ul>
           </>
         )}
-        {/* <ul>
-          <li>
-            <a href='#'>Home</a>
-          </li>
-          <li>
-            <a href='#'>About</a>
-          </li>
-          <li>
-            <a href='#'>Contact</a>
-          </li>
-          <li>
-            <a href='#'>
-              <Popover></Popover>
-            </a>
-          </li>
-        </ul> */}
       </div>
     </nav>
   );
