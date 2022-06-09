@@ -73,15 +73,27 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    visibility: hidden;
-    background-color: cornflowerblue;
-    right:19%;
+    /* visibility: hidden; */
+    background-color: white;
+    border: 1px solid #ccc !important;
+    color: #000;
+    right:13%;
     padding: 10px;
     border-radius: 10px;
     margin-top: -1px;
-    width: 25%;
+    width: 160px;
+}
+
+.popover-body{
+    border-top-width: 90%;
+    border-top: 0.1px solid #ccc !important;
+    /* border-top: 0.1px solid; */
 }
 
 .logo {
     width: 22px
+}
+
+.popover-li:hover {
+        background-color: #A9A9A9 !important;
 }

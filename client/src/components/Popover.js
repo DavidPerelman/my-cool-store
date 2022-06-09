@@ -12,10 +12,7 @@ const MyPopover = () => {
           </div>
           <div className='popover-body'>
             <ul className='popover-ul'>
-              <li>Point 1</li>
-              <li>Point 2</li>
-              <li>Point 3</li>
-              <li>Point 4</li>
+              <li className='popover-li'>Point 1</li>
             </ul>
           </div>
         </div>

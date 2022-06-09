@@ -32,6 +32,11 @@
     list-style: none;
 }
 
+.popover-li {
+    list-style: none;
+    width: 148px;
+}
+
 .navbar-links li a {
     text-decoration: none;
     color: white;
@@ -42,6 +47,7 @@
 
 .navbar-links li:hover {
     background-color: #555;
+    
 }
 
 .myButton {
