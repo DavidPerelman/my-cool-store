@@ -38,6 +38,12 @@
     background-color: #555;
 }
 
+.myButton {
+    background: none;
+    border: none;
+    color: white;
+}
+
 .toggle-button {
     position: absolute;
     top: .75rem;

@@ -5,7 +5,7 @@ const Form = (props) => {
     <>
       {Object.keys(props.data).map((field, i) => {
         return (
-          <div key={i}>
+          <div key={i} className='label'>
             <label className='form-label'>
               {field.charAt(0).toUpperCase() +
                 field

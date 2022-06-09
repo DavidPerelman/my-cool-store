@@ -1,5 +1,5 @@
 const Button = (props) => {
-  const color = props.className || 'primary';
+  const color = 'myButton' || 'primary';
 
   return (
     <button type='button' className={`${color}`} onClick={props.onClick}>
