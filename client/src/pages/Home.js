@@ -5,6 +5,7 @@ import LoginButton from '../components/LoginButton';
 import LogoutButton from '../components/LogoutButton';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
+import Navbar from '../components/Navbar';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>MyCoolStore</h1>
+      <Navbar></Navbar>
       {(loggedIn && (
         <>
           <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} />
