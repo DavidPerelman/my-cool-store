@@ -86,12 +86,6 @@ const RegisterButton = ({ setRegisterSuccess }) => {
       <Button type='button' className='btn btn-primary' onClick={handleShow}>
         Register
       </Button>
-      {/* <RegisterModal
-        registered={registered}
-        setRegistered={setRegistered}
-        show={show}
-        onClose={handleClose}
-      /> */}
       {show && (
         <Modal
           show={show}
