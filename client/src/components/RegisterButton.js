@@ -84,13 +84,11 @@ const RegisterButton = ({ setRegisterSuccess }) => {
   useEffect(() => {
     setTimeout(() => {
       if (show) {
-        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
         document
           .getElementsByClassName('wrapper')[1]
           .lastChild.classList.add('keep-show-modal');
       }
       if (!show) {
-        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
         document
           .getElementsByClassName('wrapper')[1]
           .lastChild.classList.remove('keep-show-modal');
@@ -99,7 +97,7 @@ const RegisterButton = ({ setRegisterSuccess }) => {
   }, [show]);
 
   const buttonStyle = {
-    backgroundColor: 'blue' /* Green */,
+    backgroundColor: 'blue',
     border: 'none',
     color: 'white',
     padding: '6px',

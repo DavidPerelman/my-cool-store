@@ -36,7 +36,11 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
               </li>
               <li>
                 <a>
-                  <LogoutButton setLoggedIn={setLoggedIn} />
+                  <UserPopover
+                    setRegisterSuccess={setRegisterSuccess}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
+                  />
                 </a>
               </li>
             </ul>
@@ -59,16 +63,6 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
                   />
                 </a>
               </li>
-              {/* <li>
-                <a>
-                  <RegisterButton setRegisterSuccess={setRegisterSuccess} />
-                </a>
-              </li>
-              <li>
-                <a>
-                  <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-                </a>
-              </li> */}
             </ul>
           </>
         )}

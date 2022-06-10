@@ -43,10 +43,12 @@ const LoginButton = ({ setLoggedIn }) => {
       setError('');
     }
     try {
+      console.log(loginData);
       const res = await AuthService.login(loginData);
       if (!res.data) {
         setError(res);
       } else if (res.data.isLogin) {
+        console.log(res.data);
         setLoggedIn(res.data.isLogin);
       }
     } catch (err) {
@@ -62,13 +64,11 @@ const LoginButton = ({ setLoggedIn }) => {
   useEffect(() => {
     setTimeout(() => {
       if (show) {
-        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
         document
           .getElementsByClassName('wrapper')[1]
           .lastChild.classList.add('keep-show-modal');
       }
       if (!show) {
-        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
         document
           .getElementsByClassName('wrapper')[1]
           .lastChild.classList.remove('keep-show-modal');
@@ -77,7 +77,7 @@ const LoginButton = ({ setLoggedIn }) => {
   }, [show]);
 
   const buttonStyle = {
-    backgroundColor: 'blue' /* Green */,
+    backgroundColor: 'blue',
     border: 'none',
     color: 'white',
     padding: '6px',

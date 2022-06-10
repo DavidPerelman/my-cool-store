@@ -2,7 +2,6 @@ import React from 'react';
 import './PopoverStyle.css';
 
 const MyPopover = (props) => {
-  console.log(props);
   return (
     <>
       <div className='wrapper'>
