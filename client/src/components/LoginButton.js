@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
 import Button from './Button';
 import Form from './Form';
@@ -59,20 +59,36 @@ const LoginButton = ({ setLoggedIn }) => {
     }
   };
 
-  if (show) {
-    console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+  useEffect(() => {
+    setTimeout(() => {
+      if (show) {
+        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+        document
+          .getElementsByClassName('wrapper')[1]
+          .lastChild.classList.add('keep-show-modal');
+      }
+      if (!show) {
+        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+        document
+          .getElementsByClassName('wrapper')[1]
+          .lastChild.classList.remove('keep-show-modal');
+      }
+    }, 100);
+  }, [show]);
 
-    document
-      .getElementsByClassName('wrapper')[1]
-      .lastChild.classList.add('keep-show-modal');
-  }
-  if (!show) {
-    console.log(document.getElementsByClassName('wrapper')[1].lastChild);
-
-    document
-      .getElementsByClassName('wrapper')[1]
-      .lastChild.classList.remove('keep-show-modal');
-  }
+  const buttonStyle = {
+    backgroundColor: 'blue' /* Green */,
+    border: 'none',
+    color: 'white',
+    padding: '6px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    fontSize: '16px',
+    borderRadius: '6px',
+    width: '90%',
+    marginTop: '5px',
+  };
 
   return (
     <div>
@@ -81,6 +97,7 @@ const LoginButton = ({ setLoggedIn }) => {
         className='btn btn-primary'
         data-bs-toggle='modal'
         data-bs-target='#exampleModal'
+        style={buttonStyle}
         onClick={handleShow}
       >
         Login

@@ -1,8 +1,14 @@
 const Button = (props) => {
-  const color = 'myButton' || 'primary';
+  const color = 'myButton' || 'modal-button';
+  // const color = 'myButton' || 'modal-button';
 
   return (
-    <button type='button' className={`${color}`} onClick={props.onClick}>
+    <button
+      type='button'
+      style={props.style}
+      className={`${color}`}
+      onClick={props.onClick}
+    >
       {props.children}
     </button>
   );

@@ -48,13 +48,24 @@
 
 .navbar-links li:hover {
     background-color: #555;
-    
 }
 
 .myButton {
     background: none;
     border: none;
     color: white;
+}
+
+.modal-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
 }
 
 .toggle-button {

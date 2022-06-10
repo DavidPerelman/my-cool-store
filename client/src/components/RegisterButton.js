@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthService from '../services/AuthServices';
 import {
   isFormFieldsValid,
@@ -81,24 +81,45 @@ const RegisterButton = ({ setRegisterSuccess }) => {
     }
   };
 
-  if (show) {
-    console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+  useEffect(() => {
+    setTimeout(() => {
+      if (show) {
+        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+        document
+          .getElementsByClassName('wrapper')[1]
+          .lastChild.classList.add('keep-show-modal');
+      }
+      if (!show) {
+        console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+        document
+          .getElementsByClassName('wrapper')[1]
+          .lastChild.classList.remove('keep-show-modal');
+      }
+    }, 100);
+  }, [show]);
 
-    document
-      .getElementsByClassName('wrapper')[1]
-      .lastChild.classList.add('keep-show-modal');
-  }
-  if (!show) {
-    console.log(document.getElementsByClassName('wrapper')[1].lastChild);
-
-    document
-      .getElementsByClassName('wrapper')[1]
-      .lastChild.classList.remove('keep-show-modal');
-  }
+  const buttonStyle = {
+    backgroundColor: 'blue' /* Green */,
+    border: 'none',
+    color: 'white',
+    padding: '6px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    fontSize: '16px',
+    borderRadius: '6px',
+    width: '90%',
+    marginTop: '5px',
+  };
 
   return (
     <div>
-      <Button type='button' className='btn btn-primary' onClick={handleShow}>
+      <Button
+        type='button'
+        className='modal-button'
+        style={buttonStyle}
+        onClick={handleShow}
+      >
         Register
       </Button>
       {show && (
