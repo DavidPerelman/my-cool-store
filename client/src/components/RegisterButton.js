@@ -81,6 +81,21 @@ const RegisterButton = ({ setRegisterSuccess }) => {
     }
   };
 
+  if (show) {
+    console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+
+    document
+      .getElementsByClassName('wrapper')[1]
+      .lastChild.classList.add('keep-show-modal');
+  }
+  if (!show) {
+    console.log(document.getElementsByClassName('wrapper')[1].lastChild);
+
+    document
+      .getElementsByClassName('wrapper')[1]
+      .lastChild.classList.remove('keep-show-modal');
+  }
+
   return (
     <div>
       <Button type='button' className='btn btn-primary' onClick={handleShow}>

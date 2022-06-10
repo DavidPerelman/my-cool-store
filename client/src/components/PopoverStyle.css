@@ -98,3 +98,7 @@ h1 {
     background-color: #A9A9A9 !important;
     cursor: pointer;
 }
+
+.keep-show-modal{
+    visibility: visible;
+}

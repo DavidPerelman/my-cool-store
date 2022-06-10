@@ -50,7 +50,7 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
                   <CartPopover />
                 </a>
               </li>
-              {/* <li>
+              <li>
                 <a>
                   <UserPopover
                     setRegisterSuccess={setRegisterSuccess}
@@ -58,7 +58,7 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
                     setLoggedIn={setLoggedIn}
                   />
                 </a>
-              </li> */}
+              </li>
               <li>
                 <a>
                   <RegisterButton setRegisterSuccess={setRegisterSuccess} />
