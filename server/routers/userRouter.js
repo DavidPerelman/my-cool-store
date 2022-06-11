@@ -189,8 +189,17 @@ router.get('/logout', async (req, res) => {
 
 router.get('/loggedIn', async (req, res) => {
   try {
-    const token = req.cookie.token;
-    console.log(token);
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.json(false);
+    } else {
+      jwt.verify(token, process.env.JWT_SECRET);
+
+      const user = await User.findOne({ token: token }).exec();
+
+      res.send({ loggedIn: true, user: user });
+    }
   } catch (err) {
     console.error(err);
     return res.status(500).json(false).send();
