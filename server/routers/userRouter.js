@@ -189,7 +189,7 @@ router.get('/logout', async (req, res) => {
 
 router.get('/loggedIn', async (req, res) => {
   try {
-    const token = req.cookies;
+    const token = req.cookie.token;
     console.log(token);
   } catch (err) {
     console.error(err);
