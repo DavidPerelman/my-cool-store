@@ -187,4 +187,14 @@ router.get('/logout', async (req, res) => {
   }
 });
 
+router.get('/loggedIn', async (req, res) => {
+  try {
+    const token = req.cookies;
+    console.log(token);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(false).send();
+  }
+});
+
 module.exports = router;
