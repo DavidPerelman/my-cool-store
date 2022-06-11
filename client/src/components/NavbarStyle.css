@@ -25,6 +25,7 @@
 }
 
 .navbar-links {
+    width: 65%;
     display: flex;
 }
 
@@ -86,8 +87,14 @@
     border-radius: 10px;
 }
 
+.navbar-input-div {
+    width: 50%;
+    /* width: 250px; */
+    margin: auto;
+}
+
 .navbar-input {
-    width: 250px;
+    width: 100%;
     margin-right: 0px;
 }
 
@@ -123,9 +130,13 @@
         display: flex;
     }
 
+    .navbar-input-div {
+    margin-left: 0px;
+}
+
     @media(max-width: 600px) {
     .navbar-links .navbar-input {
-        width: 150px;
+        width: 250px;
         margin-left: 20px;
         margin-bottom: 5px;
     }

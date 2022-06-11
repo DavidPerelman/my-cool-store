@@ -8,7 +8,13 @@ const Navbar = ({ loggedIn, setRegisterSuccess }) => {
 
   return (
     <nav className='navbar'>
-      <div className='brand-title'>MyCoolStore</div>
+      <div className='date-brand-div'>
+        <div className='brand-title'>MyCoolStore</div>
+        <p className='date-paragraph'>00:06 12/06/2022</p>
+      </div>
+      {/* <p>
+        <input className='navbar-input' />
+      </p> */}
       <a
         href='#'
         className='toggle-button'
@@ -21,9 +27,12 @@ const Navbar = ({ loggedIn, setRegisterSuccess }) => {
         <span className='bar'></span>
       </a>
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
+        <div className='navbar-input-div'>
+          <input className='navbar-input' />
+        </div>
         {(loggedIn && (
           <>
-            <input className='navbar-input' />
+            {/* <input className='navbar-input' /> */}
             <ul>
               <li className='wrapper'>
                 <a>
@@ -42,7 +51,9 @@ const Navbar = ({ loggedIn, setRegisterSuccess }) => {
           </>
         )) || (
           <>
-            <input className='navbar-input' />
+            {/* <div className='navbar-input-div'>
+              <input className='navbar-input' />
+            </div> */}
             <ul>
               <li className='wrapper'>
                 <a>
