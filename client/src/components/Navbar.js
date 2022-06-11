@@ -5,7 +5,6 @@ import './NavbarStyle.css';
 
 const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
-  console.log(loggedIn);
 
   return (
     <nav className='navbar'>

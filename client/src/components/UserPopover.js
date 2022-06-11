@@ -6,11 +6,6 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 
 const UserPopover = ({ setRegisterSuccess, loggedIn, setLoggedIn }) => {
-  console.log(loggedIn);
-  const userClick = async () => {
-    console.log('userClick');
-  };
-
   return (
     <MyPopover icon={user} title='User Popover'>
       {(loggedIn && (

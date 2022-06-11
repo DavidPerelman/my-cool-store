@@ -5,7 +5,6 @@ import Modal from '../components/Modal';
 import Navbar from '../components/Navbar';
 
 const Home = ({ loggedIn, setLoggedIn }) => {
-  console.log(loggedIn);
   const navigate = useNavigate();
   const [registerConfirmation, setRegisterConfirmation] = useState(false);
   const [registerSuccess, setRegisterSuccess] = useState(false);

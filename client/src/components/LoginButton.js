@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Modal from './Modal';
 import Button from './Button';
 import Form from './Form';
 import { isLoginFormFieldsValid, isValidEmail } from '../utils/formValidation';
 import AuthService from '../services/AuthServices';
+import AuthContext from '../context/authContext';
 
-const LoginButton = ({ setLoggedIn }) => {
+const LoginButton = () => {
+  const { getLoggedIn } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
 
@@ -41,13 +46,13 @@ const LoginButton = ({ setLoggedIn }) => {
     } else {
       setError('');
       try {
-        console.log(loginData);
         const res = await AuthService.login(loginData);
         if (!res.data) {
           setError(res);
-        } else if (res.data.isLogin) {
-          console.log(res.data);
-          setLoggedIn(res.data.isLogin);
+        } else {
+          console.log('loggedIn');
+          await getLoggedIn();
+          navigate('/');
         }
       } catch (err) {
         console.log(err);

@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import AuthService from '../services/AuthServices';
+import AuthContext from '../context/authContext';
 
 const LogoutButton = ({ setLoggedIn }) => {
+  const { getLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const logout = async () => {
     try {
       const res = await AuthService.logout();
-      setLoggedIn(false);
-      console.log(res);
+      await getLoggedIn();
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
