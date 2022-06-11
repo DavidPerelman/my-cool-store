@@ -5,12 +5,12 @@ import RegisterButton from './RegisterButton';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 
-const UserPopover = ({ setRegisterSuccess, loggedIn, setLoggedIn }) => {
+const UserPopover = ({ setRegisterSuccess, loggedIn }) => {
   return (
     <MyPopover icon={user} title='User Popover'>
       {(loggedIn && (
         <>
-          <LogoutButton setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
+          <LogoutButton loggedIn={loggedIn} />
         </>
       )) || (
         <>
@@ -19,7 +19,6 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, setLoggedIn }) => {
           ></RegisterButton>
           <LoginButton
             setRegisterSuccess={setRegisterSuccess}
-            setLoggedIn={setLoggedIn}
             loggedIn={loggedIn}
           ></LoginButton>
         </>

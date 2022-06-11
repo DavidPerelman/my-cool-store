@@ -3,7 +3,7 @@ import CartPopover from './CartPopover';
 import UserPopover from './UserPopover';
 import './NavbarStyle.css';
 
-const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
+const Navbar = ({ loggedIn, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
 
   return (
@@ -25,17 +25,16 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
           <>
             <input className='navbar-input' />
             <ul>
-              <li>
+              <li className='wrapper'>
                 <a>
                   <CartPopover />
                 </a>
               </li>
-              <li>
-                <a>
+              <li className='wrapper'>
+                <a className='link-hover'>
                   <UserPopover
                     setRegisterSuccess={setRegisterSuccess}
                     loggedIn={loggedIn}
-                    setLoggedIn={setLoggedIn}
                   />
                 </a>
               </li>
@@ -45,17 +44,16 @@ const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
           <>
             <input className='navbar-input' />
             <ul>
-              <li>
+              <li className='wrapper'>
                 <a>
                   <CartPopover />
                 </a>
               </li>
-              <li>
+              <li className='wrapper'>
                 <a>
                   <UserPopover
                     setRegisterSuccess={setRegisterSuccess}
                     loggedIn={loggedIn}
-                    setLoggedIn={setLoggedIn}
                   />
                 </a>
               </li>

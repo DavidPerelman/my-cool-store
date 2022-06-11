@@ -4,7 +4,7 @@ import './PopoverStyle.css';
 const MyPopover = (props) => {
   return (
     <>
-      <div className='wrapper'>
+      <div>
         <img className='logo' src={props.icon} alt='Logo' />
         <div className='content'>
           <div className='title'>

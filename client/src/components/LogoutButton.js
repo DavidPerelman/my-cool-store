@@ -4,7 +4,7 @@ import Button from './Button';
 import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
 
-const LogoutButton = ({ setLoggedIn }) => {
+const LogoutButton = () => {
   const { getLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
