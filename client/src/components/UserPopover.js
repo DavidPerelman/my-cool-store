@@ -11,17 +11,11 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, setLoggedIn }) => {
     console.log('userClick');
   };
 
-  // <RegisterButton setRegisterSuccess={setRegisterSuccess}></RegisterButton>
-  //     <LoginButton
-  //       setRegisterSuccess={setRegisterSuccess}
-  //       setLoggedIn={setLoggedIn}
-  //     ></LoginButton>
-
   return (
     <MyPopover icon={user} title='User Popover'>
       {(loggedIn && (
         <>
-          <LogoutButton setLoggedIn={setLoggedIn} />
+          <LogoutButton setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
         </>
       )) || (
         <>
@@ -31,6 +25,7 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, setLoggedIn }) => {
           <LoginButton
             setRegisterSuccess={setRegisterSuccess}
             setLoggedIn={setLoggedIn}
+            loggedIn={loggedIn}
           ></LoginButton>
         </>
       )}

@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import LoginButton from './LoginButton';
-import RegisterButton from './RegisterButton';
-import LogoutButton from './LogoutButton';
 import CartPopover from './CartPopover';
 import UserPopover from './UserPopover';
-import MyPopover from './Popover';
 import './NavbarStyle.css';
 
 const Navbar = ({ loggedIn, setLoggedIn, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
+  console.log(loggedIn);
 
   return (
     <nav className='navbar'>

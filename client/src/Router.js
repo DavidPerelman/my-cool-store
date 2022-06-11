@@ -1,13 +1,65 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import AuthContext from './context/authContext';
 
 const Router = () => {
+  const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
+  console.log(loggedIn);
+  console.log(userData);
   return (
     <div>
       <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route path='/:status/:userName' element={<Home />} />
+        {loggedIn === undefined && (
+          <>
+            <Route
+              exact
+              path='/'
+              element={
+                <Home
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                  userData={userData}
+                />
+              }
+            />
+            <Route
+              path='/:status/:userName'
+              element={
+                <Home
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                  userData={userData}
+                />
+              }
+            />
+          </>
+        )}
+        {loggedIn === true && (
+          <>
+            <Route
+              exact
+              path='/'
+              element={
+                <Home
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                  userData={userData}
+                />
+              }
+            />
+            <Route
+              path='/:status/:userName'
+              element={
+                <Home
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                  userData={userData}
+                />
+              }
+            />
+          </>
+        )}
       </Routes>
     </div>
   );

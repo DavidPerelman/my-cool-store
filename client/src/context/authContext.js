@@ -8,10 +8,10 @@ const AuthContextProvider = (props) => {
   const [userData, setUserData] = useState(undefined);
 
   const getLoggedIn = async () => {
-    const loggedInRes = await axios.get('http://localhost:5000/user/loggedIn');
+    const loggedInRes = await axios.get('/user/loggedIn');
     console.log(loggedInRes);
-    setLoggedIn(loggedInRes.loggedIn);
-    setUserData(loggedInRes.user);
+    setLoggedIn(loggedInRes.data.loggedIn);
+    setUserData(loggedInRes.data.user);
   };
 
   useEffect(() => {
@@ -19,7 +19,9 @@ const AuthContextProvider = (props) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ loggedIn, getLoggedIn, userData }}>
+    <AuthContext.Provider
+      value={{ loggedIn, setLoggedIn, getLoggedIn, userData }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

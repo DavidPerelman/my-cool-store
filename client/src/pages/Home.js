@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import RegisterButton from '../components/RegisterButton';
-import LoginButton from '../components/LoginButton';
-import LogoutButton from '../components/LogoutButton';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
 import Navbar from '../components/Navbar';
 
-const Home = () => {
+const Home = ({ loggedIn, setLoggedIn }) => {
+  console.log(loggedIn);
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false);
   const [registerConfirmation, setRegisterConfirmation] = useState(false);
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const { status, userName } = useParams();
