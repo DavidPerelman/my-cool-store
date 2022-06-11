@@ -61,18 +61,18 @@ const RegisterButton = ({ setRegisterSuccess }) => {
       setError('invalid email!');
     } else {
       setError('');
-    }
-    try {
-      const res = await AuthService.register(registerData);
-      if (!res.data) {
-        setError(res);
-      } else if (res.data.success) {
-        setRegisterSuccess(true);
-        handleClose();
+      try {
+        const res = await AuthService.register(registerData);
+        if (!res.data) {
+          setError(res);
+        } else if (res.data.success) {
+          setRegisterSuccess(true);
+          handleClose();
+        }
+      } catch (err) {
+        console.log(err.response.data.errMessage);
+        setError(err.response.data.errMessage);
       }
-    } catch (err) {
-      console.log(err.response.data.errMessage);
-      setError(err.response.data.errMessage);
     }
 
     const clearError = setTimeout(clearErrorMessage, 3000);

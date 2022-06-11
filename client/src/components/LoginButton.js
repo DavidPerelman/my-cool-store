@@ -38,21 +38,20 @@ const LoginButton = ({ setLoggedIn }) => {
       setError('all fields required!');
     } else if (!isValidEmail(loginData.email)) {
       setError('invalid email!');
-      console.log(error);
     } else {
       setError('');
-    }
-    try {
-      console.log(loginData);
-      const res = await AuthService.login(loginData);
-      if (!res.data) {
-        setError(res);
-      } else if (res.data.isLogin) {
-        console.log(res.data);
-        setLoggedIn(res.data.isLogin);
+      try {
+        console.log(loginData);
+        const res = await AuthService.login(loginData);
+        if (!res.data) {
+          setError(res);
+        } else if (res.data.isLogin) {
+          console.log(res.data);
+          setLoggedIn(res.data.isLogin);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
 
     const clearError = setTimeout(clearErrorMessage, 3000);
