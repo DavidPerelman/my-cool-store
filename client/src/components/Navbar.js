@@ -4,7 +4,7 @@ import UserPopover from './UserPopover';
 import ClockDate from './ClockDate';
 import './NavbarStyle.css';
 
-const Navbar = ({ loggedIn, setRegisterSuccess }) => {
+const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
   const today = new Date();
   const date =
@@ -39,8 +39,8 @@ const Navbar = ({ loggedIn, setRegisterSuccess }) => {
         </div>
         {(loggedIn && (
           <>
-            {/* <input className='navbar-input' /> */}
             <ul>
+              <p className='greet-user'>Hello {userData.firstName}</p>
               <li className='wrapper'>
                 <a>
                   <CartPopover />
@@ -62,6 +62,7 @@ const Navbar = ({ loggedIn, setRegisterSuccess }) => {
               <input className='navbar-input' />
             </div> */}
             <ul>
+              <p className='greet-user'>Hello Guest</p>
               <li className='wrapper'>
                 <a>
                   <CartPopover />
