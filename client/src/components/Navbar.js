@@ -4,8 +4,12 @@ import UserPopover from './UserPopover';
 import ClockDate from './ClockDate';
 import './NavbarStyle.css';
 
-const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
+const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
+  // const [userProductInCart, setUserProductInCart] = useState(
+  //   userData.productsInCart
+  // );
+  const [guestProductInCart, setGuestProductInCart] = useState(0);
   const today = new Date();
   const date =
     today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
@@ -43,7 +47,10 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
               <p className='greet-user'>Hello {userData.firstName}</p>
               <li className='wrapper'>
                 <a>
-                  <CartPopover />
+                  {/* <CartPopover
+                    userProductInCart={userProductInCart}
+                    setUserProductInCart={setUserProductInCart}
+                  /> */}
                 </a>
               </li>
               <li className='wrapper'>
@@ -58,14 +65,16 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
           </>
         )) || (
           <>
-            {/* <div className='navbar-input-div'>
-              <input className='navbar-input' />
-            </div> */}
             <ul>
               <p className='greet-user'>Hello Guest</p>
               <li className='wrapper'>
                 <a>
-                  <CartPopover />
+                  <CartPopover
+                    loggedIn={loggedIn}
+                    userData={userData}
+                    guestProductInCart={guestProductInCart}
+                    setGuestProductInCart={setGuestProductInCart}
+                  />
                 </a>
               </li>
               <li className='wrapper'>

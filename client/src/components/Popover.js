@@ -3,7 +3,6 @@ import './PopoverStyle.css';
 
 const MyPopover = (props) => {
   const cartIcon = props.title === 'Cart Popover';
-  console.log(props.title === 'Cart Popover');
   return (
     <>
       <div>
@@ -11,8 +10,7 @@ const MyPopover = (props) => {
           <img className='logo' src={props.icon} alt='Logo' />
           {cartIcon && (
             <span className='badge badge-warning' id='lblCartCount'>
-              {' '}
-              5{' '}
+              {props.guestProductInCart}
             </span>
           )}
         </div>

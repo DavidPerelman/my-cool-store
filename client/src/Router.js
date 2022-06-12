@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import AuthContext from './context/authContext';
@@ -7,10 +7,11 @@ const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
   console.log(loggedIn);
   console.log(userData);
+
   return (
     <div>
       <Routes>
-        {loggedIn === undefined && (
+        {loggedIn === false && (
           <>
             <Route
               exact

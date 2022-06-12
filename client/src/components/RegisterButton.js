@@ -93,7 +93,7 @@ const RegisterButton = ({ setRegisterSuccess }) => {
           .getElementsByClassName('wrapper')[1]
           .lastChild.classList.remove('keep-show-modal');
       }
-    }, 100);
+    }, 1000);
   }, [show]);
 
   const buttonStyle = {

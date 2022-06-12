@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
 import Navbar from '../components/Navbar';
 
-const Home = ({ loggedIn, userData }) => {
+const Home = ({ loggedIn, userData, guestData }) => {
   const navigate = useNavigate();
   const [registerConfirmation, setRegisterConfirmation] = useState(false);
   const [registerSuccess, setRegisterSuccess] = useState(false);
@@ -35,6 +35,7 @@ const Home = ({ loggedIn, userData }) => {
         loggedIn={loggedIn}
         setRegisterSuccess={setRegisterSuccess}
         userData={userData}
+        guestData={guestData}
       ></Navbar>
       {/* {(loggedIn && (
         <>
