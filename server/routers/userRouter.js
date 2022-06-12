@@ -194,7 +194,7 @@ router.get('/loggedIn', async (req, res) => {
     if (!token) {
       res.send({
         loggedIn: false,
-        user: { first: 'Guset', productsInCart: 0 },
+        user: { firstName: 'Guset', productsInCart: [] },
       });
       // return res.json(false);
     } else {

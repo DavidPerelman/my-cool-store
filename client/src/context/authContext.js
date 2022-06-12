@@ -11,7 +11,6 @@ const AuthContextProvider = (props) => {
     const loggedInRes = await axios.get('/user/loggedIn');
     setLoggedIn(loggedInRes.data.loggedIn);
     setUserData(loggedInRes.data.user);
-    console.log(loggedIn);
   };
 
   useEffect(() => {

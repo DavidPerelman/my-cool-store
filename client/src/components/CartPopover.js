@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import cart from '../asset/cart.png';
 
 const CartPopover = ({ loggedIn, userData }) => {
-  const [productsInCart, setProductsInCart] = useState(userData.productsInCart);
-  console.log(loggedIn);
-  console.log(userData);
+  const [productsInCart, setProductsInCart] = useState(
+    userData.productsInCart.length
+  );
 
   return (
     <>
@@ -17,12 +17,14 @@ const CartPopover = ({ loggedIn, userData }) => {
         </div>
         <div className='content'>
           <div className='title'>
-            <h5>Cart Popover</h5>
+            <h5>Cart</h5>
           </div>
           <div className='popover-body'>
-            <ul className='popover-ul'>
-              <li className='popover-li'></li>
-            </ul>
+            {(productsInCart < 1 && 'Your cart is empty') || (
+              <ul className='popover-ul'>
+                <li className='popover-li'></li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

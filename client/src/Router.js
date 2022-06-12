@@ -5,7 +5,6 @@ import AuthContext from './context/authContext';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
-  console.log(loggedIn);
   console.log(userData);
 
   return (

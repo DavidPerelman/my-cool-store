@@ -41,16 +41,13 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
         <div className='navbar-input-div'>
           <input className='navbar-input' />
         </div>
+        <p className='greet-user'>Hello {userData.firstName}</p>
         {(loggedIn && (
           <>
             <ul>
-              <p className='greet-user'>Hello {userData.firstName}</p>
               <li className='wrapper'>
                 <a>
-                  {/* <CartPopover
-                    userProductInCart={userProductInCart}
-                    setUserProductInCart={setUserProductInCart}
-                  /> */}
+                  <CartPopover loggedIn={loggedIn} userData={userData} />
                 </a>
               </li>
               <li className='wrapper'>
@@ -66,15 +63,10 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
         )) || (
           <>
             <ul>
-              <p className='greet-user'>Hello Guest</p>
+              {/* <p className='greet-user'>Hello Guest</p> */}
               <li className='wrapper'>
                 <a>
-                  <CartPopover
-                    loggedIn={loggedIn}
-                    userData={userData}
-                    guestProductInCart={guestProductInCart}
-                    setGuestProductInCart={setGuestProductInCart}
-                  />
+                  <CartPopover loggedIn={loggedIn} userData={userData} />
                 </a>
               </li>
               <li className='wrapper'>
