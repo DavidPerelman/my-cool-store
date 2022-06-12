@@ -3,17 +3,17 @@ const moment = require('moment-timezone');
 
 const userSchema = new mongoose.Schema({
   firstName: {
-      type: String,
-      required: true
+    type: String,
+    required: true,
   },
   lastName: {
-      type: String,
-      required: true
+    type: String,
+    required: true,
   },
   email: {
-      type: String,
-      required: true,
-      match:
+    type: String,
+    required: true,
+    match:
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   },
   passwordHash: { type: String, required: true },
@@ -29,6 +29,17 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String,
   },
+  productsInCart: [
+    {
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ProductSchema',
+      },
+      amount: {
+        type: Number,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model('User', userSchema);
