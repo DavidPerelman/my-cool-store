@@ -16,9 +16,25 @@ const ClockDate = () => {
 
   const renderClcok = () => {
     if (date.getHours() < 10) {
-      return `0${date.toLocaleTimeString()} ${date.toLocaleDateString()}`;
+      if (date.getMonth() < 10) {
+        return `0${date.toLocaleTimeString()} ${date.getDate()}.0${
+          date.getMonth() + 1
+        }.${date.getFullYear()}`;
+      } else {
+        return `0${date.toLocaleTimeString()} ${date.getDate()}.${
+          date.getMonth() + 1
+        }.${date.getFullYear()}`;
+      }
     } else {
-      return `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`;
+      if (date.getMonth() < 10) {
+        return `${date.toLocaleTimeString()} ${date.getDate()}.0${
+          date.getMonth() + 1
+        }.${date.getFullYear()}`;
+      } else {
+        return `${date.toLocaleTimeString()} ${date.getDate()}.${
+          date.getMonth() + 1
+        }.${date.getFullYear()}`;
+      }
     }
   };
 
