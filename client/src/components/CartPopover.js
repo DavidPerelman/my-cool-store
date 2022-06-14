@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import cart from '../asset/cart.png';
+import MyPopover from './MyPopover';
 
 const CartPopover = ({ loggedIn, userData }) => {
-  const [productsInCart, setProductsInCart] = useState(0);
+  let itemsInCart = JSON.parse(localStorage.getItem('cartItems'));
 
   return (
     <>
-      <div>
+      <MyPopover
+        icon={cart}
+        itemsInCart={itemsInCart.length}
+        title='Cart Popover'
+      ></MyPopover>
+      {/* <div>
         <div>
           <img className='logo' src={cart} alt='Logo' />
           <span className='badge badge-warning' id='lblCartCount'>
-            {productsInCart}
+            {itemsInCart.length}
           </span>
         </div>
         <div className='content'>
@@ -18,14 +24,14 @@ const CartPopover = ({ loggedIn, userData }) => {
             <h5>Cart</h5>
           </div>
           <div className='popover-body'>
-            {(productsInCart < 1 && 'Your cart is empty') || (
+            {(itemsInCart.length < 1 && 'Your cart is empty') || (
               <ul className='popover-ul'>
                 <li className='popover-li'></li>
               </ul>
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

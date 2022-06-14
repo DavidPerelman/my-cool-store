@@ -9,7 +9,6 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
   // const [userProductInCart, setUserProductInCart] = useState(
   //   userData.productsInCart
   // );
-  const [guestProductInCart, setGuestProductInCart] = useState(0);
   const today = new Date();
   const date =
     today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();

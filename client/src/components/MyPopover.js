@@ -2,6 +2,7 @@ import React from 'react';
 import './PopoverStyle.css';
 
 const MyPopover = (props) => {
+  // console.log(localStorage.getItem('cartItems'));
   const cartIcon = props.title === 'Cart Popover';
   return (
     <>
@@ -10,7 +11,7 @@ const MyPopover = (props) => {
           <img className='logo' src={props.icon} alt='Logo' />
           {cartIcon && (
             <span className='badge badge-warning' id='lblCartCount'>
-              {props.guestProductInCart}
+              {props.itemsInCart}
             </span>
           )}
         </div>

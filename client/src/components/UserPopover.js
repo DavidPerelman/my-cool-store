@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import user from '../asset/user.png';
-import MyPopover from './Popover';
+import MyPopover from './MyPopover';
 import RegisterButton from './RegisterButton';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
