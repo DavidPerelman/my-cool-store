@@ -2,11 +2,10 @@ import React from 'react';
 import './PopoverStyle.css';
 
 const MyPopover = (props) => {
-  // console.log(localStorage.getItem('cartItems'));
-  const cartIcon = props.title === 'Cart Popover';
+  const cartIcon = props.title === 'Cart';
   return (
     <>
-      <div>
+      <div className='MyContent'>
         <div>
           <img className='logo' src={props.icon} alt='Logo' />
           {cartIcon && (

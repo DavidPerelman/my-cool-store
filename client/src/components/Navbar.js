@@ -6,9 +6,7 @@ import './NavbarStyle.css';
 
 const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
-  // const [userProductInCart, setUserProductInCart] = useState(
-  //   userData.productsInCart
-  // );
+
   const today = new Date();
   const date =
     today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
@@ -22,9 +20,6 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
         <div className='brand-title'>MyCoolStore</div>
         <ClockDate />
       </div>
-      {/* <p>
-        <input className='navbar-input' />
-      </p> */}
       <a
         href='#'
         className='toggle-button'
@@ -49,9 +44,10 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
                   <CartPopover loggedIn={loggedIn} userData={userData} />
                 </a>
               </li>
-              <li className='wrapper'>
+              <li className='wrapper-user'>
                 <a className='link-hover'>
                   <UserPopover
+                    userData={userData}
                     setRegisterSuccess={setRegisterSuccess}
                     loggedIn={loggedIn}
                   />
@@ -68,9 +64,10 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
                   <CartPopover loggedIn={loggedIn} userData={userData} />
                 </a>
               </li>
-              <li className='wrapper'>
+              <li className='wrapper-user'>
                 <a>
                   <UserPopover
+                    userData={userData}
                     setRegisterSuccess={setRegisterSuccess}
                     loggedIn={loggedIn}
                   />

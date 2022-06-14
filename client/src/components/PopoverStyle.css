@@ -63,9 +63,11 @@ h1 {
 }
 
 .wrapper:hover .content {visibility: visible;}
+.wrapper-user:hover .content {visibility: visible;}
 
 .wrapper {
     margin: 0px 0px 0px 0px;
+    padding-right: 0.4rem;
 }
 
 .content {

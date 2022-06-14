@@ -69,15 +69,15 @@ const LoginButton = () => {
     setTimeout(() => {
       if (show) {
         document
-          .getElementsByClassName('wrapper')[1]
+          .getElementsByClassName('MyContent')[1]
           .lastChild.classList.add('keep-show-modal');
       }
       if (!show) {
         document
-          .getElementsByClassName('wrapper')[1]
+          .getElementsByClassName('MyContent')[1]
           .lastChild.classList.remove('keep-show-modal');
       }
-    }, 1000);
+    }, 100);
   }, [show]);
 
   const buttonStyle = {

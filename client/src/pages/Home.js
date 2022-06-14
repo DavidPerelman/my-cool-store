@@ -22,7 +22,7 @@ const Home = ({ loggedIn, userData }) => {
   };
 
   useEffect(() => {
-    addCartItem();
+    // addCartItem();
     if (status === 'registerSuccess') {
       setShow(true);
       setRegisterConfirmation(true);
