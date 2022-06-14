@@ -4,7 +4,7 @@ import UserPopover from './UserPopover';
 import ClockDate from './ClockDate';
 import './NavbarStyle.css';
 
-const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
+const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);
 
   const today = new Date();

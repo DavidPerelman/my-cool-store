@@ -6,10 +6,13 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 
 const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
-  const guest = userData === undefined;
-
   return (
-    <MyPopover icon={user} title={guest ? 'Guest' : userData.firstName}>
+    <MyPopover
+      icon={user}
+      title={loggedIn ? userData.firstName : 'Guest'}
+      userData={userData}
+      loggedIn={loggedIn}
+    >
       {(loggedIn && (
         <>
           <LogoutButton loggedIn={loggedIn} />
@@ -17,6 +20,7 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
       )) || (
         <>
           <RegisterButton
+            loggedIn={loggedIn}
             setRegisterSuccess={setRegisterSuccess}
           ></RegisterButton>
           <LoginButton

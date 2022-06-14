@@ -5,7 +5,7 @@ import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
 
 const LogoutButton = () => {
-  const { getLoggedIn } = useContext(AuthContext);
+  const { getLoggedIn, show, loggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -33,9 +33,24 @@ const LogoutButton = () => {
   };
 
   useEffect(() => {
-    document
-      .getElementsByClassName('wrapper')[1]
-      .lastChild.classList.remove('keep-show-modal');
+    if (!loggedIn) {
+      setTimeout(() => {
+        if (show) {
+          document
+            .getElementsByClassName('user-popover')[1]
+            .lastChild.classList.add('keep-show-modal');
+        }
+        if (!show) {
+          document
+            .getElementsByClassName('user-popover')[1]
+            .lastChild.classList.remove('keep-show-modal');
+        }
+      }, 100);
+    }
+
+    // document
+    //   .getElementsByClassName('wrapper')[1]
+    //   .lastChild.classList.remove('keep-show-modal');
   }, []);
 
   return (

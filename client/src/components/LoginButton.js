@@ -8,7 +8,7 @@ import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
 
 const LoginButton = () => {
-  const { getLoggedIn } = useContext(AuthContext);
+  const { getLoggedIn, loggedIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -66,18 +66,20 @@ const LoginButton = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      if (show) {
-        document
-          .getElementsByClassName('MyContent')[1]
-          .lastChild.classList.add('keep-show-modal');
-      }
-      if (!show) {
-        document
-          .getElementsByClassName('MyContent')[1]
-          .lastChild.classList.remove('keep-show-modal');
-      }
-    }, 100);
+    if (!loggedIn) {
+      setTimeout(() => {
+        if (show) {
+          document
+            .getElementsByClassName('user-popover')[1]
+            .lastChild.classList.add('keep-show-modal');
+        }
+        if (!show) {
+          document
+            .getElementsByClassName('user-popover')[1]
+            .lastChild.classList.remove('keep-show-modal');
+        }
+      }, 100);
+    }
   }, [show]);
 
   const buttonStyle = {

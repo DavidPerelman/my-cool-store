@@ -9,7 +9,7 @@ import Form from './Form';
 import Modal from './Modal';
 import Button from './Button';
 
-const RegisterButton = ({ setRegisterSuccess }) => {
+const RegisterButton = ({ setRegisterSuccess, loggedIn }) => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
 
@@ -82,18 +82,20 @@ const RegisterButton = ({ setRegisterSuccess }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      if (show) {
-        document
-          .getElementsByClassName('MyContent')[1]
-          .lastChild.classList.add('keep-show-modal');
-      }
-      if (!show) {
-        document
-          .getElementsByClassName('MyContent')[1]
-          .lastChild.classList.remove('keep-show-modal');
-      }
-    }, 100);
+    if (!loggedIn) {
+      setTimeout(() => {
+        if (show) {
+          document
+            .getElementsByClassName('user-popover')[1]
+            .lastChild.classList.add('keep-show-modal');
+        }
+        if (!show) {
+          document
+            .getElementsByClassName('user-popover')[1]
+            .lastChild.classList.remove('keep-show-modal');
+        }
+      }, 100);
+    }
   }, [show]);
 
   const buttonStyle = {
