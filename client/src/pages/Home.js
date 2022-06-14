@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
 import Navbar from '../components/Navbar';
 
-const Home = ({ loggedIn, userData, guestData }) => {
+const Home = ({ loggedIn, userData }) => {
   const navigate = useNavigate();
   const [registerConfirmation, setRegisterConfirmation] = useState(false);
   const [registerSuccess, setRegisterSuccess] = useState(false);
@@ -35,7 +35,6 @@ const Home = ({ loggedIn, userData, guestData }) => {
         loggedIn={loggedIn}
         setRegisterSuccess={setRegisterSuccess}
         userData={userData}
-        guestData={guestData}
       ></Navbar>
       {/* {(loggedIn && (
         <>

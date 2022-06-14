@@ -41,9 +41,9 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
         <div className='navbar-input-div'>
           <input className='navbar-input' />
         </div>
-        <p className='greet-user'>Hello {userData.firstName}</p>
         {(loggedIn && (
           <>
+            <p className='greet-user'>Hello {userData.firstName}</p>
             <ul>
               <li className='wrapper'>
                 <a>
@@ -63,7 +63,7 @@ const Navbar = ({ loggedIn, userData, guestData, setRegisterSuccess }) => {
         )) || (
           <>
             <ul>
-              {/* <p className='greet-user'>Hello Guest</p> */}
+              <p className='greet-user'>Hello Guest</p>
               <li className='wrapper'>
                 <a>
                   <CartPopover loggedIn={loggedIn} userData={userData} />

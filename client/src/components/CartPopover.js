@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import cart from '../asset/cart.png';
 
 const CartPopover = ({ loggedIn, userData }) => {
-  const [productsInCart, setProductsInCart] = useState(
-    userData.productsInCart.length
-  );
+  const [productsInCart, setProductsInCart] = useState(0);
 
   return (
     <>

@@ -192,11 +192,12 @@ router.get('/loggedIn', async (req, res) => {
     const token = req.cookies.token;
 
     if (!token) {
+      return res.json(false);
+
       res.send({
         loggedIn: false,
         user: { firstName: 'Guset', productsInCart: [] },
       });
-      // return res.json(false);
     } else {
       jwt.verify(token, process.env.JWT_SECRET);
 

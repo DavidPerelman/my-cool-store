@@ -5,12 +5,12 @@ import AuthContext from './context/authContext';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
-  console.log(userData);
+  // console.log(userData);
 
   return (
     <div>
       <Routes>
-        {loggedIn === false && (
+        {loggedIn === undefined && (
           <>
             <Route
               exact
