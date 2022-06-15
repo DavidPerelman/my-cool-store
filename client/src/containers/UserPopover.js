@@ -8,6 +8,7 @@ import LogoutButton from './LogoutButton';
 const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
   return (
     <MyPopover
+      type='user'
       icon={user}
       title={loggedIn ? userData.firstName : 'Guest'}
       userData={userData}

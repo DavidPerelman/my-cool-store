@@ -1,29 +1,25 @@
 import React from 'react';
 import './MyPopover.css';
 
-const MyPopover = (props) => {
-  const cart = props.title === 'Cart';
-  const user = props.title === 'User' || 'Guest';
-  console.log(props.itemsInCart);
-
+const MyPopover = ({ type, title, icon, itemsInCart, children }) => {
   return (
     <>
-      <div className={user ? 'user-popover' : 'cart-popover'}>
+      <div className={`${type}-popover`}>
         <div>
-          <img className='logo' src={props.icon} alt='Logo' />
-          {cart && (
+          <img className='logo' src={icon} alt='Logo' />
+          {type === 'cart' && (
             <span className='badge badge-warning' id='lblCartCount'>
-              {props.itemsInCart}
+              {itemsInCart}
             </span>
           )}
         </div>
-        <div className={cart ? 'cart-content' : 'user-content'}>
+        <div className={`${type}-content`}>
           <div className='title'>
-            <h5>{props.title}</h5>
+            <h5>{title}</h5>
           </div>
           <div className='popover-body'>
             <ul className='popover-ul'>
-              <li className='popover-li'>{props.children}</li>
+              <li className='popover-li'>{children}</li>
             </ul>
           </div>
         </div>

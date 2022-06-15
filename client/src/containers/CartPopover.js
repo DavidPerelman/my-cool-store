@@ -15,7 +15,12 @@ const CartPopover = () => {
 
   return (
     <>
-      <MyPopover icon={cart} itemsInCart={renderItemsInCart()} title='Cart'>
+      <MyPopover
+        type='cart'
+        icon={cart}
+        itemsInCart={renderItemsInCart()}
+        title='Cart'
+      >
         {(itemsInCart < 0 &&
           itemsInCart.map((item, i) => <h5 key={i}>{item.name}</h5>)) || (
           <div>Your cart is empty</div>

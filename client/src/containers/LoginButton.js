@@ -70,12 +70,12 @@ const LoginButton = () => {
       setTimeout(() => {
         if (show) {
           document
-            .getElementsByClassName('user-popover')[1]
+            .getElementsByClassName('user-popover')[0]
             .lastChild.classList.add('keep-show-modal');
         }
         if (!show) {
           document
-            .getElementsByClassName('user-popover')[1]
+            .getElementsByClassName('user-popover')[0]
             .lastChild.classList.remove('keep-show-modal');
         }
       }, 100);
