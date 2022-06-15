@@ -1,0 +1,23 @@
+.button {
+  padding: 4px calc(var(--size) - 4px);
+  font-size: var(--size);
+}
+.button.blue {
+  --color: blue;
+}
+.button.red {
+  --color: red;
+}
+.button.small {
+  --size: 30px;
+}
+
+.button.outlined {
+  color: var(--color);
+  border-color: var(--color);
+  background-color: transparent;
+}
+.button.contained {
+  background-color: var(--color);
+  color: white;
+}

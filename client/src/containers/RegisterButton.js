@@ -1,27 +1,29 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Modal from './Modal';
-import Button from './Button';
-import Form from './Form';
-import { isLoginFormFieldsValid, isValidEmail } from '../utils/formValidation';
+import React, { useState, useEffect } from 'react';
 import AuthService from '../services/AuthServices';
-import AuthContext from '../context/authContext';
+import {
+  isFormFieldsValid,
+  isValidPassword,
+  isValidEmail,
+} from '../utils/formValidation';
+import Form from '../components/Form';
+import Modal from '../components/Modal/Modal';
+import Button from '../components/Button/Button';
 
-const LoginButton = () => {
-  const { getLoggedIn, loggedIn } = useContext(AuthContext);
-
-  const navigate = useNavigate();
+const RegisterButton = ({ setRegisterSuccess, loggedIn }) => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
 
-  const [loginData, setLoginData] = useState({
+  const [registerData, setRegisterData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
+    verifyPassword: '',
   });
 
   const handleFormChange = (e, valKey) => {
     const { value } = e.target;
-    setLoginData((prevState) => {
+    setRegisterData((prevState) => {
       return { ...prevState, [valKey]: value };
     });
   };
@@ -33,29 +35,43 @@ const LoginButton = () => {
   };
 
   const clearFormFields = () => {
-    for (let field in loginData) {
-      loginData[field] = '';
+    for (let field in registerData) {
+      registerData[field] = '';
     }
   };
 
-  const login = async () => {
-    if (isLoginFormFieldsValid(loginData.email, loginData.password)) {
+  const register = async () => {
+    if (
+      isFormFieldsValid(
+        registerData.firstName,
+        registerData.lastName,
+        registerData.email,
+        registerData.password,
+        registerData.verifyPassword
+      )
+    ) {
       setError('all fields required!');
-    } else if (!isValidEmail(loginData.email)) {
+    } else if (
+      isValidPassword(registerData.password, registerData.verifyPassword)
+    ) {
+      setError(
+        'Password must be at least 6 characters long and the passwords must be identical'
+      );
+    } else if (!isValidEmail(registerData.email)) {
       setError('invalid email!');
     } else {
       setError('');
       try {
-        const res = await AuthService.login(loginData);
+        const res = await AuthService.register(registerData);
         if (!res.data) {
           setError(res);
-        } else {
-          console.log('loggedIn');
-          await getLoggedIn();
-          navigate('/');
+        } else if (res.data.success) {
+          setRegisterSuccess(true);
+          handleClose();
         }
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.errMessage);
+        setError(err.response.data.errMessage);
       }
     }
 
@@ -100,28 +116,26 @@ const LoginButton = () => {
     <div>
       <Button
         type='button'
-        className='btn btn-primary'
-        data-bs-toggle='modal'
-        data-bs-target='#exampleModal'
+        className='modal-button'
         style={buttonStyle}
         onClick={handleShow}
       >
-        Login
+        Register
       </Button>
       {show && (
         <Modal
           show={show}
           onClose={handleClose}
-          title='Login'
-          textButton='Login'
-          onSubmit={login}
+          title='Register'
+          textButton='Register'
+          onSubmit={register}
           error={error}
         >
-          <Form data={loginData} handleFormChange={handleFormChange}></Form>
+          <Form data={registerData} handleFormChange={handleFormChange}></Form>
         </Modal>
       )}
     </div>
   );
 };
 
-export default LoginButton;
+export default RegisterButton;

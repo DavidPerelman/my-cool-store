@@ -9,7 +9,6 @@ export function useCart() {
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
 
-  //   const getCartItems = () => {};
   const addCartItem = () => {
     const id = Math.random() * (1000 - 1) + 1;
 

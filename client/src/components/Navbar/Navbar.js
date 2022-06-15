@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import CartPopover from './CartPopover';
-import UserPopover from './UserPopover';
-import ClockDate from './ClockDate';
-import './NavbarStyle.css';
+import CartPopover from '../../containers/CartPopover';
+import UserPopover from '../../containers/UserPopover';
+import ClockDate from '../ClockDate';
+import './Navbar.css';
 
 const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
   const [active, setActive] = useState(true);

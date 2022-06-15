@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from './Button';
+import Button from '../components/Button/Button';
 import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
 
@@ -47,10 +47,6 @@ const LogoutButton = () => {
         }
       }, 100);
     }
-
-    // document
-    //   .getElementsByClassName('wrapper')[1]
-    //   .lastChild.classList.remove('keep-show-modal');
   }, []);
 
   return (

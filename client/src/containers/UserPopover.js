@@ -1,6 +1,6 @@
 import React from 'react';
 import user from '../asset/user.png';
-import MyPopover from './MyPopover';
+import MyPopover from '../components/MyPopover/MyPopover';
 import RegisterButton from './RegisterButton';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';

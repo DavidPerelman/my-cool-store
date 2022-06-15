@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../components/Modal';
-import Navbar from '../components/Navbar';
+import Button from '../components/Button/Button';
+import Modal from '../components/Modal/Modal';
+import Navbar from '../components/Navbar/Navbar';
 import { useCart } from '../context/cartContext';
 
 const Home = ({ loggedIn, userData }) => {
@@ -39,6 +40,12 @@ const Home = ({ loggedIn, userData }) => {
         setRegisterSuccess={setRegisterSuccess}
         userData={userData}
       ></Navbar>
+      <Button color='red' variant='outlined'>
+        btn1
+      </Button>
+      <Button color='blue' variant='contained'>
+        btn1
+      </Button>
       {/* {(loggedIn && (
         <>
           <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} />
@@ -50,7 +57,6 @@ const Home = ({ loggedIn, userData }) => {
           <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         </>
       )} */}
-
       {registerSuccess && (
         <>
           <Modal
@@ -67,7 +73,6 @@ const Home = ({ loggedIn, userData }) => {
           </Modal>
         </>
       )}
-
       {registerConfirmation && (
         <>
           <Modal

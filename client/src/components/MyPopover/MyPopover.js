@@ -1,14 +1,11 @@
 import React from 'react';
-import './PopoverStyle.css';
+import './MyPopover.css';
 
 const MyPopover = (props) => {
-  console.log(props);
-  // const user =
-  //   props.loggedIn === true
-  //     ? (props.title = props.userData.firstName)
-  //     : (props.title = 'Guest');
   const cart = props.title === 'Cart';
   const user = props.title === 'User' || 'Guest';
+  console.log(props.itemsInCart);
+
   return (
     <>
       <div className={user ? 'user-popover' : 'cart-popover'}>

@@ -1,12 +1,12 @@
+import './Button.css';
 const Button = (props) => {
-  const color = 'myButton' || 'modal-button';
-  // const color = 'myButton' || 'modal-button';
+  const { size = 'small', color = 'blue', variant = '' } = props;
 
   return (
     <button
       type='button'
       style={props.style}
-      className={`${color}`}
+      className={`button ${color} ${size} ${variant}`}
       onClick={props.onClick}
     >
       {props.children}
