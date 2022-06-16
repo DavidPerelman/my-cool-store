@@ -5,23 +5,35 @@ const ProductsContext = createContext();
 
 const ProductsContextProvider = (props) => {
   const [allProducts, setAllProducts] = useState(undefined);
+  const [categories, setCategories] = useState(undefined);
   // const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('https://fakestoreapi.com/products')
+    const fetchCategoriesData = async () => {
+      const products = await fetch(
+        'https://fakestoreapi.com/products/categories'
+      )
         .then((res) => res.json())
         .then((json) => {
-          console.log(json);
-          setAllProducts(json);
-          console.log(allProducts);
+          setCategories(json);
         });
     };
-    fetchData();
+
+    fetchCategoriesData();
+
+    const fetchProductsData = async () => {
+      const products = await fetch('https://fakestoreapi.com/products')
+        .then((res) => res.json())
+        .then((json) => {
+          setAllProducts(json);
+        });
+    };
+
+    fetchProductsData();
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ allProducts }}>
+    <ProductsContext.Provider value={{ allProducts, categories }}>
       {props.children}
     </ProductsContext.Provider>
   );
