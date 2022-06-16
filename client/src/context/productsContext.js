@@ -5,7 +5,7 @@ const ProductsContext = createContext();
 
 const ProductsContextProvider = (props) => {
   const [allProducts, setAllProducts] = useState(undefined);
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
