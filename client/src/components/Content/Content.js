@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import ProductsContext from '../../context/productsContext';
 import Card from '../Card/Card';
+import CardsContainer from '../CardsContainer/CardsContainer';
 import './Content.css';
 
 const Content = () => {
@@ -17,7 +18,8 @@ const Content = () => {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      {(!allProducts && (
+      <CardsContainer></CardsContainer>
+      {/* {(!allProducts && (
         <div>
           <h1>Loading Products!</h1>
         </div>
@@ -39,7 +41,7 @@ const Content = () => {
             })}
           </div>
         </>
-      )}
+      )} */}
     </div>
   );
 };

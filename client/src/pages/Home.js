@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import CardsContainer from '../components/CardsContainer/CardsContainer';
 import Content from '../components/Content/Content';
 import Modal from '../components/Modal/Modal';
 import Navbar from '../components/Navbar/Navbar';
@@ -43,6 +44,7 @@ const Home = ({ loggedIn, userData }) => {
           userData={userData}
         ></Navbar> */}
         <Content></Content>
+        {/* <CardsContainer></CardsContainer> */}
         {registerSuccess && (
           <>
             <Modal
