@@ -39,6 +39,9 @@ app.use((req, res, next) => {
 const userRouter = require('./routers/userRouter');
 app.use('/user', userRouter);
 
+const productsRouter = require('./routers/productsRouter');
+app.use('/products', productsRouter);
+
 app.listen(3001, () => {
   console.log(`Server running 3001`);
 });
