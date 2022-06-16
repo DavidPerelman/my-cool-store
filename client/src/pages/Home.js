@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button/Button';
+import Content from '../components/Content';
 import Modal from '../components/Modal/Modal';
 import Navbar from '../components/Navbar/Navbar';
 import { useCart } from '../context/cartContext';
@@ -40,6 +40,7 @@ const Home = ({ loggedIn, userData }) => {
         setRegisterSuccess={setRegisterSuccess}
         userData={userData}
       ></Navbar>
+      <Content></Content>
       {/* {(loggedIn && (
         <>
           <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} />
