@@ -1,9 +1,7 @@
 .card {
-    flex: 0 1 24%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    height: 350px !important;
-    width: 19.25rem !important;
+    flex-basis: 32.333333%;
+    height: 370px !important;
+    width: 9.25rem !important;
 }
 
 .card:hover {

@@ -30,8 +30,9 @@ const Content = () => {
                   <Card
                     title={product.title}
                     img={product.image}
-                    description={product.description}
-                    data={product}
+                    category={product.category}
+                    rating={product.rating}
+                    price={product.price}
                   ></Card>
                 </div>
               );
