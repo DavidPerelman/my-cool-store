@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ProductsContext from '../../context/productsContext';
 import Card from '../Card/Card';
-import CardsContainer from '../CategoriesContainer/CategoriesContainer';
+import CategoriesContainer from '../CategoriesContainer/CategoriesContainer';
 import './Content.css';
 
 const Content = () => {
@@ -18,7 +18,7 @@ const Content = () => {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <CardsContainer></CardsContainer>
+      <CategoriesContainer></CategoriesContainer>
       {/* {(!allProducts && (
         <div>
           <h1>Loading Products!</h1>

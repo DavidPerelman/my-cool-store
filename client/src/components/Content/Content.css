@@ -1,14 +1,11 @@
 * { box-sizing: border-box; }
 
 #main  {
-  /* width: 100%; */
   width: 96%;
   height: 30%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* justify-content: space-between; */
-  /* justify-content: center; */
   line-height: 20px;
   text-align: center;
   display: inline-flex;

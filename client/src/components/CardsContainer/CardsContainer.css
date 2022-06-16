@@ -1,0 +1,14 @@
+.cards-container {
+    align-items: center;
+    margin: 2px;
+    padding: 2px;
+}
+
+.cards-container-div {
+  display: flex;
+  gap: 15px;
+}
+
+.product-title {
+    font-size: 18px !important;
+}

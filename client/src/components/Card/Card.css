@@ -23,3 +23,15 @@
 .cardContent {
     padding: 20px;
 }
+
+.product-details {
+    font-size: 16px;
+}
+
+.product-title {
+    font-size: 18px !important;
+}
+
+p {
+    margin-bottom: 1px;
+}
