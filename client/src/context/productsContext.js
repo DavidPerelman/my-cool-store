@@ -7,8 +7,12 @@ const ProductsContextProvider = (props) => {
   const [allProducts, setAllProducts] = useState(undefined);
 
   const getAllProducts = async () => {
-    const allProductsRes = await axios.get('https://fakestoreapi.com/products');
+    // const allProductsRes = await axios.get('https://fakestoreapi.com/products');
+    const allProductsRes = await fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((json) => console.log(json));
     setAllProducts(allProductsRes);
+    console.log(allProducts);
   };
 
   useEffect(() => {
