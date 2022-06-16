@@ -1,49 +1,73 @@
 import './Modal.css';
+import Button from '../Button/Button';
 
-const Modal = (props) => {
+const Modal = ({
+  title,
+  onClose,
+  error,
+  children,
+  hideButton,
+  onSubmit,
+  textButton,
+}) => {
   return (
     <>
       <div className='modal' tabIndex='-1'>
         <div className='modal-dialog'>
           <div className='modal-content'>
             <div className='modal-header'>
-              <h5 className='modal-title'>{props.title}</h5>
+              <h5 className='modal-title'>{title}</h5>
               <button
                 type='button'
                 className='btn-close'
                 data-bs-dismiss='modal'
                 aria-label='Close'
-                onClick={props.onClose}
+                onClick={onClose}
               ></button>
             </div>
             <div className='modal-body'>
-              {(props.error && (
+              {(error && (
                 <div className='alert alert-danger' role='alert'>
-                  {props.error}
+                  {error}
                 </div>
               )) ||
                 ''}
-              {props.children}
+              {children}
             </div>
             <div className='modal-footer'>
-              <button
+              {/* <button
                 type='button'
                 style={{ fontSize: '13px' }}
                 className='btn btn-secondary'
-                data-bs-dismiss='modal'
-                onClick={props.onClose}
+                onClick={onClose}
               >
                 Close
-              </button>
-              {!props.hideButton && (
-                <button
+              </button> */}
+              <Button
+                type='button'
+                size='user-modal-button'
+                color='button--close'
+                onClick={onClose}
+              >
+                Close
+              </Button>
+              {!hideButton && (
+                <Button
                   type='button'
-                  style={{ fontSize: '13px' }}
-                  className='btn btn-primary'
-                  onClick={props.onSubmit}
+                  size='user-modal-button'
+                  color='button--primary'
+                  onClick={onSubmit}
                 >
-                  {props.textButton}
-                </button>
+                  {textButton}
+                </Button>
+                // <button
+                //   type='button'
+                //   style={{ fontSize: '13px' }}
+                //   className='btn btn-primary'
+                //   onClick={onSubmit}
+                // >
+                //   {textButton}
+                // </button>
               )}
             </div>
           </div>

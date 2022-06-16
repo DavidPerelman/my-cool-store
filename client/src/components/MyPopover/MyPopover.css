@@ -65,7 +65,6 @@ h1 {
 .wrapper:hover .user-content {visibility: visible;}
 .wrapper:hover .cart-content {visibility: visible;}
 .wrapper-user:hover .user-content {visibility: visible;}
-/* .wrapper-user:hover .content {visibility: visible;} */
 
 .wrapper {
     margin: 0px 0px 0px 0px;

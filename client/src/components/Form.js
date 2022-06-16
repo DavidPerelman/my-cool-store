@@ -1,9 +1,7 @@
-const Form = (props) => {
-  //   console.log(props);
-
+const Form = ({ data, handleFormChange }) => {
   return (
     <>
-      {Object.keys(props.data).map((field, i) => {
+      {Object.keys(data).map((field, i) => {
         return (
           <div key={i} className='label'>
             <label className='form-label'>
@@ -21,8 +19,8 @@ const Form = (props) => {
               }
               className='form-control'
               id={field}
-              onChange={(e) => props.handleFormChange(e, field)}
-              value={props.data[field]}
+              onChange={(e) => handleFormChange(e, field)}
+              value={data[field]}
             />
           </div>
         );

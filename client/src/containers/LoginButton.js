@@ -6,7 +6,8 @@ import Form from '../components/Form';
 import { isLoginFormFieldsValid, isValidEmail } from '../utils/formValidation';
 import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
-
+import './LoginButton.css';
+import '../components/Button/Button.css';
 const LoginButton = () => {
   const { getLoggedIn, loggedIn } = useContext(AuthContext);
 
@@ -82,28 +83,12 @@ const LoginButton = () => {
     }
   }, [show]);
 
-  const buttonStyle = {
-    backgroundColor: 'blue',
-    border: 'none',
-    color: 'white',
-    padding: '6px',
-    textAlign: 'center',
-    textDecoration: 'none',
-    display: 'inline-block',
-    fontSize: '16px',
-    borderRadius: '6px',
-    width: '90%',
-    marginTop: '5px',
-  };
-
   return (
     <div>
       <Button
         type='button'
-        className='btn btn-primary'
-        data-bs-toggle='modal'
-        data-bs-target='#exampleModal'
-        style={buttonStyle}
+        size='user-popover-button'
+        color='button--primary'
         onClick={handleShow}
       >
         Login

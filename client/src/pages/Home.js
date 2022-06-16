@@ -40,12 +40,6 @@ const Home = ({ loggedIn, userData }) => {
         setRegisterSuccess={setRegisterSuccess}
         userData={userData}
       ></Navbar>
-      <Button color='red' variant='outlined'>
-        btn1
-      </Button>
-      <Button color='blue' variant='contained'>
-        btn1
-      </Button>
       {/* {(loggedIn && (
         <>
           <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} />

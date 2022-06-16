@@ -1,12 +1,12 @@
 import './Button.css';
 const Button = (props) => {
-  const { size = 'small', color = 'blue', variant = '' } = props;
+  const { size, color = 'blue' } = props;
 
   return (
     <button
       type='button'
       style={props.style}
-      className={`button ${color} ${size} ${variant}`}
+      className={`button ${color} ${size}`}
       onClick={props.onClick}
     >
       {props.children}

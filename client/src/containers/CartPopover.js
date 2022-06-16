@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import cart from '../asset/cart.png';
 import MyPopover from '../components/MyPopover/MyPopover';
 

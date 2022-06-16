@@ -98,26 +98,12 @@ const RegisterButton = ({ setRegisterSuccess, loggedIn }) => {
     }
   }, [show]);
 
-  const buttonStyle = {
-    backgroundColor: 'blue',
-    border: 'none',
-    color: 'white',
-    padding: '6px',
-    textAlign: 'center',
-    textDecoration: 'none',
-    display: 'inline-block',
-    fontSize: '16px',
-    borderRadius: '6px',
-    width: '90%',
-    marginTop: '5px',
-  };
-
   return (
     <div>
       <Button
         type='button'
-        className='modal-button'
-        style={buttonStyle}
+        size='user-popover-button'
+        color='button--primary'
         onClick={handleShow}
       >
         Register
