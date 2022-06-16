@@ -114,6 +114,10 @@ h1 {
     width: 22px
 }
 
+.popover-li {
+    text-align: center;
+}
+
 .popover-li:hover {
     background-color: white !important;
     cursor: pointer;

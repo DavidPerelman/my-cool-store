@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Content from '../components/Content';
+import Content from '../components/Content/Content';
 import Modal from '../components/Modal/Modal';
 import Navbar from '../components/Navbar/Navbar';
 import { useCart } from '../context/cartContext';
@@ -34,54 +34,46 @@ const Home = ({ loggedIn, userData }) => {
   }, []);
 
   return (
-    <div>
-      <Navbar
-        loggedIn={loggedIn}
-        setRegisterSuccess={setRegisterSuccess}
-        userData={userData}
-      ></Navbar>
-      <Content></Content>
-      {/* {(loggedIn && (
-        <>
-          <p>Hello!</p> <LogoutButton setLoggedIn={setLoggedIn} />
-        </>
-      )) || (
-        <>
-          <RegisterButton setRegisterSuccess={setRegisterSuccess} />
-          <br />
-          <LoginButton loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-        </>
-      )} */}
-      {registerSuccess && (
-        <>
-          <Modal
-            show={show}
-            onClose={handleClose}
-            hideButton={true}
-            title={'Register Success!'}
-          >
-            <p>Register Success!</p>
-            <p>
-              For registration confirmation please click on the link that we
-              sent to email you signed up with him.
-            </p>
-          </Modal>
-        </>
-      )}
-      {registerConfirmation && (
-        <>
-          <Modal
-            show={show}
-            onClose={handleClose}
-            hideButton={true}
-            userName={userName}
-            title={'Register Confirmation'}
-          >
-            <p>Thank you {userName} for subscribing to our site!</p>
-          </Modal>
-        </>
-      )}
-    </div>
+    <>
+      <div>
+        {/* <Navbar
+          sticky='top'
+          loggedIn={loggedIn}
+          setRegisterSuccess={setRegisterSuccess}
+          userData={userData}
+        ></Navbar> */}
+        <Content></Content>
+        {registerSuccess && (
+          <>
+            <Modal
+              show={show}
+              onClose={handleClose}
+              hideButton={true}
+              title={'Register Success!'}
+            >
+              <p>Register Success!</p>
+              <p>
+                For registration confirmation please click on the link that we
+                sent to email you signed up with him.
+              </p>
+            </Modal>
+          </>
+        )}
+        {registerConfirmation && (
+          <>
+            <Modal
+              show={show}
+              onClose={handleClose}
+              hideButton={true}
+              userName={userName}
+              title={'Register Confirmation'}
+            >
+              <p>Thank you {userName} for subscribing to our site!</p>
+            </Modal>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
