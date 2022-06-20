@@ -4,7 +4,7 @@ import CardsContainer from '../CardsContainer/CardsContainer';
 import './CategoriesContainer.css';
 
 const CategoriesContainer = () => {
-  const { allProducts, categories } = useContext(ProductsContext);
+  const { categories } = useContext(ProductsContext);
   console.log(categories);
 
   return (
@@ -18,9 +18,9 @@ const CategoriesContainer = () => {
           {categories.map((category, i) => {
             return (
               <div key={i} className='CategoriesContainer'>
-                <h1>{category}</h1>
+                <h1>{category.name}</h1>
                 <div className='cards-container-div'>
-                  <CardsContainer category={category}></CardsContainer>
+                  <CardsContainer categoryId={category.id}></CardsContainer>
                 </div>
               </div>
             );

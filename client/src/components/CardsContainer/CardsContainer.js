@@ -3,17 +3,18 @@ import ProductsContext from '../../context/productsContext';
 import Card from '../Card/Card';
 import './CardsContainer.css';
 
-const CardsContainer = ({ category }) => {
-  const { allProducts } = useContext(ProductsContext);
+const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);
+  console.log(categoryId);
 
   useEffect(() => {
     const fetchProductsByCategory = async () => {
       const products = await fetch(
-        `https://fakestoreapi.com/products/category/${category}`
+        `https://api.escuelajs.co/api/v1/categories/${categoryId}/products`
       )
         .then((res) => res.json())
         .then((json) => {
+          console.log(json.slice(0, 3));
           setProductsByCategory(json.slice(0, 3));
         });
     };
@@ -26,20 +27,19 @@ const CardsContainer = ({ category }) => {
     // <div className='cards-container'>
     <>
       {productsByCategory.map((product, i) => {
+        console.log(product);
         return (
-          <>
-            <div key={i} className='card'>
-              <Card
-                detailsSize='product-details'
-                titleSize='product-title'
-                title={product.title}
-                img={product.image}
-                category={product.category}
-                rating={product.rating}
-                price={product.price}
-              ></Card>
-            </div>
-          </>
+          <div key={i} className='card'>
+            <Card
+              detailsSize='product-details'
+              titleSize='product-title'
+              title={product.title}
+              img={product.images[0]}
+              category={product.category['name']}
+              price={product.price}
+              description={product.description}
+            ></Card>
+          </div>
         );
       })}
     </>

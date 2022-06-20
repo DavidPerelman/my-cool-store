@@ -6,13 +6,10 @@ const ProductsContext = createContext();
 const ProductsContextProvider = (props) => {
   const [allProducts, setAllProducts] = useState(undefined);
   const [categories, setCategories] = useState(undefined);
-  // const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchCategoriesData = async () => {
-      const products = await fetch(
-        'https://fakestoreapi.com/products/categories'
-      )
+      const products = await fetch('https://api.escuelajs.co/api/v1/categories')
         .then((res) => res.json())
         .then((json) => {
           setCategories(json);
@@ -22,9 +19,10 @@ const ProductsContextProvider = (props) => {
     fetchCategoriesData();
 
     const fetchProductsData = async () => {
-      const products = await fetch('https://fakestoreapi.com/products')
+      const products = await fetch('https://api.escuelajs.co/api/v1/products')
         .then((res) => res.json())
         .then((json) => {
+          console.log(json);
           setAllProducts(json);
         });
     };

@@ -24,7 +24,6 @@ const Card = ({
         <div className={`${detailsSize}`}>
           <p>Price: {price}$</p>
           <p>Category: {category}</p>
-          <p>Rating: {rating.rate}</p>
         </div>
       </div>
       {/* </div> */}
