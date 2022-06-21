@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import AuthContext from './context/authContext';
 import Navbar from './components/Navbar/Navbar';
+import ProductPage from './pages/ProductPage';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
@@ -14,11 +15,6 @@ const Router = () => {
       <Routes>
         {loggedIn === undefined && (
           <>
-            {/* <Navbar
-              loggedIn={loggedIn}
-              setRegisterSuccess={setRegisterSuccess}
-              userData={userData}
-            ></Navbar> */}
             <Route
               exact
               path='/'
@@ -40,6 +36,7 @@ const Router = () => {
                 />
               }
             />
+            <Route path='/product' element={<ProductPage />} />
           </>
         )}
         {loggedIn === true && (

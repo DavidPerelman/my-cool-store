@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Card from '../Card/Card';
 import './CardsContainer.css';
+import { useNavigate } from 'react-router-dom';
 
 const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProductsByCategory = async () => {
@@ -21,6 +23,9 @@ const CardsContainer = ({ categoryId }) => {
   }, []);
 
   const cardButtonClick = (productId) => {
+    navigate('/product', {
+      productId: productId,
+    });
     console.log(productId);
   };
 
