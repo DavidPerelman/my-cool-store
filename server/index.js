@@ -48,7 +48,7 @@ const productsRouter = require('./routers/productsRouter');
 app.use('/products', productsRouter);
 
 app.get('/', (req, res) => {
-  res.send('GET request to the homepage');
+  res.send('<h1>myCoolStore Server</h1>');
 });
 
 const PORT = process.env.PORT || 3001;
