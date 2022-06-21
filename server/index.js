@@ -47,6 +47,10 @@ app.use('/user', userRouter);
 const productsRouter = require('./routers/productsRouter');
 app.use('/products', productsRouter);
 
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage');
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running 3001`);
