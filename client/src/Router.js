@@ -7,11 +7,16 @@ import ProductPage from './pages/ProductPage';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
-  // console.log(userData);
   const [registerSuccess, setRegisterSuccess] = useState(false);
 
   return (
     <>
+      <Navbar
+        sticky='top'
+        loggedIn={loggedIn}
+        setRegisterSuccess={setRegisterSuccess}
+        userData={userData}
+      ></Navbar>
       <Routes>
         {loggedIn === undefined && (
           <>
@@ -62,6 +67,7 @@ const Router = () => {
                 />
               }
             />
+            <Route path='/product' element={<ProductPage />} />
           </>
         )}
       </Routes>

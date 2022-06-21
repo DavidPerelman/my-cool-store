@@ -53,7 +53,7 @@ const LoginButton = () => {
         } else {
           console.log('loggedIn');
           await getLoggedIn();
-          navigate('/');
+          // navigate('/');
         }
       } catch (err) {
         console.log(err);

@@ -14,12 +14,12 @@ function App({ loggedIn, userData }) {
 
   return (
     <>
-      <Navbar
+      {/* <Navbar
         sticky='top'
         loggedIn={loggedIn}
         setRegisterSuccess={setRegisterSuccess}
         userData={userData}
-      ></Navbar>
+      ></Navbar> */}
       <ProductsContextProvider>
         <CartProvider>
           <div className='App'>

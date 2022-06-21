@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartPopover from '../../containers/CartPopover';
 import UserPopover from '../../containers/UserPopover';
+import Button from '../Button/Button';
 import ClockDate from '../ClockDate';
 import './Navbar.css';
 
 const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
+  const navigate = useNavigate();
   const [active, setActive] = useState(true);
+
+  const brandTitleClick = () => {
+    navigate('/');
+    console.log('brandTitleClick');
+  };
 
   const today = new Date();
   const date =
@@ -17,7 +25,10 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
   return (
     <nav className='navbar'>
       <div className='date-brand-div'>
-        <div className='brand-title'>MyCoolStore</div>
+        {/* <Button className='brand-title'>MyCoolStore</Button> */}
+        <div className='brand-title' onClick={brandTitleClick}>
+          MyCoolStore
+        </div>
         <ClockDate />
       </div>
       <a

@@ -36,12 +36,6 @@ const Home = ({ loggedIn, userData }) => {
   return (
     <>
       <div>
-        {/* <Navbar
-          sticky='top'
-          loggedIn={loggedIn}
-          setRegisterSuccess={setRegisterSuccess}
-          userData={userData}
-        ></Navbar> */}
         <Content></Content>
         {registerSuccess && (
           <>

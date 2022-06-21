@@ -19,29 +19,6 @@ const Content = () => {
         mollit anim id est laborum.
       </p>
       <CategoriesContainer></CategoriesContainer>
-      {/* {(!allProducts && (
-        <div>
-          <h1>Loading Products!</h1>
-        </div>
-      )) || (
-        <>
-          <div id='main'>
-            {allProducts.map((product, i) => {
-              return (
-                <div key={i} className='card'>
-                  <Card
-                    title={product.title}
-                    img={product.image}
-                    category={product.category}
-                    rating={product.rating}
-                    price={product.price}
-                  ></Card>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )} */}
     </div>
   );
 };

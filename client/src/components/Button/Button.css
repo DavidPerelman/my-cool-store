@@ -4,6 +4,7 @@
   --darkGray-color: #6c757d;
   --red-color: red;
   --green-color: green;
+  --none-color: none;
   border: none;
 }
 
@@ -19,6 +20,11 @@
 .button--primary {
     background-color: var(--blue-color);
     color: var(--white-color);
+}
+
+.button--none {
+    background-color: var(--none-color);
+    color: var(--blue-color);
 }
 
 .button--close {
