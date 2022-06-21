@@ -14,7 +14,6 @@ const CardsContainer = ({ categoryId }) => {
       )
         .then((res) => res.json())
         .then((json) => {
-          console.log(json.slice(0, 3));
           setProductsByCategory(json.slice(0, 3));
         });
     };
@@ -24,7 +23,9 @@ const CardsContainer = ({ categoryId }) => {
 
   const cardButtonClick = (productId) => {
     navigate('/product', {
-      productId: productId,
+      state: {
+        productId: productId,
+      },
     });
     console.log(productId);
   };

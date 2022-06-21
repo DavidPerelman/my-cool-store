@@ -5,7 +5,6 @@ import './CategoriesContainer.css';
 
 const CategoriesContainer = () => {
   const { categories } = useContext(ProductsContext);
-  console.log(categories);
 
   return (
     <>
