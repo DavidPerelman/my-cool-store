@@ -161,8 +161,7 @@ router.post('/login', async (req, res) => {
             .cookie('token', token, {
               httpOnly: true,
             })
-            .json({ isLogin: true, user: existingUser })
-            .send();
+            .json({ isLogin: true, user: existingUser });
         }
       }
     }

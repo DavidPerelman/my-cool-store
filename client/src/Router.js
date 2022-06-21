@@ -41,7 +41,7 @@ const Router = () => {
                 />
               }
             />
-            <Route path='/product' element={<ProductPage />} />
+            <Route path='/product/:id' element={<ProductPage />} />
           </>
         )}
         {loggedIn === true && (
@@ -67,7 +67,7 @@ const Router = () => {
                 />
               }
             />
-            <Route path='/product' element={<ProductPage />} />
+            <Route path='/product/:id' element={<ProductPage />} />
           </>
         )}
       </Routes>

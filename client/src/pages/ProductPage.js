@@ -1,16 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
 import './ProductPage.css';
-import No_image_available from '../asset/No_image_available.svg';
 
 const ProductPage = () => {
   const { loggedIn } = useContext(AuthContext);
   const { state } = useLocation();
-
-  console.log(No_image_available);
   console.log(state);
+
+  const [item, setItem] = useState(null);
+
+  useEffect(() => {
+    // load product
+  }, []);
+
+  //todo:  render spinner when load product
 
   return (
     <div className='ProductPage'>
