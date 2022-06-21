@@ -11,7 +11,7 @@ const Router = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
 
   return (
-    <div>
+    <>
       <Routes>
         {loggedIn === undefined && (
           <>
@@ -65,7 +65,7 @@ const Router = () => {
           </>
         )}
       </Routes>
-    </div>
+    </>
   );
 };
 

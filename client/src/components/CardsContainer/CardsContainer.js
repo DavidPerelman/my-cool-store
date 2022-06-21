@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);
+  const [product, setProduct] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,13 +22,29 @@ const CardsContainer = ({ categoryId }) => {
     fetchProductsByCategory();
   }, []);
 
-  const cardButtonClick = (productId) => {
-    navigate('/product', {
-      state: {
-        productId: productId,
-      },
-    });
-    console.log(productId);
+  const fetchProduct = async (productId) => {
+    try {
+      const response = await fetch(
+        `https://api.escuelajs.co/api/v1/products/${productId}`
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          return json;
+        });
+
+      return response;
+    } catch (err) {
+      console.log(err);
+      return 'error';
+    }
+  };
+
+  const cardButtonClick = async (productId) => {
+    const response = await fetchProduct(productId);
+
+    if (response !== 'error') {
+      navigate('/product', { state: response });
+    }
   };
 
   return (
