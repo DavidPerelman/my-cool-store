@@ -1,42 +1,51 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
 import './ProductPage.css';
 
 const ProductPage = () => {
   const { loggedIn } = useContext(AuthContext);
-  const { state } = useLocation();
-  console.log(state);
+  let { productId } = useParams();
 
-  const [item, setItem] = useState(null);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    // load product
-  }, []);
+    const fetchProduct = async () => {
+      const products = await fetch(
+        `https://api.escuelajs.co/api/v1/products/${productId}`
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          setProduct(json);
+        });
+    };
 
-  //todo:  render spinner when load product
+    fetchProduct();
+  }, []);
 
   return (
     <div className='ProductPage'>
-      <div className='product-div'>
-        <div className='product-content'>
-          <h1>{state.title}</h1>
-          <p>{state.description}</p>
-          <h3>{state.price}$</h3>
-          <Button color='button--primary'>
-            <h5 className='btn-text'>Add To Cart</h5>
-          </Button>
-          {loggedIn && (
-            <Button color='button--none'>
-              <h5 className='btn-text'>Add To My Wishlist</h5>
+      {(!product && <h1>Loading...</h1>) || (
+        <div className='product-div'>
+          <div className='product-content'>
+            <h1>{product.title}</h1>
+            <p>{product.description}</p>
+            <h3>{product.price}$</h3>
+            <Button color='button--primary'>
+              <h5 className='btn-text'>Add To Cart</h5>
             </Button>
-          )}
+            {loggedIn && (
+              <Button color='button--none'>
+                <h5 className='btn-text'>Add To My Wishlist</h5>
+              </Button>
+            )}
+          </div>
+          <div className='product-image-div'>
+            <img src={product.images[0]} className='product-image' />
+          </div>
         </div>
-        <div className='product-image-div'>
-          <img src={state.images[0]} className='product-image' />
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -12,7 +12,6 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
 
   const brandTitleClick = () => {
     navigate('/');
-    console.log('brandTitleClick');
   };
 
   const today = new Date();

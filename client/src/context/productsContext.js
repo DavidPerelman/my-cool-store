@@ -23,7 +23,6 @@ const ProductsContextProvider = (props) => {
         .then((res) => res.json())
         .then((json) => {
           setAllProducts(json);
-          console.log(json);
         });
     };
 
