@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ProductsContext from '../../context/productsContext';
 import Card from '../Card/Card';
 import './CardsContainer.css';
 
 const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);
-  console.log(categoryId);
 
   useEffect(() => {
     const fetchProductsByCategory = async () => {
@@ -21,16 +19,19 @@ const CardsContainer = ({ categoryId }) => {
 
     fetchProductsByCategory();
   }, []);
-  console.log(productsByCategory);
+
+  const cardButtonClick = (productId) => {
+    console.log(productId);
+  };
 
   return (
     // <div className='cards-container'>
     <>
       {productsByCategory.map((product, i) => {
-        console.log(product);
         return (
           <div key={i} className='card'>
             <Card
+              productId={product.id}
               detailsSize='product-details'
               titleSize='product-title'
               title={product.title}
@@ -38,6 +39,10 @@ const CardsContainer = ({ categoryId }) => {
               category={product.category['name']}
               price={product.price}
               description={product.description}
+              color='button--primary'
+              size='user-popover-button'
+              textButton='Details & Buying'
+              onClick={cardButtonClick}
             ></Card>
           </div>
         );
