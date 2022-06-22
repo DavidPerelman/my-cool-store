@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
+import ProductsServices from '../services/ProductsServices';
 import './ProductPage.css';
 
 const ProductPage = () => {
@@ -11,17 +12,9 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const products = await fetch(
-        `https://api.escuelajs.co/api/v1/products/${productId}`
-      )
-        .then((res) => res.json())
-        .then((json) => {
-          setProduct(json);
-        });
-    };
-
-    fetchProduct();
+    ProductsServices.fetchProduct(productId).then((data) => {
+      setProduct(data);
+    });
   }, []);
 
   return (

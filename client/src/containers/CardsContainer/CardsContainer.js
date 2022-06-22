@@ -15,22 +15,11 @@ const CardsContainer = ({ categoryId }) => {
     });
   }, []);
 
-  const fetchProduct = async (productId) => {
-    ProductsServices.fetchProduct(productId).then((data) => {
-      return data;
-    });
-  };
-
   const cardButtonClick = async (productId) => {
-    const response = await fetchProduct(productId);
-
-    if (response !== 'error') {
-      navigate(`/product/${productId}`, { state: response });
-    }
+    navigate(`/product/${productId}`);
   };
 
   return (
-    // <div className='cards-container'>
     <>
       {productsByCategory.map((product, i) => {
         return (
@@ -53,7 +42,6 @@ const CardsContainer = ({ categoryId }) => {
         );
       })}
     </>
-    // </div>
   );
 };
 
