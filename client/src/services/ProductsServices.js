@@ -1,29 +1,25 @@
-import axios from 'axios';
+const url = 'https://api.escuelajs.co/';
 
 const ProductsServices = {
-  register: async (data) => {
-    try {
-      let res = await axios.post('/user/register', data);
-      return res;
-    } catch (err) {
-      return err.response.data.errMessage;
-    }
+  fetchProductsByCategory: (categoryId) => {
+    return fetch(
+      `${url}api/v1/categories/${categoryId}/products?offset=0&limit=3`
+    ).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
   },
-  login: async (data) => {
-    try {
-      let res = await axios.post('/user/login', data);
-      return res;
-    } catch (err) {
-      return err.response.data.errMessage;
-    }
-  },
-  logout: async () => {
-    try {
-      let res = await axios.get('/user/logout');
-      return res;
-    } catch (err) {
-      return err.response.data.errMessage;
-    }
+  fetchProduct: (productId) => {
+    return fetch(`${url}api/v1/products/${productId}`).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
   },
 };
 

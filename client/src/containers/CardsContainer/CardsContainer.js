@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Card from '../../components/Card/Card';
 import './CardsContainer.css';
 import { useNavigate } from 'react-router-dom';
+import ProductsServices from '../../services/ProductsServices';
 
 const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);
@@ -9,34 +10,15 @@ const CardsContainer = ({ categoryId }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProductsByCategory = async () => {
-      const products = await fetch(
-        `https://api.escuelajs.co/api/v1/categories/${categoryId}/products`
-      )
-        .then((res) => res.json())
-        .then((json) => {
-          setProductsByCategory(json.slice(0, 3));
-        });
-    };
-
-    fetchProductsByCategory();
+    ProductsServices.fetchProductsByCategory(categoryId).then((data) => {
+      setProductsByCategory(data);
+    });
   }, []);
 
   const fetchProduct = async (productId) => {
-    try {
-      const response = await fetch(
-        `https://api.escuelajs.co/api/v1/products/${productId}`
-      )
-        .then((res) => res.json())
-        .then((json) => {
-          return json;
-        });
-
-      return response;
-    } catch (err) {
-      console.log(err);
-      return 'error';
-    }
+    ProductsServices.fetchProduct(productId).then((data) => {
+      return data;
+    });
   };
 
   const cardButtonClick = async (productId) => {
