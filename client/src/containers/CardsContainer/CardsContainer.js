@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Card from '../../components/Card/Card';
 import './CardsContainer.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);
