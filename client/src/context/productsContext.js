@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import ProductsServices from '../services/ProductsServices';
 
 const ProductsContext = createContext();
 
@@ -8,25 +9,19 @@ const ProductsContextProvider = (props) => {
   const [categories, setCategories] = useState(undefined);
 
   useEffect(() => {
-    const fetchCategoriesData = async () => {
-      const products = await fetch('https://api.escuelajs.co/api/v1/categories')
-        .then((res) => res.json())
-        .then((json) => {
-          setCategories(json);
-        });
-    };
+    ProductsServices.fetchCategoriesData().then((data) => {
+      setCategories(data);
+    });
 
-    fetchCategoriesData();
+    // const fetchProductsData = async () => {
+    //   const products = await fetch('https://api.escuelajs.co/api/v1/products')
+    //     .then((res) => res.json())
+    //     .then((json) => {
+    //       setAllProducts(json);
+    //     });
+    // };
 
-    const fetchProductsData = async () => {
-      const products = await fetch('https://api.escuelajs.co/api/v1/products')
-        .then((res) => res.json())
-        .then((json) => {
-          setAllProducts(json);
-        });
-    };
-
-    fetchProductsData();
+    // fetchProductsData();
   }, []);
 
   return (
