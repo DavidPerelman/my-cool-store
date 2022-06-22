@@ -3,6 +3,7 @@ import './Card.css';
 import Button from '../Button/Button';
 
 const Card = ({
+  cardButtonClick,
   titleSize,
   title,
   img,
@@ -28,8 +29,12 @@ const Card = ({
           <h6>{title}</h6>
         </div>
         <div className={`${detailsSize}`}>
-          <p>Price: {price}$</p>
-          <p>Category: {category}</p>
+          <div className='price-div'>
+            <p className='bold-text'>Price:</p>
+            <p>{price}$</p>
+          </div>
+          <p className='bold-text'>Category:</p>
+          <p>{category}</p>
         </div>
         <br />
         <Button

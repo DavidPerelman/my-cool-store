@@ -45,4 +45,13 @@ p {
 .cardContent {
     padding: 10px;
 }
+
+.price-div {
+    display: flex;
+    gap: 5px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
 }
