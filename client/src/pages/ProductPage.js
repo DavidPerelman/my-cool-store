@@ -6,9 +6,8 @@ import ProductsServices from '../services/ProductsServices';
 import './ProductPage.css';
 
 const ProductPage = () => {
-  const { loggedIn } = useContext(AuthContext);
   let { productId } = useParams();
-
+  const { loggedIn } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
 
   useEffect(() => {

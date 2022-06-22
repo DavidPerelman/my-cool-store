@@ -40,15 +40,17 @@ p {
 .card-image {
     width: 100px;
     height: 100px;
+    padding: 10px;
 }
 
 .cardContent {
-    padding: 10px;
+    padding: 5px;
 }
 
 .price-div {
     display: flex;
     gap: 5px;
+    justify-content: center;
 }
 
 .bold-text {

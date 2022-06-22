@@ -36,7 +36,6 @@ const Card = ({
           <p className='bold-text'>Category:</p>
           <p>{category}</p>
         </div>
-        <br />
         <Button
           color={color}
           size={size}
