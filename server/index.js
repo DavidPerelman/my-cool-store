@@ -8,7 +8,11 @@ const cors = require('cors');
 
 app.use(
   cors({
-    origin: ['http://localhost:3001', 'https://my-cool-store.netlify.app'],
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://my-cool-store.netlify.app',
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
   })
