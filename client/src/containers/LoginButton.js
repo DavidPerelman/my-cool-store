@@ -48,17 +48,23 @@ const LoginButton = () => {
       setError('');
       try {
         const response = await AuthService.login(loginData);
-        if (response === 'login error!') {
-          console.log('dsds');
-          setError(response);
-        } else {
-          await getLoggedIn();
-          navigate('/');
-          setShow(false);
+        if (response.response.data.errMessage === 'login error!') {
+          setError(response.response.data.errMessage);
+          // clearError();
+          const clearError = setTimeout(clearErrorMessage, 3000);
+          function clearErrorMessage() {
+            setError('');
+          }
+          return;
         }
       } catch (err) {
         console.log(err);
       }
+
+      setShow(false);
+      console.log('response');
+      await getLoggedIn();
+      navigate('/');
     }
 
     const clearError = setTimeout(clearErrorMessage, 3000);

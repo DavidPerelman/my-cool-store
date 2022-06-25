@@ -10,6 +10,8 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
 
+  console.log(userData);
+
   const brandTitleClick = () => {
     navigate('/');
   };
