@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
     // allow other origins to make unauthenticated CORS requests
     res.set('Access-Control-Allow-Origin', '*');
   }
-  res.send('<h1>myCoolStore Server</h1><br/>');
+  res.send('<h1>myCoolStore Server</h1>');
 });
 
 const PORT = process.env.PORT || 3001;
