@@ -202,13 +202,13 @@ router.get('/logout', async (req, res) => {
 });
 
 router.get('/loggedIn', async (req, res) => {
-  if (ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
-    res.set('Access-Control-Allow-Origin', req.headers.origin);
-    res.set('Access-Control-Allow-Credentials', 'true');
-  } else {
-    // allow other origins to make unauthenticated CORS requests
-    res.set('Access-Control-Allow-Origin', '*');
-  }
+  // if (ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
+  //   res.set('Access-Control-Allow-Origin', req.headers.origin);
+  //   res.set('Access-Control-Allow-Credentials', 'true');
+  // } else {
+  //   // allow other origins to make unauthenticated CORS requests
+  //   res.set('Access-Control-Allow-Origin', '*');
+  // }
 
   try {
     const token = req.cookies.token;
