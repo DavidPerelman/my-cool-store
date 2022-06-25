@@ -6,42 +6,16 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-//Cors Configuration - Start
-app.use((req, res, next) => {
-  res.header(
-    'Access-Control-Allow-Origin',
-    'https://my-cool-store.netlify.app'
-  );
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested, Content-Type, Accept Authorization'
-  );
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', 'POST, PUT, PATCH, GET, DELETE');
-    return res.status(200).json({});
-  }
-  next();
-});
-//Cors Configuration - End
-
-// app.use(
-//   cors({ origin: 'https://my-cool-store.netlify.app', credentials: true })
-// );
+app.use(
+  cors({
+    origin: ['http://localhost:3001', 'https://my-cool-store.netlify.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 dotenv.config();
-
-// const whitelist = ['http://localhost:3000'];
-// const corsOptions = {
-//   credentials: true, // This is important.
-//   origin: (origin, callback) => {
-//     if (whitelist.includes(origin)) return callback(null, true);
-
-//     callback(new Error('Not allowed by CORS'));
-//   },
-// };
-
-// app.use(cors(corsOptions));
 
 main().catch((err) => console.log(err));
 
@@ -79,7 +53,7 @@ app.get('/', (req, res) => {
   // } else {
   //   res.set('Access-Control-Allow-Origin', '*');
   // }
-  res.send('<h1>myCoolStore Server!</h1>');
+  res.send('<h1>myCoolStore Server</h1>');
 });
 
 const PORT = process.env.PORT || 3001;
