@@ -26,7 +26,7 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
       <div className='date-brand-div'>
         {/* <Button className='brand-title'>MyCoolStore</Button> */}
         <div className='brand-title' onClick={brandTitleClick}>
-          MyCoolStore!
+          MyCoolStore
         </div>
         <ClockDate />
       </div>
