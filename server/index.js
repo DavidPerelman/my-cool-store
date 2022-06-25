@@ -13,7 +13,7 @@ const cors = require('cors');
 // app.options('*', cors(corsOptions));
 
 app.use(
-  cors({ origin: 'https://my-cool-store.herokuapp.com', credentials: true })
+  cors({ origin: 'https://my-cool-store.netlify.app', credentials: true })
 );
 
 app.use(cookieParser());
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
   // } else {
   //   res.set('Access-Control-Allow-Origin', '*');
   // }
-  res.send('<h1>myCoolStore Server</h1>');
+  res.send('<h1>myCoolStore Server!</h1>');
 });
 
 const PORT = process.env.PORT || 3001;
