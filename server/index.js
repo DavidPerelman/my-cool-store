@@ -47,7 +47,7 @@ app.use('/products', productsRouter);
 
 const ALLOWED_ORIGINS = [
   'http://localhost:3000',
-  'https://stark-tundra-31639.herokuapp.com',
+  'https://my-cool-store.herokuapp.com',
   'https://my-cool-store.netlify.app',
 ];
 
