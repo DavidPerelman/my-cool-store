@@ -33,8 +33,10 @@ const Card = ({
             <p className='bold-text'>Price:</p>
             <p>{price}$</p>
           </div>
-          <p className='bold-text'>Category:</p>
-          <p>{category}</p>
+          <div className='category-div'>
+            <p className='bold-text'>Category:</p>
+            <p>{category}</p>
+          </div>
         </div>
         <Button
           color={color}

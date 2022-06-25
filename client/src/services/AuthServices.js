@@ -13,15 +13,22 @@ const AuthService = {
   },
   login: async (data) => {
     try {
-      let res = await axios.post(`${url}user/login`, data);
-      return res;
+      let loginRes = await axios.post(
+        `${process.env.REACT_APP_production_URL}/user/login`,
+        data
+      );
+
+      console.log(loginRes);
+      return loginRes;
     } catch (err) {
-      return err.response.data.errMessage;
+      return err;
     }
   },
   logout: async () => {
     try {
-      let res = await axios.get(`${url}user/logout`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_production_URL}/user/logout`
+      );
       return res;
     } catch (err) {
       return err.response.data.errMessage;

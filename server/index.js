@@ -6,9 +6,21 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-app.use(cookieParser());
 app.use(cors());
+app.use(cookieParser());
 dotenv.config();
+
+// const whitelist = ['http://localhost:3000'];
+// const corsOptions = {
+//   credentials: true, // This is important.
+//   origin: (origin, callback) => {
+//     if (whitelist.includes(origin)) return callback(null, true);
+
+//     callback(new Error('Not allowed by CORS'));
+//   },
+// };
+
+// app.use(cors(corsOptions));
 
 main().catch((err) => console.log(err));
 
@@ -26,20 +38,6 @@ async function main() {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header(
-    'Access-Control-Allow-Origin',
-    '*',
-    'http://localhost:3000/',
-    'https://fakestoreapi.com/'
-  );
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
-
 // Routers
 const userRouter = require('./routers/userRouter');
 app.use('/user', userRouter);
@@ -47,7 +45,20 @@ app.use('/user', userRouter);
 const productsRouter = require('./routers/productsRouter');
 app.use('/products', productsRouter);
 
+const ALLOWED_ORIGINS = [
+  'http://localhost:3000',
+  'https://stark-tundra-31639.herokuapp.com',
+  'https://my-cool-store.netlify.app',
+];
+
 app.get('/', (req, res) => {
+  if (ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.set('Access-Control-Allow-Origin', req.headers.origin);
+  } else {
+    // allow other origins to make unauthenticated CORS requests
+    res.set('Access-Control-Allow-Origin', '*');
+  }
   res.send('<h1>myCoolStore Server</h1>');
 });
 

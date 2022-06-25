@@ -2,6 +2,7 @@
     flex-basis: 32.333333%;
     height: 350px !important;
     width: 9.25rem !important;
+    justify-content: center;
 }
 
 .card:hover {
@@ -16,8 +17,7 @@
     height: 150px;
     width: 150px;
     border-bottom: 1px solid black;
-    padding: 10px;
-    padding: 20px;
+    padding: 0.3125rem;
 }
 
 .cardContent {
@@ -36,21 +36,44 @@ p {
     margin-bottom: 1px;
 }
 
+.price-div {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.category-div {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
 @media(max-width: 600px) {
 .card-image {
     width: 100px;
     height: 100px;
     padding: 10px;
+    padding-left: 7px;
+    border-bottom: none;
 }
 
 .cardContent {
-    padding: 5px;
+    padding: 0.3125rem
+;
 }
 
 .price-div {
     display: flex;
     gap: 5px;
     justify-content: center;
+}
+
+.category-div {
+    display: block;
 }
 
 .bold-text {

@@ -47,13 +47,14 @@ const LoginButton = () => {
     } else {
       setError('');
       try {
-        const res = await AuthService.login(loginData);
-        if (!res.data) {
-          setError(res);
+        const response = await AuthService.login(loginData);
+        if (response === 'login error!') {
+          console.log('dsds');
+          setError(response);
         } else {
-          console.log('loggedIn');
           await getLoggedIn();
-          // navigate('/');
+          navigate('/');
+          setShow(false);
         }
       } catch (err) {
         console.log(err);

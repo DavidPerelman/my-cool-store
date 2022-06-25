@@ -7,7 +7,15 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 router.use(cors());
 
+const ALLOWED_ORIGINS = [
+  'http://localhost:3000',
+  'https://stark-tundra-31639.herokuapp.com',
+  'https://my-cool-store.netlify.app',
+];
+
 router.post('/register', async (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.set('Access-Control-Allow-Credentials', 'true');
   try {
     const data = ({ firstName, lastName, email, password, verifyPassword } =
       req.body);
@@ -81,6 +89,8 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/verify/:id/:token', async (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.set('Access-Control-Allow-Credentials', 'true');
   try {
     console.log(req.params.id);
     const user = await User.findOne({ _id: req.params.id });
@@ -106,8 +116,18 @@ router.get('/verify/:id/:token', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  if (ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
+    res.set('Access-Control-Allow-Origin', req.headers.origin);
+    res.set('Access-Control-Allow-Credentials', 'true');
+  } else {
+    // allow other origins to make unauthenticated CORS requests
+    res.set('Access-Control-Allow-Origin', '*');
+  }
+
   try {
     const { email, password } = req.body;
+
+    console.log(req.body);
 
     if (!email || !password) {
       return res.status(400).json({
@@ -172,14 +192,15 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.set('Access-Control-Allow-Credentials', 'true');
   try {
     res
       .cookie('token', '', {
         httpOnly: true,
         expires: new Date(0),
       })
-      .json({ isLogout: true })
-      .send();
+      .json({ isLogout: true });
   } catch (err) {
     console.error(err);
     res.status(500).send();
@@ -187,8 +208,18 @@ router.get('/logout', async (req, res) => {
 });
 
 router.get('/loggedIn', async (req, res) => {
+  if (ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
+    res.set('Access-Control-Allow-Origin', req.headers.origin);
+    res.set('Access-Control-Allow-Credentials', 'true');
+  } else {
+    // allow other origins to make unauthenticated CORS requests
+    res.set('Access-Control-Allow-Origin', '*');
+  }
+
   try {
     const token = req.cookies.token;
+
+    console.log(req.cookies);
 
     if (!token) {
       return res.json(false);
