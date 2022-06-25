@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
   // } else {
   //   res.set('Access-Control-Allow-Origin', '*');
   // }
-  res.send('<h1>myCoolStore Server</h1>');
+  res.send('<h1>myCoolStore Server!</h1>');
 });
 
 const PORT = process.env.PORT || 3001;
