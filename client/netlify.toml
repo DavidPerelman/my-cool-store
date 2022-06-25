@@ -10,3 +10,10 @@
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+    [[redirects]]
+  from = "/*"
+  to = "https://my-cool-store.herokuapp.com"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
