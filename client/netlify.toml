@@ -11,7 +11,7 @@
     Access-Control-Allow-Origin = "*"
 
 [[redirects]]
-from = "/api/*"
+from = "/*"
 to = "https://my-cool-store.herokuapp.com/:splat"
 status = 200
 force = false
