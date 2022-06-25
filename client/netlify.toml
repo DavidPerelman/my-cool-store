@@ -10,9 +10,8 @@
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
-    [[redirects]]
-  from = "/*"
-  to = "https://my-cool-store.herokuapp.com"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
+[[redirects]]
+from = "/api/*"
+to = "https://my-cool-store.herokuapp.com/:splat"
+status = 200
+force = false
