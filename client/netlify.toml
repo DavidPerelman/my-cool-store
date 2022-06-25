@@ -3,16 +3,3 @@
   to = "/index.html"
   status = 200
   force = false
-
-[[headers]]
-  # Define which paths this specific [[headers]] block will cover.
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
-
-[[redirects]]
-from = "/user/*"
-to = "https://my-cool-store.herokuapp.com/:splat"
-status = 200
-force = true
-headers = {X-From = "Netlify"}

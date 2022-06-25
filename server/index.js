@@ -8,11 +8,10 @@ const cors = require('cors');
 
 const corsOptions = {
   origin: '*',
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
 };
+// app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
-app.use(cors(corsOptions));
 app.use(cookieParser());
 dotenv.config();
 
