@@ -7,15 +7,13 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 router.use(cors());
 
-const ALLOWED_ORIGINS = [
-  'http://localhost:3000',
-  'https://my-cool-store.herokuapp.com',
-  'https://my-cool-store.netlify.app',
-];
+// const ALLOWED_ORIGINS = [
+//   'http://localhost:3000',
+//   'https://my-cool-store.herokuapp.com',
+//   'https://my-cool-store.netlify.app',
+// ];
 
 router.post('/register', async (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.set('Access-Control-Allow-Credentials', true);
   try {
     const data = ({ firstName, lastName, email, password, verifyPassword } =
       req.body);
@@ -89,8 +87,6 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/verify/:id/:token', async (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.set('Access-Control-Allow-Credentials', true);
   try {
     console.log(req.params.id);
     const user = await User.findOne({ _id: req.params.id });
@@ -192,8 +188,6 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.set('Access-Control-Allow-Credentials', true);
   try {
     res
       .cookie('token', '', {
