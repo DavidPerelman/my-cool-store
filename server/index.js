@@ -6,11 +6,20 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-// const corsOptions = {
-//   origin: '*',
-// };
-// app.use(cors(corsOptions));
-// app.options('*', cors(corsOptions));
+//Cors Configuration - Start
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested, Content-Type, Accept Authorization'
+  );
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'POST, PUT, PATCH, GET, DELETE');
+    return res.status(200).json({});
+  }
+  next();
+});
+//Cors Configuration - End
 
 app.use(
   cors({ origin: 'https://my-cool-store.netlify.app', credentials: true })
@@ -67,7 +76,7 @@ app.get('/', (req, res) => {
   // } else {
   //   res.set('Access-Control-Allow-Origin', '*');
   // }
-  res.send('<h1>myCoolStore Server!</h1>');
+  res.send('<h1>myCoolStore Server</h1>');
 });
 
 const PORT = process.env.PORT || 3001;
