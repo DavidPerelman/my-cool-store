@@ -8,7 +8,10 @@ const cors = require('cors');
 
 //Cors Configuration - Start
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Origin',
+    'https://my-cool-store.netlify.app'
+  );
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested, Content-Type, Accept Authorization'
