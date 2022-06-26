@@ -17,7 +17,6 @@ router.get('/categories', async (req, res) => {
 router.get('/category/:categoryId/products', async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
-    console.log(categoryId);
 
     // get all products by category
     const category = await Category.findById(categoryId).exec();
@@ -35,7 +34,6 @@ router.get('/category/:categoryId/products', async (req, res) => {
 router.get('/category/:categoryId/productsLimits', async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
-    console.log(categoryId);
 
     // get 3 products by category
     const category = await Category.findById(categoryId).exec();
@@ -43,7 +41,7 @@ router.get('/category/:categoryId/productsLimits', async (req, res) => {
     const products = await Product.find({
       category: category.name,
     }).limit(3);
-    res.json({ products: products });
+    res.json({ products });
   } catch (err) {
     console.error(err);
     res.status(500).send();

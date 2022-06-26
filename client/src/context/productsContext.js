@@ -10,7 +10,9 @@ const ProductsContextProvider = (props) => {
 
   useEffect(() => {
     ProductsServices.fetchCategoriesData().then((data) => {
-      setCategories(data);
+      console.log(data.categories);
+      setCategories(data.categories);
+      return;
     });
 
     // const fetchProductsData = async () => {

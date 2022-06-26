@@ -12,7 +12,8 @@ const ProductPage = () => {
 
   useEffect(() => {
     ProductsServices.fetchProduct(productId).then((data) => {
-      setProduct(data);
+      console.log(data);
+      setProduct(data.product);
     });
   }, []);
 

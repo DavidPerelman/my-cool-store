@@ -5,6 +5,7 @@ import './CategoriesContainer.css';
 
 const CategoriesContainer = () => {
   const { categories } = useContext(ProductsContext);
+  console.log(categories);
 
   return (
     <>
@@ -15,11 +16,12 @@ const CategoriesContainer = () => {
       )) || (
         <>
           {categories.map((category, i) => {
+            console.log(category._id);
             return (
               <div key={i} className='CategoriesContainer'>
                 <h1>{category.name}</h1>
                 <div className='cards-container-div'>
-                  <CardsContainer categoryId={category.id}></CardsContainer>
+                  <CardsContainer categoryId={category._id}></CardsContainer>
                 </div>
               </div>
             );

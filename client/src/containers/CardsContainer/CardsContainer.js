@@ -6,16 +6,16 @@ import ProductsServices from '../../services/ProductsServices';
 
 const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);
-  const [product, setProduct] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     ProductsServices.fetchProductsByCategory(categoryId).then((data) => {
-      setProductsByCategory(data);
+      setProductsByCategory(data.splice(0, 3));
     });
   }, []);
 
   const cardButtonClick = async (productId) => {
+    console.log(productId);
     navigate(`/product/${productId}`);
   };
 
@@ -25,12 +25,12 @@ const CardsContainer = ({ categoryId }) => {
         return (
           <div key={i} className='card'>
             <Card
-              productId={product.id}
+              productId={product._id}
               detailsSize='product-details'
               titleSize='product-title'
               title={product.title}
               img={product.images[0]}
-              category={product.category['name']}
+              category={product.category}
               price={product.price}
               description={product.description}
               color='button--primary'
