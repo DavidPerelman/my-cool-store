@@ -1,0 +1,30 @@
+.product-div {
+    display: flex;
+    margin: 15px;
+    padding: 10px;
+    box-shadow: 1px 1px;
+    border: 1px solid;
+    justify-content: space-between;
+    /* flex-direction: row; */
+}
+
+.product-image-div {
+    width: 40%;
+}
+
+.product-image {
+    width: 100%;
+}
+
+.btn-text {
+    margin-bottom: 0px;
+}
+
+.product-content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    /* justify-content: space-between; */
+}
