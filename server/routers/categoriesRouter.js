@@ -32,6 +32,24 @@ router.get('/category/:categoryId/products', async (req, res) => {
   }
 });
 
+router.get('/category/:categoryId/productsLimits', async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+    console.log(categoryId);
+
+    // get 3 products by category
+    const category = await Category.findById(categoryId).exec();
+
+    const products = await Product.find({
+      category: category.name,
+    }).limit(3);
+    res.json({ products: products });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 router.post('/createCategory', async (req, res) => {
   try {
     // const data = { name } = req.body;
