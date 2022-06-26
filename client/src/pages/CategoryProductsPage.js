@@ -10,13 +10,18 @@ const CategoryProductsPage = () => {
   let { categoryId } = useParams();
   const { loggedIn } = useContext(AuthContext);
   const [products, setProducts] = useState(null);
+  const [category, setCategory] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(categoryId);
     ProductsServices.fetchAllProductsByCategory(categoryId).then((data) => {
-      console.log(data);
+      // console.log(data);
       setProducts(data);
+    });
+    ProductsServices.fetchCategoryData(categoryId).then((data) => {
+      console.log(data);
+      setCategory(data.category.name);
     });
   }, []);
 
@@ -27,6 +32,7 @@ const CategoryProductsPage = () => {
 
   return (
     <div className='CategoryProductsPage'>
+      <h1>{category}</h1>
       {(!products && <h1>Loading...</h1>) || (
         <div className='categoryProductsPage-container'>
           {products.map((product, i) => {

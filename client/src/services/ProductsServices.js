@@ -45,6 +45,17 @@ const ProductsServices = {
       }
     });
   },
+  fetchCategoryData: (categoryId) => {
+    return fetch(
+      `${process.env.REACT_APP_development_URL}/categories/categories/${categoryId}`
+    ).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
+  },
 };
 
 export default ProductsServices;

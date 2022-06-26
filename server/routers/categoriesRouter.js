@@ -14,6 +14,19 @@ router.get('/categories', async (req, res) => {
   }
 });
 
+router.get('/categories/:categoryId', async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+
+    // get category
+    const category = await Category.findById(categoryId);
+    res.json({ category: category });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 router.get('/category/:categoryId/products', async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
