@@ -6,7 +6,7 @@ router.get('/products', async (req, res) => {
   try {
     // get all products
     const products = await Product.find({});
-    console.log(products);
+    res.json({ products: products });
   } catch (err) {
     console.error(err);
     res.status(500).send();
@@ -21,7 +21,7 @@ router.get('/product/:productId', async (req, res) => {
     // get single product
     const product = await Product.findById(productId).exec();
 
-    console.log(product);
+    res.json({ product: product });
   } catch (err) {
     console.error(err);
     res.status(500).send();
