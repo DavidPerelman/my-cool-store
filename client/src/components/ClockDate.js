@@ -15,23 +15,25 @@ const ClockDate = () => {
   }, []);
 
   const renderClcok = () => {
+    let options = { hour: 'numeric', minute: '2-digit' };
+
     if (date.getHours() < 10) {
       if (date.getMonth() < 10) {
-        return `0${date.toLocaleTimeString()} ${date.getDate()}.0${
+        return `0${date.toLocaleString('he-IL', options)} ${date.getDate()}.0${
           date.getMonth() + 1
         }.${date.getFullYear()}`;
       } else {
-        return `0${date.toLocaleTimeString()} ${date.getDate()}.${
+        return `0${date.toLocaleString('he-IL', options)} ${date.getDate()}.${
           date.getMonth() + 1
         }.${date.getFullYear()}`;
       }
     } else {
       if (date.getMonth() < 10) {
-        return `${date.toLocaleTimeString()} ${date.getDate()}.0${
+        return `${date.toLocaleString('he-IL', options)} ${date.getDate()}.0${
           date.getMonth() + 1
         }.${date.getFullYear()}`;
       } else {
-        return `${date.toLocaleTimeString()} ${date.getDate()}.${
+        return `${date.toLocaleString('he-IL', options)} ${date.getDate()}.${
           date.getMonth() + 1
         }.${date.getFullYear()}`;
       }

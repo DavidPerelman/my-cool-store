@@ -41,6 +41,7 @@ router.get('/category/:categoryId/productsLimits', async (req, res) => {
     const products = await Product.find({
       category: category.name,
     }).limit(3);
+
     res.json({ products });
   } catch (err) {
     console.error(err);

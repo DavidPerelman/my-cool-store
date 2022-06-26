@@ -16,3 +16,10 @@
   padding: 20px;
   font-size: 30px;
 }
+
+.CategoriesContainer-header {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    height: 40px;
+}

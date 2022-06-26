@@ -10,7 +10,6 @@ router.post('/register', async (req, res) => {
     const data = ({ firstName, lastName, email, password, verifyPassword } =
       req.body);
 
-    console.log(data);
     if (!firstName || !lastName || !email || !password || !verifyPassword) {
       return res.status(400).json({
         errMessage: 'all fields required!',
@@ -91,7 +90,6 @@ router.get('/verify/:id/:token', async (req, res) => {
     });
     if (!token) return res.status(400).send('Token not found!');
 
-    console.log(token);
     await User.updateOne({ _id: user._id, verified: true });
     await Token.findByIdAndRemove(token._id);
 
@@ -188,8 +186,6 @@ router.get('/logout', async (req, res) => {
 router.get('/loggedIn', async (req, res) => {
   try {
     const token = req.cookies.token;
-
-    console.log(req.cookies);
 
     if (!token) {
       return res.json(false);

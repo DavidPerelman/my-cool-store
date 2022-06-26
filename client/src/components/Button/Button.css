@@ -1,7 +1,10 @@
 * {
   --white-color: white;
+  --black-color: black;
   --blue-color: #0d6efd;
   --darkGray-color: #6c757d;
+  --indigo-color: #4B0082;
+  --whiteGray-color: #DCDCDC;
   --red-color: red;
   --green-color: green;
   --none-color: none;
@@ -19,6 +22,16 @@
 
 .button--primary {
     background-color: var(--blue-color);
+    color: var(--white-color);
+}
+
+.button--whiteGray {
+    background-color: var(--whiteGray-color);
+    color: var(--black-color);
+}
+
+.button--indigo {
+    background-color: var(--indigo-color);
     color: var(--white-color);
 }
 

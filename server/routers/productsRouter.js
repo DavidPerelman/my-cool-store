@@ -16,7 +16,6 @@ router.get('/products', async (req, res) => {
 router.get('/product/:productId', async (req, res) => {
   try {
     const productId = req.params.productId;
-    console.log(productId);
 
     // get single product
     const product = await Product.findById(productId).exec();
@@ -70,18 +69,6 @@ router.put('/editProduct', async (req, res) => {
         }
       }
     );
-
-    // for (let i = 0; i < jsonData.length; i++) {
-    //   console.log(jsonData[i].id);
-    // }
-
-    // fs.readFile('../server/productsData.json', 'utf8', (err, data) => {
-    //   if (err) {
-    //     console.error(err);
-    //     return;
-    //   }
-    //   console.log(data);
-    // });
   } catch (err) {
     console.error(err);
     res.status(500).send();

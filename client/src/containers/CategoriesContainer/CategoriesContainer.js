@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
+import Button from '../../components/Button/Button';
 import ProductsContext from '../../context/productsContext';
 import CardsContainer from '../CardsContainer/CardsContainer';
 import './CategoriesContainer.css';
 
 const CategoriesContainer = () => {
   const { categories } = useContext(ProductsContext);
-  console.log(categories);
+
+  const categoryContainerClick = (id) => {
+    console.log(id);
+  };
 
   return (
     <>
@@ -16,10 +20,20 @@ const CategoriesContainer = () => {
       )) || (
         <>
           {categories.map((category, i) => {
-            console.log(category._id);
             return (
               <div key={i} className='CategoriesContainer'>
-                <h1>{category.name}</h1>
+                <div className='CategoriesContainer-header'>
+                  <h1>{category.name}</h1>
+                  <Button
+                    color='button--whiteGray'
+                    // size={size}
+                    onClick={() => {
+                      categoryContainerClick(category._id);
+                    }}
+                  >
+                    All {category.name} Products
+                  </Button>
+                </div>
                 <div className='cards-container-div'>
                   <CardsContainer categoryId={category._id}></CardsContainer>
                 </div>

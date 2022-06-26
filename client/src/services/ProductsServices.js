@@ -3,7 +3,7 @@ const url = 'https://api.escuelajs.co/';
 const ProductsServices = {
   fetchProductsByCategory: (categoryId) => {
     return fetch(
-      `${process.env.REACT_APP_development_URL}/categories/category/${categoryId}/products`
+      `${process.env.REACT_APP_development_URL}/categories/category/${categoryId}/productsLimits`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data.products);
