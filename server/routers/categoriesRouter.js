@@ -11,14 +11,21 @@ router.get('/categories', async (req, res) => {
   }
 });
 
-router.post('/categories/createCategory', async (req, res) => {
+router.post('/createCategory', async (req, res) => {
   try {
     // const data = { name } = req.body;
-    let rawdata = fs.readFileSync('./data.json');
-    let product = JSON.parse(rawdata);
-    let newItems = [];
-
-    console.log('categories');
+    fs.readFile('../server/categoriesData.json', 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(data);
+    });
+    // let rawdata = fs.readFileSync('../categoriesData.json');
+    // let categories = JSON.parse(rawdata);
+    // let newCategories = [];
+    // console.log(categories);
+    // return categories;
   } catch (err) {
     console.error(err);
     res.status(500).send();

@@ -44,6 +44,9 @@ app.use('/user', userRouter);
 const productsRouter = require('./routers/productsRouter');
 app.use('/products', productsRouter);
 
+const categoriesRouter = require('./routers/categoriesRouter');
+app.use('/categories', categoriesRouter);
+
 app.get('/', (req, res) => {
   res.send('<h1>myCoolStore Server</h1>');
 });
