@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import ProductsContext from '../../context/productsContext';
 import CardsContainer from '../CardsContainer/CardsContainer';
@@ -6,9 +7,11 @@ import './CategoriesContainer.css';
 
 const CategoriesContainer = () => {
   const { categories } = useContext(ProductsContext);
+  const navigate = useNavigate();
 
-  const categoryContainerClick = (id) => {
-    console.log(id);
+  const categoryContainerClick = (categoryId) => {
+    console.log(categoryId);
+    navigate(`/category/${categoryId}`);
   };
 
   return (

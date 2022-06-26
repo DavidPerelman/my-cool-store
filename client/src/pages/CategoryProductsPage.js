@@ -6,14 +6,16 @@ import ProductsServices from '../services/ProductsServices';
 import './CategoryProductsPage.css';
 
 const CategoryProductsPage = () => {
-  let { productId } = useParams();
+  let { categoryId } = useParams();
   const { loggedIn } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
 
+  console.log(categoryId);
   useEffect(() => {
-    ProductsServices.fetchProduct(productId).then((data) => {
+    console.log(categoryId);
+    ProductsServices.fetchAllProductsByCategory(categoryId).then((data) => {
       console.log(data);
-      setProduct(data.product);
+      // setProduct(data.product);
     });
   }, []);
 

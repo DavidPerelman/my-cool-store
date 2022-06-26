@@ -12,6 +12,17 @@ const ProductsServices = {
       }
     });
   },
+  fetchAllProductsByCategory: (categoryId) => {
+    return fetch(
+      `${process.env.REACT_APP_development_URL}/categories/category/${categoryId}/products`
+    ).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data.products);
+      } else {
+        return { message: 'error' };
+      }
+    });
+  },
   fetchProduct: (productId) => {
     return fetch(
       `${process.env.REACT_APP_development_URL}/products/product/${productId}`
