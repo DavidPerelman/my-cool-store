@@ -3,6 +3,7 @@ import './Card.css';
 import Button from '../Button/Button';
 
 const Card = ({
+  marginBottom,
   cardButtonClick,
   titleSize,
   title,
@@ -25,10 +26,10 @@ const Card = ({
         <img className='card-image' src={img} alt='Avatar' />
       </div>
       <div className='cardContent'>
-        <div className={`${titleSize}`}>
+        <div className={`${titleSize} ${marginBottom}`}>
           <h6>{title}</h6>
         </div>
-        <div className={`${detailsSize}`}>
+        <div className={`${detailsSize} ${marginBottom}`}>
           <div className='price-div'>
             <p className='bold-text'>Price:</p>
             <p>{price}$</p>
@@ -39,6 +40,7 @@ const Card = ({
           </div>
         </div>
         <Button
+          marginTop='marginTop'
           color={color}
           size={size}
           onClick={() => {

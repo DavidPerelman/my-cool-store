@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
+import Card from '../components/Card/Card';
 import AuthContext from '../context/authContext';
 import ProductsServices from '../services/ProductsServices';
 import './CategoryProductsPage.css';
@@ -8,37 +9,46 @@ import './CategoryProductsPage.css';
 const CategoryProductsPage = () => {
   let { categoryId } = useParams();
   const { loggedIn } = useContext(AuthContext);
-  const [product, setProduct] = useState(null);
+  const [products, setProducts] = useState(null);
+  const navigate = useNavigate();
 
-  console.log(categoryId);
   useEffect(() => {
     console.log(categoryId);
     ProductsServices.fetchAllProductsByCategory(categoryId).then((data) => {
       console.log(data);
-      // setProduct(data.product);
+      setProducts(data);
     });
   }, []);
 
+  const cardButtonClick = async (productId) => {
+    console.log(productId);
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <div className='CategoryProductsPage'>
-      {(!product && <h1>Loading...</h1>) || (
-        <div className='product-div'>
-          <div className='product-content'>
-            <h1>{product.title}</h1>
-            <p>{product.description}</p>
-            <h3>{product.price}$</h3>
-            <Button color='button--primary'>
-              <h5 className='btn-text'>Add To Cart</h5>
-            </Button>
-            {loggedIn && (
-              <Button color='button--none'>
-                <h5 className='btn-text'>Add To My Wishlist</h5>
-              </Button>
-            )}
-          </div>
-          <div className='product-image-div'>
-            <img src={product.images[0]} className='product-image' />
-          </div>
+      {(!products && <h1>Loading...</h1>) || (
+        <div className='categoryProductsPage-container'>
+          {products.map((product, i) => {
+            return (
+              <div key={i} className='categoryProductsPage-card card'>
+                <Card
+                  marginBottom='marinBottom'
+                  productId={product._id}
+                  detailsSize='product-details'
+                  titleSize='product-title'
+                  title={product.title}
+                  img={product.images[0]}
+                  category={product.category}
+                  price={product.price}
+                  description={product.description}
+                  color='button--primary'
+                  textButton='Details & Buying'
+                  onClick={cardButtonClick}
+                ></Card>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
