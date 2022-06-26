@@ -13,6 +13,21 @@ router.get('/categories', async (req, res) => {
   }
 });
 
+router.get('/category/:categoryId', async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+    console.log(categoryId);
+
+    // get single category
+    const category = await Category.findById(categoryId).exec();
+
+    res.json({ category: category });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 router.post('/createCategory', async (req, res) => {
   try {
     // const data = { name } = req.body;
