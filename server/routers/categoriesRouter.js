@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Category = require('../models/categoryModel');
+const Product = require('../models/productModel');
 const fs = require('fs');
 
 router.get('/categories', async (req, res) => {
@@ -13,15 +14,18 @@ router.get('/categories', async (req, res) => {
   }
 });
 
-router.get('/category/:categoryId', async (req, res) => {
+router.get('/category/:categoryId/products', async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
     console.log(categoryId);
 
-    // get single category
+    // get all products by category
     const category = await Category.findById(categoryId).exec();
 
-    res.json({ category: category });
+    const products = await Product.find({
+      category: category.name,
+    });
+    res.json({ products: products });
   } catch (err) {
     console.error(err);
     res.status(500).send();
