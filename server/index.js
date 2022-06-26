@@ -44,19 +44,7 @@ app.use('/user', userRouter);
 const productsRouter = require('./routers/productsRouter');
 app.use('/products', productsRouter);
 
-// const ALLOWED_ORIGINS = [
-//   'http://localhost:3000',
-//   'https://my-cool-store.herokuapp.com',
-//   'https://my-cool-store.netlify.app',
-// ];
-
 app.get('/', (req, res) => {
-  // if (ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
-  //   res.set('Access-Control-Allow-Credentials', 'true');
-  //   res.set('Access-Control-Allow-Origin', req.headers.origin);
-  // } else {
-  //   res.set('Access-Control-Allow-Origin', '*');
-  // }
   res.send('<h1>myCoolStore Server</h1>');
 });
 

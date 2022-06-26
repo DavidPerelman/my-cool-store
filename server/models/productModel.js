@@ -12,11 +12,13 @@ const productSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  category: { type: String, required: true },
-  image: {
-    type: String,
-    required: true,
-  },
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+  images: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   rating: {
     rate: { type: Number, required: true },
     count: { type: Number, required: true },
