@@ -20,8 +20,8 @@ const productSchema = new mongoose.Schema({
     },
   ],
   rating: {
-    rate: { type: Number, required: true },
-    count: { type: Number, required: true },
+    rate: { type: Number },
+    count: { type: Number },
   },
 });
 
