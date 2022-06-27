@@ -7,14 +7,28 @@ import ProductsServices from '../services/ProductsServices';
 import './ProductPage.css';
 
 const ProductPage = () => {
-  const { addCartItem } = useCart();
+  const { cartItems, addCartItem, removeCartItem } = useCart();
   let { productId } = useParams();
   const { loggedIn } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
 
+  function checkIfExistInCart() {
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].product['_id'] === productId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const existInCart = checkIfExistInCart();
+
+  // const addItemToCart = (product) => {
+  //   addCartItem(product);
+  // };
+
   useEffect(() => {
     ProductsServices.fetchProduct(productId).then((data) => {
-      console.log(data);
       setProduct(data.product);
     });
   }, []);
@@ -26,13 +40,27 @@ const ProductPage = () => {
           <div className='product-content'>
             <h1>{product.title}</h1>
             <p>{product.description}</p>
+            {/* {(existInCart && (
+                <h5 className='btn-text'>Remove From Cart</h5>
+              )) || } */}
             <h3>{product.price}$</h3>
-            <Button
-              color='button--primary'
-              onClick={() => addCartItem(product)}
-            >
-              <h5 className='btn-text'>Add To Cart</h5>
-            </Button>
+            {!existInCart && (
+              <Button
+                color='button--primary'
+                onClick={() => addCartItem(product)}
+              >
+                <h5 className='btn-text'>Add To Cart</h5>
+              </Button>
+            )}
+            {existInCart && (
+              <Button
+                color='button--primary'
+                onClick={() => removeCartItem(product._id)}
+              >
+                <h5 className='btn-text'>Remove From Cart</h5>
+              </Button>
+            )}
+
             {loggedIn && (
               <Button color='button--none'>
                 <h5 className='btn-text'>Add To My Wishlist</h5>

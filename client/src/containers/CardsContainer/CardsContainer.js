@@ -16,7 +16,6 @@ const CardsContainer = ({ categoryId }) => {
   }, []);
 
   const cardButtonClick = async (productId) => {
-    console.log(productId);
     navigate(`/product/${productId}`);
   };
 
