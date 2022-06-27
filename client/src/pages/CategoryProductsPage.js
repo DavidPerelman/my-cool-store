@@ -37,7 +37,7 @@ const CategoryProductsPage = () => {
         <div className='categoryProductsPage-container'>
           {products.map((product, i) => {
             return (
-              <div key={i} className='categoryProductsPage-card card'>
+              <div key={i} className='categoryProductsPage-card product-card'>
                 <Card
                   marginBottom='marinBottom'
                   productId={product._id}

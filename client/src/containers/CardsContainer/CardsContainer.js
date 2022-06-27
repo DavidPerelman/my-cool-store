@@ -24,7 +24,7 @@ const CardsContainer = ({ categoryId }) => {
     <>
       {productsByCategory.map((product, i) => {
         return (
-          <div key={i} className='card'>
+          <div key={i} className='product-card'>
             <Card
               productId={product._id}
               detailsSize='product-details'

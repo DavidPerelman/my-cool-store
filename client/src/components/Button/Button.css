@@ -6,6 +6,7 @@
   --indigo-color: #4B0082;
   --whiteGray-color: #DCDCDC;
   --red-color: red;
+  --red-salmon-color: #FA8076;;
   --green-color: green;
   --none-color: none;
   border: none;
@@ -35,6 +36,11 @@
     color: var(--white-color);
 }
 
+.button--salmon {
+    background-color: var(--red-salmon-color);
+    color: var(--white-color);
+}
+
 .button--none {
     background-color: var(--none-color);
     color: var(--blue-color);
@@ -61,4 +67,9 @@
 
 .marginTop {
   margin-top: 10px;
+}
+
+.circle-button {
+  border-radius: 50% !important;
+  width: 30px;
 }

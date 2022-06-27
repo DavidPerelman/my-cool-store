@@ -14,7 +14,9 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevCartItems) => {
       console.log(prevCartItems);
 
-      if (prevCartItems.find((cartItem) => cartItem._id === product._id)) {
+      if (
+        prevCartItems.find((cartItem) => cartItem.product._id === product._id)
+      ) {
         return prevCartItems;
       }
       return [

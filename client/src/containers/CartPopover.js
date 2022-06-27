@@ -27,16 +27,25 @@ const CartPopover = () => {
                   <h6>{item.product.title}</h6>
                   <p>{item.product.price}$</p>
                 </div>
-                <div>
-                  <Button onClick={() => addCartItemQuantity(item.product._id)}>
-                    +
-                  </Button>{' '}
-                  {item.quantity}{' '}
-                  <Button
-                    onClick={() => removeCartItemQuantity(item.product._id)}
-                  >
-                    -
-                  </Button>
+                <div className='cart-popover-buttons'>
+                  <div className='cart-popover-quantity-counter'>
+                    <Button
+                      color='button--primary'
+                      buttonStyle='circle-button'
+                      onClick={() => removeCartItemQuantity(item.product._id)}
+                    >
+                      -
+                    </Button>
+                    <p className='quantity-counter'>{item.quantity}</p>
+                    <Button
+                      color='button--primary'
+                      buttonStyle='circle-button'
+                      onClick={() => addCartItemQuantity(item.product._id)}
+                    >
+                      +
+                    </Button>
+                  </div>
+                  <Button color='button--salmon'>Remove</Button>
                 </div>
               </div>
             </div>
