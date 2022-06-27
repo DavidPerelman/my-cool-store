@@ -5,7 +5,12 @@ import Button from '../components/Button/Button';
 import { useCart } from '../context/cartContext';
 
 const CartPopover = () => {
-  const { cartItems, addCartItemQuantity, removeCartItemQuantity } = useCart();
+  const {
+    cartItems,
+    addCartItemQuantity,
+    removeCartItemQuantity,
+    removeCartItem,
+  } = useCart();
 
   return (
     <>
@@ -45,7 +50,12 @@ const CartPopover = () => {
                       +
                     </Button>
                   </div>
-                  <Button color='button--salmon'>Remove</Button>
+                  <Button
+                    color='button--salmon'
+                    onClick={() => removeCartItem(item.product._id)}
+                  >
+                    Remove
+                  </Button>
                 </div>
               </div>
             </div>

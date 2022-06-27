@@ -60,9 +60,11 @@ export const CartProvider = ({ children }) => {
     setCartItems(cartItems);
   };
 
-  const removeCartItem = ({ id }) => {
+  const removeCartItem = (productId) => {
     setCartItems((prevCartItems) => {
-      return prevCartItems.filter((cartItem) => cartItem.id !== id);
+      return prevCartItems.filter(
+        (cartItem) => cartItem.product._id !== productId
+      );
     });
   };
 
