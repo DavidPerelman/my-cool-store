@@ -8,16 +8,54 @@ export function useCart() {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
-  const [cartItemsLength, setCartItemsLength] = useState(cartItems.length);
+  const [cartItemQuantity, setCartItemQuantity] = useState(1);
 
   const addCartItem = (product) => {
-    console.log(cartItemsLength);
     setCartItems((prevCartItems) => {
+      console.log(prevCartItems);
+
       if (prevCartItems.find((cartItem) => cartItem._id === product._id)) {
         return prevCartItems;
       }
-      return [...prevCartItems, product];
+      return [
+        ...prevCartItems,
+        { product: product, quantity: cartItemQuantity },
+      ];
     });
+  };
+
+  const addCartItemQuantity = (productId) => {
+    const items = localStorage.getItem('cartItems');
+    const cartItems = JSON.parse(items);
+
+    for (let i = 0; i < cartItems.length; i++) {
+      if (productId === cartItems[i].product['_id']) {
+        if (cartItems[i].quantity === 99) {
+          return;
+        } else {
+          cartItems[i].quantity += 1;
+        }
+      }
+    }
+
+    setCartItems(cartItems);
+  };
+
+  const removeCartItemQuantity = (productId) => {
+    const items = localStorage.getItem('cartItems');
+    const cartItems = JSON.parse(items);
+
+    for (let i = 0; i < cartItems.length; i++) {
+      if (productId === cartItems[i].product['_id']) {
+        if (cartItems[i].quantity === 1) {
+          return;
+        } else {
+          cartItems[i].quantity -= 1;
+        }
+      }
+    }
+
+    setCartItems(cartItems);
   };
 
   const removeCartItem = ({ id }) => {
@@ -31,7 +69,8 @@ export const CartProvider = ({ children }) => {
       value={{
         cartItems,
         // getCartItems,
-        setCartItemsLength,
+        addCartItemQuantity,
+        removeCartItemQuantity,
         addCartItem,
         removeCartItem,
       }}

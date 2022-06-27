@@ -18,7 +18,7 @@ const MyPopover = ({ type, title, icon, itemsInCart, children }) => {
             <h5>{title}</h5>
           </div>
           <div className='popover-body'>
-            <ul className='popover-ul'>
+            <ul className={`${type}-popover-ul`}>
               <li className={`${type}-popover-li`}>{children}</li>
             </ul>
           </div>
