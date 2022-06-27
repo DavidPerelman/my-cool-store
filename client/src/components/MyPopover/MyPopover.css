@@ -106,6 +106,7 @@ h1 {
 }
 
 .popover-body{
+    width: 100%;
     border-top-width: 90%;
     border-top: 0.1px solid #ccc !important;
 }
@@ -114,11 +115,24 @@ h1 {
     width: 22px
 }
 
-.popover-li {
+.user-popover-li {
     text-align: center;
+    width: 147px;
 }
 
-.popover-li:hover {
+.cart-popover-li {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.user-popover-li:hover {
+    background-color: white !important;
+    cursor: pointer;
+}
+
+.cart-popover-li:hover {
     background-color: white !important;
     cursor: pointer;
 }
@@ -150,5 +164,29 @@ h1 {
 }
 
 .cart-content {
-    width: 270px;
+    width: 350px;
+}
+
+.user-popover-card {
+    
+}
+
+.cart-popover-card {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    border-bottom: solid 1px;
+    box-shadow: 1px 1px;
+    border: 1px solid;
+    padding: 2px;
+    gap: 10px;
+}
+
+.cart-popover-card-image {
+    width: 80px;
+}
+
+.cart-popover-card-title {
+    align-self: center;
+    width: 80px;
 }

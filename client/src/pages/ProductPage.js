@@ -2,10 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
+import { useCart } from '../context/cartContext';
 import ProductsServices from '../services/ProductsServices';
 import './ProductPage.css';
 
 const ProductPage = () => {
+  const { addCartItem } = useCart();
   let { productId } = useParams();
   const { loggedIn } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
@@ -25,7 +27,10 @@ const ProductPage = () => {
             <h1>{product.title}</h1>
             <p>{product.description}</p>
             <h3>{product.price}$</h3>
-            <Button color='button--primary'>
+            <Button
+              color='button--primary'
+              onClick={() => addCartItem(product)}
+            >
               <h5 className='btn-text'>Add To Cart</h5>
             </Button>
             {loggedIn && (

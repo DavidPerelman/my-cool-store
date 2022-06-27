@@ -8,15 +8,15 @@ export function useCart() {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
+  const [cartItemsLength, setCartItemsLength] = useState(cartItems.length);
 
-  const addCartItem = () => {
-    const id = Math.random() * (1000 - 1) + 1;
-
+  const addCartItem = (product) => {
+    console.log(cartItemsLength);
     setCartItems((prevCartItems) => {
-      if (prevCartItems.find((cartItem) => cartItem.id === id)) {
+      if (prevCartItems.find((cartItem) => cartItem._id === product._id)) {
         return prevCartItems;
       }
-      return [...prevCartItems, { id: id, name: `item ${id}` }];
+      return [...prevCartItems, product];
     });
   };
 
@@ -31,6 +31,7 @@ export const CartProvider = ({ children }) => {
       value={{
         cartItems,
         // getCartItems,
+        setCartItemsLength,
         addCartItem,
         removeCartItem,
       }}

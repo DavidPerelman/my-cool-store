@@ -3,6 +3,7 @@ import Card from '../../components/Card/Card';
 import './CardsContainer.css';
 import { useNavigate } from 'react-router-dom';
 import ProductsServices from '../../services/ProductsServices';
+import { useCart } from '../../context/cartContext';
 
 const CardsContainer = ({ categoryId }) => {
   const [productsByCategory, setProductsByCategory] = useState([]);

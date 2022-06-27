@@ -19,7 +19,7 @@ const MyPopover = ({ type, title, icon, itemsInCart, children }) => {
           </div>
           <div className='popover-body'>
             <ul className='popover-ul'>
-              <li className='popover-li'>{children}</li>
+              <li className={`${type}-popover-li`}>{children}</li>
             </ul>
           </div>
         </div>
