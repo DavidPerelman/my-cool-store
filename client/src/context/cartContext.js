@@ -17,6 +17,7 @@ export const CartProvider = ({ children }) => {
       if (
         prevCartItems.find((cartItem) => cartItem.product._id === product._id)
       ) {
+        alert('The product is already in the cart');
         return prevCartItems;
       }
       return [
