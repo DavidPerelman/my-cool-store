@@ -17,6 +17,8 @@ router.get('/product/:productId', async (req, res) => {
   try {
     const productId = req.params.productId;
 
+    console.log(productId);
+
     // get single product
     const product = await Product.findById(productId).exec();
 

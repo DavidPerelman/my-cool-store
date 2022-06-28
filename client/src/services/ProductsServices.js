@@ -22,6 +22,7 @@ const ProductsServices = {
     });
   },
   fetchProduct: (productId) => {
+    console.log(productId);
     return fetch(
       `${process.env.REACT_APP_api_URL}/products/product/${productId}`
     ).then((res) => {

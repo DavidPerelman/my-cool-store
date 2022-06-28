@@ -12,6 +12,12 @@ const ProductPage = () => {
   const { loggedIn } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
 
+  useEffect(() => {
+    ProductsServices.fetchProduct(productId).then((data) => {
+      setProduct(data.product);
+    });
+  }, []);
+
   function checkIfExistInCart() {
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].product['_id'] === productId) {
@@ -22,12 +28,6 @@ const ProductPage = () => {
   }
 
   const existInCart = checkIfExistInCart();
-
-  useEffect((productId) => {
-    ProductsServices.fetchProduct(productId).then((data) => {
-      setProduct(data.product);
-    });
-  }, []);
 
   return (
     <div className='ProductPage'>
