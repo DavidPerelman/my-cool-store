@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Card from '../components/Card/Card';
 import AuthContext from '../context/authContext';
 import ProductsServices from '../services/ProductsServices';
@@ -11,6 +11,7 @@ const CategoryProductsPage = () => {
   const { cardButtonClick } = useContext(ProductsContext);
   const [products, setProducts] = useState(null);
   const [category, setCategory] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(categoryId);

@@ -23,3 +23,12 @@
     gap: 20px;
     height: 40px;
 }
+
+@media(max-width: 600px) {
+.CategoriesContainer-Electronics-header {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    height: 60px !important;
+}
+}

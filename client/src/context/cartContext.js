@@ -67,11 +67,22 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  function checkIfExistInCart(productId) {
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].product['_id'] === productId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // const existInCart = checkIfExistInCart();
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        // getCartItems,
+        checkIfExistInCart,
         addCartItemQuantity,
         removeCartItemQuantity,
         addCartItem,

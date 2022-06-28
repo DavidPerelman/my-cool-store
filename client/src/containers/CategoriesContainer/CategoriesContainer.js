@@ -23,9 +23,17 @@ const CategoriesContainer = () => {
       )) || (
         <>
           {categories.map((category, i) => {
+            console.log(category.name);
+
             return (
               <div key={i} className='CategoriesContainer'>
-                <div className='CategoriesContainer-header'>
+                <div
+                  className={
+                    category.name === 'Electronics'
+                      ? 'CategoriesContainer-Electronics-header'
+                      : 'CategoriesContainer-header'
+                  }
+                >
                   <h1>{category.name}</h1>
                   <Button
                     color='button--whiteGray'
