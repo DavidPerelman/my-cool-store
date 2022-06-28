@@ -5,6 +5,7 @@ import AuthContext from './context/authContext';
 import Navbar from './components/Navbar/Navbar';
 import ProductPage from './pages/ProductPage';
 import CategoryProductsPage from './pages/CategoryProductsPage';
+import CartPage from './pages/CartPage';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
@@ -47,6 +48,7 @@ const Router = () => {
               path='/category/:categoryId'
               element={<CategoryProductsPage />}
             />
+            <Route path='/cart' element={<CartPage />} />
           </>
         )}
         {loggedIn === true && (
@@ -77,6 +79,7 @@ const Router = () => {
               path='/category/:categoryId'
               element={<CategoryProductsPage />}
             />
+            <Route path='/cart' element={<CartPage />} />
           </>
         )}
       </Routes>

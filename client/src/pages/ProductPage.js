@@ -23,10 +23,6 @@ const ProductPage = () => {
 
   const existInCart = checkIfExistInCart();
 
-  // const addItemToCart = (product) => {
-  //   addCartItem(product);
-  // };
-
   useEffect(() => {
     ProductsServices.fetchProduct(productId).then((data) => {
       setProduct(data.product);
@@ -40,19 +36,15 @@ const ProductPage = () => {
           <div className='product-content'>
             <h1>{product.title}</h1>
             <p>{product.description}</p>
-            {/* {(existInCart && (
-                <h5 className='btn-text'>Remove From Cart</h5>
-              )) || } */}
             <h3>{product.price}$</h3>
-            {!existInCart && (
+            {(!existInCart && (
               <Button
                 color='button--primary'
                 onClick={() => addCartItem(product)}
               >
                 <h5 className='btn-text'>Add To Cart</h5>
               </Button>
-            )}
-            {existInCart && (
+            )) || (
               <Button
                 color='button--primary'
                 onClick={() => removeCartItem(product._id)}
@@ -60,7 +52,6 @@ const ProductPage = () => {
                 <h5 className='btn-text'>Remove From Cart</h5>
               </Button>
             )}
-
             {loggedIn && (
               <Button color='button--none'>
                 <h5 className='btn-text'>Add To My Wishlist</h5>

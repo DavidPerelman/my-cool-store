@@ -1,16 +1,23 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import cart from '../asset/cart.png';
 import MyPopover from '../components/MyPopover/MyPopover';
 import Button from '../components/Button/Button';
 import { useCart } from '../context/cartContext';
 
 const CartPopover = () => {
+  const navigate = useNavigate();
+
   const {
     cartItems,
     addCartItemQuantity,
     removeCartItemQuantity,
     removeCartItem,
   } = useCart();
+
+  const showCartPage = () => {
+    navigate('/cart');
+  };
 
   return (
     <>
@@ -60,6 +67,11 @@ const CartPopover = () => {
               </div>
             </div>
           ))}
+        <div>
+          <Button size='show-cart-button' onClick={showCartPage}>
+            Show Cart
+          </Button>
+        </div>
       </MyPopover>
     </>
   );

@@ -1,6 +1,6 @@
 import './Button.css';
 const Button = (props) => {
-  const { size, color = 'blue', marginTop, buttonStyle } = props;
+  const { size, color = 'button--primary', marginTop, buttonStyle } = props;
 
   return (
     <button

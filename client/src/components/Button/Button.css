@@ -73,3 +73,7 @@
   border-radius: 50% !important;
   width: 30px;
 }
+
+.show-cart-button {
+  width: 100%;
+}
