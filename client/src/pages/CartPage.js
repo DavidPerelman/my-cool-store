@@ -1,32 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '../components/Button/Button';
-import Card from '../components/Card/Card';
 import ProductContainer from '../components/ProductContainer';
 import { useCart } from '../context/cartContext';
-import ProductsContext from '../context/productsContext';
 import './CartPage.css';
-import ProductPage from './ProductPage';
 
 const CartPage = () => {
-  const { cardButtonClick } = useContext(ProductsContext);
+  const { addCartItem, cartItems } = useCart();
+  const [itemsQuantity, setItemsQuantity] = useState(0);
 
-  //   const existInCart = checkIfExistInCart(productId);
+  console.log(cartItems);
 
-  const {
-    addCartItem,
-    cartItems,
-    checkIfExistInCart,
-    removeCartItemQuantity,
-    removeCartItem,
-  } = useCart();
+  useEffect(() => {
+    let counter = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      // console.log(cartItems[i].quantity);
+      const total = (counter += cartItems[i].quantity);
+      setItemsQuantity(total);
+    }
+  }, []);
+
+  console.log(itemsQuantity);
 
   return (
     <div>
       {(cartItems.length === 0 && <h1>Your Cart Is Empty!</h1>) ||
         (cartItems.length > 0 && (
           <div className='categoryProductsPage-container cartPage-container'>
-            {/* <h1>Check Out</h1> */}
-            <div>
+            <div className='order-div'>
+              <p>Items Quantity: {itemsQuantity}</p>
               <Button>Check Out</Button>
             </div>
             {cartItems.map((item, i) => {

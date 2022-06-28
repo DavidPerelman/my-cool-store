@@ -15,9 +15,22 @@ const CartPopover = () => {
     removeCartItem,
   } = useCart();
 
-  const showCartPage = () => {
+  const showCartPage = (e) => {
     navigate('/cart');
   };
+
+  useEffect(() => {
+    const cartWrapper = document.getElementsByClassName('wrapper')[0];
+    const cartContent = document.getElementsByClassName('cart-content')[0];
+
+    cartWrapper.addEventListener('mouseover', () => {
+      cartContent.style.visibility = 'visible';
+    });
+
+    cartWrapper.addEventListener('mouseout', () => {
+      cartContent.style.visibility = 'hidden';
+    });
+  }, [100]);
 
   return (
     <>

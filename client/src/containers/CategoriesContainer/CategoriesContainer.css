@@ -26,9 +26,15 @@
 
 @media(max-width: 600px) {
 .CategoriesContainer-Electronics-header {
+    align-self: center;
     display: flex;
     justify-content: center;
     gap: 20px;
     height: 60px !important;
+}
+
+.CategoriesContainer-Electronics-header > h1 {
+        align-self: center;
+    margin: inherit;
 }
 }

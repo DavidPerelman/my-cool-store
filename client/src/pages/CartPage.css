@@ -21,3 +21,16 @@
 .cartPage-product-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+
+.checkout-div {
+  padding-top: 15px;
+}
+
+.order-div {
+      display: flex;
+    margin: 15px;
+    padding: 10px;
+    box-shadow: 1px 1px;
+    border: 1px solid;
+    justify-content: space-between;
+}
