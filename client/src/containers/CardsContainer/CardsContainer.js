@@ -1,23 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Card from '../../components/Card/Card';
 import './CardsContainer.css';
-import { useNavigate } from 'react-router-dom';
 import ProductsServices from '../../services/ProductsServices';
-import { useCart } from '../../context/cartContext';
+import ProductsContext from '../../context/productsContext';
 
 const CardsContainer = ({ categoryId }) => {
+  const { cardButtonClick } = useContext(ProductsContext);
   const [productsByCategory, setProductsByCategory] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     ProductsServices.fetchProductsByCategory(categoryId).then((data) => {
       setProductsByCategory(data.splice(0, 3));
     });
   }, []);
-
-  const cardButtonClick = async (productId) => {
-    navigate(`/product/${productId}`);
-  };
 
   return (
     <>

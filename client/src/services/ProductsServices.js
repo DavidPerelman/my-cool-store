@@ -1,5 +1,3 @@
-const url = 'https://api.escuelajs.co/';
-
 const ProductsServices = {
   fetchProductsByCategory: (categoryId) => {
     return fetch(

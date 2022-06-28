@@ -23,7 +23,7 @@ const ProductPage = () => {
 
   const existInCart = checkIfExistInCart();
 
-  useEffect(() => {
+  useEffect((productId) => {
     ProductsServices.fetchProduct(productId).then((data) => {
       setProduct(data.product);
     });
@@ -59,7 +59,11 @@ const ProductPage = () => {
             )}
           </div>
           <div className='product-image-div'>
-            <img src={product.images[0]} className='product-image' />
+            <img
+              src={product.images[0]}
+              className='product-image'
+              alt='Avatar'
+            />
           </div>
         </div>
       )}

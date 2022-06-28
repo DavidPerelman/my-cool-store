@@ -1,17 +1,16 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Button from '../components/Button/Button';
+import { useParams } from 'react-router-dom';
 import Card from '../components/Card/Card';
 import AuthContext from '../context/authContext';
 import ProductsServices from '../services/ProductsServices';
+import ProductsContext from '../context/productsContext';
 import './CategoryProductsPage.css';
 
 const CategoryProductsPage = () => {
   let { categoryId } = useParams();
-  const { loggedIn } = useContext(AuthContext);
+  const { cardButtonClick } = useContext(ProductsContext);
   const [products, setProducts] = useState(null);
   const [category, setCategory] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(categoryId);
@@ -24,11 +23,6 @@ const CategoryProductsPage = () => {
       setCategory(data.category.name);
     });
   }, []);
-
-  const cardButtonClick = async (productId) => {
-    console.log(productId);
-    navigate(`/product/${productId}`);
-  };
 
   return (
     <div className='CategoryProductsPage'>

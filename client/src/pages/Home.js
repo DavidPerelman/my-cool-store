@@ -3,11 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Content from '../components/Content/Content';
 import Modal from '../components/Modal/Modal';
-import Navbar from '../components/Navbar/Navbar';
-import { useCart } from '../context/cartContext';
 
 const Home = ({ loggedIn, userData }) => {
-  const { addCartItem } = useCart();
   const navigate = useNavigate();
   const [registerConfirmation, setRegisterConfirmation] = useState(false);
   const [registerSuccess, setRegisterSuccess] = useState(false);
