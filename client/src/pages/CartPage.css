@@ -27,10 +27,16 @@
 }
 
 .order-div {
-      display: flex;
     margin: 15px;
     padding: 10px;
     box-shadow: 1px 1px;
     border: 1px solid;
     justify-content: space-between;
+}
+
+.order-details {
+      display: flex;
+      flex-direction: row;
+    justify-content: center;
+    gap: 40px;
 }

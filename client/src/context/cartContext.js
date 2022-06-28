@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const CartContext = createContext();
@@ -9,6 +9,8 @@ export function useCart() {
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const [cartItemQuantity, setCartItemQuantity] = useState(1);
+  const [itemsQuantity, setItemsQuantity] = useState(0);
+  const [itemsPrice, setItemsPrice] = useState(0);
 
   const addCartItem = (product) => {
     setCartItems((prevCartItems) => {
@@ -76,12 +78,28 @@ export const CartProvider = ({ children }) => {
     return false;
   }
 
+  useEffect(() => {
+    let quantityCounter = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      const total = (quantityCounter += cartItems[i].quantity);
+      setItemsQuantity(total);
+    }
+
+    let priceCounter = 0;
+    for (let z = 0; z < cartItems.length; z++) {
+      const total = (priceCounter +=
+        cartItems[z].quantity * cartItems[z].product.price);
+      setItemsPrice(total);
+    }
+  }, [addCartItemQuantity, removeCartItemQuantity]);
   // const existInCart = checkIfExistInCart();
 
   return (
     <CartContext.Provider
       value={{
         cartItems,
+        itemsPrice,
+        itemsQuantity,
         checkIfExistInCart,
         addCartItemQuantity,
         removeCartItemQuantity,

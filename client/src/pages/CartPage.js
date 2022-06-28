@@ -5,21 +5,25 @@ import { useCart } from '../context/cartContext';
 import './CartPage.css';
 
 const CartPage = () => {
-  const { addCartItem, cartItems } = useCart();
-  const [itemsQuantity, setItemsQuantity] = useState(0);
+  const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
 
   console.log(cartItems);
 
   useEffect(() => {
-    let counter = 0;
-    for (let i = 0; i < cartItems.length; i++) {
-      // console.log(cartItems[i].quantity);
-      const total = (counter += cartItems[i].quantity);
-      setItemsQuantity(total);
-    }
+    // let quantityCounter = 0;
+    // for (let i = 0; i < cartItems.length; i++) {
+    //   const total = (quantityCounter += cartItems[i].quantity);
+    //   setItemsQuantity(total);
+    // }
+    // let priceCounter = 0;
+    // for (let z = 0; z < cartItems.length; z++) {
+    //   const total = (priceCounter +=
+    //     cartItems[z].quantity * cartItems[z].product.price);
+    //   setItemsPrice(total);
+    // }
   }, []);
 
-  console.log(itemsQuantity);
+  console.log(itemsPrice);
 
   return (
     <div>
@@ -27,8 +31,12 @@ const CartPage = () => {
         (cartItems.length > 0 && (
           <div className='categoryProductsPage-container cartPage-container'>
             <div className='order-div'>
-              <p>Items Quantity: {itemsQuantity}</p>
-              <Button>Check Out</Button>
+              <h1>Your Order</h1>
+              <div className='order-details'>
+                <p>Items Quantity: {itemsQuantity}</p>
+                <p>Pay: {itemsPrice}$</p>
+                <Button>Check Out</Button>
+              </div>
             </div>
             {cartItems.map((item, i) => {
               return (
