@@ -9,7 +9,7 @@ const AuthContextProvider = (props) => {
 
   const getLoggedIn = async () => {
     const loggedInRes = await axios.get(
-      `${process.env.REACT_APP_development_URL}/user/loggedIn`
+      `${process.env.REACT_APP_api_URL}/user/loggedIn`
     );
 
     setLoggedIn(loggedInRes.data.loggedIn);
