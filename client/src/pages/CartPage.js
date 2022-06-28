@@ -31,11 +31,13 @@ const CartPage = () => {
             </div>
             {cartItems.map((item, i) => {
               return (
-                <ProductContainer
-                  product={item.product}
-                  existInCart={true}
-                  addCartItem={addCartItem}
-                ></ProductContainer>
+                <div key={i}>
+                  <ProductContainer
+                    product={item.product}
+                    existInCart={true}
+                    addCartItem={addCartItem}
+                  ></ProductContainer>
+                </div>
                 // <div key={i} className='product-div'>
                 //   <Card
                 //     marginBottom='marinBottom'
