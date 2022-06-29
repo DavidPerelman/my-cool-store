@@ -10,6 +10,7 @@ const {
   checkIfPasswordCurrect,
   checkIfUserVerified,
 } = require('../services/userServices');
+const { createToken } = require('../services/jwtServices');
 
 router.post('/register', async (req, res) => {
   try {
@@ -112,50 +113,37 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     const formValidation = userLoginValidation(email, password);
-
     if (formValidation.validationForm === false) {
       return res.status(400).json(formValidation.errMessage);
     }
 
     const user = await checkIfUserExist(email);
-
     if (user.existingUser === false) {
       return res.status(400).json(user.errMessage);
     }
 
-    // const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
     const passwordCorrect = await checkIfPasswordCurrect(
       password,
       user.passwordHash
     );
-
     if (passwordCorrect.currctPassword === false) {
       return res.status(400).json(passwordCorrect.errMessage);
     }
 
     const userVerified = await checkIfUserVerified(user.verified);
-
     if (userVerified.verified === false) {
       return res.status(400).json(userVerified.errMessage);
     }
 
-    // sign the token //jwt.createToken({...})
-    const token = jwt.sign(
-      {
-        user: existingUser._id,
-      },
-      process.env.JWT_SECRET
-    );
-    existingUser.token = token;
+    const token = createToken(user._id);
+    user.token = token;
+    user.save();
 
-    existingUser.save();
-
-    // send the token in a HTTP only cookie
     res
       .cookie('token', token, {
         httpOnly: true,
       })
-      .json({ isLogin: true, user: existingUser });
+      .json({ isLogin: true, user: user });
   } catch (err) {
     console.error(err);
     res.status(500).send();
