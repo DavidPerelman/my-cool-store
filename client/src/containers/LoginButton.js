@@ -39,21 +39,26 @@ const LoginButton = () => {
     }
   };
 
+  const showError = (error) => {
+    setError(error);
+
+    const clearError = setTimeout(() => {
+      setError('');
+    }, 3000);
+  };
+
   const login = async () => {
-    if (isLoginFormFieldsValid(loginData.email, loginData.password))
-      return setError('all fields required!');
-    if (!isValidEmail(loginData.email)) return setError('invalid email!');
+    if (!isLoginFormFieldsValid(loginData))
+      return showError('all fields required!');
+
+    if (!isValidEmail(loginData.email)) return showError('invalid email!');
 
     try {
       const response = await AuthService.login(loginData);
-      if (response.response.data.errMessage === 'login error!') {
-        setError(response.response.data.errMessage);
-        // clearError();
-        const clearError = setTimeout(clearErrorMessage, 3000);
-        function clearErrorMessage() {
-          setError('');
-        }
-        return;
+      console.log(console.log(response.response.data));
+      if (response.response.data === 'login error!') {
+        console.log(response.response.data);
+        return showError(response.response.data);
       }
     } catch (err) {
       console.log(err);
@@ -62,11 +67,6 @@ const LoginButton = () => {
     setShow(false);
     await getLoggedIn();
     navigate('/');
-
-    const clearError = setTimeout(clearErrorMessage, 3000);
-    function clearErrorMessage() {
-      setError('');
-    }
   };
 
   useEffect(() => {

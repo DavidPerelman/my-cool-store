@@ -8,9 +8,18 @@ const isFormFieldsValid = (
   return !firstName || !lastName || !email || !password || !verifyPassword;
 };
 
-const isLoginFormFieldsValid = (email, password) => {
-  return !email || !password;
+const isLoginFormFieldsValid = (data) => {
+  for (let key in data) {
+    if (!data[key]) {
+      return false;
+    }
+  }
+  return true;
+  // return !email || !password;
 };
+// const isLoginFormFieldsValid = (email, password) => {
+//   return !email || !password;
+// };
 
 const isValidPassword = (password, verifyPassword) => {
   return (
