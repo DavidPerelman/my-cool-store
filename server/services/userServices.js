@@ -46,8 +46,19 @@ const checkIfPasswordCurrect = async (password, passwordHash) => {
   return passwordCorrect;
 };
 
+const checkIfUserVerified = async (data) => {
+  if (data === false) {
+    return {
+      verified: false,
+      errMessage: 'user not verify!',
+    };
+  }
+  return data;
+};
+
 module.exports = {
   userLoginValidation,
   checkIfUserExist,
   checkIfPasswordCurrect,
+  checkIfUserVerified,
 };
