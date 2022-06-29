@@ -4,6 +4,11 @@ const User = require('../models/userModel');
 const Token = require('../models/tokenModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {
+  userLoginValidation,
+  checkIfUserExist,
+  checkIfPasswordCurrect,
+} = require('../services/userServices');
 
 router.post('/register', async (req, res) => {
   try {
@@ -103,65 +108,58 @@ router.get('/verify/:id/:token', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
+    console.log(req.body);
     const { email, password } = req.body;
 
-    console.log(req.body);
+    const formValidation = userLoginValidation(email, password);
 
-    if (!email || !password) {
-      return res.status(400).json({
-        errMessage: 'all fields required!',
-      });
+    if (formValidation.validationForm === false) {
+      return res.status(400).json(formValidation.errMessage);
     }
 
-    const regexp =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const user = await checkIfUserExist(email);
 
-    if (!regexp.test(email)) {
-      return res.status(400).json({
-        errMessage: 'invalid email!',
-      });
+    if (user.existingUser === false) {
+      return res.status(400).json(user.errMessage);
     }
 
-    const existingUser = await User.findOne({ email });
+    // const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
+    const passwordCorrect = await checkIfPasswordCurrect(
+      password,
+      user.passwordHash
+    );
 
-    if (!existingUser) {
+    if (passwordCorrect.currctPassword === false) {
+      console.log(passwordCorrect.errMessage);
+      return res.status(400).json(passwordCorrect.errMessage);
+    }
+
+    console.log(user);
+
+    // return;
+
+    if (existingUser.verified === false) {
       return res.status(400).json({
-        errMessage: 'login error!',
+        errMessage: 'user not verify!',
       });
     } else {
-      const passwordCorrect = await bcrypt.compare(
-        password,
-        existingUser.passwordHash
+      // sign the token //jwt.createToken({...})
+      const token = jwt.sign(
+        {
+          user: existingUser._id,
+        },
+        process.env.JWT_SECRET
       );
-      if (!passwordCorrect) {
-        return res.status(400).json({
-          errMessage: 'login error!',
-        });
-      } else {
-        if (existingUser.verified === false) {
-          return res.status(400).json({
-            errMessage: 'user not verify!',
-          });
-        } else {
-          // sign the token //jwt.createToken({...})
-          const token = jwt.sign(
-            {
-              user: existingUser._id,
-            },
-            process.env.JWT_SECRET
-          );
-          existingUser.token = token;
+      existingUser.token = token;
 
-          existingUser.save();
+      existingUser.save();
 
-          // send the token in a HTTP only cookie
-          res
-            .cookie('token', token, {
-              httpOnly: true,
-            })
-            .json({ isLogin: true, user: existingUser });
-        }
-      }
+      // send the token in a HTTP only cookie
+      res
+        .cookie('token', token, {
+          httpOnly: true,
+        })
+        .json({ isLogin: true, user: existingUser });
     }
   } catch (err) {
     console.error(err);
