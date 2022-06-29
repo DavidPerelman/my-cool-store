@@ -2,15 +2,29 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 const userLoginValidation = (email, password) => {
+  console.log({ email, password });
+  const data = { email, password };
+
   const regexp =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  if (!email || !password) {
-    return {
-      validationForm: false,
-      errMessage: 'all fields required!',
-    };
-  } else if (!regexp.test(email)) {
+  for (let key in data) {
+    if (!data[key]) {
+      return {
+        validationForm: false,
+        errMessage: 'all fields required!',
+      };
+    }
+  }
+
+  //   if (!email || !password) {
+  //     return {
+  //       validationForm: false,
+  //       errMessage: 'all fields required!',
+  //     };
+  //   }
+
+  if (!regexp.test(email)) {
     return {
       validationForm: false,
       errMessage: 'invalid email!',

@@ -112,43 +112,40 @@ router.get('/verify/:id/:token', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
+    // const checkUser = await userValidationAndAuth(email, password);
 
-    const checkUser = await userValidationAndAuth(email, password);
+    const formValidation = userLoginValidation(email, password);
+    if (formValidation.validationForm === false) {
+      return res.status(400).json(formValidation.errMessage);
+    }
 
-    console.log(checkUser.user.token);
+    const user = await checkIfUserExist(email);
+    if (user.existingUser === false) {
+      return res.status(400).json(user.errMessage);
+    }
 
-    // const formValidation = userLoginValidation(email, password);
-    // if (formValidation.validationForm === false) {
-    //   return res.status(400).json(formValidation.errMessage);
-    // }
+    const passwordCorrect = await checkIfPasswordCurrect(
+      password,
+      user.passwordHash
+    );
+    if (passwordCorrect.currctPassword === false) {
+      return res.status(400).json(passwordCorrect.errMessage);
+    }
 
-    // const user = await checkIfUserExist(email);
-    // if (user.existingUser === false) {
-    //   return res.status(400).json(user.errMessage);
-    // }
+    const userVerified = await checkIfUserVerified(user.verified);
+    if (userVerified.verified === false) {
+      return res.status(400).json(userVerified.errMessage);
+    }
 
-    // const passwordCorrect = await checkIfPasswordCurrect(
-    //   password,
-    //   user.passwordHash
-    // );
-    // if (passwordCorrect.currctPassword === false) {
-    //   return res.status(400).json(passwordCorrect.errMessage);
-    // }
-
-    // const userVerified = await checkIfUserVerified(user.verified);
-    // if (userVerified.verified === false) {
-    //   return res.status(400).json(userVerified.errMessage);
-    // }
-
-    // const token = await createToken(user._id);
-    // user.token = token;
-    // user.save();
+    const token = await createToken(user._id);
+    user.token = token;
+    user.save();
 
     res
-      .cookie('token', checkUser.user.token, {
+      .cookie('token', token, {
         httpOnly: true,
       })
-      .json({ isLogin: true, user: checkUser.user });
+      .json({ isLogin: true, user: user });
   } catch (err) {
     console.error(err);
     res.status(500).send();
