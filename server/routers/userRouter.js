@@ -18,39 +18,14 @@ router.post('/register', async (req, res) => {
     const data = ({ firstName, lastName, email, password, verifyPassword } =
       req.body);
 
-    if (!firstName || !lastName || !email || !password || !verifyPassword) {
-      return res.status(400).json({
-        errMessage: 'all fields required!',
-      });
+    const formValidation = userLoginValidation(data);
+    if (formValidation.validationForm === false) {
+      return res.status(400).json(formValidation.errMessage);
     }
 
-    if (password.length < 6) {
-      return res.status(400).json({
-        errMessage: 'Password must be at least 6 characters long!',
-      });
-    }
-
-    if (password !== verifyPassword) {
-      return res.status(400).json({
-        errMessage:
-          'Password must be at least 6 characters long and the passwords must be identical!',
-      });
-    }
-
-    const regexp =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (!regexp.test(email)) {
-      return res.status(400).json({
-        errMessage: 'invalid email!',
-      });
-    }
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({
-        errMessage: 'An account with this email already exist.',
-      });
+    const user = await checkIfUserExist('register', data.email);
+    if (user.existingUser) {
+      return res.status(400).json(user.errMessage);
     }
 
     // hash the password
@@ -65,17 +40,16 @@ router.post('/register', async (req, res) => {
       passwordHash,
     }).save();
 
-    const token = await new Token({
+    await createToken(user._id);
+
+    const userToken = await createToken(newUser._id);
+
+    const tokenModel = await new Token({
       userId: newUser._id,
-      token: jwt.sign(
-        {
-          user: newUser._id,
-        },
-        process.env.JWT_SECRET
-      ),
+      token: userToken,
     }).save();
 
-    const message = `${process.env.BASE_URL}/verify/${newUser._id}/${token.token}`;
+    const message = `${process.env.BASE_URL}/verify/${newUser._id}/${userToken}`;
     await sendEmail(newUser.email, 'Verify Email', message);
     res.json({ user: newUser, success: true });
   } catch (err) {
@@ -108,15 +82,15 @@ router.get('/verify/:id/:token', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const data = ({ email, password } = req.body);
     // const checkUser = await userValidationAndAuth(email, password);
 
-    const formValidation = userLoginValidation(email, password);
+    const formValidation = userLoginValidation(data);
     if (formValidation.validationForm === false) {
       return res.status(400).json(formValidation.errMessage);
     }
 
-    const user = await checkIfUserExist(email);
+    const user = await checkIfUserExist('login', data.email);
     if (user.existingUser === false) {
       return res.status(400).json(user.errMessage);
     }
@@ -176,19 +150,6 @@ router.get('/loggedIn', async (req, res) => {
 
       res.send({ loggedIn: true, user: user });
     }
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json(false).send();
-  }
-});
-
-router.get('/test/register', async (req, res) => {
-  try {
-    await checkIfEmailExistd(req.body.email);
-    const user = await createUser(req.body);
-    sendEmailVerification(user.email);
-    const token = await createTOken(user);
-    res.json(user);
   } catch (err) {
     console.error(err);
     return res.status(500).json(false).send();

@@ -1,10 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
-const userLoginValidation = (email, password) => {
-  console.log({ email, password });
-  const data = { email, password };
-
+const userLoginValidation = (data) => {
   const regexp =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -16,13 +13,6 @@ const userLoginValidation = (email, password) => {
       };
     }
   }
-
-  //   if (!email || !password) {
-  //     return {
-  //       validationForm: false,
-  //       errMessage: 'all fields required!',
-  //     };
-  //   }
 
   if (!regexp.test(email)) {
     return {
@@ -36,15 +26,29 @@ const userLoginValidation = (email, password) => {
   };
 };
 
-const checkIfUserExist = async (email) => {
+const checkIfUserExist = async (type, email) => {
   const existingUser = await User.findOne({ email });
 
-  if (!existingUser) {
-    return {
-      existingUser: false,
-      errMessage: 'login error!',
-    };
+  if (type === 'register') {
+    if (existingUser) {
+      return {
+        existingUser: true,
+        errMessage: 'An account with this email already exist.',
+      };
+    } else {
+      return false;
+    }
   }
+
+  if (type === 'login') {
+    if (!existingUser) {
+      return {
+        existingUser: false,
+        errMessage: 'login error!',
+      };
+    }
+  }
+
   return existingUser;
 };
 
