@@ -7,8 +7,6 @@ import './CartPage.css';
 const CartPage = () => {
   const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
 
-  console.log(cartItems);
-
   useEffect(() => {
     // let quantityCounter = 0;
     // for (let i = 0; i < cartItems.length; i++) {
@@ -24,6 +22,7 @@ const CartPage = () => {
   }, []);
 
   console.log(itemsPrice);
+  console.log(itemsQuantity);
 
   return (
     <div>

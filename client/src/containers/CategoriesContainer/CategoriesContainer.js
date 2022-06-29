@@ -23,8 +23,6 @@ const CategoriesContainer = () => {
       )) || (
         <>
           {categories.map((category, i) => {
-            console.log(category.name);
-
             return (
               <div key={i} className='CategoriesContainer'>
                 <div

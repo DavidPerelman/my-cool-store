@@ -10,16 +10,16 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const [cartItemQuantity, setCartItemQuantity] = useState(1);
 
-  const getTotalProducts = () => {
-    return cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
-  };
+  const itemsQuantity = cartItems.reduce(
+    (total, cartItem) => total + cartItem.quantity,
+    0
+  );
 
-  const [itemsQuantity, setItemsQuantity] = useState(0);
-  const [itemsPrice, setItemsPrice] = useState(0);
-  console.log(cartItems);
-  console.log(`cartItemQuantity- ${cartItemQuantity}`);
-  console.log(`itemsQuantity- ${itemsQuantity}`);
-  console.log(`itemsPrice- ${itemsPrice}`);
+  const itemsPrice = cartItems.reduce(
+    (previousValue, cartItem) =>
+      previousValue + cartItem.product.price * cartItem.quantity,
+    0
+  );
 
   const addCartItem = (product) => {
     setCartItems((prevCartItems) => {
@@ -86,22 +86,6 @@ export const CartProvider = ({ children }) => {
     }
     return false;
   }
-
-  useEffect(() => {
-    let quantityCounter = 0;
-    for (let i = 0; i < cartItems.length; i++) {
-      const total = (quantityCounter += cartItems[i].quantity);
-      setItemsQuantity(total);
-    }
-
-    let priceCounter = 0;
-    for (let z = 0; z < cartItems.length; z++) {
-      const total = (priceCounter +=
-        cartItems[z].quantity * cartItems[z].product.price);
-      setItemsPrice(total);
-    }
-  }, [addCartItemQuantity, removeCartItemQuantity]);
-  // const existInCart = checkIfExistInCart();
 
   return (
     <CartContext.Provider

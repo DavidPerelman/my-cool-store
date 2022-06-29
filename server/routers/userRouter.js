@@ -137,7 +137,7 @@ router.get('/logout', async (req, res) => {
   }
 });
 
-router.get('/loggedIn', async (req, res) => {
+router.get('/checkIfSomebodyLoggedIn', async (req, res) => {
   try {
     const token = req.cookies.token;
 
