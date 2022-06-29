@@ -4,6 +4,7 @@ import {
   isFormFieldsValid,
   isValidPassword,
   isValidEmail,
+  isLoginFormFieldsValid,
 } from '../utils/formValidation';
 import Form from '../components/Form';
 import Modal from '../components/Modal/Modal';
@@ -40,44 +41,36 @@ const RegisterButton = ({ setRegisterSuccess, loggedIn }) => {
     }
   };
 
+  const showError = (error) => {
+    setError(error);
+
+    const clearError = setTimeout(() => {
+      setError('');
+    }, 3000);
+  };
+
   const register = async () => {
-    if (
-      isFormFieldsValid(
-        registerData.firstName,
-        registerData.lastName,
-        registerData.email,
-        registerData.password,
-        registerData.verifyPassword
-      )
-    ) {
-      setError('all fields required!');
-    } else if (
-      isValidPassword(registerData.password, registerData.verifyPassword)
-    ) {
-      setError(
+    if (!isFormFieldsValid(registerData))
+      return showError('all fields required!');
+
+    if (isValidPassword(registerData.password, registerData.verifyPassword))
+      return showError(
         'Password must be at least 6 characters long and the passwords must be identical'
       );
-    } else if (!isValidEmail(registerData.email)) {
-      setError('invalid email!');
-    } else {
-      setError('');
-      try {
-        const res = await AuthService.register(registerData);
-        if (!res.data) {
-          setError(res);
-        } else if (res.data.success) {
-          setRegisterSuccess(true);
-          handleClose();
-        }
-      } catch (err) {
-        console.log(err.response.data.errMessage);
-        setError(err.response.data.errMessage);
-      }
-    }
 
-    const clearError = setTimeout(clearErrorMessage, 3000);
-    function clearErrorMessage() {
-      setError('');
+    if (!isValidEmail(registerData.email)) return showError('invalid email');
+
+    try {
+      const res = await AuthService.register(registerData);
+      if (!res.data) {
+        showError(res);
+      } else if (res.data.success) {
+        setRegisterSuccess(true);
+        handleClose();
+      }
+    } catch (err) {
+      console.log(err);
+      setError(err);
     }
   };
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal/Modal';
 import Button from '../components/Button/Button';
 import Form from '../components/Form';
-import { isLoginFormFieldsValid, isValidEmail } from '../utils/formValidation';
+import { isFormFieldsValid, isValidEmail } from '../utils/formValidation';
 import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
 import './LoginButton.css';
@@ -48,8 +48,7 @@ const LoginButton = () => {
   };
 
   const login = async () => {
-    if (!isLoginFormFieldsValid(loginData))
-      return showError('all fields required!');
+    if (!isFormFieldsValid(loginData)) return showError('all fields required!');
 
     if (!isValidEmail(loginData.email)) return showError('invalid email!');
 

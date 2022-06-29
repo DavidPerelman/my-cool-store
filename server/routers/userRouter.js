@@ -77,7 +77,6 @@ router.post('/register', async (req, res) => {
 
     const message = `${process.env.BASE_URL}/verify/${newUser._id}/${token.token}`;
     await sendEmail(newUser.email, 'Verify Email', message);
-    console.log(newUser.email);
     res.json({ user: newUser, success: true });
   } catch (err) {
     console.error(err);
@@ -87,22 +86,20 @@ router.post('/register', async (req, res) => {
 
 router.get('/verify/:id/:token', async (req, res) => {
   try {
-    console.log(req.params.id);
     const user = await User.findOne({ _id: req.params.id });
     if (!user) return res.status(400).send('User not found!');
 
-    console.log(user);
     const token = await Token.findOne({
       userId: user._id,
       token: req.params.token,
     });
     if (!token) return res.status(400).send('Token not found!');
 
-    await User.updateOne({ _id: user._id, verified: true });
-    await Token.findByIdAndRemove(token._id);
+    user.verified = true;
+    await user.save();
+    await token.remove();
 
     const link = `http://localhost:3000/registerSuccess/${user.firstName}`;
-    console.log(link);
     res.redirect(link);
   } catch (err) {
     res.status(400).send('An error occured');

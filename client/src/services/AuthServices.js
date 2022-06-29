@@ -5,7 +5,10 @@ const url = 'https://stark-tundra-31639.herokuapp.com/';
 const AuthService = {
   register: async (data) => {
     try {
-      let res = await axios.post(`${url}user/register`, data);
+      let res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/user/register`,
+        data
+      );
       return res;
     } catch (err) {
       return err.response.data.errMessage;

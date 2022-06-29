@@ -1,14 +1,14 @@
-const isFormFieldsValid = (
-  firstName,
-  lastName,
-  email,
-  password,
-  verifyPassword
-) => {
-  return !firstName || !lastName || !email || !password || !verifyPassword;
-};
+// const isFormFieldsValid = (
+//   firstName,
+//   lastName,
+//   email,
+//   password,
+//   verifyPassword
+// ) => {
+//   return !firstName || !lastName || !email || !password || !verifyPassword;
+// };
 
-const isLoginFormFieldsValid = (data) => {
+const isFormFieldsValid = (data) => {
   for (let key in data) {
     if (!data[key]) {
       return false;
@@ -41,7 +41,7 @@ const isValidEmail = (email) => {
 
 export {
   isFormFieldsValid,
-  isLoginFormFieldsValid,
+  // isLoginFormFieldsValid,
   isValidLoginPassword,
   isValidPassword,
   isValidEmail,
