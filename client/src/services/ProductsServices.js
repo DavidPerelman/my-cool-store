@@ -1,7 +1,7 @@
 const ProductsServices = {
   fetchProductsByCategory: (categoryId) => {
     return fetch(
-      `${process.env.REACT_APP_api_URL}/categories/category/${categoryId}/productsLimits`
+      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/productsLimits`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data.products);
@@ -12,7 +12,7 @@ const ProductsServices = {
   },
   fetchAllProductsByCategory: (categoryId) => {
     return fetch(
-      `${process.env.REACT_APP_api_URL}/categories/category/${categoryId}/products`
+      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data.products);
@@ -24,7 +24,7 @@ const ProductsServices = {
   fetchProduct: (productId) => {
     console.log(productId);
     return fetch(
-      `${process.env.REACT_APP_api_URL}/products/product/${productId}`
+      `${process.env.REACT_APP_API_URL}/products/product/${productId}`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data);
@@ -34,7 +34,7 @@ const ProductsServices = {
     });
   },
   fetchCategoriesData: () => {
-    return fetch(`${process.env.REACT_APP_api_URL}/categories/categories`).then(
+    return fetch(`${process.env.REACT_APP_API_URL}/categories/categories`).then(
       (res) => {
         if (res.status !== 401) {
           return res.json().then((data) => data);
@@ -46,7 +46,7 @@ const ProductsServices = {
   },
   fetchCategoryData: (categoryId) => {
     return fetch(
-      `${process.env.REACT_APP_api_URL}/categories/categories/${categoryId}`
+      `${process.env.REACT_APP_API_URL}/categories/categories/${categoryId}`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data);

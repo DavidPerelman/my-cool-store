@@ -143,7 +143,7 @@ router.post('/login', async (req, res) => {
             errMessage: 'user not verify!',
           });
         } else {
-          // sign the token
+          // sign the token //jwt.createToken({...})
           const token = jwt.sign(
             {
               user: existingUser._id,
@@ -196,6 +196,19 @@ router.get('/loggedIn', async (req, res) => {
 
       res.send({ loggedIn: true, user: user });
     }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(false).send();
+  }
+});
+
+router.get('/test/register', async (req, res) => {
+  try {
+    await checkIfEmailExistd(req.body.email);
+    const user = await createUser(req.body);
+    sendEmailVerification(user.email);
+    const token = await createTOken(user);
+    res.json(user);
   } catch (err) {
     console.error(err);
     return res.status(500).json(false).send();

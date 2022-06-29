@@ -19,6 +19,7 @@ const CardsContainer = ({ categoryId }) => {
       {productsByCategory.map((product, i) => {
         return (
           <div key={i} className='product-card'>
+            {/* <Card product={product} /> */}
             <Card
               productId={product._id}
               detailsSize='product-details'
@@ -29,7 +30,7 @@ const CardsContainer = ({ categoryId }) => {
               price={product.price}
               description={product.description}
               color='button--primary'
-              size='user-popover-button'
+              // size='user-popover-button'
               textButton='Details & Buying'
               onClick={cardButtonClick}
             ></Card>

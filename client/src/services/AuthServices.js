@@ -14,7 +14,7 @@ const AuthService = {
   login: async (data) => {
     try {
       let loginRes = await axios.post(
-        `${process.env.REACT_APP_api_URL}/user/login`,
+        `${process.env.REACT_APP_API_URL}/user/login`,
         data
       );
 
@@ -26,7 +26,7 @@ const AuthService = {
   },
   logout: async () => {
     try {
-      let res = await axios.get(`${process.env.REACT_APP_api_URL}/user/logout`);
+      let res = await axios.get(`${process.env.REACT_APP_API_URL}/user/logout`);
       return res;
     } catch (err) {
       return err.response.data.errMessage;

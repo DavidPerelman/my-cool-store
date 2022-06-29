@@ -27,9 +27,13 @@ router.get('/categories/:categoryId', async (req, res) => {
   }
 });
 
+// /category/:categoryId/products?limit=3
+// /category/:categoryId/products?limit=3&offset=2
+
 router.get('/category/:categoryId/products', async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
+    //req.query['limit']
 
     // get all products by category
     const category = await Category.findById(categoryId).exec();
@@ -62,7 +66,8 @@ router.get('/category/:categoryId/productsLimits', async (req, res) => {
   }
 });
 
-router.post('/createCategory', async (req, res) => {
+// create category
+router.post('/category', async (req, res) => {
   try {
     // const data = { name } = req.body;
     fs.readFile('../server/categoriesData.json', 'utf8', (err, data) => {

@@ -40,32 +40,28 @@ const LoginButton = () => {
   };
 
   const login = async () => {
-    if (isLoginFormFieldsValid(loginData.email, loginData.password)) {
-      setError('all fields required!');
-    } else if (!isValidEmail(loginData.email)) {
-      setError('invalid email!');
-    } else {
-      setError('');
-      try {
-        const response = await AuthService.login(loginData);
-        if (response.response.data.errMessage === 'login error!') {
-          setError(response.response.data.errMessage);
-          // clearError();
-          const clearError = setTimeout(clearErrorMessage, 3000);
-          function clearErrorMessage() {
-            setError('');
-          }
-          return;
-        }
-      } catch (err) {
-        console.log(err);
-      }
+    if (isLoginFormFieldsValid(loginData.email, loginData.password))
+      return setError('all fields required!');
+    if (!isValidEmail(loginData.email)) return setError('invalid email!');
 
-      setShow(false);
-      console.log('response');
-      await getLoggedIn();
-      navigate('/');
+    try {
+      const response = await AuthService.login(loginData);
+      if (response.response.data.errMessage === 'login error!') {
+        setError(response.response.data.errMessage);
+        // clearError();
+        const clearError = setTimeout(clearErrorMessage, 3000);
+        function clearErrorMessage() {
+          setError('');
+        }
+        return;
+      }
+    } catch (err) {
+      console.log(err);
     }
+
+    setShow(false);
+    await getLoggedIn();
+    navigate('/');
 
     const clearError = setTimeout(clearErrorMessage, 3000);
     function clearErrorMessage() {

@@ -27,16 +27,12 @@ const Card = ({
       </div>
       <div className='cardContent'>
         <div className={`${titleSize} ${marginBottom}`}>
-          <h6>{title}</h6>
+          <h6 className='product-title-h'>{title}</h6>
         </div>
         <div className={`${detailsSize} ${marginBottom}`}>
           <div className='price-div'>
             <p className='bold-text'>Price:</p>
             <p>{price}$</p>
-          </div>
-          <div className='category-div'>
-            <p className='bold-text'>Category:</p>
-            <p>{category}</p>
           </div>
         </div>
         <Button

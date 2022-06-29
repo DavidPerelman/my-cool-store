@@ -10,6 +10,7 @@
 
 .product-image-div {
     width: 40%;
+    align-self: center;
 }
 
 .product-image {

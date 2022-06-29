@@ -13,3 +13,13 @@
 .product-title {
     font-size: 18px !important;
 }
+
+@media(max-width: 600px) {
+
+.cards-container-div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+}

@@ -9,8 +9,17 @@ export function useCart() {
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const [cartItemQuantity, setCartItemQuantity] = useState(1);
+
+  const getTotalProducts = () => {
+    return cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  };
+
   const [itemsQuantity, setItemsQuantity] = useState(0);
   const [itemsPrice, setItemsPrice] = useState(0);
+  console.log(cartItems);
+  console.log(`cartItemQuantity- ${cartItemQuantity}`);
+  console.log(`itemsQuantity- ${itemsQuantity}`);
+  console.log(`itemsPrice- ${itemsPrice}`);
 
   const addCartItem = (product) => {
     setCartItems((prevCartItems) => {
