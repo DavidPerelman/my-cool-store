@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Category = require('../models/categoryModel');
 const Product = require('../models/productModel');
 const fs = require('fs');
+const { paginationProducts } = require('../services/PaginationsService');
 
 router.get('/categories', async (req, res) => {
   try {
@@ -32,16 +33,59 @@ router.get('/categories/:categoryId', async (req, res) => {
 
 router.get('/category/:categoryId/products', async (req, res) => {
   try {
+    console.log(req.query);
     const categoryId = req.params.categoryId;
-    //req.query['limit']
 
     // get all products by category
-    const category = await Category.findById(categoryId).exec();
+    // const category = await Category.findById(categoryId).exec();
 
-    const products = await Product.find({
-      category: category.name,
-    });
-    res.json({ products: products });
+    // const products = await Product.find({
+    //   category: category.name,
+    // });
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+
+    const results = await paginationProducts(categoryId, page, limit);
+
+    // const startIndex = (page - 1) * limit;
+    // const endIndex = page * limit;
+
+    // const products = await Product.find({
+    //   category: category.name,
+    // })
+    //   .limit(limit)
+    //   .skip(startIndex)
+    //   .exec();
+
+    // const productsLength = await Product.find({
+    //   category: category.name,
+    // })
+    //   .countDocuments()
+    //   .exec();
+
+    // const results = {};
+
+    // if (endIndex < productsLength) {
+    //   results.next = {
+    //     page: page + 1,
+    //     limit: limit,
+    //   };
+    // }
+
+    // if (startIndex > 0) {
+    //   results.previous = {
+    //     page: page - 1,
+    //     limit: limit,
+    //   };
+    // }
+
+    // results.results = {
+    //   products: products,
+    //   page: page,
+    //   limit: limit,
+    // };
+
+    res.json({ results });
   } catch (err) {
     console.error(err);
     res.status(500).send();

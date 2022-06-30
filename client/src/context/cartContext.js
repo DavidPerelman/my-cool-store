@@ -8,7 +8,6 @@ export function useCart() {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
-  const [cartItemQuantity, setCartItemQuantity] = useState(1);
 
   const itemsQuantity = cartItems.reduce(
     (total, cartItem) => total + cartItem.quantity,
@@ -29,10 +28,7 @@ export const CartProvider = ({ children }) => {
         alert('The product is already in the cart');
         return prevCartItems;
       }
-      return [
-        ...prevCartItems,
-        { product: product, quantity: cartItemQuantity },
-      ];
+      return [...prevCartItems, { product: product, quantity: 1 }];
     });
   };
 

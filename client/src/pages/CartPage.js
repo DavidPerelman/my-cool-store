@@ -7,23 +7,6 @@ import './CartPage.css';
 const CartPage = () => {
   const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
 
-  useEffect(() => {
-    // let quantityCounter = 0;
-    // for (let i = 0; i < cartItems.length; i++) {
-    //   const total = (quantityCounter += cartItems[i].quantity);
-    //   setItemsQuantity(total);
-    // }
-    // let priceCounter = 0;
-    // for (let z = 0; z < cartItems.length; z++) {
-    //   const total = (priceCounter +=
-    //     cartItems[z].quantity * cartItems[z].product.price);
-    //   setItemsPrice(total);
-    // }
-  }, []);
-
-  console.log(itemsPrice);
-  console.log(itemsQuantity);
-
   return (
     <div>
       {(cartItems.length === 0 && <h1>Your Cart Is Empty!</h1>) ||
