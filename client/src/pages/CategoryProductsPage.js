@@ -17,7 +17,7 @@ const CategoryProductsPage = () => {
     console.log(categoryId);
     ProductsServices.fetchAllProductsByCategory(categoryId).then((data) => {
       // console.log(data);
-      setProducts(data);
+      setProducts(data.products);
     });
     ProductsServices.fetchCategoryData(categoryId).then((data) => {
       console.log(data);

@@ -10,7 +10,8 @@ const CardsContainer = ({ categoryId }) => {
 
   useEffect(() => {
     ProductsServices.fetchProductsByCategory(categoryId).then((data) => {
-      setProductsByCategory(data.splice(0, 3));
+      console.log(data.products);
+      setProductsByCategory(data.products);
     });
   }, []);
 

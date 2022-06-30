@@ -1,10 +1,10 @@
 const ProductsServices = {
   fetchProductsByCategory: (categoryId) => {
     return fetch(
-      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/productsLimits`
+      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products?page=1&limit=3`
     ).then((res) => {
       if (res.status !== 401) {
-        return res.json().then((data) => data.products);
+        return res.json().then((data) => data.results.results);
       } else {
         return { message: 'error' };
       }
@@ -12,10 +12,10 @@ const ProductsServices = {
   },
   fetchAllProductsByCategory: (categoryId) => {
     return fetch(
-      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products`
+      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products?page=1&limit=10`
     ).then((res) => {
       if (res.status !== 401) {
-        return res.json().then((data) => data.products);
+        return res.json().then((data) => data.results.results);
       } else {
         return { message: 'error' };
       }
