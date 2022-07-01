@@ -77,3 +77,10 @@
 .show-cart-button {
   width: 100%;
 }
+
+.more-products-button {
+  margin: 10px;
+  width: 90%;
+  align-items: center;
+
+}

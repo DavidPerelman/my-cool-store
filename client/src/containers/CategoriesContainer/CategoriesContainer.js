@@ -9,9 +9,9 @@ const CategoriesContainer = () => {
   const { categories } = useContext(ProductsContext);
   const navigate = useNavigate();
 
-  const categoryContainerClick = (categoryId) => {
+  const categoryContainerClick = (categoryId, categoryName) => {
     console.log(categoryId);
-    navigate(`/category/${categoryId}`);
+    navigate(`/category/${categoryName}/${categoryId}`);
   };
 
   return (
@@ -37,7 +37,7 @@ const CategoriesContainer = () => {
                     color='button--whiteGray'
                     // size={size}
                     onClick={() => {
-                      categoryContainerClick(category._id);
+                      categoryContainerClick(category._id, category.name);
                     }}
                   >
                     All {category.name} Products

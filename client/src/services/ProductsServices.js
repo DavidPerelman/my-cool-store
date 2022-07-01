@@ -10,9 +10,9 @@ const ProductsServices = {
       }
     });
   },
-  fetchAllProductsByCategory: (categoryId) => {
+  fetchAllProductsByCategory: (categoryId, page, limit) => {
     return fetch(
-      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products?page=1&limit=10`
+      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products?page=${page}&limit=${limit}`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data.results.results);

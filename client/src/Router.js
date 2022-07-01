@@ -45,7 +45,7 @@ const Router = () => {
             />
             <Route path='/product/:productId' element={<ProductPage />} />
             <Route
-              path='/category/:categoryId'
+              path='/category/:categoryName/:categoryId'
               element={<CategoryProductsPage />}
             />
             <Route path='/cart' element={<CartPage />} />
@@ -76,7 +76,7 @@ const Router = () => {
             />
             <Route path='/product/:productId' element={<ProductPage />} />
             <Route
-              path='/category/:categoryId'
+              path='/category/:categoryName/:categoryId'
               element={<CategoryProductsPage />}
             />
             <Route path='/cart' element={<CartPage />} />

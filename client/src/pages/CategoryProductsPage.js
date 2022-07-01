@@ -5,9 +5,10 @@ import AuthContext from '../context/authContext';
 import ProductsServices from '../services/ProductsServices';
 import ProductsContext from '../context/productsContext';
 import './CategoryProductsPage.css';
+import Button from '../components/Button/Button';
 
 const CategoryProductsPage = () => {
-  let { categoryId } = useParams();
+  let { categoryId, categoryName } = useParams();
   const { cardButtonClick } = useContext(ProductsContext);
   const [products, setProducts] = useState(null);
   const [category, setCategory] = useState(null);
@@ -15,19 +16,27 @@ const CategoryProductsPage = () => {
 
   useEffect(() => {
     console.log(categoryId);
-    ProductsServices.fetchAllProductsByCategory(categoryId).then((data) => {
-      // console.log(data);
-      setProducts(data.products);
-    });
-    ProductsServices.fetchCategoryData(categoryId).then((data) => {
-      console.log(data);
-      setCategory(data.category.name);
-    });
+    console.log(products);
+    ProductsServices.fetchAllProductsByCategory(categoryId, 1, 10).then(
+      (data) => {
+        console.log(data);
+        setProducts(data.products);
+      }
+    );
   }, []);
+
+  const loadMoreProducts = () => {
+    // setTheArray([...theArray, newElement]);
+
+    console.log('loadMoreProducts');
+  };
+  console.log(products);
+
+  // return;
 
   return (
     <div className='CategoryProductsPage'>
-      <h1>{category}</h1>
+      <h1>{categoryName}</h1>
       {(!products && <h1>Loading...</h1>) || (
         <div className='categoryProductsPage-container'>
           {products.map((product, i) => {
@@ -52,6 +61,13 @@ const CategoryProductsPage = () => {
           })}
         </div>
       )}
+      <Button
+        color='button--primary'
+        className='more-products-button'
+        onClick={loadMoreProducts}
+      >
+        More Products
+      </Button>
     </div>
   );
 };
