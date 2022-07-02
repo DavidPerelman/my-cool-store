@@ -36,17 +36,20 @@ router.get('/category/:categoryId/products', async (req, res) => {
     const categoryId = req.params.categoryId;
 
     // get all products by category
-    // const category = await Category.findById(categoryId).exec();
+    const category = await Category.findById(categoryId).exec();
 
-    // const products = await Product.find({
-    //   category: category.name,
-    // });
+    const products = await Product.find({
+      category: category.name,
+    });
+    console.log(products.length);
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
 
+    console.log(req.query);
+
     const results = await paginationProducts(categoryId, page, limit);
 
-    // console.log(results);
+    console.log(results);
     // const startIndex = (page - 1) * limit;
     // const endIndex = page * limit;
 

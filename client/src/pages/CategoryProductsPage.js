@@ -11,28 +11,40 @@ const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();
   const { cardButtonClick } = useContext(ProductsContext);
   const [products, setProducts] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [nextPagePage, setNextPagePage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(categoryId);
-    console.log(products);
+    setLoading(true);
+    setNextPagePage(1);
     ProductsServices.fetchAllProductsByCategory(categoryId, 1, 10).then(
       (data) => {
-        console.log(data);
-        setProducts(data.products);
+        setTimeout(() => {
+          setNextPagePage(data.next.page);
+          setProducts(data.results.products);
+          setLoading(false);
+        }, 1000);
       }
     );
   }, []);
 
   const loadMoreProducts = () => {
-    // setTheArray([...theArray, newElement]);
-
-    console.log('loadMoreProducts');
+    setLoading(true);
+    ProductsServices.fetchAllProductsByCategory(
+      categoryId,
+      nextPagePage,
+      10
+    ).then((data) => {
+      if (Object.keys(data).length === 3) {
+        setNextPagePage(data.next.page);
+      } else {
+        setNextPagePage(null);
+      }
+      setProducts(products.concat(data.results.products));
+      setLoading(false);
+    });
   };
-  console.log(products);
-
-  // return;
 
   return (
     <div className='CategoryProductsPage'>
@@ -61,13 +73,15 @@ const CategoryProductsPage = () => {
           })}
         </div>
       )}
-      <Button
-        color='button--primary'
-        className='more-products-button'
-        onClick={loadMoreProducts}
-      >
-        More Products
-      </Button>
+      {nextPagePage && !loading && (
+        <Button
+          color='button--primary'
+          className='more-products-button'
+          onClick={loadMoreProducts}
+        >
+          More Products
+        </Button>
+      )}
     </div>
   );
 };

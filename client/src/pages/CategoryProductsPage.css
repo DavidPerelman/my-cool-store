@@ -20,6 +20,14 @@
     /* flex-direction: column; */
 }
 
+.load-more-button .disabled {
+    pointer-events: none;
+}
+
+.load-more-button .enable {
+    pointer-events: '';
+}
+
 @media(max-width: 600px) {
 .categoryProductsPage-card {
     /* flex-basis: 46.333333%;

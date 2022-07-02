@@ -15,7 +15,7 @@ const ProductsServices = {
       `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products?page=${page}&limit=${limit}`
     ).then((res) => {
       if (res.status !== 401) {
-        return res.json().then((data) => data.results.results);
+        return res.json().then((data) => data.results);
       } else {
         return { message: 'error' };
       }
