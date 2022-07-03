@@ -5,6 +5,7 @@ import ProductContainer from '../components/ProductContainer';
 import AuthContext from '../context/authContext';
 import { useCart } from '../context/cartContext';
 import ProductsServices from '../services/ProductsServices';
+import LoadingGif from '.././asset/loading-gif.gif';
 import './ProductPage.css';
 
 const ProductPage = () => {
@@ -34,7 +35,11 @@ const ProductPage = () => {
 
   return (
     <div className='ProductPage'>
-      {(!product && <h1>Loading...</h1>) || (
+      {(!product && (
+        <div className='loading-gif'>
+          <img src={LoadingGif} alt='loading...' />
+        </div>
+      )) || (
         <ProductContainer
           product={product}
           existInCart={existInCart}

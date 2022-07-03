@@ -16,11 +16,7 @@ const CategoriesContainer = () => {
 
   return (
     <>
-      {(!categories && (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )) || (
+      {(!categories && <div>{''}</div>) || (
         <>
           {categories.map((category, i) => {
             return (
