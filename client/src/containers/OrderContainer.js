@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
 
 const OrderContainer = ({ itemsPrice, itemsQuantity }) => {
+  const navigate = useNavigate();
   const { loggedIn } = useContext(AuthContext);
 
   const order = () => {
-    console.log('order');
+    const orderId = 1;
+    navigate(`/order/${orderId}`);
   };
 
   return (

@@ -6,6 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 import CartPage from './pages/CartPage/CartPage';
+import OrderPage from './pages/OrderPage';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
@@ -79,6 +80,7 @@ const Router = () => {
               path='/category/:categoryName/:categoryId'
               element={<CategoryProductsPage />}
             />
+            <Route path='/order/:orderId' element={<OrderPage />} />
             <Route path='/cart' element={<CartPage />} />
           </>
         )}
