@@ -1,0 +1,10 @@
+.quantity-div {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 6px;
+}
+
+h4 {
+    margin: auto;
+}

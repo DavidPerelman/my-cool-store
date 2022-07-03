@@ -34,6 +34,10 @@
     justify-content: space-between;
 }
 
+.order-paragraphs {
+  place-self: center;
+}
+
 .order-details {
       display: flex;
       flex-direction: row;

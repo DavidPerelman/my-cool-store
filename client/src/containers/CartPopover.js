@@ -4,6 +4,7 @@ import cart from '../asset/cart.png';
 import MyPopover from '../components/MyPopover/MyPopover';
 import Button from '../components/Button/Button';
 import { useCart } from '../context/cartContext';
+import CartQuantityCounter from './CartQuantityCounter';
 
 const CartPopover = () => {
   const navigate = useNavigate();
@@ -56,7 +57,8 @@ const CartPopover = () => {
                   <p>{item.product.price}$</p>
                 </div>
                 <div className='cart-popover-buttons'>
-                  <div className='cart-popover-quantity-counter'>
+                  <CartQuantityCounter item={item}></CartQuantityCounter>
+                  {/* <div className='cart-popover-quantity-counter'>
                     <Button
                       color='button--primary'
                       buttonStyle='circle-button'
@@ -72,7 +74,7 @@ const CartPopover = () => {
                     >
                       +
                     </Button>
-                  </div>
+                  </div> */}
                   <Button
                     color='button--salmon'
                     onClick={() => removeCartItem(item.product._id)}
@@ -84,9 +86,11 @@ const CartPopover = () => {
             </div>
           ))}
         <div>
-          <Button size='show-cart-button' onClick={showCartPage}>
-            Show Cart
-          </Button>
+          {cartItems.length > 0 && (
+            <Button size='show-cart-button' onClick={showCartPage}>
+              Show Cart
+            </Button>
+          )}
         </div>
       </MyPopover>
     </>

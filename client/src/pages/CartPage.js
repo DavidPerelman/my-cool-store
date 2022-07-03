@@ -15,9 +15,11 @@ const CartPage = () => {
             <div className='order-div'>
               <h1>Your Order</h1>
               <div className='order-details'>
-                <p>Items Quantity: {itemsQuantity}</p>
-                <p>Pay: {itemsPrice}$</p>
-                <Button>Check Out</Button>
+                <p className='order-paragraphs'>
+                  Items Quantity: {itemsQuantity}
+                </p>
+                <p className='order-paragraphs'>Pay: {itemsPrice}$</p>
+                <Button>Order</Button>
               </div>
             </div>
             {cartItems.map((item, i) => {
