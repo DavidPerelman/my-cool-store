@@ -6,6 +6,7 @@ import ProductsServices from '../services/ProductsServices';
 import ProductsContext from '../context/productsContext';
 import './CategoryProductsPage.css';
 import Button from '../components/Button/Button';
+import LoadingGif from '.././asset/loading-gif.gif';
 
 const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();
@@ -47,7 +48,11 @@ const CategoryProductsPage = () => {
   return (
     <div className='CategoryProductsPage'>
       <h1>{categoryName}</h1>
-      {(!products && <h1>Loading...</h1>) || (
+      {(!products && (
+        <div className='loading-gif'>
+          <img src={LoadingGif} alt='loading...' />
+        </div>
+      )) || (
         <div className='categoryProductsPage-container'>
           {products.map((product, i) => {
             return (

@@ -3,7 +3,7 @@ import Card from '../../components/Card/Card';
 import './CardsContainer.css';
 import ProductsServices from '../../services/ProductsServices';
 import ProductsContext from '../../context/productsContext';
-import LoadingGif from '../../asset/Spinner-1s-200px.gif';
+import LoadingGif from '../../asset/loading-gif.gif';
 
 const CardsContainer = ({ categoryId }) => {
   const { cardButtonClick } = useContext(ProductsContext);
