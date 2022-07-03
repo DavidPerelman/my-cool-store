@@ -14,8 +14,6 @@ const ProductContainer = ({ existInCart, product }) => {
 
   const result = cartItems.filter((item) => item.product._id === product._id);
 
-  console.log(result[0].quantity);
-
   return (
     <div className='product-div'>
       <div className='product-content'>

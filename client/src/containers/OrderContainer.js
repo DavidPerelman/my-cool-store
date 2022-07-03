@@ -8,9 +8,9 @@ const OrderCartContainer = ({ orderId, itemsPrice, itemsQuantity }) => {
   const { loggedIn } = useContext(AuthContext);
   console.log(orderId);
 
-  const checkout = () => {
-    console.log('checkout');
-  };
+  // const checkout = () => {
+  //   console.log('checkout');
+  // };
 
   return (
     <div className='order-div'>
@@ -23,7 +23,7 @@ const OrderCartContainer = ({ orderId, itemsPrice, itemsQuantity }) => {
         <div className='order-paragraphs pay-paragraphs'>
           <h5>Pay:</h5> <h5>{itemsPrice}$</h5>
         </div>
-        <Button onClick={checkout}>Check Out</Button>
+        {/* <Button onClick={checkout}>Check Out</Button> */}
       </div>
     </div>
   );
