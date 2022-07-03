@@ -41,7 +41,7 @@ router.get('/category/:categoryId/products', async (req, res) => {
     const products = await Product.find({
       category: category.name,
     });
-    console.log(products.length);
+
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
 

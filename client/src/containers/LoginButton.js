@@ -65,7 +65,7 @@ const LoginButton = () => {
 
     setShow(false);
     await getLoggedIn();
-    navigate('/');
+    // navigate('/');
   };
 
   useEffect(() => {

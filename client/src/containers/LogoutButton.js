@@ -12,7 +12,7 @@ const LogoutButton = () => {
     try {
       const res = await AuthService.logout();
       await getLoggedIn();
-      navigate('/');
+      // navigate('/');
     } catch (err) {
       console.log(err);
     }

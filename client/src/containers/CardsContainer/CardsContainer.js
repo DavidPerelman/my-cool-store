@@ -14,9 +14,7 @@ const CardsContainer = ({ categoryId }) => {
       (data) => {
         setTimeout(() => {
           setProductsByCategory(data.results.products);
-          console.log(productsByCategory);
         }, 1000);
-        console.log(data.products);
         setProductsByCategory(data.products);
       }
     );

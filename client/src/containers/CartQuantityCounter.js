@@ -4,7 +4,6 @@ import { useCart } from '../context/cartContext';
 
 const CartQuantityCounter = ({ item }) => {
   const { addCartItemQuantity, removeCartItemQuantity } = useCart();
-  console.log(item.quantity);
 
   return (
     <div className='cart-popover-quantity-counter'>
