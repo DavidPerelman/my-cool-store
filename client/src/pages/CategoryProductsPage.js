@@ -11,39 +11,37 @@ const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();
   const { cardButtonClick } = useContext(ProductsContext);
   const [products, setProducts] = useState(null);
-  const [nextPagePage, setNextPagePage] = useState(null);
+  const [nextPage, setNextPage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
-    setNextPagePage(1);
+    setLoading(false);
     ProductsServices.fetchAllProductsByCategory(categoryId, 1, 10).then(
       (data) => {
         setTimeout(() => {
-          setNextPagePage(data.next.page);
+          setNextPage(data.next.page);
           setProducts(data.results.products);
-          setLoading(false);
+          setLoading(true);
+          console.log(data);
         }, 1000);
       }
     );
   }, []);
 
   const loadMoreProducts = () => {
-    setLoading(true);
-    ProductsServices.fetchAllProductsByCategory(
-      categoryId,
-      nextPagePage,
-      10
-    ).then((data) => {
-      if (Object.keys(data).length === 3) {
-        setNextPagePage(data.next.page);
-      } else {
-        setNextPagePage(null);
+    setLoading(false);
+    ProductsServices.fetchAllProductsByCategory(categoryId, nextPage, 10).then(
+      (data) => {
+        if (data.results.page * 10 < data.results.productsLength) {
+          setLoading(true);
+          setNextPage(data.next.page);
+        } else {
+          setLoading(false);
+        }
+
+        setProducts(products.concat(data.results.products));
       }
-      setProducts(products.concat(data.results.products));
-      setLoading(false);
-    });
+    );
   };
 
   return (
@@ -73,7 +71,7 @@ const CategoryProductsPage = () => {
           })}
         </div>
       )}
-      {nextPagePage && !loading && (
+      {loading && (
         <Button
           color='button--primary'
           className='more-products-button'

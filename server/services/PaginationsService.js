@@ -40,6 +40,7 @@ const paginationProducts = async (categoryId, page, limit) => {
     products: products,
     page: page,
     limit: limit,
+    productsLength: productsLength,
   };
 
   return results;
