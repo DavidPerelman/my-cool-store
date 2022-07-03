@@ -16,6 +16,9 @@ const CartPopover = () => {
   } = useCart();
 
   const showCartPage = (e) => {
+    const cartContentPopover = (document.getElementsByClassName(
+      'cart-content'
+    )[0].style.visibility = 'hidden');
     navigate('/cart');
   };
 

@@ -67,6 +67,10 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeCartItem = (productId) => {
+    const cartContentPopover = (document.getElementsByClassName(
+      'cart-content'
+    )[0].style.visibility = 'hidden');
+    console.log(cartContentPopover);
     setCartItems((prevCartItems) => {
       return prevCartItems.filter(
         (cartItem) => cartItem.product._id !== productId
