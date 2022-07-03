@@ -8,3 +8,12 @@
 h4 {
     margin: auto;
 }
+
+@media(max-width: 600px) {
+.quantity-div {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 10px;
+}
+}

@@ -26,22 +26,6 @@ const CartPage = () => {
                     addCartItem={addCartItem}
                   ></ProductContainer>
                 </div>
-                // <div key={i} className='product-div'>
-                //   <Card
-                //     marginBottom='marinBottom'
-                //     productId={item.product._id}
-                //     detailsSize='product-details'
-                //     titleSize='product-title'
-                //     title={item.product.title}
-                //     img={item.product.images[0]}
-                //     category={item.product.category}
-                //     price={item.product.price}
-                //     description={item.product.description}
-                //     color='button--primary'
-                //     textButton='Details & Buying'
-                //     onClick={cardButtonClick}
-                //   ></Card>
-                // </div>
               );
             })}
           </div>

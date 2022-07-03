@@ -47,3 +47,13 @@
     justify-content: center;
     gap: 40px;
 }
+
+@media(max-width: 600px) {
+.item-quantity-h5 {
+  margin: auto;
+}
+
+.pay-paragraphs {
+  padding-top: 4px;
+}
+}
