@@ -3,9 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import AuthContext from './context/authContext';
 import Navbar from './components/Navbar/Navbar';
-import ProductPage from './pages/ProductPage';
-import CategoryProductsPage from './pages/CategoryProductsPage';
-import CartPage from './pages/CartPage';
+import ProductPage from './pages/ProductPage/ProductPage';
+import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
+import CartPage from './pages/CartPage/CartPage';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);

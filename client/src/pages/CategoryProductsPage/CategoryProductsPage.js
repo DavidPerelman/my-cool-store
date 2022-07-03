@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Card from '../components/Card/Card';
-import AuthContext from '../context/authContext';
-import ProductsServices from '../services/ProductsServices';
-import ProductsContext from '../context/productsContext';
+import Card from '../../components/Card/Card';
+import AuthContext from '../../context/authContext';
+import ProductsServices from '../../services/ProductsServices';
+import ProductsContext from '../../context/productsContext';
 import './CategoryProductsPage.css';
-import Button from '../components/Button/Button';
-import LoadingGif from '.././asset/loading-gif.gif';
+import Button from '../../components/Button/Button';
+import LoadingGif from '../../asset/loading-gif.gif';
 
 const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();

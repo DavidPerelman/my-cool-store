@@ -36,6 +36,9 @@
 
 .order-paragraphs {
   place-self: center;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
 }
 
 .order-details {

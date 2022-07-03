@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Button from '../components/Button/Button';
-import ProductContainer from '../components/ProductContainer';
-import AuthContext from '../context/authContext';
-import { useCart } from '../context/cartContext';
-import ProductsServices from '../services/ProductsServices';
-import LoadingGif from '.././asset/loading-gif.gif';
+import Button from '../../components/Button/Button';
+import ProductContainer from '../../components/ProductContainer';
+import AuthContext from '../../context/authContext';
+import { useCart } from '../../context/cartContext';
+import ProductsServices from '../../services/ProductsServices';
+import LoadingGif from '../../asset/loading-gif.gif';
 import './ProductPage.css';
 
 const ProductPage = () => {
