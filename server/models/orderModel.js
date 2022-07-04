@@ -56,6 +56,11 @@ const orderSchema = new mongoose.Schema({
       type: String,
     },
   },
+  isOpen: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
 });
 
 module.exports = mongoose.model('Order', orderSchema);

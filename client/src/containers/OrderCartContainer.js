@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
 import { useCart } from '../context/cartContext';
+import OrdersServices from '../services/OrdersServices';
 
 const OrderCartContainer = () => {
   const { cartItems, itemsPrice, itemsQuantity } = useCart();
@@ -10,7 +11,7 @@ const OrderCartContainer = () => {
   const navigate = useNavigate();
   const { loggedIn, userData } = useContext(AuthContext);
 
-  const order = () => {
+  const order = async () => {
     let productsArray = [];
     for (let i = 0; i < cartItems.length; i++) {
       console.log(cartItems[i].product._id);
@@ -33,9 +34,14 @@ const OrderCartContainer = () => {
     // console.log(orderData);
     // return;
     try {
-    } catch (error) {}
-    const orderId = 1;
-    navigate(`/order/${orderId}`);
+      const res = await OrdersServices.createOrder(orderData);
+
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+    // const orderId = 1;
+    // navigate(`/order/${orderId}`);
   };
 
   return (
