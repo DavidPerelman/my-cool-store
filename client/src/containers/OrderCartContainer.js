@@ -2,12 +2,38 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
+import { useCart } from '../context/cartContext';
 
-const OrderCartContainer = ({ itemsPrice, itemsQuantity }) => {
+const OrderCartContainer = () => {
+  const { cartItems, itemsPrice, itemsQuantity } = useCart();
+
   const navigate = useNavigate();
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, userData } = useContext(AuthContext);
 
   const order = () => {
+    let productsArray = [];
+    for (let i = 0; i < cartItems.length; i++) {
+      console.log(cartItems[i].product._id);
+      productsArray.push({
+        product: cartItems[i].product._id,
+        productQuantity: cartItems[i].quantity,
+      });
+    }
+
+    console.log(productsArray);
+
+    const orderData = {
+      user: userData._id,
+      products: productsArray,
+      totalProductsQuantity: itemsQuantity,
+      totalPayment: itemsPrice,
+    };
+
+    // console.log(userData);
+    // console.log(orderData);
+    // return;
+    try {
+    } catch (error) {}
     const orderId = 1;
     navigate(`/order/${orderId}`);
   };
