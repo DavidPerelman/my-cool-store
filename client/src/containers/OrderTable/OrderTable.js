@@ -13,7 +13,7 @@ const OrderTable = () => {
           <th>Product</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>Sum</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
@@ -27,11 +27,11 @@ const OrderTable = () => {
             </tr>
           );
         })}
-        <tr>
+        <tr className='table-bottom'>
           <td></td>
           <td></td>
           <td>{itemsQuantity}</td>
-          <td>{itemsPrice}</td>
+          <td>{itemsPrice}$</td>
         </tr>
       </tbody>
     </table>

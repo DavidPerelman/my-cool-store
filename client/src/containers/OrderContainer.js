@@ -21,7 +21,7 @@ const OrderCartContainer = ({ orderId, itemsPrice, itemsQuantity }) => {
           <h5 className='item-quantity-h5'>{itemsQuantity}</h5>
         </div>
         <div className='order-paragraphs pay-paragraphs'>
-          <h5>Pay:</h5> <h5>{itemsPrice}$</h5>
+          <h5>Payment:</h5> <h5>{itemsPrice}$</h5>
         </div>
         {/* <Button onClick={checkout}>Check Out</Button> */}
       </div>
