@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment-timezone');
+const User = require('./userModel');
+const Product = require('./productModel');
 
 const orderSchema = new mongoose.Schema({
   // numOfOrder: {

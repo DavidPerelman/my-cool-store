@@ -83,11 +83,6 @@ router.post('/category', async (req, res) => {
       }
       console.log(data);
     });
-    // let rawdata = fs.readFileSync('../categoriesData.json');
-    // let categories = JSON.parse(rawdata);
-    // let newCategories = [];
-    // console.log(categories);
-    // return categories;
   } catch (err) {
     console.error(err);
     res.status(500).send();
