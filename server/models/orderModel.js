@@ -50,6 +50,11 @@ const orderSchema = new mongoose.Schema({
     required: true,
     default: true,
   },
+  status: {
+    type: String,
+    required: true,
+    default: 'Open',
+  },
 });
 
 // status - created | inprogress completed

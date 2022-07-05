@@ -32,7 +32,7 @@ const OrderCartContainer = ({ orderData }) => {
               |
             </span>
             <div className='order-paragraphs status-paragraphs'>
-              <h6>Status:</h6>&nbsp;<h6>status</h6>
+              <h6>Status:</h6>&nbsp;<h6>{orderData.status}</h6>
             </div>
           </div>
         </>
