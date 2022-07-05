@@ -6,8 +6,12 @@ table {
 
 td, th {
   border: 1px solid #dddddd;
-  text-align: left;
   padding: 8px;
+  text-align: center;
+}
+
+.product-title-td {
+  text-align: left;
 }
 
 .table-bottom {

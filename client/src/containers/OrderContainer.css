@@ -1,0 +1,24 @@
+.item-created-h6 {
+    width: 130px;
+    align-self: center;
+}
+
+.order-paragraphs {
+    place-self: center;
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 600px) {
+    .order-details {
+    flex-wrap: wrap;
+    }
+
+    .status-paragraphs {
+    padding-top: 0px;
+    }
+
+    .order-paragraphs-span {
+    display: none;
+    }
+}

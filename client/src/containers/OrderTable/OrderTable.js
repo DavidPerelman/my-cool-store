@@ -40,7 +40,7 @@ const OrderTable = ({ orderData }) => {
               // console.log(counter);
               return (
                 <tr key={i}>
-                  <td>{product.product.title}</td>
+                  <td className='product-title-td'>{product.product.title}</td>
                   <td>{product.product.price}$</td>
                   <td>{product.productQuantity}</td>
                   <td>{product.productQuantity * product.product.price}$</td>

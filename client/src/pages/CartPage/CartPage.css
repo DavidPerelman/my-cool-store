@@ -34,18 +34,11 @@
     justify-content: space-between;
 }
 
-.order-paragraphs {
-  place-self: center;
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
-}
-
 .order-details {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 40px;
+    gap: 10px;
 }
 
 @media(max-width: 600px) {
