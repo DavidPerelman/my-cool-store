@@ -82,5 +82,8 @@
   margin: 10px;
   width: 90%;
   align-items: center;
+}
 
+.edit-order-button {
+  width: 110px;
 }

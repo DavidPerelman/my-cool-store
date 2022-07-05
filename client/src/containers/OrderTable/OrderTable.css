@@ -18,3 +18,23 @@ td, th {
   font-weight: bold;
   background-color: #dddddd;
 }
+
+.delete-product-order-icon {
+  padding: 0px;
+}
+
+.plus-table-span {
+  cursor: pointer;
+  background-color: #0d6efd;
+  border-radius: 50%;
+  padding: 6px;
+  color: #ffff;
+}
+
+.minus-table-span {
+  cursor: pointer;
+  background-color: #0d6efd;
+  border-radius: 50%;
+  padding: 6px;
+  color: #ffff;
+}

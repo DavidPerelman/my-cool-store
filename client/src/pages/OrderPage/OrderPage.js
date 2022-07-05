@@ -8,9 +8,12 @@ import OrdersServices from '../../services/OrdersServices';
 import SaveIcon from '../../asset/save-icon.png';
 import DeleteIcon from '../../asset/delete-icon.png';
 import CreditCardIcon from '../../asset/credit-card-icon.png';
+import cancelChangesIcon from '../../asset/cancel-changes-icon.png';
+import EditIcon from '../../asset/edit-icon.png';
 import './OrderPage.css';
 
 const OrderPage = () => {
+  const [editStatus, setEditStatus] = useState(false);
   const [orderData, setOrderData] = useState(null);
   const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
   const { orderId } = useParams();
@@ -25,29 +28,35 @@ const OrderPage = () => {
 
   const checkout = () => {
     console.log('checkout');
+    setEditStatus(false);
   };
 
   const deleteOrder = () => {
     console.log('deleteOrder');
+    setEditStatus(false);
   };
 
   const saveOrder = () => {
     console.log('saveOrder');
+    setEditStatus(false);
+  };
+
+  const editOrder = () => {
+    console.log('editOrder');
+    setEditStatus(true);
+  };
+
+  const cancelChanges = () => {
+    console.log('cancelChanges');
+    setEditStatus(false);
   };
 
   return (
     <>
-      <OrderContainer
-        // orderId={orderId}
-        // itemsPrice={orderData.totalPayment}
-        // itemsQuantity={orderData.totalProductsQuantity}
-        orderData={orderData}
-      ></OrderContainer>
+      <OrderContainer orderData={orderData}></OrderContainer>
       <OrderDetails
         orderData={orderData}
-        // orderId={orderId}
-        // itemsPrice={orderData.totalPayment}
-        // itemsQuantity={orderData.totalProductsQuantity}
+        editStatus={editStatus}
       ></OrderDetails>
       <div className='order-page-buttons'>
         <img />
@@ -55,6 +64,21 @@ const OrderPage = () => {
           Save Order{' '}
           <img className='icon-button' src={SaveIcon} alt='SaveIcon' />
         </Button>
+        {(!editStatus && (
+          <Button onClick={editOrder}>
+            Edit Order{' '}
+            <img className='icon-button' src={EditIcon} alt='EditIcon' />
+          </Button>
+        )) || (
+          <Button onClick={cancelChanges} size='edit-order-button'>
+            Cancel{' '}
+            <img
+              className='icon-button'
+              src={cancelChangesIcon}
+              alt='cancelChangesIcon'
+            />
+          </Button>
+        )}
         <Button onClick={deleteOrder}>
           Delete Order{' '}
           <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
