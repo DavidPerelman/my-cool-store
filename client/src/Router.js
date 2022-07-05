@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 import CartPage from './pages/CartPage/CartPage';
-import OrderPage from './pages/OrderPage';
+import OrderPage from './pages/OrderPage/OrderPage';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
