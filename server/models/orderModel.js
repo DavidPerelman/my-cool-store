@@ -4,17 +4,10 @@ const User = require('./userModel');
 const Product = require('./productModel');
 
 const orderSchema = new mongoose.Schema({
-  // numOfOrder: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   default: mongoose.Types.ObjectId,
-  //   index: { unique: true },
-  // },
-  // numOfOrder: {
-  //   type: Number,
-  //   required: true,
-  //   default: Math.floor(Math.random() * 10000) + 1,
-  //   unique: true,
-  // },
+  orderNumber: {
+    type: Number,
+    required: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -38,10 +31,6 @@ const orderSchema = new mongoose.Schema({
     },
   ],
   discount: { type: Number },
-  totalProductsQuantity: {
-    type: Number,
-    required: true,
-  },
   totalPayment: {
     type: Number,
     required: true,
@@ -62,5 +51,7 @@ const orderSchema = new mongoose.Schema({
     default: true,
   },
 });
+
+// status - created | inprogress completed
 
 module.exports = mongoose.model('Order', orderSchema);

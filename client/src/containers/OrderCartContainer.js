@@ -6,9 +6,8 @@ import { useCart } from '../context/cartContext';
 import OrdersServices from '../services/OrdersServices';
 
 const OrderCartContainer = () => {
-  const { cartItems, itemsPrice, itemsQuantity } = useCart();
-
   const navigate = useNavigate();
+  const { cartItems, itemsPrice, itemsQuantity } = useCart();
   const { loggedIn, userData } = useContext(AuthContext);
 
   const order = async () => {
@@ -21,27 +20,19 @@ const OrderCartContainer = () => {
       });
     }
 
-    console.log(productsArray);
-
     const orderData = {
       user: userData._id,
       products: productsArray,
-      totalProductsQuantity: itemsQuantity,
       totalPayment: itemsPrice,
     };
 
-    // console.log(userData);
-    // console.log(orderData);
-    // return;
     try {
       const res = await OrdersServices.createOrder(orderData);
-
-      console.log(res);
+      const orderId = res;
+      navigate(`/order/${orderId}`);
     } catch (err) {
       console.log(err);
     }
-    // const orderId = 1;
-    // navigate(`/order/${orderId}`);
   };
 
   return (

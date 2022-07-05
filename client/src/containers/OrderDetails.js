@@ -1,10 +1,10 @@
 import React from 'react';
 import OrderTable from './OrderTable/OrderTable';
 
-const OrderDetails = () => {
+const OrderDetails = ({ orderData }) => {
   return (
     <div className='order-div'>
-      <OrderTable></OrderTable>
+      <OrderTable orderData={orderData}></OrderTable>
     </div>
   );
 };

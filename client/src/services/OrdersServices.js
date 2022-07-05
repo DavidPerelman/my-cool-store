@@ -14,10 +14,9 @@ const OrdersServices = {
       }
     });
   },
-  fetchProduct: (productId) => {
-    console.log(productId);
+  getOrder: (orderId) => {
     return fetch(
-      `${process.env.REACT_APP_API_URL}/products/product/${productId}`
+      `${process.env.REACT_APP_API_URL}/orders/order/${orderId}`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data);
