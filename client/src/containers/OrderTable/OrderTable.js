@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { useCart } from '../../context/cartContext';
 import LoadingGif from '../../asset/loading-gif.gif';
 import DeleteIconBlack from '../../asset/delete-icon-black.png';
 import './OrderTable.css';
 
-const OrderTable = ({ orderData, editStatus }) => {
-  const [quantity, setQuantity] = useState(false);
-
+const OrderTable = ({ orderData, editStatus, orderDataBackup }) => {
   const totalQuantity = () => {
     let counter = 0;
     for (let i = 0; i < orderData.products.length; i++) {
@@ -16,107 +13,48 @@ const OrderTable = ({ orderData, editStatus }) => {
     return counter;
   };
 
-  // const incrementProductQuantity = (e, i) => {
-  //   let priceValue = document.getElementById(`product-${i}-row`).children[2]
-  //     .childNodes[0];
+  const changeProductQuantity = (type, e, i, oldTotal) => {
+    console.log(oldTotal);
 
-  //   parseInt(priceValue.nodeValue);
+    let quantityTd = e.target.parentNode.children[1];
+    let quantityValue = parseInt(quantityTd.innerHTML);
 
-  //   let quantityValue = parseInt(e.target.parentNode.children[1].innerHTML);
-
-  //   if (quantityValue === 99) {
-  //     return;
-  //   }
-  //   quantityValue =
-  //     e.target.parentNode.children[1].innerHTML =
-  //     quantityValue +=
-  //       1;
-
-  //   let newValue =
-  //     (priceValue.nodeValue = parseInt(priceValue.nodeValue)) * quantityValue;
-
-  //   document.getElementById(
-  //     `product-${i}-row`
-  //   ).children[4].childNodes[0].nodeValue = `${newValue}`;
-  // };
-
-  const changeProductQuantity = (type, e, i) => {
-    let quantityValue = parseInt(e.target.parentNode.children[1].innerHTML);
+    let totalPriceTd = quantityTd.parentNode.nextSibling;
+    let totalPriceValue = parseInt(totalPriceTd.innerHTML);
 
     const incrementProductBtn = document.getElementById(`plus-table-span-${i}`);
     const subtractProductBtn = document.getElementById(`minus-table-span-${i}`);
 
-    let totalPriceValue = parseInt(
-      document.getElementById(`product-${i}-row`).children[4].childNodes[0]
-        .nodeValue
-    );
-
-    const priceValue = parseInt(
-      document.getElementById(`product-${i}-row`).children[2].childNodes[0]
-        .nodeValue
-    );
-
     if (type === 'increment') {
-      e.target.style.pointerEvents = 'auto';
-      quantityValue =
-        e.target.parentNode.children[1].innerHTML =
-        quantityValue +=
-          1;
+      console.log((quantityValue += 1));
+
+      console.log((quantityTd.innerHTML = quantityValue));
+
+      console.log((totalPriceValue = quantityValue * oldTotal));
+      console.log((totalPriceTd.innerHTML = totalPriceValue));
     }
 
     if (type === 'subtract') {
-      e.target.style.pointerEvents = 'auto';
-      quantityValue =
-        e.target.parentNode.children[1].innerHTML =
-        quantityValue -=
-          1;
+      console.log((quantityValue -= 1));
+
+      console.log((quantityTd.innerHTML = quantityValue));
+
+      console.log((totalPriceValue = quantityValue * oldTotal));
+      console.log((totalPriceTd.innerHTML = totalPriceValue));
     }
 
-    if (quantityValue === 1) {
-      console.log((subtractProductBtn.style.pointerEvents = 'none'));
+    if (quantityValue === 1 || quantityValue === 0) {
+      subtractProductBtn.style.pointerEvents = 'none';
     } else {
-      console.log((subtractProductBtn.style.pointerEvents = 'auto'));
+      subtractProductBtn.style.pointerEvents = 'auto';
     }
 
     if (quantityValue === 99) {
       incrementProductBtn.style.pointerEvents = 'none';
     } else {
-      console.log((incrementProductBtn.style.pointerEvents = 'auto'));
+      incrementProductBtn.style.pointerEvents = 'auto';
     }
-
-    totalPriceValue = priceValue * quantityValue;
-
-    document.getElementById(
-      `product-${i}-row`
-    ).children[4].childNodes[0].nodeValue = `${totalPriceValue}`;
   };
-
-  // const subtractProductQuantity = (e, i) => {
-  //   let totalPriceValue = document.getElementById(`product-${i}-row`)
-  //     .children[4].childNodes[0].nodeValue;
-
-  //   let priceValue = document.getElementById(`product-${i}-row`).children[2]
-  //     .childNodes[0];
-
-  //   parseInt(priceValue.nodeValue);
-
-  //   let quantityValue = parseInt(e.target.parentNode.children[1].innerHTML);
-
-  //   if (quantityValue === 1) {
-  //     return;
-  //   }
-  //   quantityValue =
-  //     e.target.parentNode.children[1].innerHTML =
-  //     quantityValue -=
-  //       1;
-
-  //   totalPriceValue =
-  //     (priceValue.nodeValue = parseInt(priceValue.nodeValue)) * quantityValue;
-
-  //   document.getElementById(
-  //     `product-${i}-row`
-  //   ).children[4].childNodes[0].nodeValue = `${totalPriceValue}`;
-  // };
 
   return (
     <>
@@ -139,7 +77,7 @@ const OrderTable = ({ orderData, editStatus }) => {
             {orderData.products.map((product, i) => {
               return (
                 <tr key={i} id={`product-${i}-row`}>
-                  {(!editStatus && <td></td>) || (
+                  {(!editStatus && <td>{i + 1}</td>) || (
                     <td className='delete-product-order-icon'>
                       {' '}
                       <img
@@ -151,28 +89,47 @@ const OrderTable = ({ orderData, editStatus }) => {
                   )}
                   <td className='product-title-td'>{product.product.title}</td>
                   <td>{product.product.price}$</td>
-                  {(!editStatus && <td>{product.productQuantity}</td>) || (
-                    <td>
-                      <span
-                        className='minus-table-span'
-                        id={`minus-table-span-${i}`}
-                        onClick={(e) => changeProductQuantity('subtract', e, i)}
-                      >
-                        -
-                      </span>{' '}
-                      <span>{product.productQuantity}</span>{' '}
-                      <span
-                        className='plus-table-span'
-                        id={`plus-table-span-${i}`}
-                        onClick={(e) =>
-                          changeProductQuantity('increment', e, i)
-                        }
-                      >
-                        +
-                      </span>
-                    </td>
+                  {(!editStatus && (
+                    <>
+                      <td>{product.productQuantity}</td>
+                      <td>{product.totalPrice}$</td>
+                    </>
+                  )) || (
+                    <>
+                      <td>
+                        <span
+                          className='minus-table-span'
+                          id={`minus-table-span-${i}`}
+                          onClick={(e) =>
+                            changeProductQuantity(
+                              'subtract',
+                              e,
+                              i,
+                              product.totalPrice
+                            )
+                          }
+                        >
+                          -
+                        </span>{' '}
+                        <span>{product.productQuantity}</span>{' '}
+                        <span
+                          className='plus-table-span'
+                          id={`plus-table-span-${i}`}
+                          onClick={(e) =>
+                            changeProductQuantity(
+                              'increment',
+                              e,
+                              i,
+                              product.totalPrice
+                            )
+                          }
+                        >
+                          +
+                        </span>
+                      </td>
+                      <td>{product.totalPrice}$</td>
+                    </>
                   )}
-                  <td>{product.productQuantity * product.product.price}$</td>
                 </tr>
               );
             })}

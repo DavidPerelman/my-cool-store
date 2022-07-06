@@ -1,10 +1,14 @@
 import React from 'react';
 import OrderTable from './OrderTable/OrderTable';
 
-const OrderDetails = ({ editStatus, orderData }) => {
+const OrderDetails = ({ editStatus, orderData, orderDataBackup }) => {
   return (
     <div className='order-div'>
-      <OrderTable orderData={orderData} editStatus={editStatus}></OrderTable>
+      <OrderTable
+        orderData={orderData}
+        orderDataBackup={orderDataBackup}
+        editStatus={editStatus}
+      ></OrderTable>
     </div>
   );
 };

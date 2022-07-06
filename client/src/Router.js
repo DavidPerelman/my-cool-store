@@ -7,6 +7,7 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 import CartPage from './pages/CartPage/CartPage';
 import OrderPage from './pages/OrderPage/OrderPage';
+import MyOrders from './pages/MyOrders/MyOrders';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
@@ -81,6 +82,7 @@ const Router = () => {
               element={<CategoryProductsPage />}
             />
             <Route path='/order/:orderId' element={<OrderPage />} />
+            <Route path='/orders/:userId' element={<MyOrders />} />
             <Route path='/cart' element={<CartPage />} />
           </>
         )}

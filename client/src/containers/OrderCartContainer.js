@@ -13,10 +13,10 @@ const OrderCartContainer = () => {
   const order = async () => {
     let productsArray = [];
     for (let i = 0; i < cartItems.length; i++) {
-      console.log(cartItems[i].product._id);
       productsArray.push({
         product: cartItems[i].product._id,
         productQuantity: cartItems[i].quantity,
+        totalPrice: cartItems[i].quantity * cartItems[i].product.price,
       });
     }
 

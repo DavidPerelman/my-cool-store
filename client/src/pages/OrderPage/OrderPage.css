@@ -1,3 +1,10 @@
+.OrderPage {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .order-page-buttons {
     gap: 10px;
     display: flex;
@@ -9,4 +16,8 @@
     width: 20px;
     margin-bottom: 2px;
     margin-left: 2px;
+}
+
+.my-orders-icon {
+    margin-right: 8px;
 }

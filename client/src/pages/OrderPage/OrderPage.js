@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import OrderContainer from '../../containers/OrderContainer';
 import OrderDetails from '../../containers/OrderDetails';
@@ -8,20 +8,27 @@ import OrdersServices from '../../services/OrdersServices';
 import SaveIcon from '../../asset/save-icon.png';
 import DeleteIcon from '../../asset/delete-icon.png';
 import CreditCardIcon from '../../asset/credit-card-icon.png';
-import cancelChangesIcon from '../../asset/cancel-changes-icon.png';
+import BackIcon from '../../asset/back-icon.png';
+import CancelChangesIcon from '../../asset/cancel-changes-icon.png';
 import EditIcon from '../../asset/edit-icon.png';
 import './OrderPage.css';
+import AuthContext from '../../context/authContext';
 
 const OrderPage = () => {
+  const navigate = useNavigate();
+  const { loggedIn, userData } = useContext(AuthContext);
   const [editStatus, setEditStatus] = useState(false);
   const [orderData, setOrderData] = useState(null);
+  const [orderDataBackup, setOrderDataBackup] = useState(null);
   const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
   const { orderId } = useParams();
 
+  console.log(userData);
   useEffect(() => {
     OrdersServices.getOrder(orderId).then((data) => {
       setTimeout(() => {
         setOrderData(data.order);
+        setOrderDataBackup(data.order);
       }, 1000);
     });
   }, []);
@@ -47,24 +54,38 @@ const OrderPage = () => {
   };
 
   const cancelChanges = () => {
-    console.log('cancelChanges');
+    console.log(orderData);
     setEditStatus(false);
   };
 
+  const backToMyOrders = () => {
+    console.log(`/orders/${userData._id}`);
+    // return;
+    navigate(`/orders/${userData._id}`);
+  };
+
   return (
-    <>
+    <div className='OrderPage'>
+      <Button onClick={backToMyOrders} size={'my-orders-button'}>
+        <img
+          className='icon-button my-orders-icon'
+          src={BackIcon}
+          alt='BackIcon'
+        />
+        My Orders
+      </Button>
       <OrderContainer orderData={orderData}></OrderContainer>
       <OrderDetails
         orderData={orderData}
+        orderDataBackup={orderDataBackup}
         editStatus={editStatus}
       ></OrderDetails>
       <div className='order-page-buttons'>
-        <img />
-        <Button onClick={saveOrder}>
+        {/* <Button onClick={saveOrder}>
           Save Order{' '}
           <img className='icon-button' src={SaveIcon} alt='SaveIcon' />
-        </Button>
-        {(!editStatus && (
+        </Button> */}
+        {/* {(!editStatus && (
           <Button onClick={editOrder}>
             Edit Order{' '}
             <img className='icon-button' src={EditIcon} alt='EditIcon' />
@@ -74,11 +95,19 @@ const OrderPage = () => {
             Cancel{' '}
             <img
               className='icon-button'
-              src={cancelChangesIcon}
-              alt='cancelChangesIcon'
+              src={CancelChangesIcon}
+              alt='CancelChangesIcon'
             />
           </Button>
-        )}
+        )} */}
+        <Button onClick={deleteOrder}>
+          Cancel Order{' '}
+          <img
+            className='icon-button'
+            src={CancelChangesIcon}
+            alt='CancelChangesIcon'
+          />
+        </Button>
         <Button onClick={deleteOrder}>
           Delete Order{' '}
           <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
@@ -92,7 +121,7 @@ const OrderPage = () => {
           />
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
