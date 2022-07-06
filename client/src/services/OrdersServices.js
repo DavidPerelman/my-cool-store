@@ -25,6 +25,17 @@ const OrdersServices = {
       }
     });
   },
+  getUserOrders: (userId) => {
+    return fetch(
+      `${process.env.REACT_APP_API_URL}/orders/orders/${userId}`
+    ).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
+  },
   fetchCategoriesData: () => {
     return fetch(`${process.env.REACT_APP_API_URL}/categories/categories`).then(
       (res) => {

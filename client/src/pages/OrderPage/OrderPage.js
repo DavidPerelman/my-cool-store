@@ -16,10 +16,9 @@ import AuthContext from '../../context/authContext';
 
 const OrderPage = () => {
   const navigate = useNavigate();
-  const { loggedIn, userData } = useContext(AuthContext);
+  const { userData } = useContext(AuthContext);
   const [editStatus, setEditStatus] = useState(false);
   const [orderData, setOrderData] = useState(null);
-  const [orderDataBackup, setOrderDataBackup] = useState(null);
   const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
   const { orderId } = useParams();
 
@@ -28,7 +27,6 @@ const OrderPage = () => {
     OrdersServices.getOrder(orderId).then((data) => {
       setTimeout(() => {
         setOrderData(data.order);
-        setOrderDataBackup(data.order);
       }, 1000);
     });
   }, []);
@@ -77,7 +75,6 @@ const OrderPage = () => {
       <OrderContainer orderData={orderData}></OrderContainer>
       <OrderDetails
         orderData={orderData}
-        orderDataBackup={orderDataBackup}
         editStatus={editStatus}
       ></OrderDetails>
       <div className='order-page-buttons'>

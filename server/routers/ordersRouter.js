@@ -38,4 +38,21 @@ router.get('/order/:orderId', async (req, res) => {
   }
 });
 
+router.get('/orders/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    console.log(userId);
+    // get single product
+    const orders = await Order.find({ user: userId })
+      .populate('products.product')
+      .exec();
+
+    res.json({ orders: orders });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 module.exports = router;
