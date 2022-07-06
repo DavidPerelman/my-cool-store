@@ -15,6 +15,15 @@ th, td {
   text-align: center;
 }
 
+.row-data {
+    cursor: pointer;
+}
+
+.row-data:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    /* background-color: aqua; */
+}
+
 /* tr:nth-child(even) {
   background-color: #dddddd;
 } */

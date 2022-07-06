@@ -15,11 +15,15 @@ const MyOrders = () => {
     });
   }, []);
 
+  const rowClick = (i) => {
+    console.log(i);
+  };
+
   return (
     <div>
       <div className='order-div'>
         <h1>My Orders</h1>
-        <Table data={userOrders}></Table>
+        <Table data={userOrders} rowClick={rowClick}></Table>
       </div>
     </div>
   );

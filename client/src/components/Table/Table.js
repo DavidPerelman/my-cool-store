@@ -2,7 +2,7 @@ import React from 'react';
 import LoadingGif from '../../asset/loading-gif.gif';
 import './Table.css';
 
-const Table = ({ data }) => {
+const Table = ({ data, rowClick }) => {
   console.log(data);
   return (
     <div>
@@ -23,7 +23,11 @@ const Table = ({ data }) => {
           <tbody>
             {data.map((rowData, i) => {
               return (
-                <tr key={i}>
+                <tr
+                  key={i}
+                  className='row-data'
+                  onClick={() => rowClick(rowData._id)}
+                >
                   <td>{rowData.orderNumber}</td>
                   <td>{rowData.created}</td>
                   <td>{rowData.status}</td>
