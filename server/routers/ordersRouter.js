@@ -42,7 +42,6 @@ router.get('/orders/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    console.log(userId);
     // get single product
     const orders = await Order.find({ user: userId })
       .populate('products.product')
