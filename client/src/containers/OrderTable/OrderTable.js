@@ -56,6 +56,8 @@ const OrderTable = ({ orderData, editStatus, orderDataBackup }) => {
     }
   };
 
+  console.log(orderData);
+
   return (
     <>
       {(!orderData && (
@@ -92,7 +94,9 @@ const OrderTable = ({ orderData, editStatus, orderDataBackup }) => {
                   {(!editStatus && (
                     <>
                       <td>{product.productQuantity}</td>
-                      <td>{product.totalPrice}$</td>
+                      <td>
+                        {product.product.price * product.productQuantity}$
+                      </td>
                     </>
                   )) || (
                     <>

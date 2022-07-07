@@ -1,9 +1,11 @@
 import React from 'react';
 import LoadingGif from '../../asset/loading-gif.gif';
 import './Table.css';
+import TableRow from './TableRow';
 
-const Table = ({ data, rowClick }) => {
-  console.log(data);
+const Table = ({ data, setData, tableHeaders, rowClick, keys }) => {
+  //   return;
+
   return (
     <div>
       {(!data && (
@@ -14,27 +16,26 @@ const Table = ({ data, rowClick }) => {
         <table>
           <thead>
             <tr>
-              <th>Order Number</th>
+              {tableHeaders.map((header, i) => {
+                return <th key={i}>{header}</th>;
+              })}
+              {/* <th>Order Number</th>
               <th>Date</th>
               <th>Status</th>
-              <th>Payment</th>
+              <th>Payment</th> */}
             </tr>
           </thead>
           <tbody>
-            {data.map((rowData, i) => {
-              return (
-                <tr
-                  key={i}
-                  className='row-data'
-                  onClick={() => rowClick(rowData._id)}
-                >
-                  <td>{rowData.orderNumber}</td>
-                  <td>{rowData.created}</td>
-                  <td>{rowData.status}</td>
-                  <td>{rowData.totalPayment}$</td>
-                </tr>
-              );
-            })}
+            <TableRow
+              keys={keys}
+              data={data}
+              className='row-data'
+              //   onClick={() => rowClick(i)}
+            ></TableRow>
+            {/* <td>{rowData.orderNumber}</td>
+                //   <td>{rowData.created}</td>
+                //   <td>{rowData.status}</td>
+                //   <td>{rowData.totalPayment}$</td> */}
           </tbody>
         </table>
       )}

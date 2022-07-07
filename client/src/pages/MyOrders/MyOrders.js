@@ -1,29 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Table from '../../components/Table/Table';
 import OrdersServices from '../../services/OrdersServices';
+import { dataTableParse } from '../../utils/tablesUtils';
 
 const MyOrders = () => {
+  const navigate = useNavigate();
   const { userId } = useParams();
-  const [userOrders, setUserOrders] = useState(null);
+  const [tableData, setTableData] = useState(null);
 
   useEffect(() => {
     OrdersServices.getUserOrders(userId).then((data) => {
       setTimeout(() => {
-        setUserOrders(data.orders);
+        const userOrders = dataTableParse(data);
+        setTableData({ data: userOrders, type: 'userOrders' });
       }, 1000);
     });
   }, []);
 
-  const rowClick = (i) => {
-    console.log(i);
+  const tableHeaders = ['Order Number', 'Date', 'Status', 'Payment'];
+  const keys = ['orderNumber', 'created', 'status', 'totalPayment'];
+
+  const rowClick = (id) => {
+    console.log(id);
+    return;
+    // navigate(`/order/${i}`);
+
+    // console.log(i);
   };
 
   return (
     <div>
       <div className='order-div'>
         <h1>My Orders</h1>
-        <Table data={userOrders} rowClick={rowClick}></Table>
+        <Table
+          data={tableData}
+          rowClick={rowClick}
+          keys={keys}
+          tableHeaders={tableHeaders}
+        ></Table>
       </div>
     </div>
   );
