@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Table from '../../components/Table/Table';
 import OrdersServices from '../../services/OrdersServices';
@@ -8,11 +8,12 @@ const MyOrders = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
   const [tableData, setTableData] = useState(null);
+  const [state, dispatch] = useReducer(dataTableParse, null);
 
   useEffect(() => {
     OrdersServices.getUserOrders(userId).then((data) => {
       setTimeout(() => {
-        const userOrders = dataTableParse(data);
+        const userOrders = dataTableParse('userOrders', data);
         setTableData({ data: userOrders, type: 'userOrders' });
       }, 1000);
     });
@@ -23,10 +24,6 @@ const MyOrders = () => {
 
   const rowClick = (id) => {
     console.log(id);
-    return;
-    // navigate(`/order/${i}`);
-
-    // console.log(i);
   };
 
   return (

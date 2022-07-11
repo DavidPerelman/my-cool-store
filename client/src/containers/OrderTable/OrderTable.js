@@ -56,8 +56,6 @@ const OrderTable = ({ orderData, editStatus, orderDataBackup }) => {
     }
   };
 
-  console.log(orderData);
-
   return (
     <>
       {(!orderData && (

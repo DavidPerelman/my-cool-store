@@ -7,6 +7,7 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 import CartPage from './pages/CartPage/CartPage';
 import OrderPage from './pages/OrderPage/OrderPage';
+import Order from './pages/Order/Order';
 import MyOrders from './pages/MyOrders/MyOrders';
 
 const Router = () => {
@@ -81,7 +82,7 @@ const Router = () => {
               path='/category/:categoryName/:categoryId'
               element={<CategoryProductsPage />}
             />
-            <Route path='/order/:orderId' element={<OrderPage />} />
+            <Route path='/order/:orderId' element={<Order />} />
             <Route path='/orders/:userId' element={<MyOrders />} />
             <Route path='/cart' element={<CartPage />} />
           </>

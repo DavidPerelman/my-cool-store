@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Card from '../../components/Card/Card';
-import AuthContext from '../../context/authContext';
 import ProductsServices from '../../services/ProductsServices';
 import ProductsContext from '../../context/productsContext';
 import './CategoryProductsPage.css';
 import Button from '../../components/Button/Button';
 import LoadingGif from '../../asset/loading-gif.gif';
+import Container from '../../components/Container/Container';
+import NewButton from '../../components/NewButton/NewButton';
+import NewCard from '../../components/NewCard/NewCard';
 
 const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();
@@ -46,7 +47,7 @@ const CategoryProductsPage = () => {
   };
 
   return (
-    <div className='CategoryProductsPage'>
+    <Container>
       <h1>{categoryName}</h1>
       {(!products && (
         <div className='loading-gif'>
@@ -56,36 +57,36 @@ const CategoryProductsPage = () => {
         <div className='categoryProductsPage-container'>
           {products.map((product, i) => {
             return (
-              <div key={i} className='categoryProductsPage-card product-card'>
-                <Card
-                  marginBottom='marinBottom'
-                  productId={product._id}
-                  detailsSize='product-details'
-                  titleSize='product-title'
-                  title={product.title}
-                  img={product.images[0]}
-                  category={product.category}
-                  price={product.price}
-                  description={product.description}
-                  color='button--primary'
-                  textButton='Details & Buying'
-                  onClick={cardButtonClick}
-                ></Card>
-              </div>
+              <NewCard key={i} img={product.images[0]} title={product.title}>
+                <div className='price-div'>
+                  <p className='bold-text'>Price:</p>
+                  <p>{product.price}$</p>
+                </div>
+
+                <NewButton
+                  onClick={() => {
+                    cardButtonClick(product._id);
+                  }}
+                >
+                  Details & Buying
+                </NewButton>
+              </NewCard>
             );
           })}
         </div>
       )}
       {loading && (
-        <Button
-          color='button--primary'
-          className='more-products-button'
-          onClick={loadMoreProducts}
-        >
-          More Products
-        </Button>
+        <div style={{ marginTop: '10px' }}>
+          <Button
+            color='button--primary'
+            className='more-products-button'
+            onClick={loadMoreProducts}
+          >
+            More Products
+          </Button>
+        </div>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Card from '../../components/Card/Card';
 import './CardsContainer.css';
 import ProductsServices from '../../services/ProductsServices';
 import ProductsContext from '../../context/productsContext';
 import LoadingGif from '../../asset/loading-gif.gif';
+import NewCard from '../../components/NewCard/NewCard';
+import NewButton from '../../components/NewButton/NewButton';
 
 const CardsContainer = ({ categoryId }) => {
   const { cardButtonClick } = useContext(ProductsContext);
   const [productsByCategory, setProductsByCategory] = useState([]);
 
   useEffect(() => {
-    ProductsServices.fetchAllProductsByCategory(categoryId, 1, 3).then(
+    ProductsServices.fetchAllProductsByCategory(categoryId, 1, 4).then(
       (data) => {
         setTimeout(() => {
           setProductsByCategory(data.results.products);
@@ -21,7 +22,7 @@ const CardsContainer = ({ categoryId }) => {
   }, []);
 
   return (
-    <>
+    <div className='cards-container'>
       {(!productsByCategory && (
         <div className='loading-gif'>
           <img src={LoadingGif} alt='loading...' />
@@ -29,26 +30,40 @@ const CardsContainer = ({ categoryId }) => {
       )) ||
         productsByCategory.map((product, i) => {
           return (
-            <div key={i} className='product-card'>
-              <Card
-                productId={product._id}
-                detailsSize='product-details'
-                titleSize='product-title'
-                title={product.title}
-                img={product.images[0]}
-                category={product.category}
-                price={product.price}
-                description={product.description}
-                color='button--primary'
-                // size='user-popover-button'
-                textButton='Details & Buying'
-                onClick={cardButtonClick}
-              ></Card>
-            </div>
+            <NewCard key={i} img={product.images[0]} title={product.title}>
+              <div className='price-div'>
+                <p className='bold-text'>Price:</p>
+                <p>{product.price}$</p>
+              </div>
+
+              <NewButton
+                onClick={() => {
+                  cardButtonClick(product._id);
+                }}
+              >
+                Details & Buying
+              </NewButton>
+            </NewCard>
           );
         })}
-    </>
+    </div>
   );
 };
+
+{
+  /* <Card>
+  <CardContent>
+    <h1>title</h1>
+    <h1>price</h1>
+  </CardContent>
+</Card>;
+
+<Card>
+  <CardContent>
+    <h1 className='order-title'>title</h1>
+    <h1>price</h1>
+  </CardContent>
+</Card>; */
+}
 
 export default CardsContainer;

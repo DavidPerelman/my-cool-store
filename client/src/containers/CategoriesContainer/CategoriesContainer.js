@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import Container from '../../components/Container/Container';
+import NewButton from '../../components/NewButton/NewButton';
 import ProductsContext from '../../context/productsContext';
 import CardsContainer from '../CardsContainer/CardsContainer';
 import './CategoriesContainer.css';
@@ -15,39 +17,34 @@ const CategoriesContainer = () => {
   };
 
   return (
-    <>
+    <div className='CategoriesContainer'>
       {(!categories && <div>{''}</div>) || (
         <>
           {categories.map((category, i) => {
             return (
-              <div key={i} className='CategoriesContainer'>
-                <div
-                  className={
-                    category.name === 'Electronics'
-                      ? 'CategoriesContainer-Electronics-header'
-                      : 'CategoriesContainer-header'
-                  }
-                >
+              <div key={i}>
+                <Container>
                   <h1>{category.name}</h1>
-                  <Button
+                  <NewButton
+                    size='all-category-cards-button'
                     color='button--whiteGray'
-                    // size={size}
                     onClick={() => {
                       categoryContainerClick(category._id, category.name);
                     }}
                   >
                     All {category.name} Products
-                  </Button>
-                </div>
-                <div className='cards-container-div'>
-                  <CardsContainer categoryId={category._id}></CardsContainer>
-                </div>
+                  </NewButton>
+                  <CardsContainer
+                    categoryId={category._id}
+                    apiQuantity={4}
+                  ></CardsContainer>
+                </Container>
               </div>
             );
           })}
         </>
       )}
-    </>
+    </div>
   );
 };
 

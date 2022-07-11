@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
+import NewButton from '../components/NewButton/NewButton';
 
 const LogoutButton = () => {
   const { getLoggedIn, show, loggedIn } = useContext(AuthContext);

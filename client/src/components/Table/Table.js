@@ -3,9 +3,8 @@ import LoadingGif from '../../asset/loading-gif.gif';
 import './Table.css';
 import TableRow from './TableRow';
 
-const Table = ({ data, setData, tableHeaders, rowClick, keys }) => {
-  //   return;
-
+const Table = ({ data, setData, tableHeaders, rowClick, keys, onClick }) => {
+  console.log(data);
   return (
     <div>
       {(!data && (
@@ -30,7 +29,7 @@ const Table = ({ data, setData, tableHeaders, rowClick, keys }) => {
               keys={keys}
               data={data}
               className='row-data'
-              //   onClick={() => rowClick(i)}
+              rowClick={() => rowClick}
             ></TableRow>
             {/* <td>{rowData.orderNumber}</td>
                 //   <td>{rowData.created}</td>

@@ -1,13 +1,18 @@
-.cards-container {
+/* .cards-container {
     align-items: center;
     margin: 2px;
     padding: 2px;
-}
+} */
 
-.cards-container-div {
+.cards-container {
   display: flex;
   gap: 15px;
   margin-top: 10px;
+  justify-content: center;
+}
+
+.large {
+ flex-wrap: wrap;
 }
 
 .product-title {

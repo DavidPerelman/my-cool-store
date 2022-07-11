@@ -58,7 +58,6 @@ const OrderPage = () => {
 
   const backToMyOrders = () => {
     console.log(`/orders/${userData._id}`);
-    // return;
     navigate(`/orders/${userData._id}`);
   };
 

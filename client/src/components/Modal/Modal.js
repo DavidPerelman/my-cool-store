@@ -35,14 +35,6 @@ const Modal = ({
               {children}
             </div>
             <div className='modal-footer'>
-              {/* <button
-                type='button'
-                style={{ fontSize: '13px' }}
-                className='btn btn-secondary'
-                onClick={onClose}
-              >
-                Close
-              </button> */}
               <Button
                 type='button'
                 size='user-modal-button'
@@ -60,14 +52,6 @@ const Modal = ({
                 >
                   {textButton}
                 </Button>
-                // <button
-                //   type='button'
-                //   style={{ fontSize: '13px' }}
-                //   className='btn btn-primary'
-                //   onClick={onSubmit}
-                // >
-                //   {textButton}
-                // </button>
               )}
             </div>
           </div>
