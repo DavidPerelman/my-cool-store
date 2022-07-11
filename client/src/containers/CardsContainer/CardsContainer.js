@@ -4,7 +4,7 @@ import ProductsServices from '../../services/ProductsServices';
 import ProductsContext from '../../context/productsContext';
 import LoadingGif from '../../asset/loading-gif.gif';
 import NewCard from '../../components/NewCard/NewCard';
-import NewButton from '../../components/NewButton/NewButton';
+import Button from '../../components/Button/Button';
 
 const CardsContainer = ({ categoryId }) => {
   const { cardButtonClick } = useContext(ProductsContext);
@@ -36,13 +36,13 @@ const CardsContainer = ({ categoryId }) => {
                 <p>{product.price}$</p>
               </div>
 
-              <NewButton
+              <Button
                 onClick={() => {
                   cardButtonClick(product._id);
                 }}
               >
                 Details & Buying
-              </NewButton>
+              </Button>
             </NewCard>
           );
         })}

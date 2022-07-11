@@ -96,7 +96,7 @@ const OrderPage = () => {
             />
           </Button>
         )} */}
-        <Button onClick={deleteOrder}>
+        <Button size='order-buttons' onClick={deleteOrder}>
           Cancel Order{' '}
           <img
             className='icon-button'
@@ -104,11 +104,11 @@ const OrderPage = () => {
             alt='CancelChangesIcon'
           />
         </Button>
-        <Button onClick={deleteOrder}>
+        <Button size='order-buttons' onClick={deleteOrder}>
           Delete Order{' '}
           <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
         </Button>
-        <Button onClick={checkout}>
+        <Button size='order-buttons' onClick={checkout}>
           Check Out{' '}
           <img
             className='icon-button'

@@ -6,7 +6,6 @@ import './CategoryProductsPage.css';
 import Button from '../../components/Button/Button';
 import LoadingGif from '../../asset/loading-gif.gif';
 import Container from '../../components/Container/Container';
-import NewButton from '../../components/NewButton/NewButton';
 import NewCard from '../../components/NewCard/NewCard';
 
 const CategoryProductsPage = () => {
@@ -63,13 +62,13 @@ const CategoryProductsPage = () => {
                   <p>{product.price}$</p>
                 </div>
 
-                <NewButton
+                <Button
                   onClick={() => {
                     cardButtonClick(product._id);
                   }}
                 >
                   Details & Buying
-                </NewButton>
+                </Button>
               </NewCard>
             );
           })}
@@ -78,6 +77,7 @@ const CategoryProductsPage = () => {
       {loading && (
         <div style={{ marginTop: '10px' }}>
           <Button
+            size='order-buttons'
             color='button--primary'
             className='more-products-button'
             onClick={loadMoreProducts}

@@ -1,15 +1,18 @@
 import './Button.css';
-const Button = (props) => {
-  const { size, color = 'button--primary', marginTop, buttonStyle } = props;
 
+const Button = ({
+  children,
+  size = 'size-90',
+  color = 'button--primary',
+  onClick,
+}) => {
   return (
     <button
       type='button'
-      style={props.style}
-      className={`button ${color} ${size} ${marginTop} ${buttonStyle}`}
-      onClick={props.onClick}
+      className={`button ${color} ${size}`}
+      onClick={onClick}
     >
-      {props.children}
+      {children}
     </button>
   );
 };

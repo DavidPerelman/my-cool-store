@@ -8,7 +8,7 @@ import {
 } from '../utils/formValidation';
 import Form from '../components/Form';
 import Modal from '../components/Modal/Modal';
-import Button from '../components/NewButton/NewButton';
+import Button from '../components/Button/Button';
 
 const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
   const [show, setShow] = useState(false);
@@ -93,7 +93,12 @@ const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
 
   return (
     <>
-      <Button type='button' color='button--primary' onClick={handleShow}>
+      <Button
+        type='button'
+        size='user-buttons'
+        color='button--primary'
+        onClick={handleShow}
+      >
         Register
       </Button>
       {show && (

@@ -92,3 +92,15 @@
     width: 120px;
     margin-left: 17px;
 }
+
+.size-90 {
+  width: 90%;
+}
+
+.order-buttons {
+  width: 150px;
+}
+
+.user-buttons {
+  width: 130px;
+}

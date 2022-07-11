@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
-import NewButton from '../../components/NewButton/NewButton';
+import Button from '../../components/Button/Button';
 import ProductsContext from '../../context/productsContext';
 import CardsContainer from '../CardsContainer/CardsContainer';
 import './CategoriesContainer.css';
@@ -25,7 +24,7 @@ const CategoriesContainer = () => {
               <div key={i}>
                 <Container>
                   <h1>{category.name}</h1>
-                  <NewButton
+                  <Button
                     size='all-category-cards-button'
                     color='button--whiteGray'
                     onClick={() => {
@@ -33,7 +32,7 @@ const CategoriesContainer = () => {
                     }}
                   >
                     All {category.name} Products
-                  </NewButton>
+                  </Button>
                   <CardsContainer
                     categoryId={category._id}
                     apiQuantity={4}

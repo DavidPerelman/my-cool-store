@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CartPopover from '../../containers/CartPopover';
 import UserPopover from '../../containers/UserPopover';
-import Button from '../Button/Button';
 import ClockDate from '../ClockDate';
 import './Navbar.css';
 

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Button from '../../components/Button/Button';
 import ProductContainer from '../../components/ProductContainer';
 import OrderCartContainer from '../../containers/OrderCartContainer';
 import { useCart } from '../../context/cartContext';

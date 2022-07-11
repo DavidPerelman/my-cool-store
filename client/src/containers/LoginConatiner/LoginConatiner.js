@@ -1,13 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
-import Button from '../../components/NewButton/NewButton';
+import Button from '../../components/Button/Button';
 import Form from '../../components/Form';
 import { isFormFieldsValid, isValidEmail } from '../../utils/formValidation';
 import AuthService from '../../services/AuthServices';
 import AuthContext from '../../context/authContext';
 import './LoginConatiner.css';
-import '../../components/Button/Button.css';
 
 const LoginConatiner = () => {
   const { getLoggedIn, loggedIn } = useContext(AuthContext);
@@ -88,7 +87,12 @@ const LoginConatiner = () => {
 
   return (
     <>
-      <Button type='button' color='button--primary' onClick={handleShow}>
+      <Button
+        type='button'
+        size='user-buttons'
+        color='button--primary'
+        onClick={handleShow}
+      >
         Login
       </Button>
       {show && (

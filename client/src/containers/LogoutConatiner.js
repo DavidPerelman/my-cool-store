@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/AuthServices';
 import AuthContext from '../context/authContext';
-import Button from '../components/NewButton/NewButton';
+import Button from '../components/Button/Button';
 
 const LogoutConatiner = () => {
   const { getLoggedIn, show, loggedIn } = useContext(AuthContext);
@@ -35,7 +35,12 @@ const LogoutConatiner = () => {
   }, []);
 
   return (
-    <Button type='button' className='btn btn-primary' onClick={logout}>
+    <Button
+      type='button'
+      size='user-buttons'
+      className='btn btn-primary'
+      onClick={logout}
+    >
       Logout
     </Button>
   );
