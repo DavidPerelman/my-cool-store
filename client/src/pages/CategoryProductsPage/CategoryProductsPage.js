@@ -6,7 +6,7 @@ import './CategoryProductsPage.css';
 import Button from '../../components/Button/Button';
 import LoadingGif from '../../asset/loading-gif.gif';
 import Container from '../../components/Container/Container';
-import NewCard from '../../components/NewCard/NewCard';
+import Card from '../../components/Card/Card';
 
 const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();
@@ -56,7 +56,10 @@ const CategoryProductsPage = () => {
         <div className='categoryProductsPage-container'>
           {products.map((product, i) => {
             return (
-              <NewCard key={i} img={product.images[0]} title={product.title}>
+              <Card key={i} img={product.images[0]} title={product.title}>
+                <div className='title-div'>
+                  <h5>{product.title}</h5>
+                </div>
                 <div className='price-div'>
                   <p className='bold-text'>Price:</p>
                   <p>{product.price}$</p>
@@ -69,7 +72,7 @@ const CategoryProductsPage = () => {
                 >
                   Details & Buying
                 </Button>
-              </NewCard>
+              </Card>
             );
           })}
         </div>

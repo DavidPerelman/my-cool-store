@@ -21,24 +21,22 @@ const CategoriesContainer = () => {
         <>
           {categories.map((category, i) => {
             return (
-              <div key={i}>
-                <Container>
-                  <h1>{category.name}</h1>
-                  <Button
-                    size='all-category-cards-button'
-                    color='button--whiteGray'
-                    onClick={() => {
-                      categoryContainerClick(category._id, category.name);
-                    }}
-                  >
-                    All {category.name} Products
-                  </Button>
-                  <CardsContainer
-                    categoryId={category._id}
-                    apiQuantity={4}
-                  ></CardsContainer>
-                </Container>
-              </div>
+              <Container key={i}>
+                <h1>{category.name}</h1>
+                <Button
+                  size='all-category-cards-button'
+                  color='button--whiteGray'
+                  onClick={() => {
+                    categoryContainerClick(category._id, category.name);
+                  }}
+                >
+                  All {category.name} Products
+                </Button>
+                <CardsContainer
+                  categoryId={category._id}
+                  apiQuantity={4}
+                ></CardsContainer>
+              </Container>
             );
           })}
         </>

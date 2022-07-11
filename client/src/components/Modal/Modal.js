@@ -18,7 +18,6 @@ const Modal = ({
             <div className='modal-header'>
               <h5 className='modal-title'>{title}</h5>
               <button
-                type='button'
                 className='btn-close'
                 data-bs-dismiss='modal'
                 aria-label='Close'
@@ -36,7 +35,6 @@ const Modal = ({
             </div>
             <div className='modal-footer'>
               <Button
-                type='button'
                 size='user-modal-button'
                 color='button--close'
                 onClick={onClose}
@@ -45,7 +43,6 @@ const Modal = ({
               </Button>
               {!hideButton && (
                 <Button
-                  type='button'
                   size='user-modal-button'
                   color='button--primary'
                   onClick={onSubmit}

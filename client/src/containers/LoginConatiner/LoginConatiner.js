@@ -87,12 +87,7 @@ const LoginConatiner = () => {
 
   return (
     <>
-      <Button
-        type='button'
-        size='user-buttons'
-        color='button--primary'
-        onClick={handleShow}
-      >
+      <Button size='user-buttons' color='button--primary' onClick={handleShow}>
         Login
       </Button>
       {show && (

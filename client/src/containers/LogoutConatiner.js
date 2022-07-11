@@ -35,12 +35,7 @@ const LogoutConatiner = () => {
   }, []);
 
   return (
-    <Button
-      type='button'
-      size='user-buttons'
-      className='btn btn-primary'
-      onClick={logout}
-    >
+    <Button size='user-buttons' className='btn btn-primary' onClick={logout}>
       Logout
     </Button>
   );

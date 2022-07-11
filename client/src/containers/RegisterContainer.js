@@ -93,12 +93,7 @@ const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
 
   return (
     <>
-      <Button
-        type='button'
-        size='user-buttons'
-        color='button--primary'
-        onClick={handleShow}
-      >
+      <Button size='user-buttons' color='button--primary' onClick={handleShow}>
         Register
       </Button>
       {show && (
