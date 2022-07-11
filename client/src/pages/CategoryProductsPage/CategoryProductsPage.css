@@ -28,7 +28,7 @@
     pointer-events: '';
 }
 
-@media(max-width: 600px) {
+@media(max-width: 500px) {
 .categoryProductsPage-card {
     /* flex-basis: 46.333333%;
     height: 350px !important;

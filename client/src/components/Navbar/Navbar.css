@@ -105,7 +105,7 @@
     margin-right: 0px;
 }
 
-@media(max-width: 700px) {
+@media(max-width: 500px) {
     .toggle-button {
         display: flex;
     }
@@ -147,7 +147,7 @@
     margin-left: 0px;
 }
 
-    @media(max-width: 700px) {
+    @media(max-width: 500px) {
     .navbar-links .navbar-input {
         width: 160px;
         margin-left: 20px;

@@ -9,7 +9,7 @@ h4 {
     margin: auto;
 }
 
-@media(max-width: 600px) {
+@media(max-width: 500px) {
 .quantity-div {
     display: flex;
     flex-direction: column;

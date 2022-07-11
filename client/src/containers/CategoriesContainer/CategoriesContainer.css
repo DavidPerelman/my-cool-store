@@ -30,7 +30,7 @@
     height: 40px;
 } */
 
-@media(max-width: 600px) {
+@media(max-width: 500px) {
 
 .cards-container {
     display: flex;
