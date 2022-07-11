@@ -1,7 +1,7 @@
 import React from 'react';
 import user from '../asset/user.png';
 import MyPopover from '../components/MyPopover/MyPopover';
-import RegisterButton from './RegisterButton';
+import RegisterContainer from './RegisterContainer';
 import LoginConatiner from './LoginConatiner/LoginConatiner';
 import LogoutConatiner from './LogoutConatiner';
 
@@ -20,10 +20,10 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
         </>
       )) || (
         <>
-          <RegisterButton
+          <RegisterContainer
             loggedIn={loggedIn}
             setRegisterSuccess={setRegisterSuccess}
-          ></RegisterButton>
+          ></RegisterContainer>
           <LoginConatiner
             setRegisterSuccess={setRegisterSuccess}
             loggedIn={loggedIn}

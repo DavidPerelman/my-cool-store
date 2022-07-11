@@ -87,14 +87,8 @@ const LoginConatiner = () => {
   }, [show]);
 
   return (
-    // <div>
     <>
-      <Button
-        type='button'
-        // size='user-popover-button'
-        color='button--primary'
-        onClick={handleShow}
-      >
+      <Button type='button' color='button--primary' onClick={handleShow}>
         Login
       </Button>
       {show && (
@@ -110,7 +104,6 @@ const LoginConatiner = () => {
         </Modal>
       )}
     </>
-    // </div>
   );
 };
 

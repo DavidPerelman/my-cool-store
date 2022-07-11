@@ -8,9 +8,9 @@ import {
 } from '../utils/formValidation';
 import Form from '../components/Form';
 import Modal from '../components/Modal/Modal';
-import Button from '../components/Button/Button';
+import Button from '../components/NewButton/NewButton';
 
-const RegisterButton = ({ setRegisterSuccess, loggedIn }) => {
+const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
 
@@ -92,13 +92,8 @@ const RegisterButton = ({ setRegisterSuccess, loggedIn }) => {
   }, [show]);
 
   return (
-    <div>
-      <Button
-        type='button'
-        size='user-popover-button'
-        color='button--primary'
-        onClick={handleShow}
-      >
+    <>
+      <Button type='button' color='button--primary' onClick={handleShow}>
         Register
       </Button>
       {show && (
@@ -113,8 +108,8 @@ const RegisterButton = ({ setRegisterSuccess, loggedIn }) => {
           <Form data={registerData} handleFormChange={handleFormChange}></Form>
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 
-export default RegisterButton;
+export default RegisterContainer;
