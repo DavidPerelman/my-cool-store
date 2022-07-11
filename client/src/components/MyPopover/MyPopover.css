@@ -116,6 +116,8 @@ h1 {
 }
 
 .user-popover-li {
+    margin-top: 5px;
+    align-items: center;
     text-align: center;
     display: flex;
     flex-direction: column;

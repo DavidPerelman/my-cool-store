@@ -3,7 +3,7 @@ import user from '../asset/user.png';
 import MyPopover from '../components/MyPopover/MyPopover';
 import RegisterButton from './RegisterButton';
 import LoginButton from './LoginButton';
-import LogoutButton from './LogoutButton';
+import LogoutConatiner from './LogoutConatiner';
 
 const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
   return (
@@ -16,7 +16,7 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
     >
       {(loggedIn && (
         <>
-          <LogoutButton loggedIn={loggedIn} />
+          <LogoutConatiner loggedIn={loggedIn} />
         </>
       )) || (
         <>

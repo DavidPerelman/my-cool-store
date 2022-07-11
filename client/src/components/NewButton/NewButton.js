@@ -1,6 +1,6 @@
 import './NewButton.css';
 
-const NewButton = ({
+const Button = ({
   children,
   size = 'size-90',
   color = 'button--primary',
@@ -17,4 +17,4 @@ const NewButton = ({
   );
 };
 
-export default NewButton;
+export default Button;
