@@ -67,7 +67,7 @@ p {
     font-weight: bold;
 }
 
-@media(max-width: 600px) {
+@media(max-width: 500px) {
 .card-image {
     width: 100px;
     height: 100px;
