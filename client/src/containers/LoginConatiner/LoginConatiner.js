@@ -1,14 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../components/Modal/Modal';
-import Button from '../components/Button/Button';
-import Form from '../components/Form';
-import { isFormFieldsValid, isValidEmail } from '../utils/formValidation';
-import AuthService from '../services/AuthServices';
-import AuthContext from '../context/authContext';
-import './LoginButton.css';
-import '../components/Button/Button.css';
-const LoginButton = () => {
+import Modal from '../../components/Modal/Modal';
+import Button from '../../components/NewButton/NewButton';
+import Form from '../../components/Form';
+import { isFormFieldsValid, isValidEmail } from '../../utils/formValidation';
+import AuthService from '../../services/AuthServices';
+import AuthContext from '../../context/authContext';
+import './LoginConatiner.css';
+import '../../components/Button/Button.css';
+
+const LoginConatiner = () => {
   const { getLoggedIn, loggedIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -86,10 +87,11 @@ const LoginButton = () => {
   }, [show]);
 
   return (
-    <div>
+    // <div>
+    <>
       <Button
         type='button'
-        size='user-popover-button'
+        // size='user-popover-button'
         color='button--primary'
         onClick={handleShow}
       >
@@ -107,8 +109,9 @@ const LoginButton = () => {
           <Form data={loginData} handleFormChange={handleFormChange}></Form>
         </Modal>
       )}
-    </div>
+    </>
+    // </div>
   );
 };
 
-export default LoginButton;
+export default LoginConatiner;
