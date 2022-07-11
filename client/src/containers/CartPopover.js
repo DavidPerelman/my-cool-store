@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cart from '../asset/cart.png';
 import MyPopover from '../components/MyPopover/MyPopover';
-import Button from '../components/Button/NewButton';
+import Button from '../components/Button/Button';
 import { useCart } from '../context/cartContext';
 import CartQuantityCounter from './CartQuantityCounter';
 
