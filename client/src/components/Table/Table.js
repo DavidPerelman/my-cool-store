@@ -3,8 +3,8 @@ import LoadingGif from '../../asset/loading-gif.gif';
 import TableRow from './TableRow';
 import './Table.css';
 
-const Table = ({ data, setData, tableHeaders, rowClick, keys, onClick }) => {
-  console.log(data);
+const Table = ({ data, onClick, column }) => {
+  console.log(onClick);
   return (
     <div>
       {(!data && (
@@ -12,30 +12,28 @@ const Table = ({ data, setData, tableHeaders, rowClick, keys, onClick }) => {
           <img src={LoadingGif} alt='loading...' />
         </div>
       )) || (
-        // <table>
-        //   <thead>
-        //     <tr>
-        //       {tableHeaders.map((header, i) => {
-        //         return <th key={i}>{header}</th>;
-        //       })}
-        //     </tr>
-        //   </thead>
-        //   <tbody>
-        //     <TableRow
-        //       keys={keys}
-        //       data={data}
-        //       className='row-data'
-        //       rowClick={() => rowClick}
-        //     ></TableRow>
-        //   </tbody>
-        // </table>
-
-        <>
-          <th>Order Number</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Payment</th>
-        </>
+        <table>
+          <thead>
+            <tr>
+              {column.map((item, i) => {
+                return <th key={i}>{item.heading}</th>;
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, i) => {
+              return (
+                <TableRow
+                  key={i}
+                  item={item}
+                  id={item._id}
+                  column={column}
+                  onClick={onClick}
+                />
+              );
+            })}
+          </tbody>
+        </table>
       )}
     </div>
   );

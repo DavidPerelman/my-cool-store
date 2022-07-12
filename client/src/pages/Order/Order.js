@@ -39,7 +39,14 @@ const Order = () => {
     });
   }, []);
 
-  console.log(orderData);
+  const column = [
+    { heading: 'Order Number' },
+    { heading: 'Date' },
+    { heading: 'Status' },
+    { heading: 'Payment' },
+  ];
+
+  console.log(column);
   const tableHeaders = ['Product', 'Price', 'Quantity', 'Total'];
   const keys = ['title', 'price', 'productQuantity', 'totalPayment'];
 
