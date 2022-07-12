@@ -3,7 +3,7 @@ import LoadingGif from '../../asset/loading-gif.gif';
 import TableRow from './TableRow';
 import './Table.css';
 
-const Table = ({ data, onClick, column }) => {
+const Table = ({ data, onClick, column, classname }) => {
   return (
     <div>
       {(!data && (
@@ -11,7 +11,7 @@ const Table = ({ data, onClick, column }) => {
           <img src={LoadingGif} alt='loading...' />
         </div>
       )) || (
-        <table>
+        <table id='table'>
           <thead>
             <tr>
               {column.map((item, i) => {
@@ -28,6 +28,7 @@ const Table = ({ data, onClick, column }) => {
                   id={item._id}
                   column={column}
                   onClick={onClick}
+                  classname={classname}
                 />
               );
             })}

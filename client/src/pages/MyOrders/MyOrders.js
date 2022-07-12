@@ -10,10 +10,22 @@ const MyOrders = () => {
 
   useEffect(() => {
     OrdersServices.getUserOrders(userId).then((data) => {
-      setTimeout(() => {
-        setTableData(data.orders);
-      }, 1000);
+      setTableData(data.orders);
     });
+
+    setTimeout(() => {
+      const trs = document.getElementsByTagName('tr');
+
+      const setup = () => {
+        for (let i = 1; i < trs.length; i++) {
+          for (let z = 1; z < trs[i].childNodes.length; z++) {
+            trs[i].childNodes[0].innerHTML = i;
+          }
+        }
+      };
+
+      setup();
+    }, 500);
   }, []);
 
   const goToOrder = async (orderId) => {
@@ -21,17 +33,25 @@ const MyOrders = () => {
   };
 
   const column = [
+    { heading: '', value: '' },
     { heading: 'Order Number', value: 'orderNumber' },
     { heading: 'Date', value: 'created' },
     { heading: 'Status', value: 'status' },
     { heading: 'Payment', value: 'totalPayment' },
   ];
 
+  const classname = 'row-data';
+
   return (
     <div>
       <div className='order-div'>
         <h1>My Orders</h1>
-        <Table data={tableData} column={column} onClick={goToOrder}></Table>
+        <Table
+          data={tableData}
+          column={column}
+          onClick={goToOrder}
+          classname={classname}
+        ></Table>
       </div>
     </div>
   );

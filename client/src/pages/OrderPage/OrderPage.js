@@ -13,22 +13,41 @@ import CancelChangesIcon from '../../asset/cancel-changes-icon.png';
 import EditIcon from '../../asset/edit-icon.png';
 import './OrderPage.css';
 import AuthContext from '../../context/authContext';
+import Table from '../../components/Table/Table';
 
 const OrderPage = () => {
   const navigate = useNavigate();
   const { userData } = useContext(AuthContext);
   const [editStatus, setEditStatus] = useState(false);
   const [orderData, setOrderData] = useState(null);
-  const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
+  const [dataTable, setDataTable] = useState(null);
   const { orderId } = useParams();
 
-  console.log(userData);
   useEffect(() => {
     OrdersServices.getOrder(orderId).then((data) => {
-      setTimeout(() => {
-        setOrderData(data.order);
-      }, 1000);
+      setOrderData(data.order);
+      setDataTable(data.order.products);
     });
+
+    setTimeout(() => {
+      const trs = document.getElementsByTagName('tr');
+
+      const setup = () => {
+        for (let y = 1; y < trs.length; y++) {
+          for (let x = 1; x < trs[y].childNodes.length; x++) {
+            trs[y].childNodes[0].innerHTML = y;
+          }
+        }
+
+        for (let i = 1; i < trs.length; i++) {
+          for (let z = 2; z < trs[i].childNodes.length; z++) {
+            trs[i].childNodes[z].style.pointerEvents = 'none';
+          }
+        }
+      };
+
+      setup();
+    }, 500);
   }, []);
 
   const checkout = () => {
@@ -38,6 +57,11 @@ const OrderPage = () => {
 
   const deleteOrder = () => {
     console.log('deleteOrder');
+    setEditStatus(false);
+  };
+
+  const cancelOrder = () => {
+    console.log('cancelOrder');
     setEditStatus(false);
   };
 
@@ -57,9 +81,18 @@ const OrderPage = () => {
   };
 
   const backToMyOrders = () => {
-    console.log(`/orders/${userData._id}`);
     navigate(`/orders/${userData._id}`);
   };
+
+  const column = [
+    { heading: '', value: '' },
+    { heading: 'Product', value: 'product.title' },
+    { heading: 'Price', value: 'product.price' },
+    { heading: 'Quantity', value: 'productQuantity' },
+    { heading: 'Total', value: 'totalPrice' },
+  ];
+
+  const classname = '';
 
   return (
     <div className='OrderPage'>
@@ -74,8 +107,13 @@ const OrderPage = () => {
       <OrderContainer orderData={orderData}></OrderContainer>
       <OrderDetails
         orderData={orderData}
+        dataTable={dataTable}
         editStatus={editStatus}
       ></OrderDetails>
+      <div className='order-div'>
+        <Table data={dataTable} column={column} classname={classname}></Table>
+      </div>
+
       <div className='order-page-buttons'>
         {/* <Button onClick={saveOrder}>
           Save Order{' '}
@@ -96,7 +134,7 @@ const OrderPage = () => {
             />
           </Button>
         )} */}
-        <Button size='order-buttons' onClick={deleteOrder}>
+        <Button size='order-buttons' onClick={cancelOrder}>
           Cancel Order{' '}
           <img
             className='icon-button'
