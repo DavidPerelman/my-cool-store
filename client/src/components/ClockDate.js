@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 const ClockDate = () => {
-  const [date, setDate] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
+
+  setInterval(() => {
+    setCurrentTime(new Date().toLocaleTimeString());
+  }, 6000);
 
   const getFullDate = () => {
     const today = new Date();
@@ -20,13 +26,7 @@ const ClockDate = () => {
   getFullDate();
 
   const renderClcok = () => {
-    let options = { hour: 'numeric', minute: '2-digit' };
-
-    if (date.getHours() < 10) {
-      return `0${date.toLocaleString('he-IL', options)} ${getFullDate()}`;
-    } else {
-      return `${date.toLocaleString('he-IL', options)} ${getFullDate()}`;
-    }
+    return `${currentTime.slice(0, 5)} ${getFullDate()}`;
   };
 
   return (

@@ -4,7 +4,6 @@ import TableRow from './TableRow';
 import './Table.css';
 
 const Table = ({ data, onClick, column }) => {
-  console.log(onClick);
   return (
     <div>
       {(!data && (

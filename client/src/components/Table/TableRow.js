@@ -1,6 +1,4 @@
-import React, { useState, useReducer } from 'react';
-import { reducer } from '../../services/TableClicksReducer';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 // function declartion vs function expression
 //myTimer(100).then(() => console.log('after timer'))
@@ -8,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const TableRow = ({ item, column, onClick, id }) => {
   return (
-    <tr>
+    <tr className='row-data'>
       {column.map((columnItem, i) => {
         return (
           <td

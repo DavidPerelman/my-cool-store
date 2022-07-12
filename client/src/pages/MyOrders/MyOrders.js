@@ -17,7 +17,6 @@ const MyOrders = () => {
   }, []);
 
   const goToOrder = async (orderId) => {
-    console.log(orderId);
     navigate(`/order/${orderId}`);
   };
 

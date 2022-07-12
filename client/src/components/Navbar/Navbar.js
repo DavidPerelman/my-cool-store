@@ -6,19 +6,20 @@ import ClockDate from '../ClockDate';
 import './Navbar.css';
 
 const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
+
+  setInterval(() => {
+    setCurrentTime(new Date().toLocaleTimeString());
+  }, 1000);
+
   const navigate = useNavigate();
   const [active, setActive] = useState(true);
 
   const brandTitleClick = () => {
     navigate('/');
   };
-
-  const today = new Date();
-  const date =
-    today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
-  const time =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  const dateTime = date + ' ' + time;
 
   return (
     <nav className='navbar'>
