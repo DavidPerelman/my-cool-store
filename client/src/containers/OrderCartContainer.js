@@ -7,7 +7,7 @@ import OrdersServices from '../services/OrdersServices';
 
 const OrderCartContainer = () => {
   const navigate = useNavigate();
-  const { cartItems, itemsPrice, itemsQuantity } = useCart();
+  const { cartItems, itemsPrice, itemsQuantity, clearCartItem } = useCart();
   const { loggedIn, userData } = useContext(AuthContext);
 
   const order = async () => {
@@ -27,8 +27,10 @@ const OrderCartContainer = () => {
     };
 
     try {
+      console.log(cartItems);
       const res = await OrdersServices.createOrder(orderData);
       const orderId = res;
+      clearCartItem();
       navigate(`/order/${orderId}`);
     } catch (err) {
       console.log(err);
