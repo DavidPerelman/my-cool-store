@@ -33,7 +33,7 @@ const MyOrders = () => {
   };
 
   const column = [
-    { heading: '', value: '' },
+    { heading: 'No.', value: '' },
     { heading: 'Order Number', value: 'orderNumber' },
     { heading: 'Date', value: 'created' },
     { heading: 'Status', value: 'status' },

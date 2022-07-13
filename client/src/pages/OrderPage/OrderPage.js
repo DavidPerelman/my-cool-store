@@ -85,7 +85,7 @@ const OrderPage = () => {
   };
 
   const column = [
-    { heading: '', value: '' },
+    { heading: 'No.', value: '' },
     { heading: 'Product', value: 'product.title' },
     { heading: 'Price', value: 'product.price' },
     { heading: 'Quantity', value: 'productQuantity' },
