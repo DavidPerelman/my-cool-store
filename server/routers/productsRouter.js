@@ -17,8 +17,6 @@ router.get('/product/:productId', async (req, res) => {
   try {
     const productId = req.params.productId;
 
-    console.log(productId);
-
     // get single product
     const product = await Product.findById(productId).exec();
 
@@ -36,7 +34,6 @@ router.post('/createProduct', async (req, res) => {
         console.error(err);
         return;
       }
-      console.log(data);
     });
   } catch (err) {
     console.error(err);

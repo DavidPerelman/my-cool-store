@@ -81,7 +81,6 @@ router.post('/category', async (req, res) => {
         console.error(err);
         return;
       }
-      console.log(data);
     });
   } catch (err) {
     console.error(err);

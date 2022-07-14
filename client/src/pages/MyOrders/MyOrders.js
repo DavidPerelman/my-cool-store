@@ -38,6 +38,7 @@ const MyOrders = () => {
     { heading: 'Date', value: 'created' },
     { heading: 'Status', value: 'status' },
     { heading: 'Payment', value: 'totalPayment' },
+    // { heading: 'Delete', value: '' },
   ];
 
   const classname = 'row-data';

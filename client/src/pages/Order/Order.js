@@ -20,39 +20,87 @@ import OrderFunctions, {
   editOrder,
   cancelChanges,
 } from '../../services/OrderFunctions';
+import MyTable from '../../components/MyTable/MyTable';
 
 const Order = () => {
   const navigate = useNavigate();
-  const { orderId } = useParams();
   const { userData } = useContext(AuthContext);
-
-  const [tableData, setTableData] = useState(null);
+  const [dataTable, setDataTable] = useState(null);
+  const { orderId } = useParams();
   const [orderData, setOrderData] = useState(null);
 
   useEffect(() => {
     OrdersServices.getOrder(orderId).then((data) => {
-      setTimeout(() => {
-        setOrderData(data.order);
-        const order = dataTableParse('order', data.order.products);
-        setTableData({ data: order, type: 'order' });
-      }, 1000);
+      setOrderData(data.order);
+      setDataTable(data.order.products);
     });
   }, []);
-
-  const column = [
-    { heading: 'Order Number' },
-    { heading: 'Date' },
-    { heading: 'Status' },
-    { heading: 'Payment' },
-  ];
-
-  console.log(column);
-  const tableHeaders = ['Product', 'Price', 'Quantity', 'Total'];
-  const keys = ['title', 'price', 'productQuantity', 'totalPayment'];
 
   const backToMyOrders = () => {
     console.log(`/orders/${userData._id}`);
     navigate(`/orders/${userData._id}`);
+  };
+
+  const decrement = (product) => {
+    const productId = product.product._id;
+    let updatedProducts = dataTable.map((product) => {
+      if (product.productQuantity > 1) {
+        if (product.product._id === productId) {
+          return { ...product, productQuantity: product.productQuantity - 1 };
+        }
+      }
+      return product;
+    });
+
+    setDataTable(updatedProducts);
+  };
+
+  const increment = (product) => {
+    const productId = product.product._id;
+    let updatedProducts = dataTable.map((product) => {
+      if (product.productQuantity < 99) {
+        if (product.product._id === productId) {
+          return { ...product, productQuantity: product.productQuantity + 1 };
+        }
+      }
+      return product;
+    });
+
+    setDataTable(updatedProducts);
+  };
+
+  const renderHeader = () => {
+    let headerData = ['No.', 'Product', 'Price', 'Quantity', 'Total'];
+
+    return headerData.map((key, i) => {
+      return <th key={i}>{key.toUpperCase()}</th>;
+    });
+  };
+
+  const renderBody = () => {
+    return (
+      dataTable &&
+      dataTable.map((product, i) => {
+        console.log(product);
+        return (
+          <tr key={i}>
+            <td>{i + 1}</td>
+            <td>{product.product.title}</td>
+            <td>{product.product.price}$</td>
+            <td>
+              <Button size='circle-button' onClick={() => decrement(product)}>
+                -
+              </Button>{' '}
+              {product.productQuantity}{' '}
+              <Button size='circle-button' onClick={() => increment(product)}>
+                +
+              </Button>
+            </td>
+            <td>{product.product.price * product.productQuantity}$</td>
+          </tr>
+        );
+      })
+    );
   };
 
   return (
@@ -67,12 +115,7 @@ const Order = () => {
       </Button>
       <OrderContainer orderData={orderData}></OrderContainer>
       <div className='order-div'>
-        <Table
-          data={tableData}
-          // rowClick={rowClick}
-          keys={keys}
-          tableHeaders={tableHeaders}
-        ></Table>
+        <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
       </div>
 
       {/* <Button onClick={deleteOrder}>

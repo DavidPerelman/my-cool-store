@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../components/Button/Button';
-// import Button from '../components/trash/Button/Button';
 import { useCart } from '../context/cartContext';
 
 const CartQuantityCounter = ({ item }) => {

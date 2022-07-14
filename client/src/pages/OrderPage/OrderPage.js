@@ -14,6 +14,7 @@ import EditIcon from '../../asset/edit-icon.png';
 import './OrderPage.css';
 import AuthContext from '../../context/authContext';
 import Table from '../../components/Table/Table';
+import MyTable from '../../components/MyTable/MyTable';
 
 const OrderPage = () => {
   const navigate = useNavigate();
@@ -111,7 +112,7 @@ const OrderPage = () => {
         editStatus={editStatus}
       ></OrderDetails>
       <div className='order-div'>
-        <Table data={dataTable} column={column} classname={classname}></Table>
+        {/* <Table data={dataTable} column={column} classname={classname}></Table> */}
       </div>
 
       <div className='order-page-buttons'>
