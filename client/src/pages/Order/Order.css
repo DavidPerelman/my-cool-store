@@ -45,3 +45,12 @@ td, th {
   padding-right: 10px;
   padding-left: 10px;
 }
+
+td:empty {
+  border: 0;
+  background-color: #ffff;
+}
+
+tfoot {
+  background-color: #dddddd;
+}

@@ -64,12 +64,11 @@ const Order = () => {
   };
 
   const cancelChanges = () => {
-    setChangesHappend(false);
     OrdersServices.getOrder(orderId).then((data) => {
       setOrderData(data.order);
       setDataTable(data.order.products);
     });
-    console.log('saveChanges');
+    setChangesHappend(false);
   };
 
   const saveChanges = () => {
@@ -107,6 +106,31 @@ const Order = () => {
     );
   };
 
+  const renderFooter = () => {
+    let sumQuantity = 0;
+    let sumPrice = 0;
+
+    dataTable &&
+      dataTable.forEach((product) => {
+        sumQuantity += product.productQuantity;
+      });
+
+    dataTable &&
+      dataTable.forEach((product) => {
+        sumPrice += product.product.price * product.productQuantity;
+      });
+
+    return (
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td colSpan='1'>{sumQuantity}$</td>
+        <td>{sumPrice}$</td>
+      </tr>
+    );
+  };
+
   return (
     <div className='OrderPage'>
       <Button onClick={backToMyOrders} size={'my-orders-button'}>
@@ -119,7 +143,11 @@ const Order = () => {
       </Button>
       <OrderContainer orderData={orderData}></OrderContainer>
       <div className='order-div'>
-        <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
+        <MyTable
+          renderHeader={renderHeader}
+          renderBody={renderBody}
+          renderFooter={renderFooter}
+        ></MyTable>
       </div>
       <div className='order-buttons-control'>
         <div className='order-page-buttons'>
