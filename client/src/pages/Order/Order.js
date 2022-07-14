@@ -8,18 +8,15 @@ import AuthContext from '../../context/authContext';
 import OrderContainer from '../../containers/OrderContainer';
 import OrderDetails from '../../containers/OrderDetails';
 import SaveIcon from '../../asset/save-icon.png';
+import CancelChangesIcon from '../../asset/cancel-changes-icon.png';
 import DeleteIcon from '../../asset/delete-icon.png';
 import CreditCardIcon from '../../asset/credit-card-icon.png';
 import BackIcon from '../../asset/back-icon.png';
-import CancelChangesIcon from '../../asset/cancel-changes-icon.png';
-import EditIcon from '../../asset/edit-icon.png';
-import OrderFunctions, {
-  checkout,
-  deleteOrder,
-  saveOrder,
-  editOrder,
-  cancelChanges,
-} from '../../services/OrderFunctions';
+import {
+  increment,
+  decrement,
+  renderHeader,
+} from '../../utils/orderTableUtils';
 import MyTable from '../../components/MyTable/MyTable';
 
 const Order = () => {
@@ -41,58 +38,49 @@ const Order = () => {
     navigate(`/orders/${userData._id}`);
   };
 
-  const decrement = (product) => {
-    const productId = product.product._id;
-    let updatedProducts = dataTable.map((product) => {
-      if (product.productQuantity > 1) {
-        if (product.product._id === productId) {
-          return { ...product, productQuantity: product.productQuantity - 1 };
-        }
-      }
-      return product;
-    });
-
+  const decrementProductQuantity = async (dataTable, product) => {
+    const updatedProducts = await decrement(dataTable, product);
     setDataTable(updatedProducts);
   };
 
-  const increment = (product) => {
-    const productId = product.product._id;
-    let updatedProducts = dataTable.map((product) => {
-      if (product.productQuantity < 99) {
-        if (product.product._id === productId) {
-          return { ...product, productQuantity: product.productQuantity + 1 };
-        }
-      }
-      return product;
-    });
-
+  const incrementProductQuantity = async (dataTable, product) => {
+    const updatedProducts = await increment(dataTable, product);
     setDataTable(updatedProducts);
   };
 
-  const renderHeader = () => {
-    let headerData = ['No.', 'Product', 'Price', 'Quantity', 'Total'];
+  const cancelOrder = () => {
+    console.log('cancelOrder');
+  };
 
-    return headerData.map((key, i) => {
-      return <th key={i}>{key.toUpperCase()}</th>;
-    });
+  const deleteOrder = () => {
+    console.log('deleteOrder');
+  };
+
+  const checkout = () => {
+    console.log('checkout');
   };
 
   const renderBody = () => {
     return (
       dataTable &&
       dataTable.map((product, i) => {
-        console.log(product);
         return (
           <tr key={i}>
             <td>{i + 1}</td>
             <td>{product.product.title}</td>
             <td>{product.product.price}$</td>
             <td>
-              <Button size='circle-button' onClick={() => decrement(product)}>
+              <Button
+                size='circle-button'
+                onClick={() => decrementProductQuantity(dataTable, product)}
+              >
                 -
               </Button>{' '}
               {product.productQuantity}{' '}
-              <Button size='circle-button' onClick={() => increment(product)}>
+              <Button
+                size='circle-button'
+                onClick={() => incrementProductQuantity(dataTable, product)}
+              >
                 +
               </Button>
             </td>
@@ -117,27 +105,28 @@ const Order = () => {
       <div className='order-div'>
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
       </div>
-
-      {/* <Button onClick={deleteOrder}>
-        Cancel Order{' '}
-        <img
-          className='icon-button'
-          src={CancelChangesIcon}
-          alt='CancelChangesIcon'
-        />
-      </Button>
-      <Button onClick={deleteOrder}>
-        Delete Order{' '}
-        <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
-      </Button>
-      <Button onClick={checkout}>
-        Check Out{' '}
-        <img
-          className='icon-button'
-          src={CreditCardIcon}
-          alt='CreditCardIcon'
-        />
-      </Button> */}
+      <div className='order-page-buttons'>
+        <Button onClick={cancelOrder}>
+          Cancel Order{' '}
+          <img
+            className='icon-button'
+            src={CancelChangesIcon}
+            alt='CancelChangesIcon'
+          />
+        </Button>
+        <Button onClick={deleteOrder}>
+          Delete Order{' '}
+          <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
+        </Button>
+        <Button onClick={checkout}>
+          Check Out{' '}
+          <img
+            className='icon-button'
+            src={CreditCardIcon}
+            alt='CreditCardIcon'
+          />
+        </Button>
+      </div>
     </div>
   );
 };
