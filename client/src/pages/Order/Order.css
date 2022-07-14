@@ -54,3 +54,7 @@ td:empty {
 tfoot {
   background-color: #dddddd;
 }
+
+.quantity-table-data-cell {
+  padding: 0;
+}

@@ -84,7 +84,7 @@ const Order = () => {
             <td>{i + 1}</td>
             <td>{product.product.title}</td>
             <td>{product.product.price}$</td>
-            <td>
+            <td className='quantity-table-data-cell'>
               <Button
                 size='circle-button'
                 onClick={() => decrementProductQuantity(dataTable, product)}
