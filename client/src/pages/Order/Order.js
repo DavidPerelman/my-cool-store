@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
 import OrdersServices from '../../services/OrdersServices';
-import { dataTableParse } from '../../utils/tablesUtils';
 import AuthContext from '../../context/authContext';
 import OrderContainer from '../../containers/OrderContainer';
 import OrderDetails from '../../containers/OrderDetails';
@@ -18,13 +17,15 @@ import {
   renderHeader,
 } from '../../utils/orderTableUtils';
 import MyTable from '../../components/MyTable/MyTable';
+import './Order.css';
 
 const Order = () => {
   const navigate = useNavigate();
+  const { orderId } = useParams();
   const { userData } = useContext(AuthContext);
   const [dataTable, setDataTable] = useState(null);
-  const { orderId } = useParams();
   const [orderData, setOrderData] = useState(null);
+  const [changesHappend, setChangesHappend] = useState(false);
 
   useEffect(() => {
     OrdersServices.getOrder(orderId).then((data) => {
@@ -39,11 +40,13 @@ const Order = () => {
   };
 
   const decrementProductQuantity = async (dataTable, product) => {
+    setChangesHappend(true);
     const updatedProducts = await decrement(dataTable, product);
     setDataTable(updatedProducts);
   };
 
   const incrementProductQuantity = async (dataTable, product) => {
+    setChangesHappend(true);
     const updatedProducts = await increment(dataTable, product);
     setDataTable(updatedProducts);
   };
@@ -58,6 +61,19 @@ const Order = () => {
 
   const checkout = () => {
     console.log('checkout');
+  };
+
+  const cancelChanges = () => {
+    setChangesHappend(false);
+    OrdersServices.getOrder(orderId).then((data) => {
+      setOrderData(data.order);
+      setDataTable(data.order.products);
+    });
+    console.log('saveChanges');
+  };
+
+  const saveChanges = () => {
+    console.log('saveChanges');
   };
 
   const renderBody = () => {
@@ -105,27 +121,41 @@ const Order = () => {
       <div className='order-div'>
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
       </div>
-      <div className='order-page-buttons'>
-        <Button onClick={cancelOrder}>
-          Cancel Order{' '}
-          <img
-            className='icon-button'
-            src={CancelChangesIcon}
-            alt='CancelChangesIcon'
-          />
-        </Button>
-        <Button onClick={deleteOrder}>
-          Delete Order{' '}
-          <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
-        </Button>
-        <Button onClick={checkout}>
-          Check Out{' '}
-          <img
-            className='icon-button'
-            src={CreditCardIcon}
-            alt='CreditCardIcon'
-          />
-        </Button>
+      <div className='order-buttons-control'>
+        <div className='order-page-buttons'>
+          <Button onClick={cancelOrder}>
+            Cancel Order{' '}
+            <img
+              className='icon-button'
+              src={CancelChangesIcon}
+              alt='CancelChangesIcon'
+            />
+          </Button>
+          <Button onClick={deleteOrder}>
+            Delete Order{' '}
+            <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
+          </Button>
+          <Button onClick={checkout}>
+            Check Out{' '}
+            <img
+              className='icon-button'
+              src={CreditCardIcon}
+              alt='CreditCardIcon'
+            />
+          </Button>
+        </div>
+        {(changesHappend && (
+          <div className='order-changes-buttons'>
+            <Button onClick={cancelChanges}>
+              Cancel Changes{' '}
+              <img className='icon-button' src={SaveIcon} alt='SaveIcon' />
+            </Button>
+            <Button onClick={saveChanges}>
+              Save Changes{' '}
+              <img className='icon-button' src={SaveIcon} alt='SaveIcon' />
+            </Button>
+          </div>
+        )) || <div></div>}
       </div>
     </div>
   );

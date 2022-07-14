@@ -38,3 +38,10 @@ td, th {
   padding: 6px;
   color: #ffff;
 }
+
+.order-buttons-control {
+  gap: 6px;
+  display: grid;
+  padding-right: 10px;
+  padding-left: 10px;
+}
