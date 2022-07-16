@@ -39,7 +39,7 @@ const Router = () => {
               }
             />
             <Route path='/product/:productId' element={<ProductPage />} />
-            <Route path='/registerConfirm' element={<RegisterConfirm />} />
+            <Route path='/confirmRegister' element={<RegisterConfirm />} />
             <Route
               path='/registerSuccess/:userName'
               element={<RegisterSuccess />}

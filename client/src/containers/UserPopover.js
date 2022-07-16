@@ -32,18 +32,14 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
   }, [100]);
 
   const login = () => {
-    console.log(
-      (document.getElementsByClassName('user-content')[0].style.visibility =
-        'hidden')
-    );
+    document.getElementsByClassName('user-content')[0].style.visibility =
+      'hidden';
     setLoginModalOpen(true);
   };
 
   const register = () => {
-    console.log(
-      (document.getElementsByClassName('user-content')[0].style.visibility =
-        'hidden')
-    );
+    document.getElementsByClassName('user-content')[0].style.visibility =
+      'hidden';
     setRegisterModalOpen(true);
   };
 
