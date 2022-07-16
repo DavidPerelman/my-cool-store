@@ -18,7 +18,7 @@ const RegisterSuccess = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '20px' }}>
       <h1>Register Success!</h1>
       <p>Thank you {userName} for subscribing to our site!</p>
       <div style={{ marginTop: '20px' }}>
