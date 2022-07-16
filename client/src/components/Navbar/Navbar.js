@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CartPopover from '../../containers/CartPopover';
 import UserPopover from '../../containers/UserPopover';
+import AuthContext from '../../context/authContext';
 import ClockDate from '../ClockDate';
 import './Navbar.css';
 
-const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
+const Navbar = ({ setRegisterSuccess }) => {
+  const { loggedIn, userData } = useContext(AuthContext);
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString()
   );
@@ -45,7 +47,7 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
         <div className='navbar-input-div'>
           <input className='navbar-input' />
         </div>
-        {(loggedIn && (
+        {loggedIn && (
           <>
             <p className='greet-user'>Hello {userData.firstName}</p>
             <ul>
@@ -65,7 +67,8 @@ const Navbar = ({ loggedIn, userData, setRegisterSuccess }) => {
               </li>
             </ul>
           </>
-        )) || (
+        )}
+        {loggedIn === undefined && (
           <>
             <ul>
               <p className='greet-user'>Hello Guest</p>

@@ -5,6 +5,8 @@ const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
   const [loggedIn, setLoggedIn] = useState(undefined);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [userData, setUserData] = useState(undefined);
 
   const getLoggedIn = async () => {
@@ -22,7 +24,16 @@ const AuthContextProvider = (props) => {
 
   return (
     <AuthContext.Provider
-      value={{ loggedIn, setLoggedIn, getLoggedIn, userData }}
+      value={{
+        loggedIn,
+        setLoggedIn,
+        getLoggedIn,
+        userData,
+        loginModalOpen,
+        setLoginModalOpen,
+        registerModalOpen,
+        setRegisterModalOpen,
+      }}
     >
       {props.children}
     </AuthContext.Provider>

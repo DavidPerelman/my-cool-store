@@ -9,17 +9,9 @@ import Navbar from './components/Navbar/Navbar';
 
 axios.defaults.withCredentials = true;
 
-function App({ loggedIn, userData }) {
-  const [registerSuccess, setRegisterSuccess] = useState(false);
-
+function App() {
   return (
     <>
-      {/* <Navbar
-        sticky='top'
-        loggedIn={loggedIn}
-        setRegisterSuccess={setRegisterSuccess}
-        userData={userData}
-      ></Navbar> */}
       <ProductsContextProvider>
         <CartProvider>
           <div className='App'>

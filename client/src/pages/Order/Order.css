@@ -46,10 +46,10 @@ td, th {
   padding-left: 10px;
 }
 
-td:empty {
+/* td:empty {
   border: 0;
   background-color: #ffff;
-}
+} */
 
 tfoot {
   background-color: #dddddd;

@@ -6,14 +6,15 @@ import AuthContext from '../../context/authContext';
 import { useCart } from '../../context/cartContext';
 import ProductsServices from '../../services/ProductsServices';
 import LoadingGif from '../../asset/loading-gif.gif';
+import LoginConatiner from '../../containers/LoginConatiner/LoginConatiner';
 import './ProductPage.css';
+import RegisterContainer from '../../containers/RegisterContainer';
 
 const ProductPage = () => {
   const { cartItems, addCartItem, removeCartItem, checkIfExistInCart } =
     useCart();
   let { productId } = useParams();
-  const { loggedIn } = useContext(AuthContext);
-  // const { checkIfExistInCart } = useContext(ProductsContext);
+  const { loginModalOpen, registerModalOpen } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
@@ -21,15 +22,6 @@ const ProductPage = () => {
       setProduct(data.product);
     });
   }, []);
-
-  // function checkIfExistInCart() {
-  //   for (let i = 0; i < cartItems.length; i++) {
-  //     if (cartItems[i].product['_id'] === productId) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
 
   const existInCart = checkIfExistInCart(productId);
 
@@ -80,6 +72,8 @@ const ProductPage = () => {
         //   </div>
         // </div>
       )}
+      {loginModalOpen && <LoginConatiner></LoginConatiner>}
+      {registerModalOpen && <RegisterContainer></RegisterContainer>}
     </div>
   );
 };

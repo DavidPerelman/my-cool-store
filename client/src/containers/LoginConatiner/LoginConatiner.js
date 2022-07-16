@@ -1,18 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
-import Button from '../../components/Button/Button';
 import Form from '../../components/Form';
 import { isFormFieldsValid, isValidEmail } from '../../utils/formValidation';
 import AuthService from '../../services/AuthServices';
 import AuthContext from '../../context/authContext';
 import './LoginConatiner.css';
 
-const LoginConatiner = () => {
-  const { getLoggedIn, loggedIn } = useContext(AuthContext);
+const LoginConatiner = ({ redirect }) => {
+  const { getLoggedIn, setLoginModalOpen } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [error, setError] = useState('');
 
   const [loginData, setLoginData] = useState({
@@ -27,9 +26,9 @@ const LoginConatiner = () => {
     });
   };
 
-  const handleShow = () => setShow(true);
   const handleClose = () => {
     clearFormFields();
+    setLoginModalOpen(false);
     setShow(false);
   };
 
@@ -48,6 +47,8 @@ const LoginConatiner = () => {
   };
 
   const login = async () => {
+    console.log(redirect);
+
     if (!isFormFieldsValid(loginData)) return showError('all fields required!');
 
     if (!isValidEmail(loginData.email)) return showError('invalid email!');
@@ -65,31 +66,14 @@ const LoginConatiner = () => {
 
     setShow(false);
     await getLoggedIn();
-    // navigate('/');
-  };
 
-  useEffect(() => {
-    if (!loggedIn) {
-      setTimeout(() => {
-        if (show) {
-          document
-            .getElementsByClassName('user-popover')[0]
-            .lastChild.classList.add('keep-show-modal');
-        }
-        if (!show) {
-          document
-            .getElementsByClassName('user-popover')[0]
-            .lastChild.classList.remove('keep-show-modal');
-        }
-      }, 100);
+    if (redirect) {
+      navigate('/');
     }
-  }, [show]);
+  };
 
   return (
     <>
-      <Button size='user-buttons' color='button--primary' onClick={handleShow}>
-        Login
-      </Button>
       {show && (
         <Modal
           show={show}

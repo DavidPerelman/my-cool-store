@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import AuthService from '../services/AuthServices';
 import {
   isFormFieldsValid,
   isValidPassword,
   isValidEmail,
-  isLoginFormFieldsValid,
 } from '../utils/formValidation';
 import Form from '../components/Form';
 import Modal from '../components/Modal/Modal';
-import Button from '../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/authContext';
 
-const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
-  const [show, setShow] = useState(false);
+const RegisterContainer = () => {
+  const navigate = useNavigate();
+  const [show, setShow] = useState(true);
   const [error, setError] = useState('');
+  const { setRegisterModalOpen } = useContext(AuthContext);
 
   const [registerData, setRegisterData] = useState({
     firstName: '',
@@ -32,6 +34,7 @@ const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
   const handleShow = () => setShow(true);
   const handleClose = () => {
     clearFormFields();
+    setRegisterModalOpen(false);
     setShow(false);
   };
 
@@ -65,8 +68,8 @@ const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
       if (!res.data) {
         showError(res);
       } else if (res.data.success) {
-        setRegisterSuccess(true);
         handleClose();
+        navigate('/confirmRegister');
       }
     } catch (err) {
       console.log(err);
@@ -74,28 +77,8 @@ const RegisterContainer = ({ setRegisterSuccess, loggedIn }) => {
     }
   };
 
-  useEffect(() => {
-    if (!loggedIn) {
-      setTimeout(() => {
-        if (show) {
-          document
-            .getElementsByClassName('user-popover')[0]
-            .lastChild.classList.add('keep-show-modal');
-        }
-        if (!show) {
-          document
-            .getElementsByClassName('user-popover')[0]
-            .lastChild.classList.remove('keep-show-modal');
-        }
-      }, 100);
-    }
-  }, [show]);
-
   return (
     <>
-      <Button size='user-buttons' color='button--primary' onClick={handleShow}>
-        Register
-      </Button>
       {show && (
         <Modal
           show={show}

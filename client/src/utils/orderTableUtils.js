@@ -40,7 +40,7 @@ const renderHeader = () => {
   let headerData = ['No.', 'Product', 'Price', 'Quantity', 'Total'];
 
   return headerData.map((key, i) => {
-    return <th key={i}>{key.toUpperCase()}</th>;
+    return <th key={i}>{key}</th>;
   });
 };
 

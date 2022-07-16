@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import user from '../asset/user.png';
 import MyPopover from '../components/MyPopover/MyPopover';
-import RegisterContainer from './RegisterContainer';
-import LoginConatiner from './LoginConatiner/LoginConatiner';
 import LogoutConatiner from './LogoutConatiner';
 import MyOrders from '../pages/MyOrders/MyOrders';
 import Button from '../components/Button/Button';
+import AuthContext from '../context/authContext';
 
 const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
   const navigate = useNavigate();
+  const { setLoginModalOpen, setRegisterModalOpen } = useContext(AuthContext);
 
   const goToMyOrders = () => {
     const userContentPopover = (document.getElementsByClassName(
@@ -31,6 +31,22 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
     });
   }, [100]);
 
+  const login = () => {
+    console.log(
+      (document.getElementsByClassName('user-content')[0].style.visibility =
+        'hidden')
+    );
+    setLoginModalOpen(true);
+  };
+
+  const register = () => {
+    console.log(
+      (document.getElementsByClassName('user-content')[0].style.visibility =
+        'hidden')
+    );
+    setRegisterModalOpen(true);
+  };
+
   return (
     <MyPopover
       type='user'
@@ -48,14 +64,20 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
         </>
       )) || (
         <>
-          <RegisterContainer
+          {/* <RegisterContainer
             loggedIn={loggedIn}
             setRegisterSuccess={setRegisterSuccess}
-          ></RegisterContainer>
-          <LoginConatiner
+          ></RegisterContainer> */}
+          <Button size='user-buttons' onClick={register}>
+            Register
+          </Button>
+          <Button size='user-buttons' onClick={login}>
+            Login
+          </Button>
+          {/* <LoginConatiner
             setRegisterSuccess={setRegisterSuccess}
             loggedIn={loggedIn}
-          ></LoginConatiner>
+          ></LoginConatiner> */}
         </>
       )}
     </MyPopover>

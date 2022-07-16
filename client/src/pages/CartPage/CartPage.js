@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ProductContainer from '../../components/ProductContainer';
+import LoginConatiner from '../../containers/LoginConatiner/LoginConatiner';
 import OrderCartContainer from '../../containers/OrderCartContainer';
+import RegisterContainer from '../../containers/RegisterContainer';
+import AuthContext from '../../context/authContext';
 import { useCart } from '../../context/cartContext';
 import './CartPage.css';
 
 const CartPage = () => {
   const { itemsPrice, itemsQuantity, addCartItem, cartItems } = useCart();
+  const { loginModalOpen, registerModalOpen } = useContext(AuthContext);
 
   return (
     <div>
@@ -29,6 +33,8 @@ const CartPage = () => {
             })}
           </div>
         ))}
+      {loginModalOpen && <LoginConatiner></LoginConatiner>}
+      {registerModalOpen && <RegisterContainer></RegisterContainer>}
     </div>
   );
 };

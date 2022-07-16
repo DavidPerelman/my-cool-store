@@ -7,10 +7,14 @@ import Button from '../../components/Button/Button';
 import LoadingGif from '../../asset/loading-gif.gif';
 import Container from '../../components/Container/Container';
 import Card from '../../components/Card/Card';
+import AuthContext from '../../context/authContext';
+import LoginConatiner from '../../containers/LoginConatiner/LoginConatiner';
+import RegisterContainer from '../../containers/RegisterContainer';
 
 const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();
   const { cardButtonClick } = useContext(ProductsContext);
+  const { loginModalOpen, registerModalOpen } = useContext(AuthContext);
   const [products, setProducts] = useState(null);
   const [nextPage, setNextPage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -46,50 +50,54 @@ const CategoryProductsPage = () => {
   };
 
   return (
-    <Container>
-      <h1>{categoryName}</h1>
-      {(!products && (
-        <div className='loading-gif'>
-          <img src={LoadingGif} alt='loading...' />
-        </div>
-      )) || (
-        <div className='categoryProductsPage-container'>
-          {products.map((product, i) => {
-            return (
-              <Card key={i} img={product.images[0]} title={product.title}>
-                <div className='title-div'>
-                  <h5>{product.title}</h5>
-                </div>
-                <div className='price-div'>
-                  <p className='bold-text'>Price:</p>
-                  <p>{product.price}$</p>
-                </div>
+    <>
+      <Container>
+        <h1>{categoryName}</h1>
+        {(!products && (
+          <div className='loading-gif'>
+            <img src={LoadingGif} alt='loading...' />
+          </div>
+        )) || (
+          <div className='categoryProductsPage-container'>
+            {products.map((product, i) => {
+              return (
+                <Card key={i} img={product.images[0]} title={product.title}>
+                  <div className='title-div'>
+                    <h5>{product.title}</h5>
+                  </div>
+                  <div className='price-div'>
+                    <p className='bold-text'>Price:</p>
+                    <p>{product.price}$</p>
+                  </div>
 
-                <Button
-                  onClick={() => {
-                    cardButtonClick(product._id);
-                  }}
-                >
-                  Details & Buying
-                </Button>
-              </Card>
-            );
-          })}
-        </div>
-      )}
-      {loading && (
-        <div style={{ marginTop: '10px' }}>
-          <Button
-            size='order-buttons'
-            color='button--primary'
-            className='more-products-button'
-            onClick={loadMoreProducts}
-          >
-            More Products
-          </Button>
-        </div>
-      )}
-    </Container>
+                  <Button
+                    onClick={() => {
+                      cardButtonClick(product._id);
+                    }}
+                  >
+                    Details & Buying
+                  </Button>
+                </Card>
+              );
+            })}
+          </div>
+        )}
+        {loading && (
+          <div style={{ marginTop: '10px' }}>
+            <Button
+              size='order-buttons'
+              color='button--primary'
+              className='more-products-button'
+              onClick={loadMoreProducts}
+            >
+              More Products
+            </Button>
+          </div>
+        )}
+      </Container>
+      {loginModalOpen && <LoginConatiner></LoginConatiner>}
+      {registerModalOpen && <RegisterContainer></RegisterContainer>}
+    </>
   );
 };
 

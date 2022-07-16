@@ -122,10 +122,8 @@ const Order = () => {
 
     return (
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td colSpan='1'>{sumQuantity}$</td>
+        <td colSpan='3'></td>
+        <td>{sumQuantity}$</td>
         <td>{sumPrice}$</td>
       </tr>
     );

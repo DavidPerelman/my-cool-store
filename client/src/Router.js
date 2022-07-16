@@ -9,6 +9,8 @@ import CartPage from './pages/CartPage/CartPage';
 import OrderPage from './pages/OrderPage/OrderPage';
 import Order from './pages/Order/Order';
 import MyOrders from './pages/MyOrders/MyOrders';
+import RegisterConfirm from './pages/RegisterConfirm';
+import RegisterSuccess from './pages/RegisterSuccess';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
@@ -36,17 +38,12 @@ const Router = () => {
                 />
               }
             />
-            <Route
-              path='/:status/:userName'
-              element={
-                <Home
-                  loggedIn={loggedIn}
-                  setLoggedIn={setLoggedIn}
-                  userData={userData}
-                />
-              }
-            />
             <Route path='/product/:productId' element={<ProductPage />} />
+            <Route path='/registerConfirm' element={<RegisterConfirm />} />
+            <Route
+              path='/registerSuccess/:userName'
+              element={<RegisterSuccess />}
+            />
             <Route
               path='/category/:categoryName/:categoryId'
               element={<CategoryProductsPage />}

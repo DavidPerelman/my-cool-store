@@ -8,9 +8,6 @@ import './ProductContainer.css';
 const ProductContainer = ({ existInCart, product }) => {
   const { cartItems, addCartItem, removeCartItem } = useCart();
   const { loggedIn } = useContext(AuthContext);
-  console.log(cartItems);
-  console.log(product._id);
-  console.log(cartItems.includes(product._id));
 
   const result = cartItems.filter((item) => item.product._id === product._id);
 
