@@ -38,18 +38,25 @@ const OrderCartContainer = () => {
   };
 
   return (
-    <div className='order-div'>
+    <div className='order-div' style={{ marginBottom: '0' }}>
       <h1>Your Order</h1>
       <div className='order-details'>
-        <div className='order-paragraphs'>
-          <h5>Items Quantity:</h5>{' '}
-          <h5 className='item-quantity-h5'>{itemsQuantity}</h5>
-        </div>
-        <div className='order-paragraphs pay-paragraphs'>
-          <h5>Pay:</h5> <h5>{itemsPrice}$</h5>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div className='order-paragraphs'>
+            <h5>Items Quantity:&nbsp;</h5>{' '}
+            <h5 className='item-quantity-h5' style={{ margin: '0' }}>
+              {itemsQuantity}
+            </h5>
+          </div>
+          <span style={{ marginRight: '10px', marginLeft: '10px' }}>|</span>
+          <div className='order-paragraphs'>
+            <h5>Pay:&nbsp;</h5> <h5>{itemsPrice}$</h5>
+          </div>
         </div>
         {(loggedIn && <Button onClick={order}>Order</Button>) || (
-          <p>You must be logged in to order!</p>
+          <p style={{ color: 'red', marginBottom: '10px' }}>
+            You must be logged in to order!
+          </p>
         )}
       </div>
     </div>

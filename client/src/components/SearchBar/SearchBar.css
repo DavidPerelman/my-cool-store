@@ -1,0 +1,9 @@
+.SearchBar {
+  width: 80%;
+  padding: 12px 20px;
+  align-self: center;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

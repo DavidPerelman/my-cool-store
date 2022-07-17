@@ -10,7 +10,7 @@ import Card from '../../components/Card/Card';
 import AuthContext from '../../context/authContext';
 import LoginConatiner from '../../containers/LoginConatiner/LoginConatiner';
 import RegisterContainer from '../../containers/RegisterContainer';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();

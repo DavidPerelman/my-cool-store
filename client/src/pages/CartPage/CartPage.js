@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ProductContainer from '../../components/ProductContainer';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import LoginConatiner from '../../containers/LoginConatiner/LoginConatiner';
 import OrderCartContainer from '../../containers/OrderCartContainer';
 import RegisterContainer from '../../containers/RegisterContainer';
@@ -26,21 +26,23 @@ const CartPage = () => {
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
-            {cartItems
-              .filter((item) =>
-                item.product.title.toLowerCase().includes(searchQuery)
-              )
-              .map((item, i) => {
-                return (
-                  <div key={i}>
-                    <ProductContainer
-                      product={item.product}
-                      existInCart={true}
-                      addCartItem={addCartItem}
-                    ></ProductContainer>
-                  </div>
-                );
-              })}
+            <div>
+              {cartItems
+                .filter((item) =>
+                  item.product.title.toLowerCase().includes(searchQuery)
+                )
+                .map((item, i) => {
+                  return (
+                    <div key={i}>
+                      <ProductContainer
+                        product={item.product}
+                        existInCart={true}
+                        addCartItem={addCartItem}
+                      ></ProductContainer>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         ))}
       {loginModalOpen && <LoginConatiner></LoginConatiner>}

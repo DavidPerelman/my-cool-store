@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SearchBar.css';
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   const onChange = (e) => {
@@ -13,14 +14,13 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
   };
 
   return (
-    <div>
-      <input
-        placeholder='Search...'
-        onChange={(e) => {
-          onChange(e);
-        }}
-      />
-    </div>
+    <input
+      className='SearchBar'
+      placeholder='Search...'
+      onChange={(e) => {
+        onChange(e);
+      }}
+    />
   );
 };
 
