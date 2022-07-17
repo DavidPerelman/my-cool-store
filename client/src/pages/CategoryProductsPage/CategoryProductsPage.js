@@ -10,6 +10,7 @@ import Card from '../../components/Card/Card';
 import AuthContext from '../../context/authContext';
 import LoginConatiner from '../../containers/LoginConatiner/LoginConatiner';
 import RegisterContainer from '../../containers/RegisterContainer';
+import SearchBar from '../../components/SearchBar';
 
 const CategoryProductsPage = () => {
   let { categoryId, categoryName } = useParams();
@@ -18,6 +19,7 @@ const CategoryProductsPage = () => {
   const [products, setProducts] = useState(null);
   const [nextPage, setNextPage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     setLoading(false);
@@ -58,29 +60,45 @@ const CategoryProductsPage = () => {
             <img src={LoadingGif} alt='loading...' />
           </div>
         )) || (
-          <div className='categoryProductsPage-container'>
-            {products.map((product, i) => {
-              return (
-                <Card key={i} img={product.images[0]} title={product.title}>
-                  <div className='title-div'>
-                    <h5>{product.title}</h5>
-                  </div>
-                  <div className='price-div'>
-                    <p className='bold-text'>Price:</p>
-                    <p>{product.price}$</p>
-                  </div>
+          <>
+            {/* <input
+              placeholder='Search...'
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+              }}
+            /> */}
+            <SearchBar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+            <div className='categoryProductsPage-container'>
+              {products
+                .filter((product) =>
+                  product.title.toLowerCase().includes(searchQuery)
+                )
+                .map((product, i) => {
+                  return (
+                    <Card key={i} img={product.images[0]} title={product.title}>
+                      <div className='title-div'>
+                        <h5>{product.title}</h5>
+                      </div>
+                      <div className='price-div'>
+                        <p className='bold-text'>Price:</p>
+                        <p>{product.price}$</p>
+                      </div>
 
-                  <Button
-                    onClick={() => {
-                      cardButtonClick(product._id);
-                    }}
-                  >
-                    Details & Buying
-                  </Button>
-                </Card>
-              );
-            })}
-          </div>
+                      <Button
+                        onClick={() => {
+                          cardButtonClick(product._id);
+                        }}
+                      >
+                        Details & Buying
+                      </Button>
+                    </Card>
+                  );
+                })}
+            </div>
+          </>
         )}
         {loading && (
           <div style={{ marginTop: '10px' }}>

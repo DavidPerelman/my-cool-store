@@ -61,11 +61,12 @@ const LoginConatiner = ({ redirect }) => {
         return showError(response.response.data);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
 
     setShow(false);
     await getLoggedIn();
+    setLoginModalOpen(false);
 
     if (redirect) {
       navigate('/');
