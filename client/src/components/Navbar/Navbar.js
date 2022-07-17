@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CartPopover from '../../containers/CartPopover';
+import NavbarInput from '../../containers/NavbarInput/NavbarInput';
 import UserPopover from '../../containers/UserPopover';
 import AuthContext from '../../context/authContext';
 import ClockDate from '../ClockDate';
@@ -44,9 +45,15 @@ const Navbar = ({ setRegisterSuccess }) => {
         <span className='bar'></span>
       </a>
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
-        <div className='navbar-input-div'>
-          <input className='navbar-input' />
-        </div>
+        {/* <div className='navbar-input-div'> */}
+        <NavbarInput />
+        {/* <input
+            className='navbar-input'
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
+          /> */}
+        {/* </div> */}
         {loggedIn && (
           <>
             <p className='greet-user'>Hello {userData.firstName}</p>
@@ -69,7 +76,7 @@ const Navbar = ({ setRegisterSuccess }) => {
           </>
         )}
         {loggedIn === undefined && (
-          <>
+          <div style={{ display: 'flex', marginLeft: 'auto' }}>
             <ul>
               <p className='greet-user'>Hello Guest</p>
               <li className='wrapper'>
@@ -87,7 +94,7 @@ const Navbar = ({ setRegisterSuccess }) => {
                 </a>
               </li>
             </ul>
-          </>
+          </div>
         )}
       </div>
     </nav>

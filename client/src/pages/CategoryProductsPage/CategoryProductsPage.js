@@ -29,7 +29,6 @@ const CategoryProductsPage = () => {
           setNextPage(data.next.page);
           setProducts(data.results.products);
           setLoading(true);
-          console.log(data);
         }, 1000);
       }
     );
@@ -71,7 +70,10 @@ const CategoryProductsPage = () => {
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
-            <div className='categoryProductsPage-container'>
+            <div
+              className='categoryProductsPage-container'
+              style={{ marginTop: '15px' }}
+            >
               {products
                 .filter((product) =>
                   product.title.toLowerCase().includes(searchQuery)

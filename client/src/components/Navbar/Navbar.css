@@ -153,6 +153,10 @@
         margin-left: 20px;
         margin-bottom: 5px;
     }
+
+    .wrapper {
+        padding-right: 0px;
+    }
 }
 
 }

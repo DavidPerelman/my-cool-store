@@ -1,4 +1,15 @@
 const ProductsServices = {
+  fetchAllProducts: () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/products/products`).then(
+      (res) => {
+        if (res.status !== 401) {
+          return res.json().then((data) => data);
+        } else {
+          return { message: 'error' };
+        }
+      }
+    );
+  },
   fetchAllProductsByCategory: (categoryId, page, limit) => {
     return fetch(
       `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/products?page=${page}&limit=${limit}`
