@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import ProductContainer from '../../components/ProductContainer';
 import AuthContext from '../../context/authContext';
@@ -16,12 +16,13 @@ const ProductPage = () => {
   let { productId } = useParams();
   const { loginModalOpen, registerModalOpen } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     ProductsServices.fetchProduct(productId).then((data) => {
       setProduct(data.product);
     });
-  }, []);
+  }, [location]);
 
   const existInCart = checkIfExistInCart(productId);
 

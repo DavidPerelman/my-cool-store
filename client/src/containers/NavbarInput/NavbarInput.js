@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ProductsContext from '../../context/productsContext';
 import ProductsServices from '../../services/ProductsServices';
 import './NavbarInput.css';
 
@@ -8,6 +9,7 @@ const NavbarInput = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const { cardButtonClick } = useContext(ProductsContext);
 
   useEffect(() => {
     ProductsServices.fetchAllProducts().then((data) => {
@@ -30,9 +32,11 @@ const NavbarInput = () => {
   };
 
   const productClick = (productId) => {
+    console.log(productId);
     setFilteredData([]);
     setInputValue('');
-    navigate(`/product/${productId}`);
+    navigate(`/product/${productId}`, { replace: true });
+    // cardButtonClick(productId);
   };
 
   return (
@@ -64,22 +68,6 @@ const NavbarInput = () => {
           </div>
         )}
       </div>
-
-      {/* <input
-        className='navbar-input'
-        placeholder='Search...'
-        onChange={(e) => {
-          console.log(e.target.value);
-        }}
-      />
-
-      <div>
-        <p style={{ backgroundColor: 'white', color: 'black' }}>dsd</p>
-      </div>
-
-      <ul className='products-list'>
-        <li style={{ backgroundColor: 'white', color: 'black' }}>dsd</li>
-      </ul> */}
     </>
   );
 };

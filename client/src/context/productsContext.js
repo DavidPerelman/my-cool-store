@@ -17,7 +17,7 @@ const ProductsContextProvider = (props) => {
   }, []);
 
   const cardButtonClick = async (productId) => {
-    navigate(`/product/${productId}`);
+    navigate(`/product/${productId}, { replace: true }`);
   };
 
   return (
