@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import ProductsServices from '../services/ProductsServices';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ const ProductsContextProvider = (props) => {
   }, []);
 
   const cardButtonClick = async (productId) => {
-    navigate(`/product/${productId}, { replace: true }`);
+    navigate(`/product/${productId}`);
   };
 
   return (

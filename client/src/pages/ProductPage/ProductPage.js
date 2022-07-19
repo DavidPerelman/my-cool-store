@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Button from '../../components/Button/Button';
 import ProductContainer from '../../components/ProductContainer';
 import AuthContext from '../../context/authContext';
 import { useCart } from '../../context/cartContext';
@@ -11,8 +10,7 @@ import './ProductPage.css';
 import RegisterContainer from '../../containers/RegisterContainer';
 
 const ProductPage = () => {
-  const { cartItems, addCartItem, removeCartItem, checkIfExistInCart } =
-    useCart();
+  const { addCartItem, checkIfExistInCart } = useCart();
   let { productId } = useParams();
   const { loginModalOpen, registerModalOpen } = useContext(AuthContext);
   const [product, setProduct] = useState(null);

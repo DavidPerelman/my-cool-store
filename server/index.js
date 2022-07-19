@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 app.use(
   cors({
@@ -49,6 +50,9 @@ app.use('/categories', categoriesRouter);
 
 const ordersRouter = require('./routers/ordersRouter');
 app.use('/orders', ordersRouter);
+
+const checkoutRouter = require('./routers/checkoutRouter');
+app.use('/checkout', checkoutRouter);
 
 app.get('/', (req, res) => {
   res.send('<h1>myCoolStore Server</h1>');

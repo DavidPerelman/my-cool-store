@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ProductsContext from '../../context/productsContext';
 import ProductsServices from '../../services/ProductsServices';
 import './NavbarInput.css';
 
 const NavbarInput = () => {
-  const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -32,11 +30,9 @@ const NavbarInput = () => {
   };
 
   const productClick = (productId) => {
-    console.log(productId);
     setFilteredData([]);
     setInputValue('');
-    navigate(`/product/${productId}`, { replace: true });
-    // cardButtonClick(productId);
+    cardButtonClick(productId);
   };
 
   return (
