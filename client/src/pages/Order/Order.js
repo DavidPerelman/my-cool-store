@@ -18,8 +18,16 @@ import {
 } from '../../utils/orderTableUtils';
 import MyTable from '../../components/MyTable/MyTable';
 import './Order.css';
+import CheckoutServices from '../../services/CheckoutServices';
+import Modal from '../../components/Modal/Modal';
+import PaymentCard from '../../containers/PaymentCard';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 const Order = () => {
+  const [show, setShow] = useState(true);
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const {} = useContext(AuthContext);
   const navigate = useNavigate();
   const { orderId } = useParams();
   const { userData } = useContext(AuthContext);
@@ -57,10 +65,6 @@ const Order = () => {
 
   const deleteOrder = () => {
     console.log('deleteOrder');
-  };
-
-  const checkout = () => {
-    console.log('checkout');
   };
 
   const cancelChanges = () => {
@@ -129,6 +133,19 @@ const Order = () => {
     );
   };
 
+  const checkout = () => {
+    console.log('ds');
+    setPaymentModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setPaymentModalOpen(false);
+  };
+
+  const stripePromise = loadStripe(
+    'pk_test_51LMHebHwuFGjgD9FMmRH7NI5bEHperWkMoj16LBUtb8dsSOHrTvzNHWPivT7BMMwdi7SPhhUtbV8CIoawQfPwgzj00wFX0StK2'
+  );
+
   return (
     <div className='OrderPage'>
       <Button onClick={backToMyOrders} size={'my-orders-button'}>
@@ -148,7 +165,7 @@ const Order = () => {
         ></MyTable>
       </div>
       <div className='order-buttons-control'>
-        <div className='order-page-buttons'>
+        <div className='order-page-buttons' style={{ height: '40px' }}>
           <Button onClick={cancelOrder}>
             Cancel Order{' '}
             <img
@@ -183,6 +200,21 @@ const Order = () => {
           </div>
         )) || <div></div>}
       </div>
+
+      {paymentModalOpen && (
+        <Modal
+          onClose={handleClose}
+          title='Login'
+          textButton='Login'
+          // onSubmit={login}
+          // error={error}
+        >
+          <Elements stripe={stripePromise}>
+            <PaymentCard />
+          </Elements>
+          {/* <Form data={loginData} handleFormChange={handleFormChange}></Form> */}
+        </Modal>
+      )}
     </div>
   );
 };

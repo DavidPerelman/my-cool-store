@@ -15,6 +15,7 @@ import './OrderPage.css';
 import AuthContext from '../../context/authContext';
 import Table from '../../components/Table/Table';
 import MyTable from '../../components/MyTable/MyTable';
+import CheckoutServices from '../../services/CheckoutServices';
 
 const OrderPage = () => {
   const navigate = useNavigate();
@@ -52,7 +53,8 @@ const OrderPage = () => {
   }, []);
 
   const checkout = () => {
-    console.log('checkout');
+    CheckoutServices.checkout(orderData);
+    // console.log('checkout');
     setEditStatus(false);
   };
 

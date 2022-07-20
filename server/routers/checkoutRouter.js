@@ -3,11 +3,18 @@ const Product = require('../models/productModel');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 router.post('/', async (req, res) => {
-  const orderPayment = req.body.orderPayment;
+  const orderPayment = req.body;
   try {
-    // get all products
-    console.log(orderPayment);
-    // res.json({ products: products });
+    stripe.customers
+      .create({
+        email: req.body.user.email,
+      })
+      .then((customer) => {
+        console.log(customer.id);
+      })
+      .catch((error) => console.error(error));
+
+    // res.json({ customer });
   } catch (err) {
     console.error(err);
     res.status(500).send();

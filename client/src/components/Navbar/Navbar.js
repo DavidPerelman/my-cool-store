@@ -55,7 +55,7 @@ const Navbar = ({ setRegisterSuccess }) => {
           /> */}
         {/* </div> */}
         {loggedIn && (
-          <>
+          <div style={{ marginLeft: 'auto', display: 'flex' }}>
             <p className='greet-user'>Hello {userData.firstName}</p>
             <ul>
               <li className='wrapper'>
@@ -73,7 +73,7 @@ const Navbar = ({ setRegisterSuccess }) => {
                 </a>
               </li>
             </ul>
-          </>
+          </div>
         )}
         {loggedIn === undefined && (
           <div style={{ display: 'flex', marginLeft: 'auto' }}>

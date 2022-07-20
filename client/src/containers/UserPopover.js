@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import user from '../asset/user.png';
 import MyPopover from '../components/MyPopover/MyPopover';
 import LogoutConatiner from './LogoutConatiner';
-import MyOrders from '../pages/MyOrders/MyOrders';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
 

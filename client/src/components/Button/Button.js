@@ -1,11 +1,6 @@
 import './Button.css';
 
-const Button = ({
-  children,
-  size = 'size-90',
-  color = 'button--primary',
-  onClick,
-}) => {
+const Button = ({ children, size, color = 'button--primary', onClick }) => {
   return (
     <button
       type='button'

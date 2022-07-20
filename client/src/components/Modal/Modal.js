@@ -41,15 +41,13 @@ const Modal = ({
               >
                 Close
               </Button>
-              {!hideButton && (
-                <Button
-                  size='user-modal-button'
-                  color='button--primary'
-                  onClick={onSubmit}
-                >
-                  {textButton}
-                </Button>
-              )}
+              <Button
+                size='user-modal-button'
+                color='button--primary'
+                onClick={onSubmit}
+              >
+                {textButton}
+              </Button>
             </div>
           </div>
         </div>
