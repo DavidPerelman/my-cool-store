@@ -36,6 +36,7 @@ const Order = () => {
 
   useEffect(() => {
     OrdersServices.getOrder(orderId).then((data) => {
+      console.log(data);
       setOrderData(data.order);
       setDataTable(data.order.products);
     });
@@ -75,7 +76,22 @@ const Order = () => {
   };
 
   const saveChanges = () => {
-    console.log('saveChanges');
+    let totalPayment = document.getElementById('totalPayment').innerHTML;
+
+    totalPayment = parseInt(totalPayment.slice(0, totalPayment.length - 1));
+    console.log(totalPayment);
+
+    OrdersServices.updateOrder(orderId, dataTable, totalPayment).then(
+      (data) => {
+        console.log(data.order.products);
+        OrdersServices.getOrder(orderId).then((data) => {
+          console.log(data);
+          setOrderData(data.order);
+          setDataTable(data.order.products);
+        });
+        // setDataTable(data.order.products);
+      }
+    );
   };
 
   const renderBody = () => {
@@ -126,8 +142,8 @@ const Order = () => {
     return (
       <tr>
         <td colSpan='3'></td>
-        <td>{sumQuantity}$</td>
-        <td>{sumPrice}$</td>
+        <td>{sumQuantity}</td>
+        <td id='totalPayment'>{sumPrice}$</td>
       </tr>
     );
   };

@@ -11,12 +11,32 @@ const PaymentModal = ({ setPaymentModalOpen }) => {
     setPaymentModalOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
       return;
     }
+
+    const { clientSecret } = await fetch(
+      `${process.env.REACT_APP_API_URL}/checkout/create-payment-intent`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          paymentMethodType: 'card',
+          currency: 'usd',
+        }),
+      }
+    ).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
 
     const cardElement = elements.getElement(CardElement);
     console.log(cardElement);
@@ -24,8 +44,8 @@ const PaymentModal = ({ setPaymentModalOpen }) => {
 
   return (
     <>
-      <Modal onClose={handleClose} title='Login' textButton='Login'>
-        <form>
+      <Modal onClose={handleClose} title='Payment'>
+        <form onSubmit={handleSubmit}>
           <CardElement />
         </form>
         <div className='modal-footer'>
@@ -37,7 +57,7 @@ const PaymentModal = ({ setPaymentModalOpen }) => {
             Close
           </Button>
           <Button size='user-modal-button' onClick={handleSubmit}>
-            Login
+            Payment
           </Button>
         </div>
       </Modal>

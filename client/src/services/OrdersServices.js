@@ -58,6 +58,28 @@ const OrdersServices = {
       }
     });
   },
+  updateOrder: async (orderId, orderData, totalPayment) => {
+    console.log(orderId);
+    return await fetch(
+      `${process.env.REACT_APP_API_URL}/orders/order/${orderId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderData: orderData,
+          totalPayment: totalPayment,
+        }),
+      }
+    ).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
+  },
 };
 
 export default OrdersServices;

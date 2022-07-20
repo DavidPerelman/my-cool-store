@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 const User = require('../models/userModel');
 const Order = require('../models/orderModel');
 const Product = require('../models/productModel');
@@ -48,6 +49,34 @@ router.get('/orders/:userId', async (req, res) => {
       .exec();
 
     res.json({ orders: orders });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
+router.put('/order/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+  const { orderData, totalPayment } = req.body;
+
+  for (let i = 0; i < orderData.length; i++) {
+    orderData[i].product = mongoose.Types.ObjectId(orderData[i].product._id);
+  }
+
+  try {
+    const order = await Order.findOneAndUpdate(
+      { _id: orderId },
+      {
+        $set: {
+          products: orderData,
+          totalPayment: totalPayment,
+        },
+      }
+    )
+      .exec()
+      .then((order) => {
+        res.json({ order: order });
+      });
   } catch (err) {
     console.error(err);
     res.status(500).send();

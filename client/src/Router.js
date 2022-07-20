@@ -15,6 +15,9 @@ import RegisterSuccess from './pages/RegisterSuccess';
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
   const [registerSuccess, setRegisterSuccess] = useState(false);
+  if (loggedIn === undefined) {
+    return null;
+  }
 
   return (
     <>
@@ -25,7 +28,7 @@ const Router = () => {
         userData={userData}
       ></Navbar>
       <Routes>
-        {loggedIn === undefined && (
+        {loggedIn === false && (
           <>
             <Route
               exact

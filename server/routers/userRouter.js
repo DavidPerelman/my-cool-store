@@ -130,7 +130,7 @@ router.get('/logout', async (req, res) => {
         httpOnly: true,
         expires: new Date(0),
       })
-      .json({ isLogout: true });
+      .json({ loggedIn: false, user: null });
   } catch (err) {
     console.error(err);
     res.status(500).send();
@@ -142,7 +142,7 @@ router.get('/checkIfSomebodyLoggedIn', async (req, res) => {
     const token = req.cookies.token;
 
     if (!token) {
-      return res.json(false);
+      return res.json({ loggedIn: false, user: null });
     } else {
       jwt.verify(token, process.env.JWT_SECRET);
 
@@ -152,7 +152,7 @@ router.get('/checkIfSomebodyLoggedIn', async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    return res.status(500).json(false).send();
+    return res.status(500).json(false);
   }
 });
 

@@ -1,4 +1,13 @@
 const CheckoutServices = {
+  fetchStripePublishableKey: () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/checkout`).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
+  },
   checkout: async (orderCheckout) => {
     console.log(orderCheckout);
     return await fetch(`${process.env.REACT_APP_API_URL}/checkout`, {

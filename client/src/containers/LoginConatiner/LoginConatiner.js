@@ -48,24 +48,19 @@ const LoginConatiner = ({ redirect }) => {
   };
 
   const login = async () => {
-    console.log(redirect);
-
     if (!isFormFieldsValid(loginData)) return showError('all fields required!');
 
     if (!isValidEmail(loginData.email)) return showError('invalid email!');
 
     try {
-      const response = await AuthService.login(loginData);
-      console.log(console.log(response.response.data));
-      if (response.response.data === 'login error!') {
-        console.log(response.response.data);
-        return showError(response.response.data);
+      const response = await AuthService.loginUser(loginData);
+      if (response === 'login error!') {
+        return showError(response);
       }
     } catch (err) {
       console.error(err);
     }
 
-    setShow(false);
     await getLoggedIn();
     setLoginModalOpen(false);
 

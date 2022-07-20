@@ -14,18 +14,21 @@ const AuthService = {
       return err.response.data.errMessage;
     }
   },
-  login: async (data) => {
-    try {
-      let loginRes = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/login`,
-        data
-      );
-
-      console.log(loginRes);
-      return loginRes;
-    } catch (err) {
-      return err;
-    }
+  loginUser: async (data) => {
+    return await fetch(`${process.env.REACT_APP_API_URL}/user/login`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
   },
   logout: async () => {
     try {
