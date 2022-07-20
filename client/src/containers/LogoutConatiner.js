@@ -12,6 +12,7 @@ const LogoutConatiner = () => {
     try {
       const res = await AuthService.logout();
       await getLoggedIn();
+      navigate('/');
     } catch (err) {
       console.log(err);
     }

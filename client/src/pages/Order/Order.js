@@ -20,12 +20,11 @@ import MyTable from '../../components/MyTable/MyTable';
 import './Order.css';
 import CheckoutServices from '../../services/CheckoutServices';
 import Modal from '../../components/Modal/Modal';
-import PaymentForm from '../../containers/PaymentForm';
+import PaymentModal from '../../containers/PaymentModal';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 const Order = () => {
-  const [show, setShow] = useState(true);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const {} = useContext(AuthContext);
   const navigate = useNavigate();
@@ -134,12 +133,7 @@ const Order = () => {
   };
 
   const checkout = () => {
-    console.log('ds');
     setPaymentModalOpen(true);
-  };
-
-  const handleClose = () => {
-    setPaymentModalOpen(false);
   };
 
   const stripePromise = loadStripe(
@@ -202,18 +196,11 @@ const Order = () => {
       </div>
 
       {paymentModalOpen && (
-        <Modal
-          onClose={handleClose}
-          title='Payment'
-          textButton='Pay'
-          // onSubmit={login}
-          // error={error}
-        >
-          <Elements stripe={stripePromise}>
-            <PaymentForm />
-          </Elements>
-          {/* <Form data={loginData} handleFormChange={handleFormChange}></Form> */}
-        </Modal>
+        <Elements stripe={stripePromise}>
+          <PaymentModal
+            setPaymentModalOpen={setPaymentModalOpen}
+          ></PaymentModal>
+        </Elements>
       )}
     </div>
   );
