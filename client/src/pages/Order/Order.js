@@ -20,7 +20,7 @@ import MyTable from '../../components/MyTable/MyTable';
 import './Order.css';
 import CheckoutServices from '../../services/CheckoutServices';
 import Modal from '../../components/Modal/Modal';
-import PaymentCard from '../../containers/PaymentCard';
+import PaymentForm from '../../containers/PaymentForm';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -204,13 +204,13 @@ const Order = () => {
       {paymentModalOpen && (
         <Modal
           onClose={handleClose}
-          title='Login'
-          textButton='Login'
+          title='Payment'
+          textButton='Pay'
           // onSubmit={login}
           // error={error}
         >
           <Elements stripe={stripePromise}>
-            <PaymentCard />
+            <PaymentForm />
           </Elements>
           {/* <Form data={loginData} handleFormChange={handleFormChange}></Form> */}
         </Modal>

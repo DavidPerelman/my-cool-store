@@ -6,6 +6,7 @@ import { isFormFieldsValid, isValidEmail } from '../../utils/formValidation';
 import AuthService from '../../services/AuthServices';
 import AuthContext from '../../context/authContext';
 import './LoginConatiner.css';
+import Button from '../../components/Button/Button';
 
 const LoginConatiner = ({ redirect }) => {
   const { getLoggedIn, setLoginModalOpen } = useContext(AuthContext);
@@ -85,6 +86,18 @@ const LoginConatiner = ({ redirect }) => {
           error={error}
         >
           <Form data={loginData} handleFormChange={handleFormChange}></Form>
+          <div className='modal-footer'>
+            <Button
+              size='user-modal-button'
+              color='button--close'
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+            <Button size='user-modal-button' onClick={login}>
+              Login
+            </Button>
+          </div>
         </Modal>
       )}
     </>

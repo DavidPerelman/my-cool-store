@@ -33,7 +33,7 @@ const Modal = ({
                 ''}
               {children}
             </div>
-            <div className='modal-footer'>
+            {/* <div className='modal-footer'>
               <Button
                 size='user-modal-button'
                 color='button--close'
@@ -48,7 +48,7 @@ const Modal = ({
               >
                 {textButton}
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

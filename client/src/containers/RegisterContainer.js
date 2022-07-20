@@ -9,6 +9,7 @@ import Form from '../components/Form';
 import Modal from '../components/Modal/Modal';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/authContext';
+import Button from '../components/Button/Button';
 
 const RegisterContainer = () => {
   const navigate = useNavigate();
@@ -89,6 +90,18 @@ const RegisterContainer = () => {
           error={error}
         >
           <Form data={registerData} handleFormChange={handleFormChange}></Form>
+          <div className='modal-footer'>
+            <Button
+              size='user-modal-button'
+              color='button--close'
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+            <Button size='user-modal-button' onClick={register}>
+              Register
+            </Button>
+          </div>
         </Modal>
       )}
     </>
