@@ -1,15 +1,6 @@
 import './Modal.css';
-import Button from '../Button/Button';
 
-const Modal = ({
-  title,
-  onClose,
-  error,
-  children,
-  hideButton,
-  onSubmit,
-  textButton,
-}) => {
+const Modal = ({ title, onClose, error, children }) => {
   return (
     <>
       <div className='modal' tabIndex='-1'>
@@ -33,22 +24,6 @@ const Modal = ({
                 ''}
               {children}
             </div>
-            {/* <div className='modal-footer'>
-              <Button
-                size='user-modal-button'
-                color='button--close'
-                onClick={onClose}
-              >
-                Close
-              </Button>
-              <Button
-                size='user-modal-button'
-                color='button--primary'
-                onClick={onSubmit}
-              >
-                {textButton}
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>
