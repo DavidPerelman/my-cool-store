@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const moment = require('moment-timezone');
 
 const userSchema = new mongoose.Schema({
+  stripe_customer_id: {
+    type: String,
+    // required: true,
+  },
   firstName: {
     type: String,
     required: true,

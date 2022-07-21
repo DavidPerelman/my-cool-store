@@ -20,11 +20,15 @@ import MyTable from '../../components/MyTable/MyTable';
 import './Order.css';
 import CheckoutServices from '../../services/CheckoutServices';
 import Modal from '../../components/Modal/Modal';
-import PaymentModal from '../../containers/PaymentModal';
+import PaymentModal from '../../containers/PaymentModal/PaymentModal';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 const Order = () => {
+  const stripePromise = loadStripe(
+    'pk_test_51LMHebHwuFGjgD9FMmRH7NI5bEHperWkMoj16LBUtb8dsSOHrTvzNHWPivT7BMMwdi7SPhhUtbV8CIoawQfPwgzj00wFX0StK2'
+  );
+
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const {} = useContext(AuthContext);
   const navigate = useNavigate();
@@ -33,6 +37,8 @@ const Order = () => {
   const [dataTable, setDataTable] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [changesHappend, setChangesHappend] = useState(false);
+  const [checkoutSesessionSuccess, setCheckoutSesessionSuccess] =
+    useState(false);
 
   useEffect(() => {
     OrdersServices.getOrder(orderId).then((data) => {
@@ -79,17 +85,14 @@ const Order = () => {
     let totalPayment = document.getElementById('totalPayment').innerHTML;
 
     totalPayment = parseInt(totalPayment.slice(0, totalPayment.length - 1));
-    console.log(totalPayment);
 
     OrdersServices.updateOrder(orderId, dataTable, totalPayment).then(
       (data) => {
         console.log(data.order.products);
         OrdersServices.getOrder(orderId).then((data) => {
-          console.log(data);
           setOrderData(data.order);
           setDataTable(data.order.products);
         });
-        // setDataTable(data.order.products);
       }
     );
   };
@@ -148,13 +151,41 @@ const Order = () => {
     );
   };
 
-  const checkout = () => {
-    setPaymentModalOpen(true);
-  };
+  const checkout = async () => {
+    const stripe = await stripePromise;
 
-  const stripePromise = loadStripe(
-    'pk_test_51LMHebHwuFGjgD9FMmRH7NI5bEHperWkMoj16LBUtb8dsSOHrTvzNHWPivT7BMMwdi7SPhhUtbV8CIoawQfPwgzj00wFX0StK2'
-  );
+    console.log(orderData.products);
+    let line_items = [];
+
+    for (let i = 0; i < orderData.products.length; i++) {
+      let item = {};
+      item['price'] = orderData.products[i].product.price_id;
+      item['quantity'] = orderData.products[i].productQuantity;
+      console.log(item);
+      line_items.push(item);
+    }
+
+    await fetch(
+      `${process.env.REACT_APP_API_URL}/payment/create-checkout-session`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          line_items,
+          orderId,
+          userData,
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then((session) => {
+        stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
+      });
+  };
 
   return (
     <div className='OrderPage'>

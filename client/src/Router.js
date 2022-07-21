@@ -11,6 +11,7 @@ import Order from './pages/Order/Order';
 import MyOrders from './pages/MyOrders/MyOrders';
 import RegisterConfirm from './pages/RegisterConfirm';
 import RegisterSuccess from './pages/RegisterSuccess';
+import SuccessPayment from './pages/SuccessPayment';
 
 const Router = () => {
   const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
@@ -86,6 +87,7 @@ const Router = () => {
             <Route path='/order/:orderId' element={<Order />} />
             <Route path='/orders/:userId' element={<MyOrders />} />
             <Route path='/cart' element={<CartPage />} />
+            <Route path='/success/:paymentId' element={<SuccessPayment />} />
             {/* <Route path='/payment' element={<StripeContainer />} /> */}
           </>
         )}

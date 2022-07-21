@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import Button from '../components/Button/Button';
-import Modal from '../components/Modal/Modal';
+import Button from '../../components/Button/Button';
+import Modal from '../../components/Modal/Modal';
+import StatusMessages, { useMessages } from '../../utils/StatusMessages';
 
 const PaymentModal = ({ setPaymentModalOpen }) => {
   const elements = useElements();
   const stripe = useStripe();
+  const [messages, addMessage] = useMessages();
 
   const handleClose = () => {
     setPaymentModalOpen(false);
@@ -18,8 +20,10 @@ const PaymentModal = ({ setPaymentModalOpen }) => {
       return;
     }
 
-    const { clientSecret } = await fetch(
-      `${process.env.REACT_APP_API_URL}/checkout/create-payment-intent`,
+    addMessage('Creating payment intent...');
+
+    const { error: backendError, clientSecret } = await fetch(
+      `${process.env.REACT_APP_API_URL}/payment/create-payment-intent`,
       {
         method: 'POST',
         headers: {
@@ -30,16 +34,28 @@ const PaymentModal = ({ setPaymentModalOpen }) => {
           currency: 'usd',
         }),
       }
-    ).then((res) => {
-      if (res.status !== 401) {
-        return res.json().then((data) => data);
-      } else {
-        return { message: 'error' };
-      }
-    });
+    ).then((r) => r.json());
 
-    const cardElement = elements.getElement(CardElement);
-    console.log(cardElement);
+    if (backendError) {
+      addMessage(backendError.message);
+      return;
+    }
+
+    addMessage('Payment intent created');
+    const { error: stripeError, paymentIntent } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: { card: elements.getElement(CardElement) },
+      });
+
+    if (stripeError) {
+      addMessage(stripeError.message);
+      return;
+    }
+
+    addMessage(`paymentIntent (${paymentIntent.id}): ${paymentIntent.status}`);
+
+    // const cardElement = elements.getElement(CardElement);
+    // console.log(cardElement);
   };
 
   return (
@@ -48,7 +64,8 @@ const PaymentModal = ({ setPaymentModalOpen }) => {
         <form onSubmit={handleSubmit}>
           <CardElement />
         </form>
-        <div className='modal-footer'>
+        <StatusMessages messages={messages} />
+        <div className='modal-footer payment-modal-footer'>
           <Button
             size='user-modal-button'
             color='button--close'
