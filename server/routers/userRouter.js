@@ -12,6 +12,7 @@ const {
 } = require('../services/userServices');
 const { createToken } = require('../services/jwtServices');
 const { userValidationAndAuth } = require('../services/AuthSerices');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 router.post('/register', async (req, res) => {
   try {
@@ -32,8 +33,18 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
+    // create a new stripe user
+    const customer = await stripe.customers.create({
+      // currency: 'usd',
+      // default_currency: 'usd',
+      email: email,
+      name: `${firstName} ${lastName}`,
+      phone: null,
+    });
+
     // create a new user
     const newUser = await new User({
+      stripe_customer_id: customer.id,
       firstName,
       lastName,
       email,
@@ -49,8 +60,9 @@ router.post('/register', async (req, res) => {
       token: userToken,
     }).save();
 
-    const message = `${process.env.BASE_URL}/verify/${newUser._id}/${userToken}`;
-    await sendEmail(newUser.email, 'Verify Email', message);
+    // const message = `${process.env.BASE_URL}/verify/${newUser._id}/${userToken}`;
+    // await sendEmail(newUser.email, 'Verify Email', message);
+
     res.json({ user: newUser, success: true });
   } catch (err) {
     console.error(err);

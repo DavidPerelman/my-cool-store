@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   },
   passwordHash: { type: String, required: true },
+  role: { type: String, required: true, default: 'customer' },
   registerDate: {
     type: String,
     required: true,
