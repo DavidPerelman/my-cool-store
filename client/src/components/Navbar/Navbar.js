@@ -45,16 +45,29 @@ const Navbar = ({ setRegisterSuccess }) => {
         <span className='bar'></span>
       </a>
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
-        {/* <div className='navbar-input-div'> */}
         <NavbarInput />
-        {/* <input
-            className='navbar-input'
-            onChange={(e) => {
-              console.log(e.target.value);
-            }}
-          /> */}
-        {/* </div> */}
-        {loggedIn === true && (
+        <div style={{ marginLeft: 'auto', display: 'flex' }}>
+          <p className='greet-user'>
+            Hello {userData === null ? 'Guest' : userData.firstName}
+          </p>
+          <ul>
+            <li className='wrapper'>
+              <a>
+                <CartPopover loggedIn={loggedIn} userData={userData} />
+              </a>
+            </li>
+            <li className='wrapper-user'>
+              <a className='link-hover'>
+                <UserPopover
+                  userData={userData}
+                  setRegisterSuccess={setRegisterSuccess}
+                  loggedIn={loggedIn}
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+        {/* {loggedIn === true && (
           <div style={{ marginLeft: 'auto', display: 'flex' }}>
             <p className='greet-user'>Hello {userData.firstName}</p>
             <ul>
@@ -95,7 +108,7 @@ const Navbar = ({ setRegisterSuccess }) => {
               </li>
             </ul>
           </div>
-        )}
+        )} */}
       </div>
     </nav>
   );

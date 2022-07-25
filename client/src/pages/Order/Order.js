@@ -20,8 +20,6 @@ import MyTable from '../../components/MyTable/MyTable';
 import './Order.css';
 import CheckoutServices from '../../services/CheckoutServices';
 import Modal from '../../components/Modal/Modal';
-import PaymentModal from '../../containers/PaymentModal/PaymentModal';
-import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 const Order = () => {
@@ -29,7 +27,6 @@ const Order = () => {
     'pk_test_51LMHebHwuFGjgD9FMmRH7NI5bEHperWkMoj16LBUtb8dsSOHrTvzNHWPivT7BMMwdi7SPhhUtbV8CIoawQfPwgzj00wFX0StK2'
   );
 
-  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const {} = useContext(AuthContext);
   const navigate = useNavigate();
   const { orderId } = useParams();
@@ -95,6 +92,8 @@ const Order = () => {
         });
       }
     );
+
+    setChangesHappend(false);
   };
 
   const renderBody = () => {
@@ -154,14 +153,12 @@ const Order = () => {
   const checkout = async () => {
     const stripe = await stripePromise;
 
-    console.log(orderData.products);
     let line_items = [];
 
     for (let i = 0; i < orderData.products.length; i++) {
       let item = {};
       item['price'] = orderData.products[i].product.price_id;
       item['quantity'] = orderData.products[i].productQuantity;
-      console.log(item);
       line_items.push(item);
     }
 
@@ -241,14 +238,6 @@ const Order = () => {
           </div>
         )) || <div></div>}
       </div>
-
-      {paymentModalOpen && (
-        <Elements stripe={stripePromise}>
-          <PaymentModal
-            setPaymentModalOpen={setPaymentModalOpen}
-          ></PaymentModal>
-        </Elements>
-      )}
     </div>
   );
 };
