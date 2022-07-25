@@ -17,12 +17,9 @@ router.post('/create-customer', async (req, res) => {
 });
 
 router.post('/create-checkout-session', async (req, res) => {
-  console.log(req.body.userData);
   const session = await stripe.checkout.sessions.create({
-    success_url:
-      'http://localhost:3000/success/paymentId={CHECKOUT_SESSION_ID}',
+    success_url: `http://localhost:3000/order/paymentSuccess/{CHECKOUT_SESSION_ID}/${req.body.orderId}`,
     cancel_url: `http://localhost:3000/order/${req.body.orderId}`,
-    // customer_email: 'customer@example.com',
     payment_method_types: ['card'],
     mode: 'payment',
     line_items: req.body.line_items,
@@ -40,23 +37,22 @@ router.get('/checkout-session/:id', async (req, res) => {
   res.json(session);
 });
 
-router.post('/create-payment-intent', async (req, res) => {
-  const { paymentMethodTypes, currency } = req.body;
+// router.post('/create-payment-intent', async (req, res) => {
+//   const { paymentMethodTypes, currency } = req.body;
 
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1999,
-      currency: currency,
-      payment_method_types: [paymentMethodTypes],
-      metadata: {
-        // order_id: '6735',
-      },
-    });
-    res.json({ clientSecret: paymentIntent.client_secret });
-  } catch (e) {
-    res.status(400).json({ error: { message: e.message } });
-  }
-});
+//   try {
+//     const paymentIntent = await stripe.paymentIntents.create({
+//       amount: 1999,
+//       currency: currency,
+//       payment_method_types: [paymentMethodTypes],
+//       metadata: {
+//       },
+//     });
+//     res.json({ clientSecret: paymentIntent.client_secret });
+//   } catch (e) {
+//     res.status(400).json({ error: { message: e.message } });
+//   }
+// });
 
 router.get('/', async (req, res) => {
   try {

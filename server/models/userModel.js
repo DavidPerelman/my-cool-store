@@ -4,7 +4,7 @@ const moment = require('moment-timezone');
 const userSchema = new mongoose.Schema({
   stripe_customer_id: {
     type: String,
-    // required: true,
+    required: true,
   },
   firstName: {
     type: String,
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   registerDate: {
     type: String,
     required: true,
-    default: () => moment().format('DD/MM/YYYY hh:mm'),
+    default: () => moment().format('DD/MM/YYYY HH:mm'),
   },
   verified: {
     type: Boolean,
@@ -34,17 +34,6 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String,
   },
-  productsInCart: [
-    {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-      },
-      amount: {
-        type: Number,
-      },
-    },
-  ],
 });
 
 module.exports = mongoose.model('User', userSchema);

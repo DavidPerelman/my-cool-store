@@ -45,7 +45,7 @@ const orderSchema = new mongoose.Schema({
       required: true,
       default: false,
     },
-    paidAt: {
+    stripe_payment_id: {
       type: String,
     },
   },

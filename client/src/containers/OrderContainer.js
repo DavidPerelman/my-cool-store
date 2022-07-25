@@ -2,13 +2,15 @@ import React from 'react';
 import LoadingGif from '.././asset/loading-gif.gif';
 import './OrderContainer.css';
 
-const OrderCartContainer = ({ orderData }) => {
+const OrderCartContainer = ({ orderData, children }) => {
   // const checkout = () => {
   //   console.log('checkout');
   // };
+  console.log(orderData);
 
   return (
     <div className='order-div'>
+      {children}
       {(!orderData && (
         <div className='loading-gif'>
           <img src={LoadingGif} alt='loading...' />

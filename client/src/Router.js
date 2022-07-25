@@ -87,7 +87,10 @@ const Router = () => {
             <Route path='/order/:orderId' element={<Order />} />
             <Route path='/orders/:userId' element={<MyOrders />} />
             <Route path='/cart' element={<CartPage />} />
-            <Route path='/success/:paymentId' element={<SuccessPayment />} />
+            <Route
+              path='/order/paymentSuccess/:paymentId/:orderId'
+              element={<SuccessPayment />}
+            />
             {/* <Route path='/payment' element={<StripeContainer />} /> */}
           </>
         )}

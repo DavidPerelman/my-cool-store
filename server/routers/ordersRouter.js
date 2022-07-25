@@ -55,28 +55,45 @@ router.get('/orders/:userId', async (req, res) => {
   }
 });
 
-router.put('/order/:orderId', async (req, res) => {
+router.get('/paymentSuccess/:paymentId/:orderId', async (req, res) => {
   const orderId = req.params.orderId;
-  const { orderData, totalPayment } = req.body;
+  const paymentId = req.params.paymentId;
 
-  for (let i = 0; i < orderData.length; i++) {
-    orderData[i].product = mongoose.Types.ObjectId(orderData[i].product._id);
-  }
-
+  console.log(paymentId);
+  console.log(orderId);
+  return;
   try {
     const order = await Order.findOneAndUpdate(
       { _id: orderId },
       {
         $set: {
-          products: orderData,
-          totalPayment: totalPayment,
+          isPaid: { isPaid: true, stripe_payment_id: paymentId },
+          isOpen: false,
+          status: 'Paid, waiting for representative',
         },
       }
     )
       .exec()
       .then((order) => {
+        res.redirect(link);
         res.json({ order: order });
       });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
+router.get('/orders/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // get single product
+    const orders = await Order.find({ user: userId })
+      .populate('products.product')
+      .exec();
+
+    res.json({ orders: orders });
   } catch (err) {
     console.error(err);
     res.status(500).send();
