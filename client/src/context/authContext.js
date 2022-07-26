@@ -10,6 +10,7 @@ const AuthContextProvider = (props) => {
   const [userData, setUserData] = useState(undefined);
 
   const getLoggedIn = async () => {
+    console.log(process.env.REACT_APP_API_URL);
     const loggedInRes = await axios.get(
       `${process.env.REACT_APP_API_URL}/user/checkIfSomebodyLoggedIn`
     );
