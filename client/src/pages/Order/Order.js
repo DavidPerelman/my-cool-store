@@ -106,19 +106,23 @@ const Order = () => {
             <td>{product.product.title}</td>
             <td>{product.product.price}$</td>
             <td className='quantity-table-data-cell'>
-              <Button
-                size='circle-button'
-                onClick={() => decrementProductQuantity(dataTable, product)}
-              >
-                -
-              </Button>{' '}
+              {orderData.status === 'Open' && (
+                <Button
+                  size='circle-button'
+                  onClick={() => decrementProductQuantity(dataTable, product)}
+                >
+                  -
+                </Button>
+              )}{' '}
               {product.productQuantity}{' '}
-              <Button
-                size='circle-button'
-                onClick={() => incrementProductQuantity(dataTable, product)}
-              >
-                +
-              </Button>
+              {orderData.status === 'Open' && (
+                <Button
+                  size='circle-button'
+                  onClick={() => incrementProductQuantity(dataTable, product)}
+                >
+                  +
+                </Button>
+              )}
             </td>
             <td>{product.product.price * product.productQuantity}$</td>
           </tr>
@@ -216,14 +220,16 @@ const Order = () => {
             Delete Order{' '}
             <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
           </Button>
-          <Button onClick={checkout}>
-            Check Out{' '}
-            <img
-              className='icon-button'
-              src={CreditCardIcon}
-              alt='CreditCardIcon'
-            />
-          </Button>
+          {orderData && orderData.status === 'Open' && (
+            <Button onClick={checkout}>
+              Check Out{' '}
+              <img
+                className='icon-button'
+                src={CreditCardIcon}
+                alt='CreditCardIcon'
+              />
+            </Button>
+          )}
         </div>
         {(changesHappend && (
           <div className='order-changes-buttons'>

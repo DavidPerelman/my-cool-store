@@ -3,11 +3,6 @@ import LoadingGif from '.././asset/loading-gif.gif';
 import './OrderContainer.css';
 
 const OrderCartContainer = ({ orderData, children }) => {
-  // const checkout = () => {
-  //   console.log('checkout');
-  // };
-  console.log(orderData);
-
   return (
     <div className='order-div'>
       {children}

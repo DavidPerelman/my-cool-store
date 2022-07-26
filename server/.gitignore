@@ -1,4 +1,4 @@
 node_modules
-specs/
+specs
 .env
 heroku.txt

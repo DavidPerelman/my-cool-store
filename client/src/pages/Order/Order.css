@@ -46,6 +46,18 @@ td, th {
   padding-left: 10px;
 }
 
+.thanks-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.thanks-div > h5 {
+    margin-bottom: 20px;
+    align-self: center;
+}
+
 /* td:empty {
   border: 0;
   background-color: #ffff;

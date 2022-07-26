@@ -17,21 +17,14 @@ const SuccessPayment = () => {
   const { userData } = useContext(AuthContext);
   const [dataTable, setDataTable] = useState(null);
   const [orderData, setOrderData] = useState(null);
-
-  // const { paymentId } = useParams();
   const [sessionData, setSessionData] = useState(null);
-  useEffect(() => {
-    // console.log(paymentId);
-    // const id = paymentId.slice(0, paymentId.length);
 
-    // console.log(id);
-    // return;
+  useEffect(() => {
     fetch(
       `${process.env.REACT_APP_API_URL}/payment/checkout-session/${paymentId}`
     )
       .then((res) => res.json())
       .then((session) => {
-        console.log(session);
         setSessionData(session);
       });
 
@@ -41,8 +34,6 @@ const SuccessPayment = () => {
       setDataTable(data.order.products);
     });
   }, []);
-
-  console.log(sessionData);
 
   const backToMyOrders = () => {
     console.log(`/orders/${userData._id}`);
@@ -101,17 +92,11 @@ const SuccessPayment = () => {
 
   return (
     <div className='OrderPage'>
-      <Button onClick={backToMyOrders} size={'my-orders-button'}>
-        <img
-          className='icon-button my-orders-icon'
-          src={BackIcon}
-          alt='BackIcon'
-        />
-        My Orders
-      </Button>
       <OrderContainer orderData={orderData}>
-        <h1>Thank You!</h1>
-        <h5>{sessionData.payment_intent}</h5>
+        <div className='thanks-div'>
+          <h1>Thank You!</h1>
+          <h5>Check your mail...</h5>
+        </div>
       </OrderContainer>
       <div className='order-div'>
         <MyTable
@@ -120,8 +105,16 @@ const SuccessPayment = () => {
           renderFooter={renderFooter}
         ></MyTable>
       </div>
-      <div className='order-buttons-control'>
-        <div className='order-page-buttons' style={{ height: '40px' }}>
+      <div className='order-buttons-control' style={{ alignSelf: 'center' }}>
+        <Button onClick={backToMyOrders} size={'my-orders-button'}>
+          <img
+            className='icon-button my-orders-icon'
+            src={BackIcon}
+            alt='BackIcon'
+          />
+          My Orders
+        </Button>
+        {/* <div className='order-page-buttons' style={{ height: '40px' }}>
           <Button onClick={cancelOrder}>
             Cancel Order{' '}
             <img
@@ -134,13 +127,9 @@ const SuccessPayment = () => {
             Delete Order{' '}
             <img className='icon-button' src={DeleteIcon} alt='DeleteIcon' />
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
-    // <div>
-    //   <h1>Thank You!</h1>
-    //   <p>{sessionData}</p>
-    // </div>
   );
 };
 
