@@ -13,14 +13,27 @@ import RegisterConfirm from './pages/RegisterConfirm';
 import RegisterSuccess from './pages/RegisterSuccess';
 import SuccessPayment from './pages/SuccessPayment';
 import PaymentSuccess from './pages/PaymentSuccess';
+import Admin from './pages/Admin';
+import AdminLogin from './pages/AdminLogin';
 
 const Router = () => {
-  const { loggedIn, setLoggedIn, userData } = useContext(AuthContext);
+  const {
+    loggedIn,
+    isAdminlLoggedIn,
+    setIsAdminlLoggedIn,
+    setLoggedIn,
+    userData,
+  } = useContext(AuthContext);
   const [registerSuccess, setRegisterSuccess] = useState(false);
   if (loggedIn === undefined) {
     return null;
   }
 
+  if (isAdminlLoggedIn === undefined) {
+    return null;
+  }
+
+  console.log(loggedIn);
   return (
     <>
       <Navbar
@@ -93,6 +106,36 @@ const Router = () => {
               element={<PaymentSuccess />}
             />
             {/* <Route path='/payment' element={<StripeContainer />} /> */}
+          </>
+        )}
+
+        {(isAdminlLoggedIn === true && (
+          <>
+            <Route
+              exact
+              path='/admin'
+              element={
+                <Admin
+                  isAdminlLoggedIn={isAdminlLoggedIn}
+                  setIsAdminlLoggedIn={setIsAdminlLoggedIn}
+                  userData={userData}
+                />
+              }
+            />
+          </>
+        )) || (
+          <>
+            <Route
+              exact
+              path='/admin'
+              element={
+                <AdminLogin
+                  isAdminlLoggedIn={isAdminlLoggedIn}
+                  setIsAdminlLoggedIn={setIsAdminlLoggedIn}
+                  userData={userData}
+                />
+              }
+            />
           </>
         )}
       </Routes>

@@ -24,7 +24,8 @@ const AuthContextProvider = (props) => {
       `${process.env.REACT_APP_API_URL}/admin/checkIfAdminLoggedIn`
     );
 
-    setIsAdminlLoggedIn(adminlLoggedInRes.data.loggedIn);
+    console.log(adminlLoggedInRes.data.isAdmin);
+    setIsAdminlLoggedIn(adminlLoggedInRes.data.isAdmin);
     setUserData(adminlLoggedInRes.data.user);
   };
 
