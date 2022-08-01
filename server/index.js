@@ -42,6 +42,9 @@ app.use(express.json());
 const userRouter = require('./routers/userRouter');
 app.use('/user', userRouter);
 
+const adminRouter = require('./routers/adminRouter');
+app.use('/admin', adminRouter);
+
 const productsRouter = require('./routers/productsRouter');
 app.use('/products', productsRouter);
 
