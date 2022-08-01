@@ -15,7 +15,6 @@ const { userValidationAndAuth } = require('../services/AuthSerices');
 router.post('/login', async (req, res) => {
   try {
     const data = ({ email, password } = req.body);
-    // const checkUser = await userValidationAndAuth(email, password);
 
     const formValidation = userLoginValidation(data);
     if (formValidation.validationForm === false) {
@@ -53,6 +52,20 @@ router.post('/login', async (req, res) => {
         httpOnly: true,
       })
       .json({ isLogin: true, user: user, isAdmin: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
+router.get('/logout', async (req, res) => {
+  try {
+    res
+      .cookie('token', '', {
+        httpOnly: true,
+        expires: new Date(0),
+      })
+      .json({ loggedIn: false, user: null, isAdmin: false });
   } catch (err) {
     console.error(err);
     res.status(500).send();
