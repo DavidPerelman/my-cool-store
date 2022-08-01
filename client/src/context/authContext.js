@@ -19,19 +19,18 @@ const AuthContextProvider = (props) => {
     setUserData(loggedInRes.data.user);
   };
 
-  const getIsAdminlLoggedIn = async () => {
+  const getIsAdminlsLoggedIn = async () => {
     const adminlLoggedInRes = await axios.get(
       `${process.env.REACT_APP_API_URL}/admin/checkIfAdminLoggedIn`
     );
 
-    console.log(adminlLoggedInRes.data.isAdmin);
     setIsAdminlLoggedIn(adminlLoggedInRes.data.isAdmin);
     setUserData(adminlLoggedInRes.data.user);
   };
 
   useEffect(() => {
     getLoggedIn();
-    getIsAdminlLoggedIn();
+    getIsAdminlsLoggedIn();
   }, []);
 
   return (
@@ -41,6 +40,7 @@ const AuthContextProvider = (props) => {
         setLoggedIn,
         isAdminlLoggedIn,
         setIsAdminlLoggedIn,
+        getIsAdminlsLoggedIn,
         getLoggedIn,
         userData,
         loginModalOpen,

@@ -1,7 +1,12 @@
 import React from 'react';
+import Login from '../admin/containers/Login';
 
 const AdminLogin = () => {
-  return <div>AdminLogin</div>;
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 };
 
 export default AdminLogin;
