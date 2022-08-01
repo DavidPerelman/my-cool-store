@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { isFormFieldsValid, isValidEmail } from '../../utils/formValidation';
 import AuthService from '../../services/AuthServices';
 import AuthContext from '../../context/authContext';
+import AdminServices from '../../services/AdminServices';
 
 const Login = () => {
   const { getIsAdminlsLoggedIn } = useContext(AuthContext);
@@ -32,8 +33,12 @@ const Login = () => {
     if (!isValidEmail(loginData.email)) return showError('invalid email!');
 
     try {
-      const response = await AuthService.loginUser(loginData);
+      const response = await AdminServices.login(loginData);
+      console.log(response);
       if (response === 'login error!') {
+        return showError(response);
+      }
+      if (response === `You don't have permission!`) {
         return showError(response);
       }
     } catch (err) {

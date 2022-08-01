@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
     }
 
     if (user.role !== 'admin') {
-      return res.status(400).json({ errMessage: `You don't have permission!` });
+      return res.status(400).json(`You don't have permission!`);
     }
 
     const passwordCorrect = await checkIfPasswordCurrect(

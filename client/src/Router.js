@@ -36,12 +36,12 @@ const Router = () => {
   console.log(loggedIn);
   return (
     <>
-      <Navbar
+      {/* <Navbar
         sticky='top'
         loggedIn={loggedIn}
         setRegisterSuccess={setRegisterSuccess}
         userData={userData}
-      ></Navbar>
+      ></Navbar> */}
       <Routes>
         {loggedIn === false && (
           <>
