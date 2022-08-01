@@ -72,4 +72,27 @@ router.get('/logout', async (req, res) => {
   }
 });
 
+router.get('/checkIfAdminLoggedIn', async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.json({ user: null, isAdmin: false });
+    } else {
+      jwt.verify(token, process.env.JWT_SECRET);
+
+      const user = await User.findOne({ token: token }).exec();
+
+      if (user.role !== 'admin') {
+        return res.status(400).json({ user: null, isAdmin: false });
+      }
+
+      res.send({ user: user, isAdmin: true });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(false);
+  }
+});
+
 module.exports = router;
