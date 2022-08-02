@@ -6,7 +6,7 @@ import LogoutConatiner from './LogoutConatiner';
 import Button from '../components/Button/Button';
 import AuthContext from '../context/authContext';
 
-const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
+const UserPopover = ({ isAdminlLoggedIn, loggedIn, userData, logout }) => {
   const navigate = useNavigate();
   const { setLoginModalOpen, setRegisterModalOpen } = useContext(AuthContext);
 
@@ -59,20 +59,12 @@ const UserPopover = ({ setRegisterSuccess, loggedIn, userData }) => {
         </>
       )) || (
         <>
-          {/* <RegisterContainer
-            loggedIn={loggedIn}
-            setRegisterSuccess={setRegisterSuccess}
-          ></RegisterContainer> */}
           <Button size='user-buttons' onClick={register}>
             Register
           </Button>
           <Button size='user-buttons' onClick={login}>
             Login
           </Button>
-          {/* <LoginConatiner
-            setRegisterSuccess={setRegisterSuccess}
-            loggedIn={loggedIn}
-          ></LoginConatiner> */}
         </>
       )}
     </MyPopover>

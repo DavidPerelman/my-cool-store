@@ -13,8 +13,8 @@ import RegisterConfirm from './pages/RegisterConfirm';
 import RegisterSuccess from './pages/RegisterSuccess';
 import SuccessPayment from './pages/SuccessPayment';
 import PaymentSuccess from './pages/PaymentSuccess';
-import Admin from './pages/Admin';
-import AdminLogin from './pages/AdminLogin';
+import Admin from './admin/pages/Admin';
+import AdminLogin from './admin/pages/AdminLogin';
 
 const Router = () => {
   const {
