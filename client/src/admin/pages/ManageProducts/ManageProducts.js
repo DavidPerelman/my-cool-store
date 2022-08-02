@@ -3,16 +3,30 @@ import MyTable from '../../../components/MyTable/MyTable';
 import ProductsServices from '../../../services/ProductsServices';
 import './ManageProducts.css';
 import ExpandIcon from '../../asset/expand-icon.png';
+import MyPopover from '../../../components/MyPopover/MyPopover';
 
 const ManageProducts = () => {
+  const [visibile, setVisibile] = useState(false);
   const [products, setProducts] = useState(null);
   const [tableData, setTableData] = useState(null);
 
   useEffect(() => {
     ProductsServices.fetchAllProducts().then((data) => {
-      console.log(data);
       setProducts(data.products);
       setTableData(data.products);
+    });
+
+    document.addEventListener('click', (e) => {
+      const categoryContent = document.getElementById('Category-content');
+      const titleContent = document.getElementById('Title-content');
+
+      if (e.target.id !== 'Category-expand-icon') {
+        categoryContent.style.visibility = 'hidden';
+      }
+
+      if (e.target.id !== 'Title-expand-icon') {
+        titleContent.style.visibility = 'hidden';
+      }
     });
   }, []);
 
@@ -22,7 +36,23 @@ const ManageProducts = () => {
   };
 
   const expand = async (key) => {
-    console.log(key);
+    const content = document.getElementById(`${key}-content`);
+    const allContents = document.getElementsByClassName(`content`);
+
+    for (let i = 0; i < allContents.length; i++) {
+      console.log((allContents[i].style.visibility = 'hidden'));
+    }
+
+    if (!visibile) {
+      content.style.visibility = 'visible';
+      setVisibile(true);
+    } else {
+      content.style.visibility = 'hidden';
+      setVisibile(false);
+    }
+
+    content.style.visibility = 'visible';
+    setVisibile(true);
   };
 
   const renderHeader = () => {
@@ -33,14 +63,20 @@ const ManageProducts = () => {
         return (
           ((key === 'Title' || key === 'Category') && (
             <th key={i} className={`${key}-th`}>
-              <div>
-                {key}{' '}
+              {key}
+              <div className='wrapper'>
                 <img
-                  className='expand-icon'
+                  id={`${key}-expand-icon`}
                   src={ExpandIcon}
                   alt='Logo'
                   onClick={() => expand(key)}
                 />
+                <div className='content' id={`${key}-content`}>
+                  <ul>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
               </div>
             </th>
           )) || (
