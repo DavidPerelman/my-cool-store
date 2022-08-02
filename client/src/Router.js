@@ -33,7 +33,6 @@ const Router = () => {
     return null;
   }
 
-  console.log(loggedIn);
   return (
     <>
       {/* <Navbar

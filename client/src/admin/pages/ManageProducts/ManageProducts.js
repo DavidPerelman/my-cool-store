@@ -8,12 +8,17 @@ import MyPopover from '../../../components/MyPopover/MyPopover';
 const ManageProducts = () => {
   const [visibile, setVisibile] = useState(false);
   const [products, setProducts] = useState(null);
+  const [categories, setCategories] = useState(null);
   const [tableData, setTableData] = useState(null);
 
   useEffect(() => {
     ProductsServices.fetchAllProducts().then((data) => {
       setProducts(data.products);
       setTableData(data.products);
+    });
+
+    ProductsServices.fetchCategoriesData().then((data) => {
+      setCategories(data.categories);
     });
 
     document.addEventListener('click', (e) => {
@@ -24,9 +29,9 @@ const ManageProducts = () => {
         categoryContent.style.visibility = 'hidden';
       }
 
-      if (e.target.id !== 'Title-expand-icon') {
-        titleContent.style.visibility = 'hidden';
-      }
+      // if (e.target.id !== 'Title-expand-icon') {
+      //   titleContent.style.visibility = 'hidden';
+      // }
     });
   }, []);
 
@@ -35,12 +40,17 @@ const ManageProducts = () => {
     // navigate(`/order/${orderId}`);
   };
 
+  const categoryListClick = async (categoryId) => {
+    console.log(categoryId);
+    // navigate(`/order/${orderId}`);
+  };
+
   const expand = async (key) => {
     const content = document.getElementById(`${key}-content`);
     const allContents = document.getElementsByClassName(`content`);
 
     for (let i = 0; i < allContents.length; i++) {
-      console.log((allContents[i].style.visibility = 'hidden'));
+      allContents[i].style.visibility = 'hidden';
     }
 
     if (!visibile) {
@@ -61,21 +71,32 @@ const ManageProducts = () => {
     return headerData.map((key, i) => {
       {
         return (
-          ((key === 'Title' || key === 'Category') && (
-            <th key={i} className={`${key}-th`}>
-              {key}
-              <div className='wrapper'>
-                <img
-                  id={`${key}-expand-icon`}
-                  src={ExpandIcon}
-                  alt='Logo'
-                  onClick={() => expand(key)}
-                />
-                <div className='content' id={`${key}-content`}>
-                  <ul>
-                    <li></li>
-                    <li></li>
-                  </ul>
+          (key === 'Category' && (
+            <th key={i} className={`Category-th`}>
+              <div id={`Category-th`}>
+                {' '}
+                {key}
+                <div className='wrapper'>
+                  <img
+                    id={`Category-expand-icon`}
+                    src={ExpandIcon}
+                    alt='Logo'
+                    onClick={() => expand(key)}
+                  />
+                  <div className='content' id={`Category-content`}>
+                    <ul>
+                      {categories &&
+                        categories.map((category, i) => (
+                          <li
+                            key={i}
+                            id={category._id}
+                            onClick={() => categoryListClick(category._id)}
+                          >
+                            {category.name}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </th>
