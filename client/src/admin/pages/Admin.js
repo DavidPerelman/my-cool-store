@@ -6,7 +6,7 @@ import Navbar from '../containers/Navbar/Navbar';
 import NavigationBar from '../containers/NavigationBar/AdminNavigationBar';
 import ManageProducts from './ManageProducts';
 import ManageCustomers from './ManageCustomers';
-import ManageOrders from './ManageOrders';
+import ManageOrders from './ManageOrders/ManageOrders';
 
 const Admin = () => {
   const { getIsAdminlsLoggedIn } = useContext(AuthContext);

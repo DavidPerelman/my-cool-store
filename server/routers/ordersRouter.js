@@ -100,4 +100,18 @@ router.get('/orders/:userId', async (req, res) => {
   }
 });
 
+router.get('/orders', async (req, res) => {
+  try {
+    const orders = await Order.find({})
+      .populate('products.product')
+      .populate('user')
+      .exec();
+
+    res.json({ orders: orders });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 module.exports = router;

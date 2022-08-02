@@ -14,6 +14,17 @@ const OrdersServices = {
       }
     });
   },
+  getAllOrders: () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/orders/orders`).then(
+      (res) => {
+        if (res.status !== 401) {
+          return res.json().then((data) => data);
+        } else {
+          return { message: 'error' };
+        }
+      }
+    );
+  },
   getOrder: (orderId) => {
     return fetch(
       `${process.env.REACT_APP_API_URL}/orders/order/${orderId}`
