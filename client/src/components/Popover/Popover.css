@@ -12,12 +12,6 @@
     border: 1px black solid;
 }
 
-/* #Category-expand-icon {
-    width: 15px;
-    cursor: pointer;
-    border: 1px black solid;
-} */
-
 #Title-expand-icon {
     width: 15px;
     cursor: pointer;
@@ -36,23 +30,6 @@
 
 .expand-icon:hover .content {
     visibility: visible;
-}
-
-#Title-content {
-    visibility: hidden;
-    position: absolute;
-    background-color: white;
-    width: 150px;
-    border: 1px black solid;
-}
-
-#Category-content {
-    visibility: hidden;
-    position: absolute;
-    background-color: white;
-    width: 150px;
-    border: 1px black solid;
-    border-radius: 5px;
 }
 
 ul {

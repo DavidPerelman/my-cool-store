@@ -3,7 +3,8 @@ import MyTable from '../../../components/MyTable/MyTable';
 import ProductsServices from '../../../services/ProductsServices';
 import './ManageProducts.css';
 import ExpandIcon from '../../asset/expand-icon.png';
-import MyPopover from '../../../components/MyPopover/MyPopover';
+// import Popover from '../../components/Popover/Popover';
+import Popover from '../../../components/Popover/Popover';
 
 const ManageProducts = () => {
   const [visibile, setVisibile] = useState(false);
@@ -23,15 +24,10 @@ const ManageProducts = () => {
 
     document.addEventListener('click', (e) => {
       const categoryContent = document.getElementById('Category-content');
-      const titleContent = document.getElementById('Title-content');
 
-      if (e.target.id !== 'Category-expand-icon') {
+      if (e.target.id !== 'Category-popover-icon') {
         categoryContent.style.visibility = 'hidden';
       }
-
-      // if (e.target.id !== 'Title-expand-icon') {
-      //   titleContent.style.visibility = 'hidden';
-      // }
     });
   }, []);
 
@@ -46,20 +42,23 @@ const ManageProducts = () => {
   };
 
   const expand = async (key) => {
+    console.log(key);
     const content = document.getElementById(`${key}-content`);
-    const allContents = document.getElementsByClassName(`content`);
+    // const allContents = document.getElementsByClassName(`content`);
 
-    for (let i = 0; i < allContents.length; i++) {
-      allContents[i].style.visibility = 'hidden';
-    }
+    content.style.visibility = 'visible';
+    console.log(content);
+    // for (let i = 0; i < allContents.length; i++) {
+    //   allContents[i].style.visibility = 'hidden';
+    // }
 
-    if (!visibile) {
-      content.style.visibility = 'visible';
-      setVisibile(true);
-    } else {
-      content.style.visibility = 'hidden';
-      setVisibile(false);
-    }
+    // if (!visibile) {
+    //   content.style.visibility = 'visible';
+    //   setVisibile(true);
+    // } else {
+    //   content.style.visibility = 'hidden';
+    //   setVisibile(false);
+    // }
 
     content.style.visibility = 'visible';
     setVisibile(true);
@@ -76,28 +75,27 @@ const ManageProducts = () => {
               <div id={`Category-th`}>
                 {' '}
                 {key}
-                <div className='wrapper'>
-                  <img
-                    id={`Category-expand-icon`}
-                    src={ExpandIcon}
-                    alt='Logo'
-                    onClick={() => expand(key)}
-                  />
-                  <div className='content' id={`Category-content`}>
-                    <ul>
-                      {categories &&
-                        categories.map((category, i) => (
-                          <li
-                            key={i}
-                            id={category._id}
-                            onClick={() => categoryListClick(category._id)}
-                          >
-                            {category.name}
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                </div>
+                <Popover
+                  icon={ExpandIcon}
+                  keyValue={key}
+                  // expand={expand}
+                  onClick={() => expand(key)}
+                  categories={categories}
+                  categoryListClick={categoryListClick}
+                >
+                  <ul>
+                    {categories &&
+                      categories.map((category, i) => (
+                        <li
+                          key={i}
+                          id={category._id}
+                          onClick={() => categoryListClick(category._id)}
+                        >
+                          {category.name}
+                        </li>
+                      ))}
+                  </ul>
+                </Popover>
               </div>
             </th>
           )) || (
