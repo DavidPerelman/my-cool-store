@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MyTable from '../../../components/MyTable/MyTable';
 import ProductsServices from '../../../services/ProductsServices';
 import './ManageProducts.css';
+import ExpandIcon from '../../asset/expand-icon.png';
 
 const ManageProducts = () => {
   const [products, setProducts] = useState(null);
@@ -20,11 +21,35 @@ const ManageProducts = () => {
     // navigate(`/order/${orderId}`);
   };
 
+  const expand = async (key) => {
+    console.log(key);
+  };
+
   const renderHeader = () => {
     let headerData = ['No.', 'Title', 'Category', 'Price', 'Description'];
 
     return headerData.map((key, i) => {
-      return <th key={i}>{key}</th>;
+      {
+        return (
+          ((key === 'Title' || key === 'Category') && (
+            <th key={i} className={`${key}-th`}>
+              <div>
+                {key}{' '}
+                <img
+                  className='expand-icon'
+                  src={ExpandIcon}
+                  alt='Logo'
+                  onClick={() => expand(key)}
+                />
+              </div>
+            </th>
+          )) || (
+            <th key={i}>
+              <div>{key}</div>
+            </th>
+          )
+        );
+      }
     });
   };
 

@@ -5,3 +5,13 @@
 .products-table {
     margin: 20px;
 }
+
+.expand-icon {
+    width: 15px;
+    cursor: pointer;
+    border: 1px black solid;
+}
+
+.Category-th {
+    width: 130px
+}
