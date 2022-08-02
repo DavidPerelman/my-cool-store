@@ -17,7 +17,8 @@ const ManageOrders = () => {
   }, []);
 
   const goToOrder = async (orderId) => {
-    navigate(`/order/${orderId}`);
+    console.log(orderId);
+    // navigate(`/order/${orderId}`);
   };
 
   const renderHeader = () => {
@@ -32,7 +33,6 @@ const ManageOrders = () => {
     return (
       tableData &&
       tableData.map((order, i) => {
-        console.log(order._id);
         return (
           <tr
             key={i}

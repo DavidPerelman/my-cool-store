@@ -4,7 +4,7 @@ import AuthContext from '../../context/authContext';
 import AdminServices from '../../services/AdminServices';
 import Navbar from '../containers/Navbar/Navbar';
 import NavigationBar from '../containers/NavigationBar/AdminNavigationBar';
-import ManageProducts from './ManageProducts';
+import ManageProducts from './ManageProducts/ManageProducts';
 import ManageCustomers from './ManageCustomers';
 import ManageOrders from './ManageOrders/ManageOrders';
 
