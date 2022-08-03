@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar sticky='top' loggedIn={loggedIn} userData={userData}></Navbar>
+      {/* <Navbar sticky='top' loggedIn={loggedIn} userData={userData}></Navbar> */}
       <div>
         <Content></Content>
         {loginModalOpen && <LoginConatiner></LoginConatiner>}

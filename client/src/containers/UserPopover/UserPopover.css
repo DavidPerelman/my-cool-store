@@ -1,0 +1,15 @@
+#user-popover-icon {
+    width: 22px !important;
+}
+
+
+/* .popover-body {
+    width: 100%;
+    border-top: 0.1px solid #ccc !important;
+    padding-top: 10px;
+} */
+
+.user-popover-ul {
+    display: flex;
+    flex-direction: column;
+}

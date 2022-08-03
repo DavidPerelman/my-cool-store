@@ -1,12 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import user from '../asset/user.png';
-import MyPopover from '../components/MyPopover/MyPopover';
-import LogoutConatiner from './LogoutConatiner';
-import Button from '../components/Button/Button';
-import AuthContext from '../context/authContext';
-import Popover from '../components/Popover/Popover';
-import './UserPopover/UserPopover.css';
+import user from '../../asset/user.png';
+import MyPopover from '../../components/MyPopover/MyPopover';
+import LogoutConatiner from './../LogoutConatiner';
+import Button from '../../components/Button/Button';
+import AuthContext from '../../context/authContext';
+import Popover from '../../components/Popover/Popover';
+import './UserPopover.css';
 
 const UserPopover = ({ isAdminlLoggedIn, loggedIn, userData, logout }) => {
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ const UserPopover = ({ isAdminlLoggedIn, loggedIn, userData, logout }) => {
     const userWrapper = document.getElementsByClassName('wrapper-user')[0];
     const userContent = document.getElementsByClassName('user-content')[0];
 
-    console.log(userWrapper);
     userWrapper.addEventListener('mouseover', () => {
       userContent.style.visibility = 'visible';
     });
@@ -50,7 +49,7 @@ const UserPopover = ({ isAdminlLoggedIn, loggedIn, userData, logout }) => {
       <Popover keyValue='user' icon={user}>
         <div className={`user-content`}>
           <div className='title'>
-            <h5>{loggedIn ? userData.firstName : 'Guest'}</h5>
+            <h5>{userData === null ? 'Guest' : userData.firstName}</h5>
           </div>
           <div className='popover-body'>
             {(loggedIn && (
@@ -82,9 +81,6 @@ const UserPopover = ({ isAdminlLoggedIn, loggedIn, userData, logout }) => {
                 </ul>
               </>
             )}
-            {/* <ul className={`user-popover-ul`}>
-              <li className={`user-popover-li`}>{children}</li>
-            </ul> */}
           </div>
         </div>
       </Popover>

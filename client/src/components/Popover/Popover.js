@@ -1,10 +1,9 @@
 import React from 'react';
 import './Popover.css';
-import ExpandIcon from '../../asset/expand-icon.png';
 
 const Popover = ({ keyValue, icon, children, onClick }) => {
   return (
-    <div className='wrapper'>
+    <div className='wrapper' id={`wrapper-${keyValue}`}>
       <img
         id={`${keyValue}-popover-icon`}
         src={icon}

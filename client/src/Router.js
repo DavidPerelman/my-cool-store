@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import AuthContext from './context/authContext';
 import Navbar from './components/Navbar/Navbar';
@@ -15,12 +15,19 @@ import SuccessPayment from './pages/SuccessPayment';
 import PaymentSuccess from './pages/PaymentSuccess';
 import Admin from './admin/pages/Admin';
 import AdminLogin from './admin/pages/AdminLogin';
+import ManageProducts from './admin/pages/ManageProducts/ManageProducts';
+import ManageCustomers from './admin/pages/ManageCustomers';
+import ManageOrders from './admin/pages/ManageOrders/ManageOrders';
+import AdminNavbar from './admin/containers/Navbar/Navbar.js';
+import AdminServices from './services/AdminServices';
 
 const Router = () => {
+  const location = useLocation();
   const {
     loggedIn,
     isAdminlLoggedIn,
     setIsAdminlLoggedIn,
+    getIsAdminlsLoggedIn,
     setLoggedIn,
     userData,
   } = useContext(AuthContext);
@@ -33,14 +40,28 @@ const Router = () => {
     return null;
   }
 
+  const logout = async () => {
+    try {
+      console.log('logout');
+      const res = await AdminServices.logout();
+      await getIsAdminlsLoggedIn();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
-      {/* <Navbar
-        sticky='top'
-        loggedIn={loggedIn}
-        setRegisterSuccess={setRegisterSuccess}
-        userData={userData}
-      ></Navbar> */}
+      {location.pathname.includes('admin') ? (
+        <AdminNavbar logout={logout}></AdminNavbar>
+      ) : (
+        <Navbar
+          sticky='top'
+          loggedIn={loggedIn}
+          setRegisterSuccess={setRegisterSuccess}
+          userData={userData}
+        ></Navbar>
+      )}
       <Routes>
         {loggedIn === false && (
           <>
@@ -121,6 +142,12 @@ const Router = () => {
                 />
               }
             />
+            <Route path='/admin/manage-products' element={<ManageProducts />} />
+            <Route
+              path='/admin/manage-customers'
+              element={<ManageCustomers />}
+            />
+            <Route path='/admin/manage-orders' element={<ManageOrders />} />
           </>
         )) || (
           <>

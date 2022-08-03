@@ -5,8 +5,11 @@ import './ManageProducts.css';
 import ExpandIcon from '../../asset/expand-icon.png';
 // import Popover from '../../components/Popover/Popover';
 import Popover from '../../../components/Popover/Popover';
+import Button from '../../../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const ManageProducts = () => {
+  const navigate = useNavigate();
   const [visibile, setVisibile] = useState(false);
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -22,13 +25,18 @@ const ManageProducts = () => {
       setCategories(data.categories);
     });
 
-    document.addEventListener('click', (e) => {
-      const categoryContent = document.getElementById('Category-content');
+    setTimeout(() => {
+      const doc = document.getElementsByClassName('ManageProducts')[0];
+      console.log(doc);
 
-      if (e.target.id !== 'Category-popover-icon') {
-        categoryContent.style.visibility = 'hidden';
-      }
-    });
+      doc.addEventListener('click', (e) => {
+        const categoryContent = document.getElementById('Category-content');
+
+        if (e.target.id !== 'Category-popover-icon') {
+          categoryContent.style.visibility = 'hidden';
+        }
+      });
+    }, 1000);
   }, []);
 
   const goToOrder = async (productId) => {
@@ -41,24 +49,25 @@ const ManageProducts = () => {
     // navigate(`/order/${orderId}`);
   };
 
+  const back = async () => {
+    navigate(`/admin`);
+  };
+
   const expand = async (key) => {
-    console.log(key);
     const content = document.getElementById(`${key}-content`);
-    // const allContents = document.getElementsByClassName(`content`);
+    const allContents = document.getElementsByClassName(`content`);
 
-    content.style.visibility = 'visible';
-    console.log(content);
-    // for (let i = 0; i < allContents.length; i++) {
-    //   allContents[i].style.visibility = 'hidden';
-    // }
+    for (let i = 0; i < allContents.length; i++) {
+      allContents[i].style.visibility = 'hidden';
+    }
 
-    // if (!visibile) {
-    //   content.style.visibility = 'visible';
-    //   setVisibile(true);
-    // } else {
-    //   content.style.visibility = 'hidden';
-    //   setVisibile(false);
-    // }
+    if (!visibile) {
+      content.style.visibility = 'visible';
+      setVisibile(true);
+    } else {
+      content.style.visibility = 'hidden';
+      setVisibile(false);
+    }
 
     content.style.visibility = 'visible';
     setVisibile(true);
@@ -134,6 +143,7 @@ const ManageProducts = () => {
   return (
     <div className='ManageProducts'>
       <h1>Manage Products</h1>
+      <Button onClick={back}>Back</Button>
       <div className='products-table'>
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
       </div>

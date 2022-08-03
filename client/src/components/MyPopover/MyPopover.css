@@ -172,10 +172,6 @@ h1 {
     width: 350px;
 }
 
-.user-popover-card {
-    
-}
-
 .cart-popover-card {
     display: flex;
     flex-direction: row;
@@ -196,11 +192,11 @@ h1 {
     width: 80px;
 }
 
-.user-popover-ul {
+/* .user-popover-ul {
     display: flex !important;
     flex-direction: row !important;
     justify-content: center !important;
-}
+} */
 
 .cart-popover-quantity-counter {
     /* width: 30%; */

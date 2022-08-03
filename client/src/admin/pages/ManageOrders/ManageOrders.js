@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../../components/Button/Button';
 import MyTable from '../../../components/MyTable/MyTable';
 import OrdersServices from '../../../services/OrdersServices';
 import './ManageOrders.css';
@@ -15,6 +16,10 @@ const ManageOrders = () => {
       setTableData(data.orders);
     });
   }, []);
+
+  const back = async () => {
+    navigate(`/admin`);
+  };
 
   const goToOrder = async (orderId) => {
     console.log(orderId);
@@ -55,6 +60,7 @@ const ManageOrders = () => {
   return (
     <div className='ManageOrders'>
       <h1>Manage Orders</h1>
+      <Button onClick={back}>Back</Button>
       <div className='orders-table'>
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
       </div>

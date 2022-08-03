@@ -3,19 +3,16 @@ import Button from '../../components/Button/Button';
 import AuthContext from '../../context/authContext';
 import AdminServices from '../../services/AdminServices';
 import Navbar from '../containers/Navbar/Navbar';
-import NavigationBar from '../containers/NavigationBar/AdminNavigationBar';
-import ManageProducts from './ManageProducts/ManageProducts';
-import ManageCustomers from './ManageCustomers';
-import ManageOrders from './ManageOrders/ManageOrders';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
+  const navigate = useNavigate();
+
   const { getIsAdminlsLoggedIn } = useContext(AuthContext);
-  const [productsDisplay, setProductsDisplay] = useState(false);
-  const [customersDisplay, setCustomersDisplay] = useState(false);
-  const [ordersDisplay, setOrdersDisplay] = useState(false);
 
   const logout = async () => {
     try {
+      console.log('logout');
       const res = await AdminServices.logout();
       await getIsAdminlsLoggedIn();
     } catch (err) {
@@ -23,17 +20,23 @@ const Admin = () => {
     }
   };
 
+  const manageProducts = async () => {
+    navigate(`/admin/manage-products`);
+  };
+
+  const manageCustomers = async () => {
+    navigate(`/admin/manage-customers`);
+  };
+
+  const manageOrders = async () => {
+    navigate(`/admin/manage-orders`);
+  };
+
   return (
     <div>
-      <Navbar logout={logout}></Navbar>
-      <NavigationBar
-        setProductsDisplay={setProductsDisplay}
-        setCustomersDisplay={setCustomersDisplay}
-        setOrdersDisplay={setOrdersDisplay}
-      />
-      {productsDisplay && <ManageProducts></ManageProducts>}
-      {customersDisplay && <ManageCustomers></ManageCustomers>}
-      {ordersDisplay && <ManageOrders></ManageOrders>}
+      <Button onClick={manageProducts}>Manage Products</Button>
+      <Button onClick={manageCustomers}>Manage Customers</Button>
+      <Button onClick={manageOrders}>Manage Orders</Button>
     </div>
   );
 };

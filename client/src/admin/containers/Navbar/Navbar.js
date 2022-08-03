@@ -7,8 +7,8 @@ import AuthContext from '../../../context/authContext';
 // import NavbarInput from '../../containers/NavbarInput/NavbarInput';
 import './Navbar.css';
 
-const Navbar = () => {
-  const { isAdminlLoggedIn, userData, logout } = useContext(AuthContext);
+const Navbar = ({ logout }) => {
+  const { isAdminlLoggedIn, userData } = useContext(AuthContext);
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString()
   );
@@ -27,7 +27,6 @@ const Navbar = () => {
   return (
     <nav className='navbar'>
       <div className='date-brand-div'>
-        {/* <Button className='brand-title'>MyCoolStore</Button> */}
         <div className='brand-title' onClick={brandTitleClick}>
           MyCoolStore
         </div>
@@ -45,18 +44,14 @@ const Navbar = () => {
         <span className='bar'></span>
       </a>
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
-        {/* <NavbarInput /> */}
         <div style={{ marginLeft: 'auto', display: 'flex' }}>
-          <p className='greet-user'>
+          <p className='greet-user' style={{ marginTop: '0' }}>
             Hello {userData === null ? 'Guest' : userData.firstName}
           </p>
           <ul>
-            {/* <li className='wrapper'>
-              <a></a>
-            </li> */}
             <li className='wrapper-user'>
               <a className='link-hover'>
-                <Button onClick={logout}>Logout</Button>
+                {isAdminlLoggedIn && <Button onClick={logout}>Logout</Button>}
               </a>
             </li>
           </ul>

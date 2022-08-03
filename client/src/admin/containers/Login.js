@@ -26,7 +26,6 @@ const Login = () => {
   };
 
   const login = async () => {
-    console.log('login');
     console.log(loginData);
     if (!isFormFieldsValid(loginData)) return showError('all fields required!');
 
@@ -46,8 +45,6 @@ const Login = () => {
     }
 
     await getIsAdminlsLoggedIn();
-
-    // navigate('/admin');
   };
 
   const showError = (error) => {
@@ -69,13 +66,6 @@ const Login = () => {
           ''}
         <Form data={loginData} handleFormChange={handleFormChange}></Form>
         <div className='modal-footer'>
-          {/* <Button
-            size='user-modal-button'
-            color='button--close'
-            onClick={handleClose}
-          >
-            Close
-          </Button> */}
           <Button size='user-modal-button' onClick={login}>
             Login
           </Button>
