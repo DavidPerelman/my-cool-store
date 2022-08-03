@@ -4,6 +4,7 @@ import Button from '../../../components/Button/Button';
 import ClockDate from '../../../components/ClockDate';
 import UserPopover from '../../../containers/UserPopover';
 import AuthContext from '../../../context/authContext';
+import Logout from '../../asset/logout.png';
 // import NavbarInput from '../../containers/NavbarInput/NavbarInput';
 import './Navbar.css';
 
@@ -49,9 +50,13 @@ const Navbar = ({ logout }) => {
             Hello {userData === null ? 'Guest' : userData.firstName}
           </p>
           <ul>
-            <li className='wrapper-user'>
+            <li className='wrapper-user' style={{ marginRight: '5px' }}>
               <a className='link-hover'>
-                {isAdminlLoggedIn && <Button onClick={logout}>Logout</Button>}
+                {isAdminlLoggedIn && (
+                  <span onClick={logout}>
+                    <img src={Logout} alt='Logout' style={{ width: '30px' }} />
+                  </span>
+                )}
               </a>
             </li>
           </ul>
