@@ -13,7 +13,7 @@ import RegisterConfirm from './pages/RegisterConfirm';
 import RegisterSuccess from './pages/RegisterSuccess';
 import SuccessPayment from './pages/SuccessPayment';
 import PaymentSuccess from './pages/PaymentSuccess';
-import Admin from './admin/pages/Admin';
+import Admin from './admin/pages/Admin/Admin';
 import AdminLogin from './admin/pages/AdminLogin';
 import ManageProducts from './admin/pages/ManageProducts/ManageProducts';
 import ManageCustomers from './admin/pages/ManageCustomers';

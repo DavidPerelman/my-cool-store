@@ -1,0 +1,16 @@
+.admin-controllers {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+@media (max-width: 500px) {
+    .admin-controllers {
+    flex-direction: column;
+    margin: auto;
+    margin-top: 10px;
+    width: 85%;
+}
+}

@@ -45,8 +45,11 @@ const Navbar = ({ logout }) => {
         <span className='bar'></span>
       </a>
       <div className={active ? 'navbar-links active' : 'navbar-links'}>
-        <div style={{ marginLeft: 'auto', display: 'flex' }}>
-          <p className='greet-user' style={{ marginTop: '0' }}>
+        <div
+          className='user-navbar-controllers'
+          // style={{ marginLeft: 'auto', display: 'flex' }}
+        >
+          <p className='greet-user' style={{ marginTop: '8px' }}>
             Hello {userData === null ? 'Guest' : userData.firstName}
           </p>
           <ul>

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import Button from '../../components/Button/Button';
-import AuthContext from '../../context/authContext';
-import AdminServices from '../../services/AdminServices';
-import Navbar from '../containers/Navbar/Navbar';
+import Button from '../../../components/Button/Button';
+import AuthContext from '../../../context/authContext';
+import AdminServices from '../../../services/AdminServices';
 import { useNavigate } from 'react-router-dom';
+import './Admin.css';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Admin = () => {
   };
 
   return (
-    <div>
+    <div className='admin-controllers'>
       <Button onClick={manageProducts}>Manage Products</Button>
       <Button onClick={manageCustomers}>Manage Customers</Button>
       <Button onClick={manageOrders}>Manage Orders</Button>

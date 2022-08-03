@@ -108,7 +108,7 @@ const ManageProducts = () => {
               </div>
             </th>
           )) || (
-            <th key={i}>
+            <th key={i} className={`${key}-th`}>
               <div>{key}</div>
             </th>
           )
@@ -133,7 +133,7 @@ const ManageProducts = () => {
             <td>{product.title}</td>
             <td>{product.category}</td>
             <td>{product.price}</td>
-            <td>{product.description}</td>
+            <td className='description-td'>{product.description}</td>
           </tr>
         );
       })

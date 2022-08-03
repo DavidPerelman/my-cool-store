@@ -12,6 +12,17 @@
     border: 1px black solid;
 }
 
+.No-th {
+    width: 20px;
+}
+
+.Title-th {
+    width: 140px;
+}
+
+.Price-th {
+    width: 40px;
+}
 /* #Category-expand-icon {
     width: 15px;
     cursor: pointer;
@@ -67,4 +78,19 @@ ul > li {
 ul > li:hover {
     cursor: pointer;
     background-color: #D0D0D0;
+}
+
+
+@media (max-width: 500px) {
+    .products-table {
+    margin: 10px;
+    }
+
+    .Description-th {
+    display: none;
+    }
+
+    .description-td {
+    display: none;
+    }
 }
