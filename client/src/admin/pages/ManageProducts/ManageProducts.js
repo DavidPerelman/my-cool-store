@@ -51,20 +51,13 @@ const ManageProducts = () => {
   }
 
   const pagination = async (pageNum) => {
-    console.log(tableData);
-
     setCurrentPage(pageNum);
 
     const startIndex = (pageNum - 1) * 10;
 
-    console.log(tableData.slice(startIndex, startIndex + 10));
-
     const paginatedProduct = tableData.slice(startIndex, startIndex + 10);
 
     setPaginatedProducts(paginatedProduct);
-    console.log(paginatedProducts);
-
-    // navigate(`/order/${orderId}`);
   };
 
   const goToOrder = async (productId) => {
