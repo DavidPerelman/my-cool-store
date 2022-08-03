@@ -7,6 +7,7 @@ import ExpandIcon from '../../asset/expand-icon.png';
 import Popover from '../../../components/Popover/Popover';
 import Button from '../../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import TablePagination from '../../../components/TablePagination/TablePagination';
 
 const ManageProducts = () => {
   const navigate = useNavigate();
@@ -14,11 +15,14 @@ const ManageProducts = () => {
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
   const [tableData, setTableData] = useState(null);
+  const [paginatedProducts, setPaginatedProducts] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     ProductsServices.fetchAllProducts().then((data) => {
       setProducts(data.products);
       setTableData(data.products);
+      setPaginatedProducts(data.products.slice(0, 10));
     });
 
     ProductsServices.fetchCategoriesData().then((data) => {
@@ -27,7 +31,6 @@ const ManageProducts = () => {
 
     setTimeout(() => {
       const doc = document.getElementsByClassName('ManageProducts')[0];
-      console.log(doc);
 
       doc.addEventListener('click', (e) => {
         const categoryContent = document.getElementById('Category-content');
@@ -38,6 +41,31 @@ const ManageProducts = () => {
       });
     }, 1000);
   }, []);
+
+  const pageSize = 10;
+  const pageCount = products ? Math.ceil(products.length / pageSize) : 0;
+  const pageCountArray = new Array(pageCount).fill('').map((_, i) => i + 1);
+
+  if (pageCount === 1) {
+    return null;
+  }
+
+  const pagination = async (pageNum) => {
+    console.log(tableData);
+
+    setCurrentPage(pageNum);
+
+    const startIndex = (pageNum - 1) * 10;
+
+    console.log(tableData.slice(startIndex, startIndex + 10));
+
+    const paginatedProduct = tableData.slice(startIndex, startIndex + 10);
+
+    setPaginatedProducts(paginatedProduct);
+    console.log(paginatedProducts);
+
+    // navigate(`/order/${orderId}`);
+  };
 
   const goToOrder = async (productId) => {
     console.log(productId);
@@ -119,8 +147,9 @@ const ManageProducts = () => {
 
   const renderBody = () => {
     return (
-      tableData &&
-      tableData.map((product, i) => {
+      paginatedProducts &&
+      paginatedProducts.map((product, i) => {
+        console.log(i);
         return (
           <tr
             key={i}
@@ -146,6 +175,11 @@ const ManageProducts = () => {
       <Button onClick={back}>Back</Button>
       <div className='products-table'>
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
+        <TablePagination
+          pages={pageCountArray}
+          currentPage={currentPage}
+          onClick={pagination}
+        />
       </div>
     </div>
   );
