@@ -54,12 +54,10 @@ router.get('/category/:categoryId/products', async (req, res) => {
   }
 });
 
-router.get('/category/:categoryId/productsLimits', async (req, res) => {
+router.get('/category/:categoryId/categoryProducts', async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
 
-    console.log(categoryId);
-    // get 3 products by category
     const category = await Category.findById(categoryId).exec();
 
     const products = await Product.find({

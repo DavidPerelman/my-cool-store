@@ -4,7 +4,7 @@ import './TablePagination.css';
 const TablePagination = ({ pages, currentPage, onClick }) => {
   return (
     <div className='pagination'>
-      <a href='#'>&laquo;</a>
+      {/* <a href='#'>&laquo;</a> */}
       {pages.map((page, i) => (
         <a
           key={i}
@@ -14,7 +14,7 @@ const TablePagination = ({ pages, currentPage, onClick }) => {
           {page}
         </a>
       ))}
-      <a href='#'>&raquo;</a>
+      {/* <a href='#'>&raquo;</a> */}
     </div>
   );
 };

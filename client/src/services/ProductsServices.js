@@ -23,7 +23,7 @@ const ProductsServices = {
   },
   fetchAllProductsByCategoryId: (categoryId) => {
     return fetch(
-      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/productsLimits`
+      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/categoryProducts`
     ).then((res) => {
       if (res.status !== 401) {
         return res.json().then((data) => data.products);

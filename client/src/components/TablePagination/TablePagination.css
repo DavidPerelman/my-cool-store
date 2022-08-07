@@ -1,5 +1,6 @@
 .pagination {
-  display: inline-block;
+  overflow-x: auto;
+  display: flex;
 }
 
 .pagination a {
