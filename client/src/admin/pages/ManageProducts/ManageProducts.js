@@ -67,7 +67,11 @@ const ManageProducts = () => {
 
   const categoryListClick = async (categoryId) => {
     console.log(categoryId);
-    // navigate(`/order/${orderId}`);
+    // ProductsServices.fetchAllProducts().then((data) => {
+    //   setProducts(data.products);
+    //   setTableData(data.products);
+    //   setPaginatedProducts(data.products.slice(0, 10));
+    // });
   };
 
   const back = async () => {
@@ -102,35 +106,31 @@ const ManageProducts = () => {
         return (
           (key === 'Category' && (
             <th key={i} className={`Category-th`}>
-              <div id={`Category-th`}>
-                {' '}
-                {key}
-                <Popover
-                  icon={ExpandIcon}
-                  keyValue={key}
-                  // expand={expand}
-                  onClick={() => expand(key)}
-                  categories={categories}
-                  categoryListClick={categoryListClick}
-                >
-                  <ul>
-                    {categories &&
-                      categories.map((category, i) => (
-                        <li
-                          key={i}
-                          id={category._id}
-                          onClick={() => categoryListClick(category._id)}
-                        >
-                          {category.name}
-                        </li>
-                      ))}
-                  </ul>
-                </Popover>
-              </div>
+              <Popover
+                icon={ExpandIcon}
+                keyValue={key}
+                onClick={() => expand(key)}
+                categories={categories}
+                categoryListClick={categoryListClick}
+              >
+                <ul>
+                  {categories &&
+                    categories.map((category, i) => (
+                      <li
+                        key={i}
+                        id={category._id}
+                        onClick={() => categoryListClick(category._id)}
+                      >
+                        {category.name}
+                      </li>
+                    ))}
+                </ul>
+              </Popover>
+              {key}
             </th>
           )) || (
-            <th key={i} className={`${key}-th`}>
-              <div>{key}</div>
+            <th key={i} id={`${key}-th`}>
+              {key}
             </th>
           )
         );
@@ -142,7 +142,6 @@ const ManageProducts = () => {
     return (
       paginatedProducts &&
       paginatedProducts.map((product, i) => {
-        console.log(i);
         return (
           <tr
             key={i}
@@ -166,7 +165,7 @@ const ManageProducts = () => {
     <div className='ManageProducts'>
       <h1>Manage Products</h1>
       <Button onClick={back}>Back</Button>
-      <div className='products-table'>
+      <div className='products-table' style={{ overflowX: 'scroll' }}>
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
         <TablePagination
           pages={pageCountArray}

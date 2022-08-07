@@ -2,7 +2,7 @@ import React from 'react';
 
 const MyTable = ({ renderHeader, renderBody, renderFooter }) => {
   return (
-    <table>
+    <table className='table'>
       <thead>
         <tr>{renderHeader()}</tr>
       </thead>

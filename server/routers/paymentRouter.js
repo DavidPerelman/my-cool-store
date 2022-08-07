@@ -37,23 +37,6 @@ router.get('/checkout-session/:id', async (req, res) => {
   res.json(session);
 });
 
-// router.post('/create-payment-intent', async (req, res) => {
-//   const { paymentMethodTypes, currency } = req.body;
-
-//   try {
-//     const paymentIntent = await stripe.paymentIntents.create({
-//       amount: 1999,
-//       currency: currency,
-//       payment_method_types: [paymentMethodTypes],
-//       metadata: {
-//       },
-//     });
-//     res.json({ clientSecret: paymentIntent.client_secret });
-//   } catch (e) {
-//     res.status(400).json({ error: { message: e.message } });
-//   }
-// });
-
 router.get('/', async (req, res) => {
   try {
     const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY;

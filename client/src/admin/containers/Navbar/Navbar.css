@@ -28,12 +28,17 @@
 .navbar-links {
     width: 65%;
     display: flex;
+    justify-content: right;
 }
 
 .navbar-links li {
     list-style: none;
     /* background-color: #A9A9A9; */
 }
+
+  .user-navbar-controllers {
+        display: contents;
+    }
 
 /* .popover-li {
     list-style: none;

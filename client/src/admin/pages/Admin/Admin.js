@@ -7,7 +7,6 @@ import './Admin.css';
 
 const Admin = () => {
   const navigate = useNavigate();
-
   const { getIsAdminlsLoggedIn } = useContext(AuthContext);
 
   const logout = async () => {
@@ -31,6 +30,7 @@ const Admin = () => {
   const manageOrders = async () => {
     navigate(`/admin/manage-orders`);
   };
+  //http://192.168.1.4:3000
 
   return (
     <div className='admin-controllers'>

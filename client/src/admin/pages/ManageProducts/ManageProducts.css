@@ -12,7 +12,7 @@
     border: 1px black solid;
 }
 
-.No-th {
+#No.-th {
     width: 20px;
 }
 
@@ -80,17 +80,26 @@ ul > li:hover {
     background-color: #D0D0D0;
 }
 
+ #No.-th {
+    width: 10px !important;
+    }
 
 @media (max-width: 500px) {
     .products-table {
     margin: 10px;
     }
 
-    .Description-th {
+    #Description-th {
     display: none;
+    visibility: hidden;
     }
 
     .description-td {
     display: none;
+    visibility: hidden;
     }
+
+    /* .table thead {
+        display: none;
+    } */
 }

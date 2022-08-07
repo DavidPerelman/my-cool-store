@@ -81,7 +81,9 @@ router.get('/checkIfAdminLoggedIn', async (req, res) => {
     } else {
       jwt.verify(token, process.env.JWT_SECRET);
 
-      const user = await User.findOne({ token: token }).exec();
+      const userId = jwt.verify(token, process.env.JWT_SECRET).user;
+
+      const user = await User.findById(userId).exec();
 
       if (user.role !== 'admin') {
         return res.status(400).json({ user: null, isAdmin: false });
