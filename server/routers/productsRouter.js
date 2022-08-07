@@ -13,6 +13,20 @@ router.get('/products', async (req, res) => {
   }
 });
 
+router.get('/products/:categoryId', async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+    console.log(categoryId);
+    return;
+    // get all products
+    const products = await Product.find({});
+    res.json({ products: products });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 router.get('/product/:productId', async (req, res) => {
   try {
     const productId = req.params.productId;

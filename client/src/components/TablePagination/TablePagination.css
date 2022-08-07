@@ -3,6 +3,7 @@
 }
 
 .pagination a {
+  cursor: pointer;
   color: black;
   float: left;
   padding: 8px 16px;

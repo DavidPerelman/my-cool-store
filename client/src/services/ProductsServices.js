@@ -21,6 +21,17 @@ const ProductsServices = {
       }
     });
   },
+  fetchAllProductsByCategoryId: (categoryId) => {
+    return fetch(
+      `${process.env.REACT_APP_API_URL}/categories/category/${categoryId}/productsLimits`
+    ).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data.products);
+      } else {
+        return { message: 'error' };
+      }
+    });
+  },
   fetchProduct: (productId) => {
     return fetch(
       `${process.env.REACT_APP_API_URL}/products/product/${productId}`

@@ -67,11 +67,11 @@ const ManageProducts = () => {
 
   const categoryListClick = async (categoryId) => {
     console.log(categoryId);
-    // ProductsServices.fetchAllProducts().then((data) => {
-    //   setProducts(data.products);
-    //   setTableData(data.products);
-    //   setPaginatedProducts(data.products.slice(0, 10));
-    // });
+    ProductsServices.fetchAllProductsByCategoryId(categoryId).then((data) => {
+      setProducts(data);
+      setTableData(data);
+      setPaginatedProducts(data.slice(0, 10));
+    });
   };
 
   const back = async () => {
