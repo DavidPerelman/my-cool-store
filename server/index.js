@@ -55,6 +55,9 @@ app.use('/admin', adminRouter);
 const productsRouter = require('./routers/productsRouter');
 app.use('/products', productsRouter);
 
+const customersRouter = require('./routers/customersRouter');
+app.use('/customers', customersRouter);
+
 const categoriesRouter = require('./routers/categoriesRouter');
 app.use('/categories', categoriesRouter);
 
