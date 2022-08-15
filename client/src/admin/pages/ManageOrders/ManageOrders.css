@@ -5,3 +5,30 @@
 .orders-table {
     margin: 20px;
 }
+
+#Customer-content {
+    visibility: hidden;
+    position: absolute;
+    background-color: white;
+    width: 150px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+#Date-content {
+    visibility: hidden;
+    position: absolute;
+    background-color: white;
+    width: 150px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+#Status-content {
+    visibility: hidden;
+    position: absolute;
+    background-color: white;
+    width: 150px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
