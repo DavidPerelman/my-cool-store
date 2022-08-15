@@ -88,9 +88,9 @@ router.get('/orders/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    // get single product
     const orders = await Order.find({ user: userId })
       .populate('products.product')
+      .populate('user')
       .exec();
 
     res.json({ orders: orders });

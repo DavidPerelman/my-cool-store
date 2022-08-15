@@ -84,28 +84,63 @@ const ManageOrders = () => {
     setVisibile(true);
   };
 
-  const popoverDataListClick = async (value) => {
-    console.log(value);
-    // ProductsServices.fetchAllProductsByCategoryId(categoryId).then((data) => {
-    //   setProducts(data);
-    //   setTableData(data);
-    //   setPaginatedProducts(data.slice(0, 10));
-    // });
+  const popoverDataListClick = async (key, value) => {
+    if (key === 'Customer') {
+      OrdersServices.getUserOrders(value).then((data) => {
+        setOrders(data.orders);
+        setTableData(data.orders);
+        console.log(data.orders);
+        // setPaginatedProducts(data.slice(0, 10));
+      });
+
+      console.log(
+        customers.filter((object) => {
+          return object._id !== value;
+        })
+      );
+
+      for (let i = 0; i < tableData.length; i++) {
+        console.log(tableData[i].user);
+      }
+      // const indexOfObject = customers.findIndex((object) => {
+      //   return object._id !== value;
+      // });
+
+      // customers.splice(indexOfObject, 1);
+
+      // console.log(customers);
+      // console.log(tableData);
+    }
   };
 
   const renderHeader = () => {
     let headerData = ['No.', 'Order Number', 'Customer', 'Date', 'Status'];
+    let statuses = [];
+    let dates = [];
+
+    if (orders !== null) {
+      for (let i = 0; i < orders.length; i++) {
+        if (!statuses.includes(orders[i].status)) {
+          statuses.push(orders[i].status);
+        }
+      }
+    }
+
+    if (orders !== null) {
+      for (let i = 0; i < orders.length; i++) {
+        if (!dates.includes(orders[i].created.slice(0, 10))) {
+          dates.push(orders[i].created.slice(0, 10));
+        }
+      }
+    }
+
     let data = [
       { value: 'No.', data: [] },
       { value: 'Order Number', data: tableData },
       { value: 'Customer', data: customers },
-      { value: 'Date', data: tableData },
-      { value: 'Status', data: tableData },
+      { value: 'Date', data: dates },
+      { value: 'Status', data: statuses },
     ];
-
-    for (let i = 0; i < data.length; i++) {
-      // console.log(Object.values(data[i])[1]);
-    }
 
     return headerData.map((key, i) => {
       return (
@@ -116,38 +151,37 @@ const ManageOrders = () => {
               keyValue={key}
               onClick={() => expand(key)}
               data={data[i].data}
-              // dataListClick={dataListClick(data)}
             >
               {(key === 'Customer' && customers && (
                 <ul>
                   {data[2].data.map((customer, i) => (
                     <li
                       key={i}
-                      onClick={() => popoverDataListClick(customer._id)}
+                      onClick={() => popoverDataListClick(key, customer._id)}
                     >{`${customer.firstName} ${customer.lastName}`}</li>
                   ))}
                 </ul>
               )) ||
                 (key === 'Date' && orders && (
                   <ul>
-                    {data[1].data.map((order, i) => (
+                    {data[3].data.map((date, i) => (
                       <li
                         key={i}
-                        onClick={() => popoverDataListClick(order.created)}
+                        onClick={() => popoverDataListClick(key, date)}
                       >
-                        {order.created}
+                        {date}
                       </li>
                     ))}
                   </ul>
                 )) ||
                 (key === 'Status' && orders && (
                   <ul>
-                    {data[1].data.map((order, i) => (
+                    {data[4].data.map((status, i) => (
                       <li
                         key={i}
-                        onClick={() => popoverDataListClick(order.status)}
+                        onClick={() => popoverDataListClick(key, status)}
                       >
-                        {order.status}
+                        {status}
                       </li>
                     ))}
                   </ul>
@@ -165,6 +199,7 @@ const ManageOrders = () => {
   };
 
   const renderBody = () => {
+    console.log(tableData);
     return (
       tableData &&
       tableData.map((order, i) => {
@@ -178,8 +213,9 @@ const ManageOrders = () => {
           >
             <td>{i + 1}</td>
             <td>{order.orderNumber}</td>
+            {/* <td>{`${order.user}`}</td> */}
             <td>{`${order.user.firstName} ${order.user.lastName}`}</td>
-            <td>{order.created}</td>
+            <td>{order.created.slice(0, 10)}</td>
             <td>{order.status}</td>
           </tr>
         );

@@ -13,6 +13,19 @@ router.get('/customers', async (req, res) => {
   }
 });
 
+router.get('/customers/:customerId', async (req, res) => {
+  try {
+    const customerId = req.params.customerId;
+
+    // get customer
+    const customers = await User.findById({ _id: customerId });
+    res.json({ customers: customers });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 router.get('/product/:productId', async (req, res) => {
   try {
     const productId = req.params.productId;
