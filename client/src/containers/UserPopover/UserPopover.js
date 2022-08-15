@@ -8,7 +8,7 @@ import AuthContext from '../../context/authContext';
 import Popover from '../../components/Popover/Popover';
 import './UserPopover.css';
 
-const UserPopover = ({ isAdminlLoggedIn, loggedIn, userData, logout }) => {
+const UserPopover = ({ loggedIn, userData }) => {
   const navigate = useNavigate();
   const { setLoginModalOpen, setRegisterModalOpen } = useContext(AuthContext);
 

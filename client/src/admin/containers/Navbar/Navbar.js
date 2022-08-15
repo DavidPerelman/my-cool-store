@@ -9,7 +9,7 @@ import Logout from '../../asset/logout.png';
 import './Navbar.css';
 
 const Navbar = ({ logout }) => {
-  const { isAdminlLoggedIn, userData } = useContext(AuthContext);
+  const { isAdminLoggedIn, adminData } = useContext(AuthContext);
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString()
   );
@@ -50,12 +50,12 @@ const Navbar = ({ logout }) => {
           // style={{ marginLeft: 'auto', display: 'flex' }}
         >
           <p className='greet-user' style={{ marginTop: '8px' }}>
-            Hello {userData === null ? 'Guest' : userData.firstName}
+            Hello {adminData === null ? 'Guest' : adminData.firstName}
           </p>
           <ul>
             <li className='wrapper-user' style={{ marginRight: '5px' }}>
               <a className='link-hover'>
-                {isAdminlLoggedIn && (
+                {isAdminLoggedIn && (
                   <span onClick={logout}>
                     <img src={Logout} alt='Logout' style={{ width: '30px' }} />
                   </span>

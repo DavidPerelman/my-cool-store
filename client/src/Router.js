@@ -25,8 +25,8 @@ const Router = () => {
   const location = useLocation();
   const {
     loggedIn,
-    isAdminlLoggedIn,
-    setIsAdminlLoggedIn,
+    isAdminLoggedIn,
+    setIsAdminLoggedIn,
     getIsAdminlsLoggedIn,
     setLoggedIn,
     userData,
@@ -36,7 +36,7 @@ const Router = () => {
     return null;
   }
 
-  if (isAdminlLoggedIn === undefined) {
+  if (isAdminLoggedIn === undefined) {
     return null;
   }
 
@@ -129,15 +129,15 @@ const Router = () => {
           </>
         )}
 
-        {(isAdminlLoggedIn === true && (
+        {(isAdminLoggedIn === true && (
           <>
             <Route
               exact
               path='/admin'
               element={
                 <Admin
-                  isAdminlLoggedIn={isAdminlLoggedIn}
-                  setIsAdminlLoggedIn={setIsAdminlLoggedIn}
+                  isAdminLoggedIn={isAdminLoggedIn}
+                  setIsAdminLoggedIn={setIsAdminLoggedIn}
                   userData={userData}
                 />
               }
@@ -156,8 +156,8 @@ const Router = () => {
               path='/admin'
               element={
                 <AdminLogin
-                  isAdminlLoggedIn={isAdminlLoggedIn}
-                  setIsAdminlLoggedIn={setIsAdminlLoggedIn}
+                  isAdminLoggedIn={isAdminLoggedIn}
+                  setIsAdminLoggedIn={setIsAdminLoggedIn}
                   userData={userData}
                 />
               }

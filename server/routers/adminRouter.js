@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
     user.save();
 
     res
-      .cookie('token', token, {
+      .cookie('admin_token', token, {
         httpOnly: true,
       })
       .json({ isLogin: true, user: user, isAdmin: true });
@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
 router.get('/logout', async (req, res) => {
   try {
     res
-      .cookie('token', '', {
+      .cookie('admin_token', '', {
         httpOnly: true,
         expires: new Date(0),
       })
@@ -74,7 +74,7 @@ router.get('/logout', async (req, res) => {
 
 router.get('/checkIfAdminLoggedIn', async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies.admin_token;
 
     if (!token) {
       return res.json({ user: null, isAdmin: false });
@@ -86,7 +86,7 @@ router.get('/checkIfAdminLoggedIn', async (req, res) => {
       const user = await User.findById(userId).exec();
 
       if (user.role !== 'admin') {
-        return res.status(400).json({ user: null, isAdmin: false });
+        return res.json({ user: null, isAdmin: false });
       }
 
       res.send({ user: user, isAdmin: true });

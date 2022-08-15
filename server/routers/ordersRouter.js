@@ -8,6 +8,7 @@ const { createId } = require('../services/OrderServices');
 router.post('/order', async (req, res) => {
   try {
     const orderData = req.body;
+    console.log(orderData);
 
     const order = await new Order({
       orderNumber: await createId(),
@@ -33,22 +34,6 @@ router.get('/order/:orderId', async (req, res) => {
       .exec();
 
     res.json({ order: order });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send();
-  }
-});
-
-router.get('/orders/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-
-    // get single product
-    const orders = await Order.find({ user: userId })
-      .populate('products.product')
-      .exec();
-
-    res.json({ orders: orders });
   } catch (err) {
     console.error(err);
     res.status(500).send();

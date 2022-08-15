@@ -9,6 +9,7 @@ const OrderCartContainer = () => {
   const navigate = useNavigate();
   const { cartItems, itemsPrice, itemsQuantity, clearCartItem } = useCart();
   const { loggedIn, userData } = useContext(AuthContext);
+  console.log(userData);
 
   const order = async () => {
     let productsArray = [];
