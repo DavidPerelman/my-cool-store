@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const bodyParser = require('body-parser');
 
 app.use(
   cors({
@@ -36,7 +36,14 @@ async function main() {
 }
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json());
+// app.use(express.json());
+app.use((req, res, next) => {
+  if (req.originalUrl === '/webhook') {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
 
 // Routers
 const userRouter = require('./routers/userRouter');
@@ -56,6 +63,9 @@ app.use('/orders', ordersRouter);
 
 const paymentRouter = require('./routers/paymentRouter');
 app.use('/payment', paymentRouter);
+
+const webhookRouter = require('./routers/webhookRouter');
+app.use('/webhook', webhookRouter);
 
 app.get('/', (req, res) => {
   res.send('<h1>myCoolStore Server</h1>');
