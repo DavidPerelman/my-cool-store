@@ -2,12 +2,20 @@
     margin-top: 15px;
 }
 
-.SearchBar {
-    margin-bottom: 10px;
-}
-
 .orders-table {
     margin: 20px;
+}
+
+.ManageOrders-back-button {
+    width: 50px;
+    align-self: center;
+}
+
+.controllers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }
 
 #Customer-content {

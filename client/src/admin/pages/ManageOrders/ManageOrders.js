@@ -212,14 +212,18 @@ const ManageOrders = () => {
   return (
     <div className='ManageOrders'>
       <h1>Manage Orders</h1>
-      <Button onClick={back}>Back</Button>
-      <div className='orders-table' style={{ overflowX: 'auto' }}>
+      <div className='controllers'>
+        <Button onClick={back} className='ManageOrders-back-button'>
+          Back
+        </Button>
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           setSearchStatus={setSearchStatus}
           searchStatus={searchStatus}
-        />{' '}
+        />
+      </div>
+      <div className='orders-table' style={{ overflowX: 'auto' }}>
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
       </div>
     </div>
