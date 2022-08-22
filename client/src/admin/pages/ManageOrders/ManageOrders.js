@@ -12,6 +12,7 @@ import './ManageOrders.css';
 const ManageOrders = () => {
   const navigate = useNavigate();
   const [orders, setOrders] = useState(null);
+  const [searchStatus, setSearchStatus] = useState(false);
   const [headerData, setHeaderData] = useState([]);
   const [customers, setCustomers] = useState(null);
   const [tableData, setTableData] = useState(null);
@@ -184,8 +185,7 @@ const ManageOrders = () => {
         .filter(
           (order) =>
             order.orderNumber.toString().toLowerCase().includes(searchQuery) ||
-            order.user.firstName.toLowerCase().includes(searchQuery) ||
-            order.user.lastName.toLowerCase().includes(searchQuery) ||
+            order.user.fullName.toLowerCase().includes(searchQuery) ||
             order.created.toLowerCase().includes(searchQuery) ||
             order.status.toLowerCase().includes(searchQuery)
         )
@@ -200,7 +200,7 @@ const ManageOrders = () => {
             >
               <td>{i + 1}</td>
               <td>{order.orderNumber}</td>
-              <td>{`${order.user.firstName} ${order.user.lastName}`}</td>
+              <td>{`${order.user.fullName}`}</td>
               <td>{order.created.slice(0, 10)}</td>
               <td>{order.status}</td>
             </tr>
@@ -214,7 +214,12 @@ const ManageOrders = () => {
       <h1>Manage Orders</h1>
       <Button onClick={back}>Back</Button>
       <div className='orders-table' style={{ overflowX: 'auto' }}>
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />{' '}
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setSearchStatus={setSearchStatus}
+          searchStatus={searchStatus}
+        />{' '}
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
       </div>
     </div>
