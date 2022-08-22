@@ -16,11 +16,11 @@
     width: 130px
 }
 
-#Category-th {
+/* #Category-th {
     gap: 6px;
     display: flex;
     justify-content: center;
-}
+} */
 
 .expand-icon:hover .content {
     visibility: visible;

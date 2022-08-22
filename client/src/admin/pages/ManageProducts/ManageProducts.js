@@ -8,6 +8,7 @@ import Popover from '../../../components/Popover/Popover';
 import Button from '../../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import TablePagination from '../../../components/TablePagination/TablePagination';
+import SearchBar from '../../../components/SearchBar/SearchBar';
 
 const ManageProducts = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const ManageProducts = () => {
   const [tableData, setTableData] = useState(null);
   const [paginatedProducts, setPaginatedProducts] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     ProductsServices.fetchAllProducts().then((data) => {
@@ -29,17 +31,17 @@ const ManageProducts = () => {
       setCategories(data.categories);
     });
 
-    setTimeout(() => {
-      const doc = document.getElementsByClassName('ManageProducts')[0];
+    // setTimeout(() => {
+    //   const doc = document.getElementsByClassName('ManageProducts')[0];
 
-      doc.addEventListener('click', (e) => {
-        const categoryContent = document.getElementById('Category-content');
+    //   doc.addEventListener('click', (e) => {
+    //     const categoryContent = document.getElementById('Category-content');
 
-        if (e.target.id !== 'Category-popover-icon') {
-          categoryContent.style.visibility = 'hidden';
-        }
-      });
-    }, 1000);
+    //     if (e.target.id !== 'Category-popover-icon') {
+    //       categoryContent.style.visibility = 'hidden';
+    //     }
+    //   });
+    // }, 1000);
   }, []);
 
   const pageSize = 10;
@@ -104,35 +106,38 @@ const ManageProducts = () => {
     return headerData.map((key, i) => {
       {
         return (
-          (key === 'Category' && (
-            <th key={i} className={`Category-th`}>
-              <Popover
-                icon={ExpandIcon}
-                keyValue={key}
-                onClick={() => expand(key)}
-                categories={categories}
-                categoryListClick={categoryListClick}
-              >
-                <ul>
-                  {categories &&
-                    categories.map((category, i) => (
-                      <li
-                        key={i}
-                        id={category._id}
-                        onClick={() => categoryListClick(category._id)}
-                      >
-                        {category.name}
-                      </li>
-                    ))}
-                </ul>
-              </Popover>
-              {key}
-            </th>
-          )) || (
-            <th key={i} id={`${key}-th`}>
-              {key}
-            </th>
-          )
+          // (key === 'Category' && (
+          //   <th key={i} className={`Category-th`}>
+          //     <Popover
+          //       icon={ExpandIcon}
+          //       keyValue={key}
+          //       onClick={() => expand(key)}
+          //       categories={categories}
+          //       categoryListClick={categoryListClick}
+          //     >
+          //       <ul>
+          //         {categories &&
+          //           categories.map((category, i) => (
+          //             <li
+          //               key={i}
+          //               id={category._id}
+          //               onClick={() => categoryListClick(category._id)}
+          //             >
+          //               {category.name}
+          //             </li>
+          //           ))}
+          //       </ul>
+          //     </Popover>
+          //     {key}
+          //   </th>
+          // )) || (
+          //   <th key={i} id={`${key}-th`}>
+          //     {key}
+          //   </th>
+          // )
+          <th key={i} id={`${key}-th`}>
+            {key}
+          </th>
         );
       }
     });
@@ -140,24 +145,32 @@ const ManageProducts = () => {
 
   const renderBody = () => {
     return (
-      paginatedProducts &&
-      paginatedProducts.map((product, i) => {
-        return (
-          <tr
-            key={i}
-            className='row-data'
-            onClick={() => {
-              goToOrder(product._id);
-            }}
-          >
-            <td>{i + 1}</td>
-            <td>{product.title}</td>
-            <td>{product.category}</td>
-            <td>{product.price}</td>
-            <td className='description-td'>{product.description}</td>
-          </tr>
-        );
-      })
+      tableData &&
+      tableData
+        .filter(
+          (product) =>
+            product.title.toLowerCase().includes(searchQuery) ||
+            product.category.toLowerCase().includes(searchQuery) ||
+            product.price.toString().toLowerCase().includes(searchQuery) ||
+            product.description.toLowerCase().includes(searchQuery)
+        )
+        .map((product, i) => {
+          return (
+            <tr
+              key={i}
+              className='row-data'
+              onClick={() => {
+                goToOrder(product._id);
+              }}
+            >
+              <td>{i + 1}</td>
+              <td>{product.title}</td>
+              <td>{product.category}</td>
+              <td>{product.price}</td>
+              <td className='description-td'>{product.description}</td>
+            </tr>
+          );
+        })
     );
   };
 
@@ -165,13 +178,18 @@ const ManageProducts = () => {
     <div className='ManageProducts'>
       <h1>Manage Products</h1>
       <Button onClick={back}>Back</Button>
-      <div className='products-table' style={{ overflowX: 'scroll' }}>
+      <div className='products-table'>
+        {/* <div className='products-table' style={{ overflowX: 'scroll' }}> */}
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />{' '}
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
-        <TablePagination
+        {/* <TablePagination
           pages={pageCountArray}
           currentPage={currentPage}
           onClick={pagination}
-        />
+        /> */}
       </div>
     </div>
   );
