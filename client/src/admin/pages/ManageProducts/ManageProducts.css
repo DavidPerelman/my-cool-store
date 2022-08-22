@@ -10,6 +10,18 @@
     margin: 20px;
 }
 
+.ManageProducts-back-button {
+    width: 50px;
+    align-self: center;
+}
+
+.controllers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
 #Category-popover-icon {
     width: 15px;
     cursor: pointer;

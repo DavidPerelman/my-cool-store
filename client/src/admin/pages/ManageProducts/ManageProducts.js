@@ -204,15 +204,21 @@ const ManageProducts = () => {
   return (
     <div className='ManageProducts'>
       <h1>Manage Products</h1>
-      <Button onClick={back}>Back</Button>
-      <div className='products-table'>
-        {/* <div className='products-table' style={{ overflowX: 'scroll' }}> */}
+      <div className='controllers'>
+        <Button onClick={back} className='ManageProducts-back-button'>
+          Back
+        </Button>
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           setSearchStatus={setSearchStatus}
           searchStatus={searchStatus}
-        />{' '}
+        />
+      </div>
+
+      <div className='products-table'>
+        {/* <div className='products-table' style={{ overflowX: 'scroll' }}> */}
+
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
         {searchStatus === false && (
           <TablePagination
