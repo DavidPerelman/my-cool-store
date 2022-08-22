@@ -13,6 +13,7 @@ import SearchBar from '../../../components/SearchBar/SearchBar';
 const ManageProducts = () => {
   const navigate = useNavigate();
   const [visibile, setVisibile] = useState(false);
+  const [searchStatus, setSearchStatus] = useState(false);
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
   const [tableData, setTableData] = useState(null);
@@ -145,32 +146,58 @@ const ManageProducts = () => {
 
   const renderBody = () => {
     return (
-      tableData &&
-      tableData
-        .filter(
-          (product) =>
-            product.title.toLowerCase().includes(searchQuery) ||
-            product.category.toLowerCase().includes(searchQuery) ||
-            product.price.toString().toLowerCase().includes(searchQuery) ||
-            product.description.toLowerCase().includes(searchQuery)
-        )
-        .map((product, i) => {
-          return (
-            <tr
-              key={i}
-              className='row-data'
-              onClick={() => {
-                goToOrder(product._id);
-              }}
-            >
-              <td>{i + 1}</td>
-              <td>{product.title}</td>
-              <td>{product.category}</td>
-              <td>{product.price}</td>
-              <td className='description-td'>{product.description}</td>
-            </tr>
-          );
-        })
+      (searchStatus &&
+        tableData
+          .filter(
+            (product) =>
+              product.title.toLowerCase().includes(searchQuery) ||
+              product.category.toLowerCase().includes(searchQuery) ||
+              product.price.toString().toLowerCase().includes(searchQuery) ||
+              product.description.toLowerCase().includes(searchQuery)
+          )
+          .map((product, i) => {
+            return (
+              <tr
+                key={i}
+                className='row-data'
+                onClick={() => {
+                  goToOrder(product._id);
+                }}
+              >
+                <td>{i + 1}</td>
+                <td>{product.title}</td>
+                <td>{product.category}</td>
+                <td>{product.price}</td>
+                <td className='description-td'>{product.description}</td>
+              </tr>
+            );
+          })) ||
+      (paginatedProducts &&
+        paginatedProducts
+          .filter(
+            (product) =>
+              product.title.toLowerCase().includes(searchQuery) ||
+              product.category.toLowerCase().includes(searchQuery) ||
+              product.price.toString().toLowerCase().includes(searchQuery) ||
+              product.description.toLowerCase().includes(searchQuery)
+          )
+          .map((product, i) => {
+            return (
+              <tr
+                key={i}
+                className='row-data'
+                onClick={() => {
+                  goToOrder(product._id);
+                }}
+              >
+                <td>{i + 1}</td>
+                <td>{product.title}</td>
+                <td>{product.category}</td>
+                <td>{product.price}</td>
+                <td className='description-td'>{product.description}</td>
+              </tr>
+            );
+          }))
     );
   };
 
@@ -183,13 +210,17 @@ const ManageProducts = () => {
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          setSearchStatus={setSearchStatus}
+          searchStatus={searchStatus}
         />{' '}
         <MyTable renderHeader={renderHeader} renderBody={renderBody}></MyTable>
-        {/* <TablePagination
-          pages={pageCountArray}
-          currentPage={currentPage}
-          onClick={pagination}
-        /> */}
+        {searchStatus === false && (
+          <TablePagination
+            pages={pageCountArray}
+            currentPage={currentPage}
+            onClick={pagination}
+          />
+        )}
       </div>
     </div>
   );
