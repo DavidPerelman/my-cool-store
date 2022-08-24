@@ -57,7 +57,7 @@ const ManageOrders = () => {
   };
 
   const goToOrder = async (orderId) => {
-    // navigate(`/order/${orderId}`);
+    navigate(`/order/${orderId}`, { state: { isAdmin: true } });
   };
 
   const expand = async (key) => {

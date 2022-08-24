@@ -30,7 +30,7 @@ const MyOrders = () => {
   }, []);
 
   const goToOrder = async (orderId) => {
-    navigate(`/order/${orderId}`);
+    navigate(`/order/${orderId}`, { state: { isAdmin: false } });
   };
 
   const column = [

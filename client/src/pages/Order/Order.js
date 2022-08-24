@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
 import OrdersServices from '../../services/OrdersServices';
@@ -27,8 +27,9 @@ const Order = () => {
     'pk_test_51LMHebHwuFGjgD9FMmRH7NI5bEHperWkMoj16LBUtb8dsSOHrTvzNHWPivT7BMMwdi7SPhhUtbV8CIoawQfPwgzj00wFX0StK2'
   );
 
-  const {} = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdminControl = location.state.isAdmin;
   const { orderId } = useParams();
   const { userData } = useContext(AuthContext);
   const [dataTable, setDataTable] = useState(null);
@@ -38,6 +39,7 @@ const Order = () => {
     useState(false);
 
   useEffect(() => {
+    console.log(isAdminControl);
     OrdersServices.getOrder(orderId).then((data) => {
       console.log(data);
       setOrderData(data.order);
@@ -48,6 +50,11 @@ const Order = () => {
   const backToMyOrders = () => {
     console.log(`/orders/${userData._id}`);
     navigate(`/orders/${userData._id}`);
+  };
+
+  const backToAdminOrders = () => {
+    console.log(`backToAdminOrders`);
+    navigate(`/admin/manage-orders`);
   };
 
   const decrementProductQuantity = async (dataTable, product) => {
@@ -190,14 +197,26 @@ const Order = () => {
 
   return (
     <div className='OrderPage'>
-      <Button onClick={backToMyOrders} size={'my-orders-button'}>
-        <img
-          className='icon-button my-orders-icon'
-          src={BackIcon}
-          alt='BackIcon'
-        />
-        My Orders
-      </Button>
+      {(isAdminControl === true && (
+        <Button onClick={backToAdminOrders} size={'my-orders-button'}>
+          <img
+            className='icon-button my-orders-icon'
+            src={BackIcon}
+            alt='BackIcon'
+          />
+          All Orders
+        </Button>
+      )) || (
+        <Button onClick={backToMyOrders} size={'my-orders-button'}>
+          <img
+            className='icon-button my-orders-icon'
+            src={BackIcon}
+            alt='BackIcon'
+          />
+          My Orders
+        </Button>
+      )}
+
       <OrderContainer orderData={orderData}></OrderContainer>
       <div className='order-div'>
         <MyTable

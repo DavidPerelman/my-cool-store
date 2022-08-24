@@ -20,6 +20,7 @@ import ManageCustomers from './admin/pages/ManageCustomers';
 import ManageOrders from './admin/pages/ManageOrders/ManageOrders';
 import AdminNavbar from './admin/containers/Navbar/Navbar.js';
 import AdminServices from './services/AdminServices';
+import ManageOrder from './admin/pages/ManageOrder/ManageOrder';
 
 const Router = () => {
   const location = useLocation();
@@ -148,6 +149,7 @@ const Router = () => {
               element={<ManageCustomers />}
             />
             <Route path='/admin/manage-orders' element={<ManageOrders />} />
+            <Route path='/admin/order/:orderId' element={<ManageOrder />} />
           </>
         )) || (
           <>

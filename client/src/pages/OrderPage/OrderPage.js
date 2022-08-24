@@ -114,7 +114,7 @@ const OrderPage = () => {
         editStatus={editStatus}
       ></OrderDetails>
       <div className='order-div'>
-        {/* <Table data={dataTable} column={column} classname={classname}></Table> */}
+        <Table data={dataTable} column={column} classname={classname}></Table>
       </div>
 
       <div className='order-page-buttons'>
