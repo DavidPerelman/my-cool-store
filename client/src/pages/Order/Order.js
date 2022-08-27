@@ -34,6 +34,7 @@ const Order = () => {
   const { userData } = useContext(AuthContext);
   const [dataTable, setDataTable] = useState(null);
   const [orderData, setOrderData] = useState(null);
+  const [orderStatus, setOrderStatus] = useState('');
   const [changesHappend, setChangesHappend] = useState(false);
   const [checkoutSesessionSuccess, setCheckoutSesessionSuccess] =
     useState(false);
@@ -44,6 +45,7 @@ const Order = () => {
       console.log(data);
       setOrderData(data.order);
       setDataTable(data.order.products);
+      setOrderStatus(data.order.status);
     });
   }, []);
 
@@ -55,6 +57,14 @@ const Order = () => {
   const backToAdminOrders = () => {
     console.log(`backToAdminOrders`);
     navigate(`/admin/manage-orders`);
+  };
+
+  const changeOrderStatus = (e) => {
+    setChangesHappend(true);
+    // console.log(orderStatus);
+    // console.log(e.target.value);
+    setOrderStatus(e.target.value);
+    console.log(orderStatus);
   };
 
   const decrementProductQuantity = async (dataTable, product) => {
@@ -81,6 +91,7 @@ const Order = () => {
     OrdersServices.getOrder(orderId).then((data) => {
       setOrderData(data.order);
       setDataTable(data.order.products);
+      setOrderStatus(data.order.status);
     });
     setChangesHappend(false);
   };
@@ -217,7 +228,12 @@ const Order = () => {
         </Button>
       )}
 
-      <OrderContainer orderData={orderData}></OrderContainer>
+      <OrderContainer
+        isAdminControl={isAdminControl}
+        orderData={orderData}
+        orderStatus={orderStatus}
+        changeOrderStatus={changeOrderStatus}
+      ></OrderContainer>
       <div className='order-div'>
         <MyTable
           renderHeader={renderHeader}

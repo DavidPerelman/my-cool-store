@@ -9,6 +9,13 @@
     flex-direction: row;
 }
 
+.order-status-input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
 @media (max-width: 500px) {
     .order-details {
     flex-wrap: wrap;

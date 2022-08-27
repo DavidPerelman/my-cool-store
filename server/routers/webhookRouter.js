@@ -38,14 +38,23 @@ router.post('/', express.raw({ type: 'application/json' }), (req, res) => {
       const order = event.data.object;
       // Then define and call a function to handle the event order.created
       break;
-    case 'price.updated':
+    case 'price.updated': {
       const price = event.data.object;
       // Then define and call a function to handle the event price.updated
       break;
-    case 'product.updated':
+    }
+    case 'product.created': {
+      const product = event.data.object;
+      // Then define and call a function to handle the event product.updated
+      console.log(product);
+      break;
+    }
+    // ... handle other event types
+    case 'product.updated': {
       const product = event.data.object;
       // Then define and call a function to handle the event product.updated
       break;
+    }
     // ... handle other event types
     default:
       console.log(`Unhandled event type ${event.type}`);

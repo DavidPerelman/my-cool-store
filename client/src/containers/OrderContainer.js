@@ -2,7 +2,13 @@ import React from 'react';
 import LoadingGif from '.././asset/loading-gif.gif';
 import './OrderContainer.css';
 
-const OrderCartContainer = ({ orderData, children }) => {
+const OrderCartContainer = ({
+  orderData,
+  isAdminControl,
+  children,
+  orderStatus,
+  changeOrderStatus,
+}) => {
   return (
     <div className='order-div'>
       {children}
@@ -29,7 +35,17 @@ const OrderCartContainer = ({ orderData, children }) => {
               |
             </span>
             <div className='order-paragraphs status-paragraphs'>
-              <h6>Status:</h6>&nbsp;<h6>{orderData.status}</h6>
+              {/* <h6>Status:</h6>&nbsp;<h6>{orderData.status}</h6> */}
+              <h6>Status:</h6>&nbsp;{' '}
+              {(isAdminControl === true && (
+                <h6>
+                  <input
+                    className='order-status-input cut-text'
+                    value={orderStatus}
+                    onChange={changeOrderStatus}
+                  />
+                </h6>
+              )) || <h6>{orderStatus}</h6>}
             </div>
           </div>
         </>

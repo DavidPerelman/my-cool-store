@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const bodyParser = require('body-parser');
+const path = require('path');
 
 app.use(
   cors({
@@ -45,6 +46,12 @@ app.use((req, res, next) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build/index.html'));
+});
+
 // Routers
 const userRouter = require('./routers/userRouter');
 app.use('/user', userRouter);
@@ -70,9 +77,9 @@ app.use('/payment', paymentRouter);
 const webhookRouter = require('./routers/webhookRouter');
 app.use('/webhook', webhookRouter);
 
-app.get('/', (req, res) => {
-  res.send('<h1>myCoolStore Server</h1>');
-});
+// app.get('/', (req, res) => {
+//   // res.send('<h1>myCoolStore Server</h1>');
+// });
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
