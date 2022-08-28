@@ -48,7 +48,6 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-console.log(__dirname, 'build');
 // Routers
 const userRouter = require('./routers/userRouter');
 app.use('/user', userRouter);
@@ -77,7 +76,7 @@ app.use('/webhook', webhookRouter);
 // app.get('/', (req, res) => {
 //   // res.send('<h1>myCoolStore Server</h1>');
 // });
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build/index.html'));
 });
 
