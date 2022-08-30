@@ -24,8 +24,10 @@ const AuthContextProvider = (props) => {
     const adminlLoggedInRes = await axios.get(
       `${process.env.REACT_APP_API_URL}/admin/checkIfAdminLoggedIn`
     );
+
     setIsAdminLoggedIn(adminlLoggedInRes.data.isAdmin);
     console.log(adminlLoggedInRes.data.isAdmin);
+    console.log(isAdminLoggedIn);
 
     if (adminlLoggedInRes.data.isAdmin) {
       setAdminData(adminlLoggedInRes.data.user);

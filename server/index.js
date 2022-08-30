@@ -73,9 +73,6 @@ app.use('/payment', paymentRouter);
 const webhookRouter = require('./routers/webhookRouter');
 app.use('/webhook', webhookRouter);
 
-// app.get('/', (req, res) => {
-//   // res.send('<h1>myCoolStore Server</h1>');
-// });
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build/index.html'));
 });

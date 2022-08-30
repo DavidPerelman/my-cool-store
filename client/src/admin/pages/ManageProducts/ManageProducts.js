@@ -81,6 +81,10 @@ const ManageProducts = () => {
     navigate(`/admin`);
   };
 
+  const addNewProduct = async () => {
+    console.log('addNewProduct');
+  };
+
   const expand = async (key) => {
     const content = document.getElementById(`${key}-content`);
     const allContents = document.getElementsByClassName(`content`);
@@ -205,9 +209,14 @@ const ManageProducts = () => {
     <div className='ManageProducts'>
       <h1>Manage Products</h1>
       <div className='controllers'>
-        <Button onClick={back} className='ManageProducts-back-button'>
-          Back
-        </Button>
+        <div className='controllers-buttons'>
+          <Button onClick={back} className='ManageProducts-back-button'>
+            Back
+          </Button>
+          <Button onClick={addNewProduct} className='new-product-button'>
+            New Product
+          </Button>
+        </div>
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}

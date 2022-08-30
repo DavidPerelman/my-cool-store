@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
     "firebase": "^9.8.4",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
@@ -42,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://my-cool-store.herokuapp.com/"
+  "proxy": "https://my-cool-store-360812.uc.r.appspot.com/"
 }

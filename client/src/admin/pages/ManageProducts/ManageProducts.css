@@ -11,8 +11,17 @@
 }
 
 .ManageProducts-back-button {
-    width: 50px;
+    width: 110px;
+    margin-left: 30px;
     align-self: center;
+    float: left;
+}
+
+.new-product-button {
+    width: 110px;
+    margin-right: 30px;
+    align-self: center;
+    float: right;
 }
 
 .controllers {
