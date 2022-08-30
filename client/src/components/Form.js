@@ -1,4 +1,4 @@
-const Form = ({ data, handleFormChange }) => {
+const Form = ({ data, handleFormChange, selectData }) => {
   return (
     <>
       {Object.keys(data).map((field, i) => {
@@ -11,17 +11,40 @@ const Form = ({ data, handleFormChange }) => {
                   .split(/(?=[A-Z])/)
                   .join(' ')}
             </label>
-            <input
-              type={
-                field === 'verifyPassword' || field === 'password'
-                  ? 'password'
-                  : 'text' || field
-              }
-              className='form-control'
-              id={field}
-              onChange={(e) => handleFormChange(e, field)}
-              value={data[field]}
-            />
+            {(field === 'category' && (
+              <select
+                name='categories'
+                id='categories-select'
+                className='form-control'
+                onChange={(e) => handleFormChange(e, field)}
+              >
+                {selectData.map((data, i) => (
+                  <option key={i} value={data._id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            )) ||
+              (field === 'image' && (
+                <input
+                  type='file'
+                  className='form-control'
+                  name='image'
+                  onChange={(e) => handleFormChange(e, field)}
+                />
+              )) || (
+                <input
+                  type={
+                    field === 'verifyPassword' || field === 'password'
+                      ? 'password'
+                      : 'text'
+                  }
+                  className='form-control'
+                  id={field}
+                  onChange={(e) => handleFormChange(e, field)}
+                  value={data[field]}
+                />
+              )}
           </div>
         );
       })}

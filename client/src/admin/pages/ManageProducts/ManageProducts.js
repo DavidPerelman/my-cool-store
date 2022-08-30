@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import MyTable from '../../../components/MyTable/MyTable';
 import ProductsServices from '../../../services/ProductsServices';
 import './ManageProducts.css';
-import ExpandIcon from '../../asset/expand-icon.png';
-// import Popover from '../../components/Popover/Popover';
-import Popover from '../../../components/Popover/Popover';
 import Button from '../../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import TablePagination from '../../../components/TablePagination/TablePagination';
 import SearchBar from '../../../components/SearchBar/SearchBar';
+import Modal from '../../../components/Modal/Modal';
+import Form from '../../../components/Form';
 
 const ManageProducts = () => {
   const navigate = useNavigate();
-  const [visibile, setVisibile] = useState(false);
+  const [show, setShow] = useState(false);
   const [searchStatus, setSearchStatus] = useState(false);
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -20,6 +19,14 @@ const ManageProducts = () => {
   const [paginatedProducts, setPaginatedProducts] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState('');
+  const [newProductData, setNewProductData] = useState({
+    title: '',
+    price: '',
+    description: '',
+    category: '',
+    image: undefined,
+  });
 
   useEffect(() => {
     ProductsServices.fetchAllProducts().then((data) => {
@@ -31,19 +38,23 @@ const ManageProducts = () => {
     ProductsServices.fetchCategoriesData().then((data) => {
       setCategories(data.categories);
     });
-
-    // setTimeout(() => {
-    //   const doc = document.getElementsByClassName('ManageProducts')[0];
-
-    //   doc.addEventListener('click', (e) => {
-    //     const categoryContent = document.getElementById('Category-content');
-
-    //     if (e.target.id !== 'Category-popover-icon') {
-    //       categoryContent.style.visibility = 'hidden';
-    //     }
-    //   });
-    // }, 1000);
   }, []);
+
+  const handleShow = () => {
+    categories.unshift({ _id: undefined, name: 'Select Category' });
+    setShow(true);
+  };
+
+  const selectCategory = (e) => {
+    console.log(e.target.value);
+    console.log('selectCategory');
+  };
+
+  const handleClose = () => {
+    clearFormFields();
+    categories.shift();
+    setShow(false);
+  };
 
   const pageSize = 10;
   const pageCount = products ? Math.ceil(products.length / pageSize) : 0;
@@ -68,41 +79,56 @@ const ManageProducts = () => {
     // navigate(`/order/${orderId}`);
   };
 
-  const categoryListClick = async (categoryId) => {
-    console.log(categoryId);
-    ProductsServices.fetchAllProductsByCategoryId(categoryId).then((data) => {
-      setProducts(data);
-      setTableData(data);
-      setPaginatedProducts(data.slice(0, 10));
-    });
-  };
-
   const back = async () => {
     navigate(`/admin`);
   };
 
-  const addNewProduct = async () => {
-    console.log('addNewProduct');
+  const handleFormChange = (e, valKey) => {
+    if (
+      e.currentTarget.type !== 'text' &&
+      e.currentTarget.type !== 'select-one'
+    ) {
+      const formData = { File: e.target.files[0] };
+
+      setNewProductData((prevState) => {
+        return { ...prevState, [valKey]: formData };
+      });
+    } else {
+      const { value } = e.target;
+      setNewProductData((prevState) => {
+        return { ...prevState, [valKey]: value };
+      });
+    }
   };
 
-  const expand = async (key) => {
-    const content = document.getElementById(`${key}-content`);
-    const allContents = document.getElementsByClassName(`content`);
+  const showError = (error) => {
+    setError(error);
 
-    for (let i = 0; i < allContents.length; i++) {
-      allContents[i].style.visibility = 'hidden';
-    }
+    setTimeout(() => {
+      setError('');
+    }, 3000);
+  };
 
-    if (!visibile) {
-      content.style.visibility = 'visible';
-      setVisibile(true);
-    } else {
-      content.style.visibility = 'hidden';
-      setVisibile(false);
-    }
+  const addNewProduct = async () => {
+    console.log(newProductData);
 
-    content.style.visibility = 'visible';
-    setVisibile(true);
+    Object.keys(newProductData).forEach((key, index) => {
+      if (newProductData[key] === '' || newProductData[key] === undefined) {
+        return showError('all fields required!');
+      } else {
+        handleClose();
+      }
+    });
+  };
+
+  const clearFormFields = () => {
+    setNewProductData({
+      title: '',
+      price: '',
+      description: '',
+      category: '',
+      image: undefined,
+    });
   };
 
   const renderHeader = () => {
@@ -111,35 +137,6 @@ const ManageProducts = () => {
     return headerData.map((key, i) => {
       {
         return (
-          // (key === 'Category' && (
-          //   <th key={i} className={`Category-th`}>
-          //     <Popover
-          //       icon={ExpandIcon}
-          //       keyValue={key}
-          //       onClick={() => expand(key)}
-          //       categories={categories}
-          //       categoryListClick={categoryListClick}
-          //     >
-          //       <ul>
-          //         {categories &&
-          //           categories.map((category, i) => (
-          //             <li
-          //               key={i}
-          //               id={category._id}
-          //               onClick={() => categoryListClick(category._id)}
-          //             >
-          //               {category.name}
-          //             </li>
-          //           ))}
-          //       </ul>
-          //     </Popover>
-          //     {key}
-          //   </th>
-          // )) || (
-          //   <th key={i} id={`${key}-th`}>
-          //     {key}
-          //   </th>
-          // )
           <th key={i} id={`${key}-th`}>
             {key}
           </th>
@@ -213,7 +210,7 @@ const ManageProducts = () => {
           <Button onClick={back} className='ManageProducts-back-button'>
             Back
           </Button>
-          <Button onClick={addNewProduct} className='new-product-button'>
+          <Button onClick={handleShow} className='new-product-button'>
             New Product
           </Button>
         </div>
@@ -237,6 +234,36 @@ const ManageProducts = () => {
           />
         )}
       </div>
+
+      {show && (
+        <Modal
+          show={show}
+          onClose={handleClose}
+          title='Add New Product'
+          textButton='Add'
+          onSubmit={addNewProduct}
+          error={error}
+        >
+          <Form
+            data={newProductData}
+            handleFormChange={handleFormChange}
+            handleSelectChange={selectCategory}
+            selectData={categories}
+          ></Form>
+          <div className='modal-footer'>
+            <Button
+              size='user-modal-button'
+              color='button--close'
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+            <Button size='user-modal-button' onClick={addNewProduct}>
+              Add
+            </Button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
