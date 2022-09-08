@@ -29,12 +29,20 @@ router.get('/product/:productId', async (req, res) => {
 
 router.post('/createProduct', async (req, res) => {
   try {
-    fs.readFile('../server/productsData.json', 'utf8', (err, data) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-    });
+    const productData = req.body;
+    console.log(productData);
+
+    const product = await new Product({
+      title: productData.title,
+      price: productData.price,
+      description: productData.description,
+      category: productData.category,
+      image: productData.image,
+    }).save();
+
+    console.log(product);
+
+    res.json(product);
   } catch (err) {
     console.error(err);
     res.status(500).send();

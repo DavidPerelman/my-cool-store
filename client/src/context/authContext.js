@@ -25,14 +25,15 @@ const AuthContextProvider = (props) => {
       `${process.env.REACT_APP_API_URL}/admin/checkIfAdminLoggedIn`
     );
 
+    console.log(adminlLoggedInRes);
+
     setIsAdminLoggedIn(adminlLoggedInRes.data.isAdmin);
     console.log(adminlLoggedInRes.data.isAdmin);
-    console.log(isAdminLoggedIn);
 
     if (adminlLoggedInRes.data.isAdmin) {
       setAdminData(adminlLoggedInRes.data.user);
     } else {
-      setAdminData(adminlLoggedInRes.data.user);
+      setAdminData({ firstName: 'Guest' });
     }
   };
 

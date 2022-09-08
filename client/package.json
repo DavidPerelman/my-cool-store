@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://my-cool-store-360812.uc.r.appspot.com/"
+  "proxy": "http://localhost:3001/"
 }

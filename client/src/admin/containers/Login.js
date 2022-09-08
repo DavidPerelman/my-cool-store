@@ -26,14 +26,15 @@ const Login = () => {
   };
 
   const login = async () => {
-    console.log(loginData);
     if (!isFormFieldsValid(loginData)) return showError('all fields required!');
 
     if (!isValidEmail(loginData.email)) return showError('invalid email!');
 
     try {
       const response = await AdminServices.login(loginData);
-      console.log(response);
+      console.log(response.isAdmin);
+      await getIsAdminlsLoggedIn();
+
       if (response === 'login error!') {
         return showError(response);
       }
@@ -43,8 +44,6 @@ const Login = () => {
     } catch (err) {
       console.error(err);
     }
-
-    await getIsAdminlsLoggedIn();
   };
 
   const showError = (error) => {

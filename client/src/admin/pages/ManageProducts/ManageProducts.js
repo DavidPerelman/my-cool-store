@@ -8,6 +8,7 @@ import TablePagination from '../../../components/TablePagination/TablePagination
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import Modal from '../../../components/Modal/Modal';
 import Form from '../../../components/Form';
+import { isFormFieldsValid } from '../../../utils/formValidation';
 
 const ManageProducts = () => {
   const navigate = useNavigate();
@@ -110,15 +111,22 @@ const ManageProducts = () => {
   };
 
   const addNewProduct = async () => {
-    console.log(newProductData);
+    console.log(isFormFieldsValid(newProductData));
 
-    Object.keys(newProductData).forEach((key, index) => {
-      if (newProductData[key] === '' || newProductData[key] === undefined) {
-        return showError('all fields required!');
-      } else {
-        handleClose();
-      }
-    });
+    if (!isFormFieldsValid(newProductData))
+      return showError('all fields required!');
+
+    try {
+      // handleClose();
+
+      const newProductRes = await ProductsServices.createProduct(
+        newProductData
+      ).then((data) => {
+        console.log(data);
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const clearFormFields = () => {
