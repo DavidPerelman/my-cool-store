@@ -1,20 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
+import Form from '../../../components/Form';
+import Modal from '../../../components/Modal/Modal';
 import MyTable from '../../../components/MyTable/MyTable';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TablePagination from '../../../components/TablePagination/TablePagination';
 import CustomersServices from '../../../services/CustomersServices';
+import { isFormFieldsValid } from '../../../utils/formValidation';
 import './ManageProducts.css';
 
 const ManageCustomers = () => {
   const navigate = useNavigate();
   const [customers, setCustomers] = useState(null);
   const [tableData, setTableData] = useState(null);
+  const [show, setShow] = useState(false);
   const [searchStatus, setSearchStatus] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [paginatedCustomers, setPaginatedCustomers] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState('');
+  const [newCustomerData, setNewCustomerData] = useState({
+    lasstName: '',
+    firstName: '',
+    email: '',
+    password: '',
+    verifyPassword: '',
+  });
 
   useEffect(() => {
     CustomersServices.fetchAllCustomers().then((data) => {
@@ -29,6 +41,75 @@ const ManageCustomers = () => {
 
   const back = async () => {
     navigate(`/admin`);
+  };
+
+  const handleFormChange = (e, valKey) => {
+    if (e.currentTarget.id === 'price') {
+      const price = parseInt(e.currentTarget.value);
+
+      newCustomerData((prevState) => {
+        return { ...prevState, [valKey]: price };
+      });
+    } else if (
+      e.currentTarget.type !== 'text' &&
+      e.currentTarget.type !== 'number' &&
+      e.currentTarget.type !== 'select-one'
+    ) {
+      const formData = { File: e.target.files[0] };
+
+      newCustomerData((prevState) => {
+        return { ...prevState, [valKey]: formData };
+      });
+    } else {
+      const { value } = e.target;
+      newCustomerData((prevState) => {
+        return { ...prevState, [valKey]: value };
+      });
+    }
+  };
+
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    clearFormFields();
+    setShow(false);
+  };
+
+  const clearFormFields = () => {
+    setNewCustomerData({
+      lasstName: '',
+      firstName: '',
+      email: '',
+      password: '',
+      verifyPassword: '',
+    });
+  };
+
+  const showError = (error) => {
+    setError(error);
+
+    setTimeout(() => {
+      setError('');
+    }, 3000);
+  };
+
+  const addNewCustomer = async () => {
+    if (!isFormFieldsValid(newCustomerData))
+      return showError('all fields required!');
+
+    try {
+      // handleClose();
+
+      const newCustomerData = await CustomersServices.createProduct(
+        newCustomerData
+      ).then((data) => {
+        console.log(data);
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const goToOrder = async (productId) => {
@@ -142,9 +223,9 @@ const ManageCustomers = () => {
           <Button onClick={back} className='ManageCustomers-back-button'>
             Back
           </Button>
-          {/* <Button onClick={handleShow} className='new-product-button'>
-            New Product
-          </Button> */}
+          <Button onClick={handleShow} className='new-customer-button'>
+            New Customer
+          </Button>
         </div>
         <SearchBar
           searchQuery={searchQuery}
@@ -164,6 +245,34 @@ const ManageCustomers = () => {
           />
         )}
       </div>
+
+      {show && (
+        <Modal
+          show={show}
+          onClose={handleClose}
+          title='Add New Product'
+          textButton='Add'
+          onSubmit={addNewCustomer}
+          error={error}
+        >
+          <Form
+            data={newCustomerData}
+            handleFormChange={handleFormChange}
+          ></Form>
+          <div className='modal-footer'>
+            <Button
+              size='user-modal-button'
+              color='button--close'
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+            <Button size='user-modal-button' onClick={addNewCustomer}>
+              Add
+            </Button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
