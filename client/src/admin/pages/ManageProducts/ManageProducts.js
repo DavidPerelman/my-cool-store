@@ -61,6 +61,8 @@ const ManageProducts = () => {
   const pageCount = products ? Math.ceil(products.length / pageSize) : 0;
   const pageCountArray = new Array(pageCount).fill('').map((_, i) => i + 1);
 
+  console.log(pageCount);
+
   if (pageCount === 1) {
     return null;
   }
