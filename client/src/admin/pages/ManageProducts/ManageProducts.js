@@ -85,8 +85,15 @@ const ManageProducts = () => {
   };
 
   const handleFormChange = (e, valKey) => {
-    if (
+    if (e.currentTarget.id === 'price') {
+      const price = parseInt(e.currentTarget.value);
+
+      setNewProductData((prevState) => {
+        return { ...prevState, [valKey]: price };
+      });
+    } else if (
       e.currentTarget.type !== 'text' &&
+      e.currentTarget.type !== 'number' &&
       e.currentTarget.type !== 'select-one'
     ) {
       const formData = { File: e.target.files[0] };
@@ -111,7 +118,7 @@ const ManageProducts = () => {
   };
 
   const addNewProduct = async () => {
-    console.log(isFormFieldsValid(newProductData));
+    console.log(parseInt(newProductData.price));
 
     if (!isFormFieldsValid(newProductData))
       return showError('all fields required!');

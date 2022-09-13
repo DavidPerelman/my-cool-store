@@ -32,6 +32,15 @@ const Form = ({ data, handleFormChange, selectData }) => {
                   name='image'
                   onChange={(e) => handleFormChange(e, field)}
                 />
+              )) ||
+              (field === 'price' && (
+                <input
+                  type='number'
+                  className='form-control'
+                  name='price'
+                  id='price'
+                  onChange={(e) => handleFormChange(e, field)}
+                />
               )) || (
                 <input
                   type={

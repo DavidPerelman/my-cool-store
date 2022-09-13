@@ -16,7 +16,7 @@ import PaymentSuccess from './pages/PaymentSuccess';
 import Admin from './admin/pages/Admin/Admin';
 import AdminLogin from './admin/pages/AdminLogin';
 import ManageProducts from './admin/pages/ManageProducts/ManageProducts';
-import ManageCustomers from './admin/pages/ManageCustomers';
+import ManageCustomers from './admin/pages/ManageCustomers/ManageCustomers';
 import ManageOrders from './admin/pages/ManageOrders/ManageOrders';
 import AdminNavbar from './admin/containers/Navbar/Navbar.js';
 import AdminServices from './services/AdminServices';

@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Product = require('../models/productModel');
+const Category = require('../models/categoryModel');
 const fs = require('fs');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 router.get('/products', async (req, res) => {
   try {
@@ -27,20 +29,49 @@ router.get('/product/:productId', async (req, res) => {
   }
 });
 
-router.post('/createProduct', async (req, res) => {
+router.post('/stripe/createProduct', async (req, res) => {
+  try {
+    const productData = req.body;
+
+    console.log(productData);
+
+    await stripe.products.create({
+      name: productData.title,
+      default_price_data: {
+        currency: 'usd',
+        unit_amount: productData.price * 100,
+      },
+      description: productData.description,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
+router.post('stripe/createProduct', async (req, res) => {
   try {
     const productData = req.body;
     console.log(productData);
+    return;
+    const category = await Category.findById(productData.category).exec();
+
+    const newStripeProduct = await stripe.products.create({
+      name: productData.title,
+      default_price_data: {
+        currency: 'usd',
+        unit_amount: productData.price * 100,
+      },
+      description: productData.description,
+    });
 
     const product = await new Product({
       title: productData.title,
       price: productData.price,
       description: productData.description,
-      category: productData.category,
+      category: category.name,
       image: productData.image,
     }).save();
-
-    console.log(product);
 
     res.json(product);
   } catch (err) {

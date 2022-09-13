@@ -68,7 +68,7 @@ const ProductsServices = {
   createProduct: async (productData) => {
     console.log(productData);
     return await fetch(
-      `${process.env.REACT_APP_API_URL}/products/createProduct`,
+      `${process.env.REACT_APP_API_URL}/products/stripe/createProduct`,
       {
         method: 'POST',
         headers: {
