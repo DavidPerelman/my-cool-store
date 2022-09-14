@@ -14,6 +14,22 @@ const AuthService = {
       return err.response.data.errMessage;
     }
   },
+  registerUser: async (data) => {
+    return await fetch(`${process.env.REACT_APP_API_URL}/user/register`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else {
+        return { message: 'error' };
+      }
+    });
+  },
   loginUser: async (data) => {
     return await fetch(`${process.env.REACT_APP_API_URL}/user/login`, {
       method: 'POST',

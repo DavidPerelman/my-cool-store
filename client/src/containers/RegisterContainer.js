@@ -57,7 +57,10 @@ const RegisterContainer = () => {
     if (!isFormFieldsValid(registerData))
       return showError('all fields required!');
 
-    if (isValidPassword(registerData.password, registerData.verifyPassword))
+    if (
+      isValidPassword(registerData.password, registerData.verifyPassword)
+        .validPassword === false
+    )
       return showError(
         'Password must be at least 6 characters long and the passwords must be identical'
       );
@@ -65,12 +68,15 @@ const RegisterContainer = () => {
     if (!isValidEmail(registerData.email)) return showError('invalid email');
 
     try {
-      const res = await AuthService.register(registerData);
-      if (!res.data) {
+      const res = await AuthService.registerUser(registerData);
+      console.log(res.success === undefined);
+
+      if (res.success === undefined) {
         showError(res);
-      } else if (res.data.success) {
-        handleClose();
-        navigate('/confirmRegister');
+      } else {
+        console.log('success');
+        // handleClose();
+        // navigate('/confirmRegister');
       }
     } catch (err) {
       console.log(err);

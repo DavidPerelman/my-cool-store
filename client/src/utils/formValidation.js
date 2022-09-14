@@ -8,10 +8,25 @@ const isFormFieldsValid = (data) => {
 };
 
 const isValidPassword = (password, verifyPassword) => {
-  return (
+  // return !password.length < 6 && !verifyPassword.length < 6;
+  // if (password.length < 6) {
+  //   return { validPassword: false };
+  // } else if (verifyPassword.length < 6) {
+  //   return { validPassword: false };
+  // } else if (password !== verifyPassword) {
+  //   return { validPassword: false };
+  // } else {
+  //   return { validPassword: true };
+  // }
+  if (
     password.length < 6 ||
-    (verifyPassword.length < 6 && password === verifyPassword)
-  );
+    verifyPassword.length < 6 ||
+    password !== verifyPassword
+  ) {
+    return { validPassword: false };
+  } else {
+    return { validPassword: true };
+  }
 };
 
 const isValidLoginPassword = (password) => {

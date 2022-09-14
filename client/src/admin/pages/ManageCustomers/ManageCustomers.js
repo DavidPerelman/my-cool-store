@@ -6,8 +6,13 @@ import Modal from '../../../components/Modal/Modal';
 import MyTable from '../../../components/MyTable/MyTable';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TablePagination from '../../../components/TablePagination/TablePagination';
+import AuthService from '../../../services/AuthServices';
 import CustomersServices from '../../../services/CustomersServices';
-import { isFormFieldsValid } from '../../../utils/formValidation';
+import {
+  isFormFieldsValid,
+  isValidEmail,
+  isValidPassword,
+} from '../../../utils/formValidation';
 import './ManageProducts.css';
 
 const ManageCustomers = () => {
@@ -21,7 +26,7 @@ const ManageCustomers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState('');
   const [newCustomerData, setNewCustomerData] = useState({
-    lasstName: '',
+    lastName: '',
     firstName: '',
     email: '',
     password: '',
@@ -36,36 +41,15 @@ const ManageCustomers = () => {
     });
   }, []);
 
-  console.log(customers);
-  console.log(paginatedCustomers);
-
   const back = async () => {
     navigate(`/admin`);
   };
 
   const handleFormChange = (e, valKey) => {
-    if (e.currentTarget.id === 'price') {
-      const price = parseInt(e.currentTarget.value);
-
-      newCustomerData((prevState) => {
-        return { ...prevState, [valKey]: price };
-      });
-    } else if (
-      e.currentTarget.type !== 'text' &&
-      e.currentTarget.type !== 'number' &&
-      e.currentTarget.type !== 'select-one'
-    ) {
-      const formData = { File: e.target.files[0] };
-
-      newCustomerData((prevState) => {
-        return { ...prevState, [valKey]: formData };
-      });
-    } else {
-      const { value } = e.target;
-      newCustomerData((prevState) => {
-        return { ...prevState, [valKey]: value };
-      });
-    }
+    const { value } = e.target;
+    setNewCustomerData((prevState) => {
+      return { ...prevState, [valKey]: value };
+    });
   };
 
   const handleShow = () => {
@@ -79,7 +63,7 @@ const ManageCustomers = () => {
 
   const clearFormFields = () => {
     setNewCustomerData({
-      lasstName: '',
+      lastName: '',
       firstName: '',
       email: '',
       password: '',
@@ -99,16 +83,30 @@ const ManageCustomers = () => {
     if (!isFormFieldsValid(newCustomerData))
       return showError('all fields required!');
 
-    try {
-      // handleClose();
+    if (
+      isValidPassword(newCustomerData.password, newCustomerData.verifyPassword)
+        .validPassword === false
+    )
+      return showError(
+        'Password must be at least 6 characters long and the passwords must be identical'
+      );
 
-      const newCustomerData = await CustomersServices.createProduct(
-        newCustomerData
-      ).then((data) => {
-        console.log(data);
-      });
+    if (!isValidEmail(newCustomerData.email)) return showError('invalid email');
+
+    try {
+      const res = await AuthService.registerUser(newCustomerData);
+      console.log(res.success === undefined);
+
+      if (res.success === undefined) {
+        showError(res);
+      } else {
+        console.log('success');
+        // handleClose();
+        // navigate('/confirmRegister');
+      }
     } catch (err) {
-      console.error(err);
+      console.log(err);
+      setError(err);
     }
   };
 
@@ -157,8 +155,6 @@ const ManageCustomers = () => {
   };
 
   const renderBody = () => {
-    console.log('tableData');
-    console.log(tableData);
     return (
       (searchStatus &&
         tableData
@@ -217,7 +213,7 @@ const ManageCustomers = () => {
 
   return (
     <div>
-      <h1>ManageCustomers</h1>
+      <h1>Manage Customers</h1>
       <div className='controllers'>
         <div className='controllers-buttons'>
           <Button onClick={back} className='ManageCustomers-back-button'>

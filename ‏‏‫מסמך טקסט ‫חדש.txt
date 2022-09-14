@@ -1,0 +1,22 @@
+ // if (!isFormFieldsValid(registerData))
+    //   return showError('all fields required!');
+
+    // if (isValidPassword(registerData.password, registerData.verifyPassword))
+    //   return showError(
+    //     'Password must be at least 6 characters long and the passwords must be identical'
+    //   );
+
+    // if (!isValidEmail(registerData.email)) return showError('invalid email');
+
+    // try {
+    //   const res = await AuthService.register(registerData);
+    //   if (!res.data) {
+    //     showError(res);
+    //   } else if (res.data.success) {
+    //     handleClose();
+    //     navigate('/confirmRegister');
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   setError(err);
+    // }

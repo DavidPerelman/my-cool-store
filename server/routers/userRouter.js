@@ -19,6 +19,7 @@ router.post('/register', async (req, res) => {
     const data = ({ firstName, lastName, email, password, verifyPassword } =
       req.body);
 
+    console.log(data);
     const formValidation = userLoginValidation(data);
     if (formValidation.validationForm === false) {
       return res.status(400).json(formValidation.errMessage);
@@ -47,6 +48,7 @@ router.post('/register', async (req, res) => {
       stripe_customer_id: customer.id,
       firstName,
       lastName,
+      fullName: `${firstName} ${lastName}`,
       email,
       passwordHash,
     }).save();
